@@ -1,0 +1,64 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Main from "../../layouts/Main.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("notes");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"notes">;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Main description={post.data.description} title={post.data.title}>
+  <article>
+    <div class="prose">
+      <div class="title">
+        <h1 transition:name={`${post.slug}_title`}>{post.data.title}</h1>
+        <div class="date">
+          <FormattedDate date={post.data.pubDate} />
+          {
+            post.data.updatedDate && (
+              <div class="last-updated-on">
+                Last updated on <FormattedDate date={post.data.updatedDate} />
+              </div>
+            )
+          }
+        </div>
+        <hr />
+      </div>
+      <Content />
+    </div>
+  </article>
+</Main>
+<style>
+  .prose {
+    width: 720px;
+    max-width: calc(100% - 2em);
+    margin: auto;
+    padding: 0 1em 1em;
+    color: rgb(var(--gray-dark));
+  }
+  .title {
+    margin-bottom: 1em;
+    padding: 0 0 1em;
+    text-align: center;
+    line-height: 1;
+  }
+  .title h1 {
+    margin: 0;
+  }
+  .date {
+    margin-bottom: 0.5em;
+    color: rgb(var(--gray));
+  }
+  .last-updated-on {
+    font-style: italic;
+  }
+</style>
