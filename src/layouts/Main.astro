@@ -49,30 +49,33 @@ posts.map((post) => {
 
     <style>
       main {
-        position: relative;
         width: 720px;
         max-width: calc(100% - 2em);
-        margin: 33vh auto auto;
-        background: #ffffff;
-        z-index: 2;
-        border-radius: 0.5rem;
-        box-shadow:
-          rgba(184, 194, 215, 0.25) 0px 4px 6px,
-          rgba(184, 194, 215, 0.1) 0px 5px 7px;
+        margin: auto;
+      }
+
+      .graph-container {
+        width: 100%;
+        max-width: 720px;
+        height: 360px;
+        margin: 0 auto;
+        overflow: hidden;
       }
     </style>
   </head>
 
   <body>
     <Header />
-    <ForceGraph
-      data={{ nodes, links }}
-      client:only="react"
-      transition:persist
-    />
     <main>
       <slot />
     </main>
+    <div class="graph-container">
+      <ForceGraph
+        data={{ nodes, links }}
+        client:only="react"
+        transition:persist
+      />
+    </div>
     <Footer />
   </body>
 </html>
