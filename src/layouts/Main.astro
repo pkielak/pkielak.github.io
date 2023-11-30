@@ -51,31 +51,46 @@ posts.map((post) => {
       main {
         width: 720px;
         max-width: calc(100% - 2em);
-        margin: auto;
+        min-height: 100vh;
+        margin: 0 auto;
       }
 
       .graph-container {
         width: 100%;
-        max-width: 720px;
         height: 360px;
         margin: 0 auto;
         overflow: hidden;
+      }
+
+      @media (min-width: 1200px) {
+        main {
+          margin: 0;
+        }
+        .graph-container {
+          position: fixed;
+          top: 0;
+          left: 720px;
+          max-width: calc(100vw - 720px);
+          height: auto;
+        }
       }
     </style>
   </head>
 
   <body>
-    <Header />
     <main>
-      <slot />
+      <Header />
+      <article>
+        <slot />
+      </article>
+      <Footer nav />
     </main>
-    <div class="graph-container">
+    <aside class="graph-container">
       <ForceGraph
         data={{ nodes, links }}
         client:only="react"
-        transition:persist
+        transition:persist="graph"
       />
-    </div>
-    <Footer />
+    </aside>
   </body>
 </html>

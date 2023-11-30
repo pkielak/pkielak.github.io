@@ -17,32 +17,29 @@ const { Content } = await post.render();
 ---
 
 <Main description={post.data.description} title={post.data.title}>
-  <article>
-    <div class="prose">
-      <div class="title">
-        <h1 transition:name={`${post.slug}_title`}>{post.data.title}</h1>
-        <div class="date">
-          <FormattedDate date={post.data.pubDate} />
-          {
-            post.data.updatedDate && (
-              <div class="last-updated-on">
-                Last updated on <FormattedDate date={post.data.updatedDate} />
-              </div>
-            )
-          }
-        </div>
-        <hr />
+  <div class="prose">
+    <div class="title">
+      <h1 transition:name={`${post.slug}_title`}>{post.data.title}</h1>
+      <div class="date">
+        <FormattedDate date={post.data.pubDate} />
+        {
+          post.data.updatedDate && (
+            <div class="last-updated-on">
+              Last updated on <FormattedDate date={post.data.updatedDate} />
+            </div>
+          )
+        }
       </div>
-      <Content />
+      <hr />
     </div>
-  </article>
+    <Content />
+  </div>
 </Main>
 <style>
   .prose {
-    width: 720px;
     max-width: calc(100% - 2em);
     margin: auto;
-    padding: 0 1em 1em;
+    padding: 0 1em 0;
     color: rgb(var(--gray-dark));
   }
   .title {

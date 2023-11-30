@@ -31,6 +31,11 @@ const posts = (await getCollection("notes")).sort(
   </section>
 </Main>
 <style>
+  section {
+    max-width: calc(100% - 2em);
+    margin: auto;
+    padding: 0 1em 0;
+  }
   ul {
     display: flex;
     flex-wrap: wrap;
