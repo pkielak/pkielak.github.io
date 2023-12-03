@@ -130,6 +130,7 @@ hr {
 
 @media (min-width: 1200px) {
   body {
+    flex-wrap: wrap;
     flex-direction: row;
   }
 }

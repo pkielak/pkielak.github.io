@@ -1,17 +1,19 @@
 import type React from "react";
 import ForceGraph2D, { type GraphData } from "react-force-graph-2d";
 
-import useWindowWidth from "../hooks/useWindowWidth";
+import useWindowSize from "../hooks/useWindowSize";
 
 const ForceGraph: React.FC<{ data: GraphData }> = ({ data }) => {
-  const windowWidth = useWindowWidth();
+  const windowSize = useWindowSize();
 
-  if (!windowWidth) return null;
+  if (!windowSize) return null;
+
+  const [windowWidth, windowHeight] = windowSize;
 
   return (
     <ForceGraph2D
-      width={windowWidth > 1200 ? windowWidth - 720 : windowWidth}
-      height={windowWidth > 1200 ? undefined : 360}
+      width={windowWidth > 1200 ? windowWidth / 2 : windowWidth}
+      height={windowWidth > 1200 ? windowHeight : windowHeight * 0.3}
       graphData={data}
       onNodeClick={(node) => {
         location.replace(

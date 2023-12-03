@@ -49,28 +49,37 @@ posts.map((post) => {
 
     <style>
       main {
-        width: 720px;
+        order: 2;
         max-width: calc(100% - 2em);
-        min-height: 100vh;
+        min-height: calc(70vh - 78px);
+      }
+
+      article {
+        max-width: 720px;
         margin: 0 auto;
       }
 
       .graph-container {
+        order: 1;
         width: 100%;
-        height: 360px;
+        height: 30vh;
         margin: 0 auto;
         overflow: hidden;
       }
 
       @media (min-width: 1200px) {
         main {
+          order: 1;
           margin: 0;
+          width: 50%;
+          min-height: calc(100vh - 78px);
         }
         .graph-container {
+          order: 2;
           position: fixed;
           top: 0;
-          left: 720px;
-          max-width: calc(100vw - 720px);
+          left: 50%;
+          width: 50%;
           height: auto;
         }
       }
@@ -78,8 +87,8 @@ posts.map((post) => {
   </head>
 
   <body>
+    <Header />
     <main>
-      <Header />
       <article>
         <slot />
       </article>

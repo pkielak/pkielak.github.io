@@ -14,9 +14,17 @@ import { SITE_TITLE } from "../consts";
 </header>
 <style>
   header {
+    position: relative;
+    width: 100%;
     max-width: calc(100% - 2em);
     margin: auto;
     padding: 0 1em;
+  }
+
+  @media (min-width: 1200px) {
+    header {
+      padding-right: calc(50% + 1em);
+    }
   }
   h2 {
     margin: 0;
