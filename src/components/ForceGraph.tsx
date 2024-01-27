@@ -16,12 +16,13 @@ const ForceGraph: React.FC<{ data: GraphData }> = ({ data }) => {
       height={windowWidth > 1200 ? windowHeight : windowHeight * 0.3}
       graphData={data}
       onNodeClick={(node) => {
-        location.replace(
-          `${document.createElement("a").href}/notes/${node.id}`
-        );
+        window.location.href = `/notes/${node.id}`;
       }}
-      enableZoomInteraction={false}
+      // enableZoomInteraction={false}
       nodeAutoColorBy="group"
+      warmupTicks={100}
+      cooldownTicks={0}
+      enableNodeDrag={false}
     />
   );
 };
