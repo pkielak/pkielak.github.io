@@ -16,16 +16,10 @@ import { SITE_TITLE } from "../consts";
   header {
     position: relative;
     width: 100%;
-    max-width: calc(100% - 2em);
+    max-width: 720px;
     margin: auto;
-    padding: 0 1em;
   }
 
-  @media (min-width: 1200px) {
-    header {
-      padding-right: calc(50% + 1em);
-    }
-  }
   h2 {
     margin: 0;
     font-size: 1em;
@@ -41,12 +35,12 @@ import { SITE_TITLE } from "../consts";
   }
   nav a {
     padding: 1em 0.5em;
-    color: var(--black);
+    color: var(--nord0);
     border-bottom: 4px solid transparent;
     text-decoration: none;
   }
   nav a.active {
     text-decoration: none;
-    color: var(--accent);
+    color: var(--nord10);
   }
 </style>

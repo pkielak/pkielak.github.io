@@ -57,6 +57,7 @@ const posts = (await getCollection("notes")).sort(
   }
   ul li a {
     display: block;
+    color: var(--nord0);
   }
   .hero {
     margin: 0 0 2rem;
@@ -66,23 +67,19 @@ const posts = (await getCollection("notes")).sort(
   }
   .title {
     margin: 0;
-    color: rgb(var(--black));
     line-height: 1;
   }
   .date {
     margin: 0;
-    color: rgb(var(--gray));
+    color: var(--nord3);
   }
   .description {
     margin: 0;
-    color: rgb(var(--gray));
+    color: var(--nord3);
   }
   ul li a:hover h4,
   ul li a:hover .date {
-    color: rgb(var(--accent));
-  }
-  ul a:hover img {
-    box-shadow: var(--box-shadow);
+    color: var(--nord10);
   }
   @media (max-width: 720px) {
     ul {

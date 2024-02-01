@@ -1,25 +1,37 @@
 import type React from "react";
-import ForceGraph2D, { type GraphData } from "react-force-graph-2d";
+import ForceGraph2D, {
+  type ForceGraphMethods,
+  type GraphData,
+} from "react-force-graph-2d";
 
 import useWindowSize from "../hooks/useWindowSize";
+import { useRef } from "react";
 
 const ForceGraph: React.FC<{ data: GraphData }> = ({ data }) => {
+  const forceGraphRef = useRef<ForceGraphMethods>();
   const windowSize = useWindowSize();
+
+  const fitGraph = () => {
+    if (forceGraphRef.current) {
+      forceGraphRef.current.zoomToFit(0, 32);
+    }
+  };
 
   if (!windowSize) return null;
 
-  const [windowWidth, windowHeight] = windowSize;
+  const [, windowHeight] = windowSize;
 
   return (
     <ForceGraph2D
-      width={windowWidth > 1200 ? windowWidth / 2 : windowWidth}
-      height={windowWidth > 1200 ? windowHeight : windowHeight * 0.3}
+      ref={forceGraphRef}
+      height={windowHeight * 0.3}
       graphData={data}
+      linkColor={() => "#8FBCBB"}
+      nodeColor={() => "#88C0D0"}
       onNodeClick={(node) => {
         window.location.href = `/notes/${node.id}`;
       }}
-      // enableZoomInteraction={false}
-      nodeAutoColorBy="group"
+      onEngineStop={fitGraph}
       warmupTicks={100}
       cooldownTicks={0}
       enableNodeDrag={false}
