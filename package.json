@@ -10,16 +10,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^1.1.0",
-    "@astrojs/react": "^3.0.2",
-    "@astrojs/rss": "^3.0.0",
-    "@astrojs/sitemap": "^3.0.0",
-    "@portaljs/remark-wiki-link": "^1.1.0",
-    "@types/react": "^18.2.22",
-    "@types/react-dom": "^18.2.7",
-    "astro": "^3.1.0",
+    "@astrojs/mdx": "^2.1.1",
+    "@astrojs/react": "^3.0.9",
+    "@astrojs/rss": "^4.0.4",
+    "@astrojs/sitemap": "^3.0.5",
+    "remark-wiki-link": "^2.0.1",
+    "@types/react": "^18.2.51",
+    "@types/react-dom": "^18.2.18",
+    "astro": "^4.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-force-graph-2d": "^1.25.1"
+    "react-force-graph-2d": "^1.25.3"
   }
 }
