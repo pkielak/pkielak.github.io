@@ -5,9 +5,9 @@ import { getCollection } from "astro:content";
 import Graph from "../components/Graph.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 
-const posts = (await getCollection("notes")).sort(
-  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+const posts = (await getCollection("notes"))
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .slice(0, 5);
 ---
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -30,9 +30,7 @@ const posts = (await getCollection("notes")).sort(
         posts.map((post) => (
           <li>
             <a href={`/notes/${post.slug}/`}>
-              <h4 class="title" transition:name={`${post.slug}_title`}>
-                {post.data.title}
-              </h4>
+              <h4 class="title">{post.data.title}</h4>
               <p class="date">
                 <FormattedDate date={post.data.pubDate} />
               </p>

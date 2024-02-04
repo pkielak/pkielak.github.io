@@ -4,12 +4,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import GraphComponent from "../../components/Graph.astro";
 ---
 
-<Main
-  title={SITE_TITLE}
-  description={SITE_DESCRIPTION}
-  footerFixed={true}
-  headerBackground="rgba(229, 233, 240, 0.75)"
->
+<Main title={SITE_TITLE} description={SITE_DESCRIPTION} footerFixed={true}>
   <div class="graph-wrapper">
     <GraphComponent padding={90} />
   </div>

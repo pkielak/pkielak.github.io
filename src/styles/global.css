@@ -148,9 +148,24 @@ hr {
   white-space: nowrap;
 }
 
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .graph {
   width: 100%;
   height: 100%;
   background: var(--nord5);
   overflow: hidden;
+}
+
+.graph > * {
+  animation: 125ms ease-in forwards;
+  animation-name: reveal;
 }

@@ -19,7 +19,7 @@ const { Content } = await post.render();
 <Main description={post.data.description} title={post.data.title}>
   <div class="prose">
     <div class="title">
-      <h1 transition:name={`${post.slug}_title`}>{post.data.title}</h1>
+      <h1>{post.data.title}</h1>
       <div class="date">
         <FormattedDate date={post.data.pubDate} />
         {
