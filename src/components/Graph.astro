@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import ForceGraph from "./ForceGraph";
+
+interface Props {
+  height?: number;
+  padding?: number;
+}
+
+const { height, padding } = Astro.props;
+
+const posts = (await getCollection("notes")).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+
+let nodes: { id: string; name: string }[] = [];
+let links: { source: string; target: string }[] = [];
+
+const wikilinkRegExp = /\[\[\s?([^\[\]\|\n\r]+)(\|[^\[\]\|\n\r]+)?\s?\]\]/g;
+
+posts.map((post) => {
+  nodes.push({ id: post.slug, name: post.data.title });
+
+  (post.body.match(wikilinkRegExp) || []).map((slug) => {
+    const newSlug = slug
+      .slice(2, -2)
+      .split("|")[0]
+      .replace(/.(md|markdown)\s?$/i, "")
+      .trim();
+
+    if (newSlug) {
+      links.push({
+        source: post.slug,
+        target: newSlug,
+      });
+    }
+  });
+});
+---
+
+<ForceGraph
+  data={{ nodes, links }}
+  height={height}
+  padding={padding}
+  client:only="react"
+/>

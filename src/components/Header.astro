@@ -1,23 +1,29 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
+
+interface Props {
+  background?: string;
+}
+
+const { background } = Astro.props;
 ---
 
-<header transition:animate="none">
+<header transition:animate="none" style={background ? { background } : {}}>
   <nav>
     <h2><a href="/">{SITE_TITLE}</a></h2>
     <div class="internal-links">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/notes">Notes</HeaderLink>
+      <HeaderLink href="/" data-astro-reload>Home</HeaderLink>
+      <HeaderLink href="/notes/graph" data-astro-reload>Graph</HeaderLink>
     </div>
   </nav>
 </header>
 <style>
   header {
     position: relative;
+    z-index: 2;
     width: 100%;
-    max-width: 720px;
-    margin: auto;
+    height: var(--header-height);
   }
 
   h2 {
@@ -32,11 +38,14 @@ import { SITE_TITLE } from "../consts";
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    max-width: 720px;
+    margin: auto;
   }
   nav a {
-    padding: 1em 0.5em;
+    padding: 0 0.5em;
     color: var(--nord0);
-    border-bottom: 4px solid transparent;
     text-decoration: none;
   }
   nav a.active {

@@ -1,45 +1,17 @@
 ---
-import { getCollection } from "astro:content";
 import { ViewTransitions } from "astro:transitions";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import ForceGraph from "../components/ForceGraph";
 
 interface Props {
   title: string;
   description: string;
+  footerFixed?: boolean;
+  headerBackground?: string;
 }
 
-const { title, description } = Astro.props;
-
-const posts = (await getCollection("notes")).sort(
-  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
-
-let nodes: { id: string; name: string }[] = [];
-let links: { source: string; target: string }[] = [];
-
-const wikilinkRegExp = /\[\[\s?([^\[\]\|\n\r]+)(\|[^\[\]\|\n\r]+)?\s?\]\]/g;
-
-posts.map((post) => {
-  nodes.push({ id: post.slug, name: post.data.title });
-
-  (post.body.match(wikilinkRegExp) || []).map((slug) => {
-    const newSlug = slug
-      .slice(2, -2)
-      .split("|")[0]
-      .replace(/.(md|markdown)\s?$/i, "")
-      .trim();
-
-    if (newSlug) {
-      links.push({
-        source: post.slug,
-        target: newSlug,
-      });
-    }
-  });
-});
+const { title, description, footerFixed, headerBackground } = Astro.props;
 ---
 
 <html lang="en">
@@ -48,39 +20,21 @@ posts.map((post) => {
     <ViewTransitions />
 
     <style>
-      main {
-        margin-top: 2em;
-      }
-
       article {
         max-width: 720px;
         margin: 0 auto;
-      }
-
-      .graph-container {
-        width: 100%;
-        height: 30vh;
-        margin: 0 auto;
-        overflow: hidden;
-        background: #e5e9f0;
       }
     </style>
   </head>
 
   <body>
-    <Header />
-    <div class="graph-container">
-      <ForceGraph
-        data={{ nodes, links }}
-        client:only="react"
-        transition:persist="graph"
-      />
-    </div>
+    <Header background={headerBackground} />
+    <slot name="after-header" />
     <main>
       <article>
         <slot />
       </article>
-      <Footer nav />
+      <Footer fixed={footerFixed} />
     </main>
   </body>
 </html>
