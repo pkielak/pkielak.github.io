@@ -10,8 +10,9 @@ import "../styles/global.css";
 const ForceGraph: React.FC<{
   data: GraphData;
   height?: number;
+  width?: number;
   padding?: number;
-}> = ({ data, height, padding }) => {
+}> = ({ data, height, width, padding }) => {
   const forceGraphRef = useRef<ForceGraphMethods>();
 
   const fitGraph = () => {
@@ -26,6 +27,7 @@ const ForceGraph: React.FC<{
         ref={forceGraphRef}
         graphData={data}
         {...(height ? { height } : {})}
+        {...(width ? { width } : {})}
         linkColor={() => "#8FBCBB"}
         nodeColor={() => "#88C0D0"}
         onNodeClick={(node) => {

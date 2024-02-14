@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import Main from "../../layouts/Main.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
+import Backlinks from "../../components/Backlinks.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("notes");
@@ -33,6 +34,7 @@ const { Content } = await post.render();
       <hr />
     </div>
     <Content />
+    <Backlinks postSlug={post.slug} />
   </div>
 </Main>
 <style>
@@ -43,7 +45,7 @@ const { Content } = await post.render();
   }
   .title {
     margin-bottom: 1em;
-    padding: 0 0 1em;
+    padding: 1em 0;
     text-align: center;
     line-height: 1;
   }

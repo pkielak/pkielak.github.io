@@ -1,0 +1,74 @@
+---
+import { type Node, type Link } from "../pages/graph.json";
+
+interface Props {
+  postSlug: string;
+}
+
+const { postSlug } = Astro.props;
+
+const graphJson = await import("../pages/graph.json");
+const { nodes, links }: { nodes: Node[]; links: Link[] } = await graphJson
+  .GET({})
+  .then((response) => response.json());
+
+const backlinks = links.filter((link) => link.target === postSlug);
+---
+
+{
+  backlinks.length > 0 && (
+    <>
+      <h4>Backlinks</h4>
+      <ol class="backlinks">
+        {backlinks.map((backlink) => {
+          const referenceNode = nodes.find(
+            (node) => backlink.source === node.id
+          );
+          return (
+            <li class="backlink">
+              <a href={`/notes/${backlink.source}/`}>
+                {referenceNode ? (
+                  <>
+                    <p>
+                      <strong>{referenceNode.name}</strong>
+                    </p>
+                    {referenceNode.description && (
+                      <span>{referenceNode.description}</span>
+                    )}
+                  </>
+                ) : (
+                  backlink.target
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    </>
+  )
+}
+
+<style>
+  .backlink {
+    counter-increment: li;
+    display: list-item;
+  }
+
+  .backlink::marker {
+    display: list-item;
+    content: "[" counter(li) "] ";
+  }
+
+  .backlink a {
+    text-decoration: none;
+    color: var(--nord0);
+  }
+
+  .backlink a p {
+    margin-bottom: 0;
+  }
+
+  .backlink a:hover p {
+    color: var(--nord10);
+  }
+</style>
