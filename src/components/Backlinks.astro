@@ -18,7 +18,7 @@ const backlinks = links.filter((link) => link.target === postSlug);
 {
   backlinks.length > 0 && (
     <>
-      <h4>Backlinks</h4>
+      <h2>Backlinks</h2>
       <ol class="backlinks">
         {backlinks.map((backlink) => {
           const referenceNode = nodes.find(
@@ -28,14 +28,7 @@ const backlinks = links.filter((link) => link.target === postSlug);
             <li class="backlink">
               <a href={`/notes/${backlink.source}/`}>
                 {referenceNode ? (
-                  <>
-                    <p>
-                      <strong>{referenceNode.name}</strong>
-                    </p>
-                    {referenceNode.description && (
-                      <span>{referenceNode.description}</span>
-                    )}
-                  </>
+                  <p title={referenceNode.description}>{referenceNode.name}</p>
                 ) : (
                   backlink.target
                 )}
@@ -65,7 +58,7 @@ const backlinks = links.filter((link) => link.target === postSlug);
   }
 
   .backlink a p {
-    margin-bottom: 0;
+    margin: 0;
   }
 
   .backlink a:hover p {

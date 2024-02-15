@@ -31,7 +31,6 @@ const { Content } = await post.render();
           )
         }
       </div>
-      <hr />
     </div>
     <Content />
     <Backlinks postSlug={post.slug} />
@@ -46,14 +45,13 @@ const { Content } = await post.render();
   .title {
     margin-bottom: 1em;
     padding: 1em 0;
-    text-align: center;
     line-height: 1;
   }
   .title h1 {
     margin: 0;
   }
   .date {
-    margin-bottom: 0.5em;
+    margin: 0;
     color: var(--nord3);
   }
   .last-updated-on {
