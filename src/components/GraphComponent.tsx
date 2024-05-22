@@ -12,6 +12,7 @@ import {
 } from "@react-sigma/core";
 import { useEffect, useMemo, useState } from "react";
 import { DEFAULT_SETTINGS } from "sigma/settings";
+import { navigate } from "astro:transitions/client";
 
 const sigmaSettings = {
   allowInvalidContainer: true,
@@ -25,7 +26,7 @@ const GraphEvents: React.FC = () => {
   useEffect(() => {
     registerEvents({
       clickNode: (event) => {
-        window.location.href = `/notes/${event.node}`;
+        navigate(`/notes/${event.node}`);
       },
     });
   }, [registerEvents]);
