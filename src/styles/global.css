@@ -124,11 +124,6 @@ hr {
   border: none;
   border-top: 1px solid var(--nord4);
 }
-@media (max-width: 720px) {
-  body {
-    font-size: 18px;
-  }
-}
 
 .sr-only {
   border: 0;
@@ -148,24 +143,24 @@ hr {
   white-space: nowrap;
 }
 
-@keyframes reveal {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+div.react-sigma {
+  background: transparent !important;
 }
 
-.graph {
-  width: 100%;
-  height: 100%;
+:not(:root):fullscreen::backdrop {
   background: var(--nord5);
-  overflow: hidden;
 }
 
-.graph > * {
-  animation: 125ms ease-in forwards;
-  animation-name: reveal;
+.react-sigma-controls {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.react-sigma-control,
+.react-sigma-control > button {
+  background-color: transparent !important;
+}
+
+.react-sigma-control {
+  border-bottom: none !important;
 }

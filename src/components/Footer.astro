@@ -1,23 +1,8 @@
 ---
 const today = new Date();
-
-interface Props {
-  fixed?: boolean;
-}
-
-const { fixed } = Astro.props;
 ---
 
-<footer
-  style={fixed
-    ? {
-        position: "fixed",
-        left: "50%",
-        transform: "translateX(-50%)",
-        bottom: 0,
-      }
-    : {}}
->
+<footer>
   &copy; {today.getFullYear()} Your name here. All rights reserved.
 </footer>
 <style>

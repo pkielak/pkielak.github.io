@@ -1,33 +1,29 @@
 import { getCollection } from "astro:content";
+import Graph from "graphology";
+import forceAtlas2 from "graphology-layout-forceatlas2";
 
-export type Node = {
-  id: string;
-  name: string;
-  description?: string;
-};
-
-export type Link = {
-  source: string;
-  target: string;
-};
+import "@react-sigma/core/lib/react-sigma.min.css";
 
 export async function GET({}) {
+  const graph = new Graph();
   const posts = (await getCollection("notes")).sort(
     (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
   );
 
-  let nodes: Node[] = [];
-  let links: Link[] = [];
-
   const wikilinkRegExp = /\[\[\s?([^\[\]\|\n\r]+)(\|[^\[\]\|\n\r]+)?\s?\]\]/g;
 
   posts.map((post) => {
-    nodes.push({
-      id: post.slug,
-      name: post.data.title,
+    graph.addNode(post.slug, {
+      label: post.data.title,
       description: post.data.description,
+      x: Math.random(),
+      y: Math.random(),
+      size: 5,
+      color: "#5e81ac",
     });
+  });
 
+  posts.map((post) => {
     (post.body.match(wikilinkRegExp) || []).map((slug) => {
       const newSlug = slug
         .slice(2, -2)
@@ -36,13 +32,14 @@ export async function GET({}) {
         .trim();
 
       if (newSlug) {
-        links.push({
-          source: post.slug,
-          target: newSlug,
-        });
+        graph.addEdge(post.slug, newSlug, { size: 4, color: "#d8dee9" });
       }
     });
   });
 
-  return new Response(JSON.stringify({ nodes, links }));
+  forceAtlas2.assign(graph, { iterations: 50 });
+
+  const serializedGraph = graph.toJSON();
+
+  return new Response(JSON.stringify(serializedGraph));
 }
