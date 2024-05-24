@@ -143,12 +143,9 @@ hr {
   white-space: nowrap;
 }
 
-div.react-sigma {
-  background: transparent !important;
-}
-
+div.react-sigma,
 :not(:root):fullscreen::backdrop {
-  background: var(--nord5);
+  background: var(--nord5) !important;
 }
 
 .react-sigma-controls {

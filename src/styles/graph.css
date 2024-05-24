@@ -1,0 +1,62 @@
+.graph-wrapper,
+.graph {
+  width: 100%;
+  max-width: calc(720px - 2em);
+  margin: 0 auto;
+  aspect-ratio: 2;
+}
+
+.graph {
+  height: unset !important;
+  box-shadow: rgba(184, 194, 215, 0.35) 0px 6px 9px 0px;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 1280px) {
+  .graph--scroll {
+    position: fixed !important;
+    z-index: 3;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    max-width: calc((100vw - 720px) / 2 - 1em);
+    height: unset !important;
+    aspect-ratio: 1;
+    animation: reveal forwards ease-in-out 250ms;
+  }
+
+  .graph-button {
+    display: none;
+  }
+}
+
+@media (min-width: 1560px) {
+  .graph--scroll {
+    max-width: 400px;
+  }
+}
+
+.graph-button {
+  position: fixed;
+  z-index: 3;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: reveal forwards ease-in-out 250ms;
+}
+
+.graph-button img {
+  width: 48px;
+}

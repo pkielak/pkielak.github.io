@@ -25,38 +25,17 @@ const { title, description } = Astro.props;
         max-width: 720px;
         margin: 0 auto;
       }
-
-      .graph-wrapper {
-        width: calc(100% - 2em);
-        max-width: calc(720px - 2em);
-        margin: 0 1em;
-        aspect-ratio: 16/10;
-        background: var(--nord5);
-
-        @media (min-width: 720px) {
-          margin: 0 auto;
-        }
-        @media (min-width: 1200px) {
-          position: fixed;
-          z-index: 3;
-          bottom: 0;
-          right: 0;
-          margin: 0;
-          width: calc((100vw - 720px) / 2 - 1em);
-          max-width: 400px;
-          aspect-ratio: 1;
-        }
-      }
     </style>
   </head>
 
   <body>
     <Header />
-    <slot name="after-header" />
+    <GraphComponent
+      data={graphData}
+      client:only="react"
+      transition:persist="graph"
+    />
     <main>
-      <div class="graph-wrapper" transition:persist="graph">
-        <GraphComponent data={graphData} client:only="react" />
-      </div>
       <article>
         <slot />
       </article>
