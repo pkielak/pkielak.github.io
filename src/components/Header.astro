@@ -13,16 +13,19 @@ import { SITE_TITLE } from "../consts";
 </header>
 <style>
   header {
-    position: relative;
-    z-index: 2;
+    position: sticky;
+    top: 0;
+    z-index: 200;
     width: 100%;
     height: var(--header-height);
+    background: var(--nord6);
     pointer-events: none;
   }
 
   h2 {
     margin: 0;
     font-size: 1em;
+    margin-left: 0.5em;
   }
   h2 a [margin: 0;] h2 a,
   h2 a.active {

@@ -18,8 +18,9 @@ export async function GET({}) {
       description: post.data.description,
       x: Math.random(),
       y: Math.random(),
-      size: 5,
-      color: "#5e81ac",
+      size: 16,
+      color: "#e5e9f0",
+      image: post.data.icon || "/note.svg",
     });
   });
 
@@ -32,7 +33,7 @@ export async function GET({}) {
         .trim();
 
       if (newSlug) {
-        graph.addEdge(post.slug, newSlug, { size: 4, color: "#d8dee9" });
+        graph.addEdge(post.slug, newSlug, { size: 4, color: "#2e3440" });
       }
     });
   });

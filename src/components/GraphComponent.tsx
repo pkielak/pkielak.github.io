@@ -16,10 +16,14 @@ import { useEffect, useMemo, useState } from "react";
 import { DEFAULT_SETTINGS } from "sigma/settings";
 import { navigate } from "astro:transitions/client";
 
-import network from "../../public/network.svg";
+import network from "../graph.svg";
 import "../styles/graph.css";
+import { NodeImageProgram } from "@sigma/node-image";
 
 const sigmaSettings = {
+  nodeProgramClasses: { image: NodeImageProgram },
+  defaultNodeType: "image",
+  displayImages: true,
   allowInvalidContainer: true,
   labelFont: "Atkinson",
   defaultDrawNodeHover: DEFAULT_SETTINGS.defaultDrawNodeLabel, // draw node hover like node label

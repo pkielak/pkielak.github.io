@@ -47,9 +47,9 @@
 
 .graph-button {
   position: fixed;
-  z-index: 3;
-  bottom: 1rem;
-  right: 1rem;
+  z-index: 300;
+  top: 13px;
+  right: calc((100vw - 720px) / 2);
   padding: 0;
   background: none;
   border: none;
