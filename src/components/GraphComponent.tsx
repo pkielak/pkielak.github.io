@@ -1,33 +1,19 @@
-import type React from "react";
+import { useState, useEffect, useMemo } from "react";
 import type { Sigma } from "sigma";
 import type { SerializedGraph } from "graphology-types";
-import { useInView } from "react-intersection-observer";
 import Graph from "graphology";
 import {
   ControlsContainer,
   FullScreenControl,
   SearchControl,
   SigmaContainer,
-  useFullScreen,
   useLoadGraph,
   useRegisterEvents,
 } from "@react-sigma/core";
-import { useEffect, useMemo, useState } from "react";
-import { DEFAULT_SETTINGS } from "sigma/settings";
 import { navigate } from "astro:transitions/client";
 
-import network from "../graph.svg";
+import { sigmaSettings } from "../helpers/graphHelpers";
 import "../styles/graph.css";
-import { NodeImageProgram } from "@sigma/node-image";
-
-const sigmaSettings = {
-  nodeProgramClasses: { image: NodeImageProgram },
-  defaultNodeType: "image",
-  displayImages: true,
-  allowInvalidContainer: true,
-  labelFont: "Atkinson",
-  defaultDrawNodeHover: DEFAULT_SETTINGS.defaultDrawNodeLabel, // draw node hover like node label
-};
 
 const GraphEvents: React.FC = () => {
   const registerEvents = useRegisterEvents();
@@ -42,45 +28,38 @@ const GraphEvents: React.FC = () => {
   return null;
 };
 
-export const LoadGraph: React.FC<{
+interface LoadGraphProps {
   data: SerializedGraph;
-}> = ({ data }) => {
+  isLoading: boolean;
+}
+
+export const LoadGraph: React.FC<LoadGraphProps> = ({ data, isLoading }) => {
   const graph = useMemo(() => Graph.from(data), [data]);
 
   const loadGraph = useLoadGraph();
 
   useEffect(() => {
-    loadGraph(graph);
-  }, [loadGraph]);
+    if (!isLoading) {
+      loadGraph(graph);
+    }
+  }, [loadGraph, isLoading, graph]);
 
   return null;
 };
 
-const ShowGraphButton = () => {
-  const { toggle } = useFullScreen();
-
-  return (
-    <button className="graph-button" onClick={toggle} title="Show graph">
-      <img src={network.src} alt="network icon" />
-    </button>
-  );
-};
-
 const GraphComponent: React.FC<{
   data: SerializedGraph;
-}> = ({ data }) => {
-  const [sigma, setSigma] = useState<Sigma | null>(null);
+  isSmall?: boolean;
+}> = ({ data, isSmall }) => {
+  const [, setSigma] = useState<Sigma | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    initialInView: true,
-  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleFullscreenChange = () => {
+    setIsFullscreen(!!document.fullscreenElement);
+  };
 
   useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-
     document.addEventListener("fullscreenchange", handleFullscreenChange);
 
     return () => {
@@ -89,30 +68,27 @@ const GraphComponent: React.FC<{
   }, []);
 
   useEffect(() => {
-    sigma?.scheduleRefresh();
-  }, [inView]);
+    setIsLoading(false);
+  }, [data]);
 
   return (
-    <div className="graph-wrapper">
+    <div className={`graph-container ${isSmall ? "small" : ""}`}>
       <SigmaContainer
         ref={setSigma}
-        className={`graph ${inView ? "" : "graph--scroll"}`}
+        className={`graph ${isSmall ? "small" : ""}`}
         settings={sigmaSettings}
       >
         <GraphEvents />
-        <LoadGraph data={data} />
-        {isFullscreen ? (
+        <LoadGraph data={data} isLoading={isLoading} />
+        {isFullscreen && (
           <ControlsContainer position="top-right">
             <SearchControl />
           </ControlsContainer>
-        ) : (
-          !inView && <ShowGraphButton />
         )}
         <ControlsContainer position="bottom-right">
           <FullScreenControl />
         </ControlsContainer>
       </SigmaContainer>
-      <div ref={ref}></div>
     </div>
   );
 };

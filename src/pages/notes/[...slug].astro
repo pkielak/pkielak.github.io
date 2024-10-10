@@ -6,7 +6,7 @@ import Backlinks from "../../components/Backlinks.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("notes");
-  return posts.map((post) => ({
+  return posts.map((post: any) => ({
     params: { slug: post.slug },
     props: post,
   }));
@@ -17,7 +17,11 @@ const post = Astro.props;
 const { Content } = await post.render();
 ---
 
-<Main description={post.data.description} title={post.data.title}>
+<Main
+  description={post.data.description}
+  title={post.data.title}
+  isGraphSmall={true}
+>
   <div class="prose">
     <div class="title">
       <h1>{post.data.title}</h1>

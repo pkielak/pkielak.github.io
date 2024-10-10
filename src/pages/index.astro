@@ -5,12 +5,12 @@ import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 
 const posts = (await getCollection("notes"))
-  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .sort((a: any, b: any) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
   .slice(0, 5);
 ---
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <section>
+  <section slot="before-graph">
     <h1>🧑‍🚀 Hello, Astronaut!</h1>
     <p>
       Welcome to the official <a href="https://astro.build/">Astro</a> blog starter
@@ -19,11 +19,12 @@ const posts = (await getCollection("notes"))
       Astro.
     </p>
   </section>
+
   <section>
     <h2>Recent notes</h2>
     <ul>
       {
-        posts.map((post) => (
+        posts.map((post: any) => (
           <li>
             <a href={`/notes/${post.slug}/`}>
               <h4 class="title">{post.data.title}</h4>
@@ -94,6 +95,7 @@ const posts = (await getCollection("notes"))
   ul li a:hover .date {
     color: var(--nord10);
   }
+
   @media (max-width: 720px) {
     ul {
       gap: 0.5em;

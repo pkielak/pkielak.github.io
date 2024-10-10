@@ -7,39 +7,85 @@ import GraphComponent from "../components/GraphComponent";
 
 const graph = await import("../pages/graph.json");
 const graphData = await graph.GET({}).then((response) => response.json());
+
 interface Props {
   title: string;
   description: string;
+  isGraphSmall?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, isGraphSmall } = Astro.props;
 ---
 
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
     <ViewTransitions />
-
-    <style>
-      article {
-        max-width: 720px;
-        margin: 0 auto;
-      }
-    </style>
   </head>
 
   <body>
     <Header />
-    <GraphComponent
-      data={graphData}
-      client:only="react"
-      transition:persist="graph"
-    />
     <main>
       <article>
+        <slot name="before-graph" />
+        <div class={`graph-wrapper ${isGraphSmall ? "small" : ""}`}>
+          <GraphComponent
+            data={graphData}
+            client:only="react"
+            transition:persist="graph"
+            isSmall={isGraphSmall}
+          />
+        </div>
         <slot />
       </article>
       <Footer />
     </main>
   </body>
 </html>
+
+<style>
+  @keyframes reveal {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  article {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .graph-wrapper {
+    width: 100%;
+    max-width: calc(720px - 2em);
+    margin: 0 auto;
+    aspect-ratio: 2;
+    background: var(--nord5);
+    box-shadow: rgba(184, 194, 215, 0.35) 0px 6px 9px 0px;
+  }
+
+  @media (min-width: 1280px) {
+    .graph-wrapper.small {
+      display: block;
+      position: fixed !important;
+      z-index: 3;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+      max-width: calc((100vw - 720px) / 2 - 1em);
+      height: unset !important;
+      aspect-ratio: 1;
+      animation: reveal forwards ease-in-out 250ms;
+    }
+  }
+
+  @media (min-width: 1560px) {
+    .graph.small {
+      max-width: 400px;
+    }
+  }
+</style>
