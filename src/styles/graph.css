@@ -1,10 +1,20 @@
 .graph-container,
 .graph {
   width: 100%;
-  aspect-ratio: 2;
+  height: 50vh;
 }
 
-.graph-container.small,
-.graph.small {
-  aspect-ratio: 1;
+.controls {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .graph-container,
+  .graph {
+    height: 100vh;
+  }
+
+  .controls {
+    display: block;
+  }
 }

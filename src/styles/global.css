@@ -146,7 +146,7 @@ hr {
 
 div.react-sigma,
 :not(:root):fullscreen::backdrop {
-  background: var(--nord5) !important;
+  background: var(--nord6) !important;
 }
 
 .react-sigma-controls {

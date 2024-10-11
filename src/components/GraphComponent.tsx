@@ -80,13 +80,8 @@ const GraphComponent: React.FC<{
       >
         <GraphEvents />
         <LoadGraph data={data} isLoading={isLoading} />
-        {isFullscreen && (
-          <ControlsContainer position="top-right">
-            <SearchControl />
-          </ControlsContainer>
-        )}
-        <ControlsContainer position="bottom-right">
-          <FullScreenControl />
+        <ControlsContainer className="controls" position="top-right">
+          <SearchControl />
         </ControlsContainer>
       </SigmaContainer>
     </div>

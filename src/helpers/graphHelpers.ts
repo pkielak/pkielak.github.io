@@ -15,7 +15,7 @@ function drawLabel(
   context.font = `${weight} ${size}px ${font}`;
   const width = context.measureText(data.label).width + 4;
 
-  context.fillStyle = "#e5e9f0";
+  context.fillStyle = "#eceff4";
   context.fillRect(data.x + data.size, data.y + size / 3 - 15, width, 16);
 
   context.fillStyle = "#2e3440";
@@ -36,7 +36,7 @@ function drawHover(
   context.font = `${weight} ${size}px ${font}`;
   const width = context.measureText(data.label).width + 4;
 
-  context.fillStyle = "#e5e9f0";
+  context.fillStyle = "#eceff4";
   context.fillRect(data.x + data.size, data.y + size / 3 - 15, width, 16);
 
   context.fillStyle = "#a3be8c";

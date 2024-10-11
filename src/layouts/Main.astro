@@ -24,22 +24,21 @@ const { title, description, isGraphSmall } = Astro.props;
   </head>
 
   <body>
-    <Header />
     <main>
+      <Header />
       <article>
-        <slot name="before-graph" />
-        <div class={`graph-wrapper ${isGraphSmall ? "small" : ""}`}>
-          <GraphComponent
-            data={graphData}
-            client:only="react"
-            transition:persist="graph"
-            isSmall={isGraphSmall}
-          />
-        </div>
         <slot />
       </article>
       <Footer />
     </main>
+    <div class="graph-wrapper">
+      <GraphComponent
+        data={graphData}
+        client:only="react"
+        transition:persist="graph"
+        isSmall={isGraphSmall}
+      />
+    </div>
   </body>
 </html>
 
@@ -54,38 +53,62 @@ const { title, description, isGraphSmall } = Astro.props;
     }
   }
 
-  article {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    width: 100%;
     max-width: 720px;
     margin: 0 auto;
   }
 
   .graph-wrapper {
     width: 100%;
-    max-width: calc(720px - 2em);
-    margin: 0 auto;
-    aspect-ratio: 2;
-    background: var(--nord5);
-    box-shadow: rgba(184, 194, 215, 0.35) 0px 6px 9px 0px;
+    height: 50vh;
+    animation: reveal forwards ease-in-out 250ms;
+    border-top: 1px dashed var(--nord10);
   }
 
-  @media (min-width: 1280px) {
-    .graph-wrapper.small {
-      display: block;
-      position: fixed !important;
-      z-index: 3;
-      bottom: 0;
+  @media (min-width: 1024px) {
+    body {
+      flex-direction: row;
+    }
+
+    main {
+      max-width: 512px;
+      margin: 0 0 auto;
+    }
+
+    .graph-wrapper {
+      position: fixed;
+      top: 0;
       right: 0;
-      margin: 0;
-      max-width: calc((100vw - 720px) / 2 - 1em);
-      height: unset !important;
-      aspect-ratio: 1;
-      animation: reveal forwards ease-in-out 250ms;
+      width: calc(100% - 513px);
+      height: 100vh;
+      border-top: unset;
+      border-left: 1px dashed var(--nord10);
     }
   }
 
-  @media (min-width: 1560px) {
-    .graph.small {
-      max-width: 400px;
+  @media (min-width: 1200px) {
+    main {
+      max-width: 600px;
+    }
+
+    .graph-wrapper {
+      width: calc(100% - 601px);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    main {
+      max-width: 720px;
+    }
+
+    .graph-wrapper {
+      width: calc(100% - 721px);
     }
   }
 </style>
