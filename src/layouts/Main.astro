@@ -2,11 +2,11 @@
 import { ViewTransitions } from "astro:transitions";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import GraphComponent from "../components/GraphComponent";
 
 const graph = await import("../pages/graph.json");
 const graphData = await graph.GET({}).then((response) => response.json());
+const today = new Date();
 
 interface Props {
   title: string;
@@ -29,7 +29,6 @@ const { title, description, isGraphSmall } = Astro.props;
       <article>
         <slot />
       </article>
-      <Footer />
     </main>
     <div class="graph-wrapper">
       <GraphComponent
@@ -39,6 +38,9 @@ const { title, description, isGraphSmall } = Astro.props;
         isSmall={isGraphSmall}
       />
     </div>
+    <footer>
+      &copy; {today.getFullYear()} Your name here. All rights reserved.
+    </footer>
   </body>
 </html>
 
@@ -54,12 +56,16 @@ const { title, description, isGraphSmall } = Astro.props;
   }
 
   body {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas: "main" "graph" "footer";
   }
 
   main {
     width: 100%;
+    grid-area: main;
+  }
+
+  article {
     max-width: 720px;
     margin: 0 auto;
   }
@@ -69,16 +75,36 @@ const { title, description, isGraphSmall } = Astro.props;
     height: 50vh;
     animation: reveal forwards ease-in-out 250ms;
     border-top: 1px dashed var(--nord10);
+    grid-area: graph;
+  }
+
+  footer {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: var(--footer-height);
+    border-top: 1px dashed var(--nord10);
+    grid-area: footer;
   }
 
   @media (min-width: 1024px) {
     body {
-      flex-direction: row;
+      grid-template-areas:
+        "main graph"
+        "footer graph";
     }
 
     main {
-      max-width: 512px;
       margin: 0 0 auto;
+    }
+
+    main,
+    footer {
+      max-width: 512px;
     }
 
     .graph-wrapper {
@@ -93,7 +119,8 @@ const { title, description, isGraphSmall } = Astro.props;
   }
 
   @media (min-width: 1200px) {
-    main {
+    main,
+    footer {
       max-width: 600px;
     }
 
