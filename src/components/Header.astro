@@ -21,6 +21,7 @@ import { SITE_TITLE } from "../consts";
     background: var(--nord6);
     pointer-events: none;
     border-bottom: 1px dashed var(--nord10);
+    grid-area: header;
   }
 
   h2 {
@@ -38,7 +39,6 @@ import { SITE_TITLE } from "../consts";
     justify-content: space-between;
     height: 100%;
     width: 100%;
-    max-width: 720px;
     margin: auto;
   }
   nav a {
@@ -50,5 +50,11 @@ import { SITE_TITLE } from "../consts";
   nav a.active {
     text-decoration: none;
     color: var(--nord10);
+  }
+
+  @media (min-width: 1024px) {
+    header {
+      width: calc(50vw - 1rem);
+    }
   }
 </style>
