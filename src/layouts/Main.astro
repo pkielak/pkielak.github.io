@@ -24,8 +24,8 @@ const { title, description, isGraphSmall } = Astro.props;
   </head>
 
   <body>
+    <Header />
     <main>
-      <Header />
       <article>
         <slot />
       </article>
@@ -57,11 +57,10 @@ const { title, description, isGraphSmall } = Astro.props;
 
   body {
     display: grid;
-    grid-template-areas: "main" "graph" "footer";
+    grid-template-areas: "header" "main" "graph" "footer";
   }
 
   main {
-    width: 100%;
     grid-area: main;
   }
 
@@ -93,50 +92,26 @@ const { title, description, isGraphSmall } = Astro.props;
 
   @media (min-width: 1024px) {
     body {
+      grid-template-columns: 1fr 1fr;
       grid-template-areas:
+        "header graph"
         "main graph"
         "footer graph";
     }
 
-    main {
-      margin: 0 0 auto;
-    }
-
     main,
     footer {
-      max-width: 512px;
+      width: calc(50vw - 1rem);
     }
 
     .graph-wrapper {
       position: fixed;
       top: 0;
       right: 0;
-      width: calc(100% - 513px);
       height: 100vh;
+      width: 50vw;
       border-top: unset;
       border-left: 1px dashed var(--nord10);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    main,
-    footer {
-      max-width: 600px;
-    }
-
-    .graph-wrapper {
-      width: calc(100% - 601px);
-    }
-  }
-
-  @media (min-width: 1440px) {
-    main,
-    footer {
-      max-width: 720px;
-    }
-
-    .graph-wrapper {
-      width: calc(100% - 721px);
     }
   }
 </style>
