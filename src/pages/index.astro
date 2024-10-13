@@ -11,8 +11,18 @@ const posts = (await getCollection("notes"))
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <section>
-    <h1>🧑‍🚀 Hello!</h1>
-    <p>Welcome to my personal website.</p>
+    <h3>🧑‍🚀 Hello! I'm Piotr</h3>
+    <p>
+      I created this page to share my progress as a front-end developer, but
+      also many other things that interest me. My main motivation as a developer
+      is to create apps and web pages that serve purpose and aid users in their
+      daily activities and tasks. I can proudly say that I made a few apps that
+      did that. It keeps me motivated to do more.
+    </p>
+    <p>
+      I can say also that I like to tinker, mainly with noncomplicated
+      electronics and 3d printers. I like to read manga and do some sim racing.
+    </p>
   </section>
 
   <section>
@@ -41,7 +51,8 @@ const posts = (await getCollection("notes"))
     padding: 0 1rem 0;
   }
 
-  h2 {
+  h3 {
+    font-size: 1.563em;
     margin-bottom: 0.5rem;
   }
 
@@ -101,6 +112,12 @@ const posts = (await getCollection("notes"))
     }
     ul li:first-child .title {
       font-size: 1.563em;
+    }
+  }
+
+  @media (min-width: 720px) {
+    h3 {
+      font-size: 1.953em;
     }
   }
 </style>
