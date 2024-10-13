@@ -18,7 +18,7 @@ const backlinks = edges.filter((edge) => edge.target === postSlug);
 {
   backlinks.length > 0 && (
     <>
-      <h2>Backlinks</h2>
+      <h5>Backlinks</h5>
       <ol class="backlinks">
         {backlinks.map((backlink) => {
           const referenceNode = nodes.find(
