@@ -149,9 +149,25 @@ div.react-sigma,
   background: var(--nord6) !important;
 }
 
-.react-sigma-controls {
+.react-sigma-controls,
+.react-sigma-search {
   border: none !important;
+  border-radius: 0 !important;
   background-color: transparent !important;
+}
+
+.react-sigma-search input {
+  border: 1px solid var(--nord3) !important;
+  border-radius: 4px !important;
+}
+
+.react-sigma-search input:focus-visible {
+  outline-color: var(--nord10) !important;
+}
+
+.react-sigma-controls.top-right {
+  top: -54.5px !important;
+  right: 20px !important;
 }
 
 .react-sigma-control,

@@ -11,7 +11,7 @@
 @media (min-width: 1024px) {
   .graph-container,
   .graph {
-    height: 100vh;
+    height: calc(100vh - var(--header-height) - 1px);
   }
 
   .controls {
