@@ -26,14 +26,13 @@ const backlinks = edges.filter((edge) => edge.target === postSlug);
           );
           return (
             <li class="backlink">
-              <a href={`/notes/${backlink.source}/`}>
-                {referenceNode?.attributes ? (
-                  <p title={referenceNode.attributes.description}>
-                    {referenceNode.attributes.label}
-                  </p>
-                ) : (
-                  backlink.target
-                )}
+              <a
+                href={`/notes/${backlink.source}/`}
+                title={referenceNode?.attributes?.description}
+              >
+                {referenceNode?.attributes
+                  ? referenceNode.attributes.label
+                  : backlink.target}
               </a>
             </li>
           );
@@ -44,23 +43,9 @@ const backlinks = edges.filter((edge) => edge.target === postSlug);
 }
 
 <style>
-  .backlink {
-    counter-increment: li;
-    display: list-item;
-  }
-
-  .backlink::marker {
-    display: list-item;
-    content: "[" counter(li) "] ";
-  }
-
   .backlink a {
     text-decoration: none;
     color: var(--nord0);
-  }
-
-  .backlink a p {
-    margin: 0;
   }
 
   .backlink a:hover p {

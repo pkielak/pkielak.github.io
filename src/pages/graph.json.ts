@@ -18,7 +18,7 @@ export async function GET({}) {
       description: post.data.description,
       x: Math.random(),
       y: Math.random(),
-      size: 8,
+      size: 12,
       color: "#5e81ac",
       type: "circle",
     });
