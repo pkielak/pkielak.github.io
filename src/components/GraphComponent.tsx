@@ -3,9 +3,6 @@ import type { Sigma } from "sigma";
 import type { SerializedGraph } from "graphology-types";
 import Graph from "graphology";
 import {
-  ControlsContainer,
-  FullScreenControl,
-  SearchControl,
   SigmaContainer,
   useLoadGraph,
   useRegisterEvents,
@@ -52,20 +49,7 @@ const GraphComponent: React.FC<{
   isSmall?: boolean;
 }> = ({ data, isSmall }) => {
   const [, setSigma] = useState<Sigma | null>(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
-  const handleFullscreenChange = () => {
-    setIsFullscreen(!!document.fullscreenElement);
-  };
-
-  useEffect(() => {
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-    };
-  }, []);
 
   useEffect(() => {
     setIsLoading(false);
@@ -80,9 +64,6 @@ const GraphComponent: React.FC<{
       >
         <GraphEvents />
         <LoadGraph data={data} isLoading={isLoading} />
-        <ControlsContainer className="controls" position="top-right">
-          <SearchControl />
-        </ControlsContainer>
       </SigmaContainer>
     </div>
   );
