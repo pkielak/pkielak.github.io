@@ -39,7 +39,11 @@ const { title, description, isGraphSmall } = Astro.props;
       />
     </div>
     <footer>
-      &copy; {today.getFullYear()} pkielak 
+      <span
+        >&copy; {today.getFullYear()} pkielak | <a href="/privacy"
+          >Privacy policy</a
+        ></span
+      >
     </footer>
   </body>
 </html>

@@ -1,0 +1,112 @@
+---
+import Main from "../layouts/Main.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <section>
+    <h3>Privacy policy</h3>
+    <br />
+    <h4>Introduction</h4>
+    <p>
+      This privacy policy outlines how I collect, use, and protect your personal
+      information when you interact with my website.
+    </p>
+    <h4>GitHub Pages Service</h4>
+    <p>
+      This Website is hosted as a GitHub Pages website. GitHub may collect User
+      Personal Information from visitors to this GitHub Pages website, including
+      logs of visitor IP addresses, to comply with legal obligations, and to
+      maintain the security and integrity of this Website and the Service. See
+      the <a
+        href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+        target="_blank"
+        rel="noopener noreferrer">GitHub Privacy Statement</a
+      > for details.
+    </p>
+    <h4>Web3Forms</h4>
+    <p>
+      I use Web3Forms to send your contact request, and you can read their
+      privacy policy <a
+        href="https://web3forms.com/privacy"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://web3forms.com/privacy">here</a
+      >.
+    </p>
+    <h4>Linked services</h4>
+    <p>
+      This website contains links to other services. If you follow these links,
+      you should become aware of their terms of service.
+    </p>
+    <h4>Type of Information Collected</h4>
+    <p>
+      My website collects the following type of information:
+      <ul>
+        <li>
+          Information voluntarily provided by you through my contact form,
+          including your name and email address.
+        </li>
+      </ul>
+    </p>
+    <h4>How I Collect Information</h4>
+    <p>
+      I collect information solely through my contact form, which is powered by
+      Web3Forms.
+    </p>
+    <h4>How I Use Your Information</h4>
+    <p>
+      I use the information I collect for the following purpose:
+      <ul>
+        <li>To respond to inquiries submitted through my contact form.</li>
+      </ul>
+    </p>
+    <h4>Data Retention</h4>
+    <p>
+      I retain your information for as long as necessary to fulfill the purpose
+      for which it was collected. After that, I will delete your information
+      from my system.
+    </p>
+
+    <h4>Security Measures</h4>
+    <p>
+      I take reasonable measure to protect your personal information from
+      unauthorized access, disclosure, alteration, or destruction.
+    </p>
+    <h4>Your Rights</h4>
+    <p>
+      You have the right to request access to, correction of, or deletion of
+      your personal information. Please contact me using my contact form to
+      exercise this right.
+    </p>
+    <h4>Changes to This Privacy Policy</h4>
+    <p>
+      I reserve the right to update this privacy policy at any time. When I do,
+      I will revise the "Last Updated" date below.
+    </p>
+    <h4>Contact Me</h4>
+    <p>
+      If you have any question or concern about this privacy policy, please
+      don't hesitate to contact me using my contact form.
+    </p>
+    <p>Last Updated: 16.10.2024</p>
+  </section>
+</Main>
+<style>
+  section {
+    max-width: calc(100% - 2rem);
+    margin: 2rem auto;
+    padding: 0 1rem 0;
+  }
+
+  h3 {
+    font-size: 1.563em;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (min-width: 720px) {
+    h3 {
+      font-size: 1.953em;
+    }
+  }
+</style>
