@@ -4,22 +4,94 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
 
 <form id="form" action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value={WEB_3_FORMS_KEY} />
-  <label>First Name</label>
-  <input type="text" name="name" placeholder="First name" required />
+  <div class="small-inputs">
+    <div>
+      <label for="name">First Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="First name"
+        required
+      />
+    </div>
 
-  <label>Email</label>
-  <input
-    type="email"
-    name="email"
-    inputmode="email"
-    placeholder="Email Address"
-    required
-  />
-
-  <label>Message</label>
-  <textarea name="message" rows="4" placeholder="Message" required></textarea>
-
-  <button type="submit">Send Message</button>
+    <div>
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        inputmode="email"
+        placeholder="Email Address"
+        required
+      />
+    </div>
+  </div>
+  <div>
+    <label for="message">Message</label>
+    <textarea
+      id="message"
+      name="message"
+      rows="6"
+      placeholder="Message"
+      required></textarea>
+  </div>
+  <button type="submit">Submit</button>
 </form>
 
-<style></style>
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  input,
+  textarea {
+    padding: 0.5rem 0.75rem;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline-color: var(--nord10);
+    border-color: var(--nord10);
+  }
+
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border-color: var(--nord3);
+    border-radius: 0.25rem;
+    resize: none;
+  }
+
+  button {
+    border: 1px solid var(--nord10);
+    background: var(--nord10);
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    color: #fff;
+    align-self: center;
+    width: 150px;
+    font-size: 1em;
+  }
+
+  .small-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .small-inputs > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .small-inputs > div {
+      width: calc(50% - 0.5rem);
+    }
+  }
+</style>
