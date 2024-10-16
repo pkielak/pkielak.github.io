@@ -1,4 +1,6 @@
 ---
+import Icon from "./Icon.astro";
+
 const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
 ---
 
@@ -37,7 +39,9 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
       placeholder="Message"
       required></textarea>
   </div>
-  <button type="submit">Submit</button>
+  <button type="submit"
+    ><Icon size="22px" icon="paper-plane-tilt" /> Submit</button
+  >
 </form>
 
 <style>
@@ -50,6 +54,8 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
   input,
   textarea {
     padding: 0.5rem 0.75rem;
+    border: 1px solid var(--nord3);
+    border-radius: 0.25rem;
   }
 
   input:focus-visible,
@@ -61,12 +67,14 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
   textarea {
     width: 100%;
     box-sizing: border-box;
-    border-color: var(--nord3);
-    border-radius: 0.25rem;
     resize: none;
   }
 
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
     border: 1px solid var(--nord10);
     background: var(--nord10);
     border-radius: 0.25rem;
@@ -75,6 +83,12 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
     align-self: center;
     width: 150px;
     font-size: 1em;
+    cursor: pointer;
+  }
+
+  button:hover {
+    border: 1px solid var(--nord3);
+    background: var(--nord3);
   }
 
   .small-inputs {
