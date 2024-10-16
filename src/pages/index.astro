@@ -15,14 +15,19 @@ const posts = (await getCollection("notes"))
     <h3>🧑‍🚀 Hello! I'm Piotr</h3>
     <p>
       I created this page to share my progress as a front-end developer, but
-      also many other things that interest me. My main motivation as a developer
-      is to create apps and web pages that serve purpose and aid users in their
-      daily activities and tasks. I can proudly say that I made a few apps that
-      did that. It keeps me motivated to do more.
+      also, to test the idea of the digital garden, whose node diagram can you
+      see when viewing the site.
     </p>
     <p>
-      I can say also that I like to tinker, mainly with noncomplicated
-      electronics and 3d printers. I like to read manga and do some sim racing.
+      My main motivation as a developer is to create apps and web pages that
+      serve purpose and aid users in their daily activities and tasks. I can
+      proudly say that I made a few apps that did that. It keeps me motivated to
+      do more.
+    </p>
+    <p>
+      I can say also that I like to tinker, mainly with non-complicated
+      electronics and 3d printers. I like to read manga and play some sim racing
+      games.
     </p>
   </section>
 
@@ -48,76 +53,77 @@ const posts = (await getCollection("notes"))
     <h3>Contact Me</h3>
     <ContactForm />
   </section>
-</Main>
-<style>
-  section {
-    max-width: calc(100% - 2rem);
-    margin: 2rem auto;
-    padding: 0 1rem 0;
-  }
 
-  h3 {
-    font-size: 1.563em;
-    margin-bottom: 1rem;
-  }
-
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  ul li {
-    width: 100%;
-  }
-  ul li * {
-    text-decoration: none;
-    transition: 0.2s ease;
-  }
-  ul li img {
-    margin-bottom: 0.5rem;
-    border-radius: 12px;
-  }
-  ul li a {
-    display: block;
-    color: var(--nord0);
-  }
-
-  .title {
-    margin: 0;
-    line-height: 1;
-  }
-  .date {
-    margin: 0;
-    color: var(--nord3);
-  }
-  .description {
-    margin: 0;
-    color: var(--nord3);
-  }
-  ul li a:hover h4,
-  ul li a:hover .date {
-    color: var(--nord10);
-  }
-
-  @media (max-width: 720px) {
-    ul {
-      gap: 0.5em;
+  <style>
+    section {
+      max-width: calc(100% - 2rem);
+      margin: 2rem auto;
+      padding: 0 1rem 0;
     }
 
-    ul li:first-child {
-      margin-bottom: 0;
-    }
-    ul li:first-child .title {
-      font-size: 1.563em;
-    }
-  }
-
-  @media (min-width: 720px) {
     h3 {
-      font-size: 1.953em;
+      font-size: 1.563em;
+      margin-bottom: 1rem;
     }
-  }
-</style>
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    ul li {
+      width: 100%;
+    }
+    ul li * {
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+    ul li img {
+      margin-bottom: 0.5rem;
+      border-radius: 12px;
+    }
+    ul li a {
+      display: block;
+      color: var(--nord0);
+    }
+
+    .title {
+      margin: 0;
+      line-height: 1;
+    }
+    .date {
+      margin: 0;
+      color: var(--nord3);
+    }
+    .description {
+      margin: 0;
+      color: var(--nord3);
+    }
+    ul li a:hover h4,
+    ul li a:hover .date {
+      color: var(--nord10);
+    }
+
+    @media (max-width: 720px) {
+      ul {
+        gap: 0.5em;
+      }
+
+      ul li:first-child {
+        margin-bottom: 0;
+      }
+      ul li:first-child .title {
+        font-size: 1.563em;
+      }
+    }
+
+    @media (min-width: 720px) {
+      h3 {
+        font-size: 1.953em;
+      }
+    }
+  </style>
+</Main>
