@@ -3,6 +3,7 @@ import Main from "../layouts/Main.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
+import ContactForm from "../components/ContactForm.astro";
 
 const posts = (await getCollection("notes"))
   .sort((a: any, b: any) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
@@ -26,7 +27,7 @@ const posts = (await getCollection("notes"))
   </section>
 
   <section>
-    <h2>Recent notes</h2>
+    <h3>Recent notes</h3>
     <ul>
       {
         posts.map((post: any) => (
@@ -43,6 +44,10 @@ const posts = (await getCollection("notes"))
       }
     </ul>
   </section>
+  <section>
+    <h3>Contact me</h3>
+    <ContactForm />
+  </section>
 </Main>
 <style>
   section {
@@ -53,7 +58,7 @@ const posts = (await getCollection("notes"))
 
   h3 {
     font-size: 1.563em;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   ul {
@@ -79,12 +84,7 @@ const posts = (await getCollection("notes"))
     display: block;
     color: var(--nord0);
   }
-  .hero {
-    margin: 0 0 2rem;
-  }
-  .hero h1 {
-    margin-bottom: 1rem;
-  }
+
   .title {
     margin: 0;
     line-height: 1;

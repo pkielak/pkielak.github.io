@@ -1,0 +1,25 @@
+---
+const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
+---
+
+<form id="form" action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value={WEB_3_FORMS_KEY} />
+  <label>First Name</label>
+  <input type="text" name="name" placeholder="First name" required />
+
+  <label>Email</label>
+  <input
+    type="email"
+    name="email"
+    inputmode="email"
+    placeholder="Email Address"
+    required
+  />
+
+  <label>Message</label>
+  <textarea name="message" rows="4" placeholder="Message" required></textarea>
+
+  <button type="submit">Send Message</button>
+</form>
+
+<style></style>

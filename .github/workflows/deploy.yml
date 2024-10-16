@@ -21,6 +21,8 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
       - name: Install, build, and upload your site
+        env:
+          WEB_3_FORMS_KEY: ${{ secrets.WEB_3_FORMS_KEY }}
         uses: withastro/action@v3
         # with:
         # path: . # The root location of your Astro project inside the repository. (optional)
