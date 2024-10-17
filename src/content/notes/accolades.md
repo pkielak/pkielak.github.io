@@ -3,7 +3,7 @@ title: Accolades
 description: Without them this website would not have been possible
 pubDate: 10.17.2024
 ---
-Without them this website would not have been possible.
+Without them this website([[index]]) would not have been possible.
 
 ## Astro
 #### https://astro.build/

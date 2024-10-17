@@ -1,9 +1,9 @@
 ---
-title: Filaments
+title: Easy filaments
 description: That plastic thing that we put in 3D printer
 pubDate: 10.12.2024
 ---
-Easy printing filaments:
+Filaments that can be printed relatively easily, I didn't checked them, but one day I will:
 - PETG
 - TPU
 - Wood
