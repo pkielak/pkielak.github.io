@@ -5,7 +5,10 @@ import { SITE_TITLE } from "../consts";
 
 <header transition:animate="none">
   <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
+    <div class="title">
+      <img src="/public/favicon_192.png" />
+      <h2><a href="/">{SITE_TITLE}</a></h2>
+    </div>
     <div class="internal-links">
       <!-- <HeaderLink href="/about">About</HeaderLink> -->
     </div>
@@ -25,9 +28,10 @@ import { SITE_TITLE } from "../consts";
   }
 
   h2 {
+    position: relative;
+    top: 2px;
     margin: 0;
-    font-size: 1em;
-    margin-left: 0.5em;
+    font-size: 1.5em;
   }
   h2 a [margin: 0;] h2 a,
   h2 a.active {
@@ -42,7 +46,6 @@ import { SITE_TITLE } from "../consts";
     margin: auto;
   }
   nav a {
-    padding: 0.5em;
     color: var(--nord0);
     text-decoration: none;
     pointer-events: initial;
@@ -50,5 +53,19 @@ import { SITE_TITLE } from "../consts";
   nav a.active {
     text-decoration: none;
     color: var(--nord10);
+  }
+
+  nav img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    height: 41px;
+    margin-left: 0.5em;
   }
 </style>
