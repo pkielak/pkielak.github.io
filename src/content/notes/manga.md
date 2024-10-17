@@ -3,7 +3,7 @@ title: Manga
 description: I like to read manga books
 pubDate: 10.12.2024
 ---
-So far I manage to read:
+So far I managed to read:
 
 - Naruto\
 I read this as a teenager, and I was strongly identifying with the main character. This series introduced me to the habit of reading manga, but after finishing this series I did not continue this passion. Until...

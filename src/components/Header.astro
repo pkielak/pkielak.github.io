@@ -1,12 +1,14 @@
 ---
 // import HeaderLink from "./HeaderLink.astro";
+import { Image } from "astro:assets";
 import { SITE_TITLE } from "../consts";
+import logo from "../favicon_192.png";
 ---
 
 <header transition:animate="none">
   <nav>
     <div class="title">
-      <img src="/public/favicon_192.png" />
+      <Image src={logo} alt="P and K letters" />
       <h2><a href="/">{SITE_TITLE}</a></h2>
     </div>
     <div class="internal-links">
