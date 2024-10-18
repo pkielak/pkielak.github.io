@@ -2,6 +2,7 @@
 title: Manga
 description: I like to read manga books
 pubDate: 10.12.2024
+updatedAt: 10.17.2024
 ---
 So far I managed to read:
 

@@ -2,6 +2,7 @@
 title: Things to be done
 description: What's left to do on this garden
 pubDate: 10.17.2024
+updatedAt: 10.18.2024
 ---
 A few things are missing in this garden, we can divide them into two categories:
 - Missing content, mainly texts on existing sub-pages and more explanation of why one topic relates to the linked topic.
@@ -17,7 +18,7 @@ A few things are missing in this garden, we can divide them into two categories:
 - [ ] Come back later and write more plans
 
 ## Functional things:
-- [ ] Add updatedAt property to posts
+- [x] Add updatedAt property to posts
 - [ ] Fix node hover effects
 - [ ] More distinctive arrows in graph edges
 - [ ] Add images to nodes
