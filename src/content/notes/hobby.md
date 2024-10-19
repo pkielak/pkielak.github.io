@@ -9,5 +9,5 @@ These are my main hobbies right now:
 - [[3d-printers]]
 - [[manga]]
 - Mechanical keyboards
-- Headphones and audio gear
+- [[headphones|Headphones and audio gear]] 
 - Simracing
