@@ -6,7 +6,12 @@ import FormattedDate from "../components/FormattedDate.astro";
 import ContactForm from "../components/ContactForm.astro";
 
 const posts = (await getCollection("notes"))
-  .sort((a: any, b: any) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .sort((a: any, b: any) => {
+    const aDate = a.data.updatedAt || a.data.pubDate;
+    const bDate = b.data.updatedAt || b.data.pubDate;
+
+    return bDate.valueOf() - aDate.valueOf();
+  })
   .slice(0, 5);
 ---
 
@@ -41,7 +46,9 @@ const posts = (await getCollection("notes"))
             <a href={`/notes/${post.slug}/`}>
               <h4 class="title">{post.data.title}</h4>
               <p class="date">
-                <FormattedDate date={post.data.pubDate} />
+                <FormattedDate
+                  date={post.data.updatedAt || post.data.pubDate}
+                />
               </p>
               <p class="description">{post.data.description}</p>
             </a>
