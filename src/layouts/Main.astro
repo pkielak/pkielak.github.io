@@ -70,7 +70,7 @@ const { title, description, isGraphSmall } = Astro.props;
     min-height: calc(50vh - var(--header-height) - var(--footer-height));
     position: relative;
     grid-area: main;
-    z-index: 2;
+    z-index: 3;
     background: #fff;
     margin: 0 auto;
   }
@@ -98,6 +98,7 @@ const { title, description, isGraphSmall } = Astro.props;
     text-align: center;
     height: var(--footer-height);
     grid-area: footer;
+    box-shadow: rgba(216, 222, 233, 0.15) 0px -10px;
   }
 
   @media (min-width: 768px) {
@@ -140,8 +141,7 @@ const { title, description, isGraphSmall } = Astro.props;
     }
 
     footer {
-      left: 100%;
-      transform: translateX(-50%);
+      box-shadow: none;
     }
   }
 
