@@ -4,12 +4,13 @@ import type { SerializedGraph } from "graphology-types";
 import Graph from "graphology";
 import {
   SigmaContainer,
+  useCamera,
   useLoadGraph,
   useRegisterEvents,
 } from "@react-sigma/core";
 import { navigate } from "astro:transitions/client";
 
-import { sigmaSettings } from "../helpers/graphHelpers";
+import { sigmaProps } from "../helpers/graphHelpers";
 import "../styles/graph.css";
 
 const GraphEvents: React.FC = () => {
@@ -34,12 +35,21 @@ export const LoadGraph: React.FC<LoadGraphProps> = ({ data, isLoading }) => {
   const graph = useMemo(() => Graph.from(data), [data]);
 
   const loadGraph = useLoadGraph();
+  const camera = useCamera();
+
+  useEffect(() => {
+    const currentNode = data.nodes.find(
+      (node) => node.key === window.location.pathname.split("/").slice(-1)[0]
+    );
+
+    currentNode?.key && camera.gotoNode(currentNode.key);
+  }, [data]);
 
   useEffect(() => {
     if (!isLoading) {
       loadGraph(graph);
     }
-  }, [loadGraph, isLoading, graph]);
+  }, [loadGraph, isLoading]);
 
   return null;
 };
@@ -60,7 +70,7 @@ const GraphComponent: React.FC<{
       <SigmaContainer
         ref={setSigma}
         className={`graph ${isSmall ? "small" : ""}`}
-        settings={sigmaSettings}
+        settings={sigmaProps.settings}
       >
         <GraphEvents />
         <LoadGraph data={data} isLoading={isLoading} />

@@ -1,4 +1,6 @@
+import type { SigmaContainerProps } from "@react-sigma/core";
 import { EdgeCurvedArrowProgram } from "@sigma/edge-curve";
+import type { Attributes } from "graphology-types";
 import type { Settings } from "sigma/settings";
 import type { NodeDisplayData, PartialButFor, PlainObject } from "sigma/types";
 
@@ -80,14 +82,16 @@ function drawLabel(
   context.fillText(data.label, data.x + data.size + 3, data.y + size / 3);
 }
 
-export const sigmaSettings = {
-  displayImages: true,
-  allowInvalidContainer: true,
-  labelFont: "Atkinson",
-  defaultEdgeType: "curved",
-  edgeProgramClasses: {
-    curved: EdgeCurvedArrowProgram,
+export const sigmaProps = {
+  settings: {
+    displayImages: true,
+    allowInvalidContainer: true,
+    labelFont: "Atkinson",
+    defaultEdgeType: "curved",
+    edgeProgramClasses: {
+      curved: EdgeCurvedArrowProgram,
+    },
+    defaultDrawNodeHover: drawHover,
+    defaultDrawNodeLabel: drawLabel,
   },
-  defaultDrawNodeHover: drawHover,
-  defaultDrawNodeLabel: drawLabel,
-};
+} as SigmaContainerProps<Attributes, Attributes, Attributes>;
