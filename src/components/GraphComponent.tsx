@@ -7,6 +7,7 @@ import {
   useCamera,
   useLoadGraph,
   useRegisterEvents,
+  useSigma,
 } from "@react-sigma/core";
 import { navigate } from "astro:transitions/client";
 
@@ -32,17 +33,36 @@ interface LoadGraphProps {
 }
 
 export const LoadGraph: React.FC<LoadGraphProps> = ({ data, isLoading }) => {
+  const [clickedNodeId, setClickedNodeId] = useState<string | null>(null);
   const graph = useMemo(() => Graph.from(data), [data]);
+  const sigmaContainer = document?.querySelector(".graph-container");
 
   const loadGraph = useLoadGraph();
   const camera = useCamera();
+  const registerEvents = useRegisterEvents();
+
+  useEffect(() => {
+    registerEvents({
+      clickNode: (payload) => {
+        setClickedNodeId(payload.node);
+      },
+      enterNode: () => {
+        sigmaContainer?.setAttribute("style", "cursor: pointer;");
+      },
+      leaveNode: () => {
+        sigmaContainer?.removeAttribute("style");
+      },
+    });
+  }, []);
 
   useEffect(() => {
     const currentNode = data.nodes.find(
       (node) => node.key === window.location.pathname.split("/").slice(-1)[0]
     );
 
-    currentNode?.key && camera.gotoNode(currentNode.key);
+    if (currentNode) {
+      camera.gotoNode(currentNode.key);
+    }
   }, [data]);
 
   useEffect(() => {
