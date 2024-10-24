@@ -33,24 +33,25 @@ export function drawHover(
   data: PlainObject,
   settings: PlainObject
 ) {
-  const size = 16;
+  const hoverColor = "#5ca35c";
+  const textSize = 16;
   const font = settings.labelFont;
   const weight = settings.labelWeight;
-
+  const nodeSize = data.size;
   const label = data.label;
+  const x = Math.round(data.x);
+  const y = Math.round(data.y);
 
-  // draw label background
+  // Label background
   context.beginPath();
   context.fillStyle = "#eceff4";
 
-  context.font = `${weight} ${size}px ${font}`;
+  context.font = `${weight} ${textSize}px ${font}`;
   const labelWidth = context.measureText(label).width;
   const textWidth = Math.max(labelWidth);
 
-  const x = Math.round(data.x);
-  const y = Math.round(data.y);
-  const w = Math.round(textWidth + size / 2 + data.size + 3);
-  const hLabel = Math.round(size / 2 + 4);
+  const w = Math.round(textWidth + textSize / 2 + data.size - 2);
+  const hLabel = Math.round(textSize / 2 + 4);
 
   drawRoundRect(context, x, y - 12, w, hLabel + 10, 5);
   context.closePath();
@@ -60,10 +61,18 @@ export function drawHover(
   context.shadowOffsetY = 0;
   context.shadowBlur = 0;
 
-  // draw label
-  context.fillStyle = "#5ca35c";
-  context.font = `${weight} ${size}px ${font}`;
-  context.fillText(data.label, data.x + data.size + 3, data.y + size / 3);
+  // Node hover
+  context.fillStyle = hoverColor;
+  context.beginPath();
+  context.arc(data.x, data.y, nodeSize + 2, 0, Math.PI);
+  context.arc(data.x, data.y, nodeSize + 2, Math.PI, Math.PI * 2);
+  context.closePath();
+  context.fill();
+
+  // Label
+  context.fillStyle = hoverColor;
+  context.font = `${weight} ${textSize}px ${font}`;
+  context.fillText(data.label, data.x + data.size + 3, data.y + textSize / 3);
 }
 
 function drawLabel(
