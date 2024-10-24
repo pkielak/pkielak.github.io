@@ -34,7 +34,7 @@ export async function GET({}) {
 
       if (newSlug) {
         graph.addEdge(post.slug, newSlug, {
-          size: 4,
+          size: 3,
           color: "#bec8da",
         });
       }

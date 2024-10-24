@@ -4,6 +4,8 @@ import type { Attributes } from "graphology-types";
 import type { Settings } from "sigma/settings";
 import type { NodeDisplayData, PartialButFor, PlainObject } from "sigma/types";
 
+export const CURRENT_NODE_SIZE = 16;
+
 export function drawRoundRect(
   ctx: CanvasRenderingContext2D,
   x: number,
@@ -36,8 +38,8 @@ export function drawHover(
   const hoverColor = "#5ca35c";
   const textSize = 16;
   const font = settings.labelFont;
-  const weight = settings.labelWeight;
   const nodeSize = data.size;
+  const weight = nodeSize === CURRENT_NODE_SIZE ? "600" : settings.labelWeight;
   const label = data.label;
   const x = Math.round(data.x);
   const y = Math.round(data.y);
@@ -85,7 +87,9 @@ function drawLabel(
   const size = 16,
     font = settings.labelFont;
 
-  context.font = `500 16px ${font}`;
+  context.font = `${
+    data.size === CURRENT_NODE_SIZE ? "600" : "500"
+  } 16px ${font}`;
 
   context.fillStyle = "#2e3440";
   context.fillText(data.label, data.x + data.size + 3, data.y + size / 3);

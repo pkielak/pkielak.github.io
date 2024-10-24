@@ -2,7 +2,7 @@
 title: Things to be done
 description: What's left to do on this garden
 pubDate: 10.17.2024
-updatedAt: 10.21.2024
+updatedAt: 10.24.2024
 color: "#4c566a"
 ---
 A few things are missing in this garden, we can divide them into two categories:
@@ -11,7 +11,7 @@ A few things are missing in this garden, we can divide them into two categories:
 
 ## Missing content:
 - [x] Make this list
-- [ ] Write text for [[index]] page
+- [x] Write text for [[index]] page
 - [ ] Complete the [[projects]] page, add more projects
 - [ ] Add images to [[manga]] page
 - [ ] Write text for [[hobby]] page
@@ -20,11 +20,11 @@ A few things are missing in this garden, we can divide them into two categories:
 
 ## Functional things:
 - [x] Add updatedAt property to posts
-- [ ] Fix node hover effects
+- [x] Fix node hover effects
 - [ ] More distinctive arrows in graph edges
 - [ ] Add images to nodes
 - [ ] Add search functionality
 - [ ] More personalized index page, with animations and images
 - [x] Consider the hosting for images
-- [ ] Change the colors of the graph 
+- [x] Change the colors of the graph 
 - [ ] Write more things, when I came across them

@@ -7,12 +7,11 @@ import {
   useCamera,
   useLoadGraph,
   useRegisterEvents,
-  useSigma,
-  useSigmaContext,
 } from "@react-sigma/core";
 import { navigate } from "astro:transitions/client";
 
-import { sigmaProps } from "../helpers/graphHelpers";
+import { CURRENT_NODE_SIZE, sigmaProps } from "../helpers/graphHelpers";
+
 import "../styles/graph.css";
 
 const GraphEvents: React.FC = () => {
@@ -34,19 +33,42 @@ interface LoadGraphProps {
 }
 
 export const LoadGraph: React.FC<LoadGraphProps> = ({ data, isLoading }) => {
-  const [clickedNodeId, setClickedNodeId] = useState<string | null>(null);
-  const graph = useMemo(() => Graph.from(data), [data]);
+  const currentNode = useMemo(
+    () =>
+      data.nodes.find(
+        (node) => node.key === window.location.pathname.split("/").slice(-1)[0]
+      ),
+    [data, window.location.pathname]
+  );
+
+  const graph = useMemo(() => {
+    return Graph.from({
+      ...data,
+      nodes: [
+        ...data.nodes.filter((node) => node.key !== currentNode?.key),
+        ...(currentNode
+          ? [
+              {
+                ...currentNode,
+                attributes: {
+                  ...currentNode.attributes,
+                  color: "#a3be8c",
+                  size: CURRENT_NODE_SIZE,
+                },
+              },
+            ]
+          : []),
+      ],
+    });
+  }, [data, currentNode]);
   const sigmaContainer = document?.querySelector(".graph-container");
 
   const loadGraph = useLoadGraph();
-  const camera = useCamera();
   const registerEvents = useRegisterEvents();
+  const camera = useCamera();
 
   useEffect(() => {
     registerEvents({
-      clickNode: (payload) => {
-        setClickedNodeId(payload.node);
-      },
       enterNode: () => {
         sigmaContainer?.setAttribute("style", "cursor: pointer;");
       },
@@ -57,20 +79,11 @@ export const LoadGraph: React.FC<LoadGraphProps> = ({ data, isLoading }) => {
   }, []);
 
   useEffect(() => {
-    const currentNode = data.nodes.find(
-      (node) => node.key === window.location.pathname.split("/").slice(-1)[0]
-    );
-
-    if (currentNode) {
-      camera.gotoNode(currentNode.key);
-    }
-  }, [data]);
-
-  useEffect(() => {
     if (!isLoading) {
       loadGraph(graph);
+      currentNode?.key && camera.gotoNode(currentNode?.key, { duration: 0 });
     }
-  }, [loadGraph, isLoading]);
+  }, [loadGraph, isLoading, graph]);
 
   return null;
 };

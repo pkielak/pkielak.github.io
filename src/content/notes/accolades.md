@@ -3,6 +3,7 @@ title: Accolades
 description: Without them this website would not have been possible
 pubDate: 10.17.2024
 color: "#4c566a"
+updatedAt: 10.24.2024
 ---
 Without them this website([[index]]) would not have been possible.
 
@@ -27,4 +28,6 @@ React components used to implement node diagram in this page.
 ## React, Typescript
 
 Tools that I also used to develop this page.
+
+Also, I like to add that great inspiration was this page: https://digitalgarden.hypha.coop
 
