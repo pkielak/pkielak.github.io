@@ -8,6 +8,7 @@ import {
   useLoadGraph,
   useRegisterEvents,
   useSigma,
+  useSigmaContext,
 } from "@react-sigma/core";
 import { navigate } from "astro:transitions/client";
 

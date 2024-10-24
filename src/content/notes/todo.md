@@ -3,6 +3,7 @@ title: Things to be done
 description: What's left to do on this garden
 pubDate: 10.17.2024
 updatedAt: 10.21.2024
+color: "#4c566a"
 ---
 A few things are missing in this garden, we can divide them into two categories:
 - Missing content, mainly texts on existing sub-pages and more explanation of why one topic relates to the linked topic.

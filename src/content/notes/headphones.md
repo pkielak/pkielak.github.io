@@ -2,6 +2,7 @@
 title: Headphones and Audio Gear
 pubDate: 10.19.2024
 description: Sometimes I like to listen to music with good gear on my head.
+color: "#d08770"
 ---
 So as the title says, this note is about my music listening gear. As for now, I have:
 - Truthear Hola - My only IEMs right now, they're indestructible and have good sound.

@@ -2,6 +2,7 @@
 title: Accolades
 description: Without them this website would not have been possible
 pubDate: 10.17.2024
+color: "#4c566a"
 ---
 Without them this website([[index]]) would not have been possible.
 

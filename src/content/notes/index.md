@@ -2,8 +2,8 @@
 title: This Garden
 description: The index of this digital garden
 pubDate: 10.12.2024
-size: "32"
 updatedAt: 10.21.2024
+color: "#4c566a"
 ---
 ![Sprout](https://res.cloudinary.com/dy0rxzzwa/image/upload/v1729495341/sprout_1_p9pmub.jpg)
 

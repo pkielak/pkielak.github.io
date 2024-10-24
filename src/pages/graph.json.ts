@@ -19,7 +19,7 @@ export async function GET({}) {
       x: Math.random(),
       y: Math.random(),
       size: 12,
-      color: "#5e81ac",
+      color: post.data.color || "#5e81ac",
       type: "circle",
     });
   });
