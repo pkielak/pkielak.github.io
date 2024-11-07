@@ -2,7 +2,7 @@
 title: Manga
 description: I like to read manga books
 pubDate: 10.12.2024
-updatedAt: 10.17.2024
+updatedAt: 11.07.2024
 color: "#d08770"
 ---
 So far I managed to read:
@@ -40,8 +40,15 @@ Another manga by Tsutomu Nihei, that I read. Didn't disappoint me and was just a
 - Ajin\
 A decent manga in the style of Death Note (I admit that I've only watched the anime, maybe someday I'll catch up and read the manga).
 
-- Knights of Sidonia
-- My Lesbian Experience with Loneliness
+- Knights of Sidonia\
+This is yet another work by Tsutomu Nihei. I like this manga author. This manga is more mainstream (mecha genre) than other of his works, but still, the art is great and the plot is quite good, with likable characters.
+
+- My Lesbian Experience with Loneliness\
+This is manga not about sex, but about mental illness, it's quite a good read.
+
+- All You Need Is Kill\
+I stumbled upon this in the library. I had nice memories of the film adaptation (Edge of Tomorrow, with Tom Cruise BTW) of the novel, so I borrowed the manga adaptation to compare. It's quite good, but not amazing, definitely for fans of this type of story (Groundhog Day type of story). 
 
 I am currently reading:
-- 20th Century Boys
+- 20th Century Boys (8 out of 11 books)
+- Death Note (3 out of 11 books)
