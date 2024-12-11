@@ -43,7 +43,7 @@ const posts = (await getCollection("notes"))
       {
         posts.map((post: any) => (
           <li>
-            <a href={`/notes/${post.slug}/`}>
+            <a href={`/notes/${post.id}/`}>
               <h4 class="title">{post.data.title}</h4>
               <p class="date">
                 <FormattedDate

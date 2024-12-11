@@ -3,18 +3,19 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import Main from "../../layouts/Main.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Backlinks from "../../components/Backlinks.astro";
+import { render } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("notes");
   return posts.map((post: any) => ({
-    params: { slug: post.slug },
+    params: { id: post.id },
     props: post,
   }));
 }
 type Props = CollectionEntry<"notes">;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <Main
@@ -41,7 +42,7 @@ const { Content } = await post.render();
       </div>
     </div>
     <Content />
-    <Backlinks postSlug={post.slug} />
+    <Backlinks postSlug={post.id} />
   </div>
 </Main>
 <style>

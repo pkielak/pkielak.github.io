@@ -6,14 +6,16 @@ import "@react-sigma/core/lib/react-sigma.min.css";
 
 export async function GET({}) {
   const graph = new Graph();
-  const posts = (await getCollection("notes")).sort(
-    (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-  );
+  const posts = (await getCollection("notes")).sort((a: any, b: any) => {
+    const aDate = a.data.updatedAt || a.data.pubDate;
+    const bDate = b.data.updatedAt || b.data.pubDate;
 
+    return bDate.valueOf() - aDate.valueOf();
+  });
   const wikilinkRegExp = /\[\[\s?([^\[\]\|\n\r]+)(\|[^\[\]\|\n\r]+)?\s?\]\]/g;
 
   posts.map((post) => {
-    graph.addNode(post.slug, {
+    graph.addNode(post.id, {
       label: post.data.title,
       description: post.data.description,
       x: Math.random(),
@@ -25,7 +27,7 @@ export async function GET({}) {
   });
 
   posts.map((post) => {
-    (post.body.match(wikilinkRegExp) || []).map((slug) => {
+    (post.body?.match(wikilinkRegExp) || []).map((slug) => {
       const newSlug = slug
         .slice(2, -2)
         .split("|")[0]
@@ -33,7 +35,7 @@ export async function GET({}) {
         .trim();
 
       if (newSlug) {
-        graph.addEdge(post.slug, newSlug, {
+        graph.addEdge(post.id, newSlug, {
           size: 3,
           color: "#bec8da",
         });
