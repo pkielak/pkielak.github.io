@@ -17,17 +17,14 @@
     "@react-sigma/core": "^4.0.3",
     "@sigma/edge-curve": "^3.0.0-beta.16",
     "astro": "^5.0.5",
-    "graphology": "^0.25.4",
-    "graphology-layout-forceatlas2": "^0.10.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "remark-wiki-link": "^2.0.1",
-    "sigma": "^3.0.0-beta.39"
+    "vis-network": "^9.1.9"
   },
   "devDependencies": {
     "@types/react": "^18.3.16",
     "@types/react-dom": "^18.3.5",
-    "@types/sigmajs": "^1.0.32",
-    "graphology-types": "^0.24.8"
+    "@types/vis": "^4.21.27"
   }
 }

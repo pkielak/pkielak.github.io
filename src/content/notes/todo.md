@@ -2,8 +2,8 @@
 title: Things to be done
 description: What's left to do on this garden
 pubDate: 10.17.2024
-updatedAt: 10.24.2024
-color: "#4c566a"
+updatedAt: 12.12.2024
+color: "#e5e9f0"
 ---
 A few things are missing in this garden, we can divide them into two categories:
 - Missing content, mainly texts on existing sub-pages and more explanation of why one topic relates to the linked topic.
@@ -16,15 +16,14 @@ A few things are missing in this garden, we can divide them into two categories:
 - [ ] Add images to [[manga]] page
 - [ ] Write text for [[hobby]] page
 - [ ] Write text for [[dev]] page
-- [ ] Come back later and write more plans
 
 ## Functional things:
 - [x] Add updatedAt property to posts
 - [x] Fix node hover effects
-- [ ] More distinctive arrows in graph edges
+- [x] More distinctive arrows in graph edges
 - [ ] Add images to nodes
 - [ ] Add search functionality
 - [ ] More personalized index page, with animations and images
 - [x] Consider the hosting for images
 - [x] Change the colors of the graph 
-- [ ] Write more things, when I came across them
+- [ ] Navbar animations

@@ -3,7 +3,7 @@ title: This Garden
 description: The index of this digital garden
 pubDate: 10.12.2024
 updatedAt: 10.21.2024
-color: "#4c566a"
+color: "#e5e9f0"
 ---
 ![Sprout](https://res.cloudinary.com/dy0rxzzwa/image/upload/v1729495341/sprout_1_p9pmub.jpg)
 
@@ -14,5 +14,6 @@ This garden is divided into these categories:
 - [[hobby]] - a place where I write about my hobbies
 - [[accolades]] - my thanks to the projects that helped me set up this site
 - [[todo|things to be done]] - things to be done in this digital garden
+- [[changelog]] - what's changed in garden
 ---
 Photo by [Courtney Cantu](https://unsplash.com/@courtneycantu?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/a-small-plant-growing-out-of-the-ground-5oNX232IzBM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)

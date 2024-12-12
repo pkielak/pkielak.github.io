@@ -1,11 +1,8 @@
 import { getCollection } from "astro:content";
-import Graph from "graphology";
-import forceAtlas2 from "graphology-layout-forceatlas2";
-
-import "@react-sigma/core/lib/react-sigma.min.css";
+import { type Data, type Node, type Edge } from "vis-network";
 
 export async function GET({}) {
-  const graph = new Graph();
+  const graph = { nodes: [], edges: [] } satisfies Data;
   const posts = (await getCollection("notes")).sort((a: any, b: any) => {
     const aDate = a.data.updatedAt || a.data.pubDate;
     const bDate = b.data.updatedAt || b.data.pubDate;
@@ -15,18 +12,12 @@ export async function GET({}) {
   const wikilinkRegExp = /\[\[\s?([^\[\]\|\n\r]+)(\|[^\[\]\|\n\r]+)?\s?\]\]/g;
 
   posts.map((post) => {
-    graph.addNode(post.id, {
+    (graph.nodes as Node[]).push({
+      id: post.id,
       label: post.data.title,
-      description: post.data.description,
-      x: Math.random(),
-      y: Math.random(),
-      size: 12,
-      color: post.data.color || "#5e81ac",
-      type: "circle",
+      ...(post.data.color ? { color: post.data.color } : {}),
     });
-  });
 
-  posts.map((post) => {
     (post.body?.match(wikilinkRegExp) || []).map((slug) => {
       const newSlug = slug
         .slice(2, -2)
@@ -35,17 +26,13 @@ export async function GET({}) {
         .trim();
 
       if (newSlug) {
-        graph.addEdge(post.id, newSlug, {
-          size: 3,
-          color: "#bec8da",
+        (graph.edges as Edge[]).push({
+          from: post.id,
+          to: newSlug,
         });
       }
     });
   });
 
-  forceAtlas2.assign(graph, { iterations: 50 });
-
-  const serializedGraph = graph.toJSON();
-
-  return new Response(JSON.stringify(serializedGraph));
+  return new Response(JSON.stringify(graph));
 }

@@ -2,7 +2,7 @@
 title: Manga
 description: I like to read manga books
 pubDate: 10.12.2024
-updatedAt: 11.07.2024
+updatedAt: 12.12.2024
 color: "#d08770"
 ---
 So far I managed to read:
@@ -50,5 +50,5 @@ This is manga not about sex, but about mental illness, it's quite a good read.
 I stumbled upon this in the library. I had nice memories of the film adaptation (Edge of Tomorrow, with Tom Cruise BTW) of the novel, so I borrowed the manga adaptation to compare. It's quite good, but not amazing, definitely for fans of this type of story (Groundhog Day type of story). 
 
 I am currently reading:
-- 20th Century Boys (8 out of 11 books)
-- Death Note (3 out of 11 books)
+- 20th Century Boys (9 out of 11 books)
+- Death Note (4 out of 11 books)

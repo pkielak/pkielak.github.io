@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
-import GraphComponent from "../components/GraphComponent";
+import NetworkGraph from "../components/NetworkGraph";
 
 const graph = await import("../pages/graph.json");
 const graphData = await graph.GET({}).then((response) => response.json());
@@ -29,11 +29,16 @@ const { title, description, isGraphSmall } = Astro.props;
       </article>
     </main>
     <div class="graph-wrapper">
-      <GraphComponent
+      <!-- <GraphComponent
         data={graphData}
         client:only="react"
         transition:persist="graph"
         isSmall={isGraphSmall}
+      /> -->
+      <NetworkGraph
+        graphData={graphData}
+        client:only="react"
+        transition:persist="graph"
       />
     </div>
     <footer>

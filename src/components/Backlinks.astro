@@ -1,5 +1,5 @@
 ---
-import type { SerializedGraph } from "graphology-types";
+import { type Edge, type Data, type Node } from "vis-network";
 
 interface Props {
   postSlug: string;
@@ -8,31 +8,28 @@ interface Props {
 const { postSlug } = Astro.props;
 
 const graphJson = await import("../pages/graph.json");
-const { nodes, edges }: SerializedGraph = await graphJson
+const { nodes, edges }: Data = await graphJson
   .GET({})
   .then((response) => response.json());
 
-const backlinks = edges.filter((edge) => edge.target === postSlug);
+const backlinks = (edges as Edge[] | undefined)?.filter(
+  (edge) => edge.to === postSlug
+);
 ---
 
 {
-  backlinks.length > 0 && (
+  backlinks && backlinks.length > 0 && (
     <>
       <h5>Backlinks</h5>
       <ol class="backlinks">
         {backlinks.map((backlink) => {
-          const referenceNode = nodes.find(
-            (node) => backlink.source === node.key
+          const referenceNode = (nodes as Node[] | undefined)?.find(
+            (node) => backlink.from === node?.id
           );
           return (
             <li class="backlink">
-              <a
-                href={`/notes/${backlink.source}/`}
-                title={referenceNode?.attributes?.description}
-              >
-                {referenceNode?.attributes
-                  ? referenceNode.attributes.label
-                  : backlink.target}
+              <a href={`/notes/${referenceNode?.id}/`}>
+                {referenceNode?.label || backlink.from}
               </a>
             </li>
           );
