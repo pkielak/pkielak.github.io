@@ -29,15 +29,9 @@ const { title, description, isGraphSmall } = Astro.props;
       </article>
     </main>
     <div class="graph-wrapper">
-      <!-- <GraphComponent
-        data={graphData}
-        client:only="react"
-        transition:persist="graph"
-        isSmall={isGraphSmall}
-      /> -->
       <NetworkGraph
         graphData={graphData}
-        client:only="react"
+        client:idle
         transition:persist="graph"
       />
     </div>

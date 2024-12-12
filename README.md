@@ -20,5 +20,4 @@ All commands are run from the root of the project, from a terminal:
 - [Bear Blog](https://github.com/HermanMartinus/bearblog/).
 - [Astro](https://astro.build/)
 - [Nord](https://www.nordtheme.com/)
-- [Sigma.js](https://www.sigmajs.org/)
-- [React Sigma](https://sim51.github.io/react-sigma/)
+- [Vis-network](https://github.com/visjs/vis-network)
