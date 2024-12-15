@@ -14,9 +14,13 @@ const VisNetworkGraph = ({ graphData }) => {
 
   const handlePageLoad = () => {
     if (window && network) {
-      const locationKey = window.location.pathname.split("/").pop();
+      const locationKey =
+        window.location.pathname.split("/").slice(-1)[0] ||
+        window.location.pathname.split("/").slice(-2)[0];
 
-      locationKey && network.selectNodes([locationKey]);
+      console.log(locationKey);
+
+      network.findNode(locationKey) && network.selectNodes([locationKey]);
     }
   };
 
@@ -56,7 +60,7 @@ const VisNetworkGraph = ({ graphData }) => {
 
     network.on("click", function (params) {
       if (params.nodes.length > 0) {
-        navigate(`/notes/${params.nodes[0]}`);
+        navigate(`/notes/${params.nodes[0]}/`);
       }
     });
 
