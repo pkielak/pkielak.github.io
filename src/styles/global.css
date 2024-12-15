@@ -72,6 +72,9 @@ h4 {
 h5 {
   font-size: 1.25em;
 }
+h6 {
+  font-size: 1em;
+}
 strong,
 b {
   font-weight: 700;
@@ -139,4 +142,23 @@ hr {
   clip-path: inset(50%);
   /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
+}
+
+.vis-tooltip {
+  position: absolute;
+  z-index: 4;
+  background: var(--nord6);
+  border: 1px solid var(--nord3);
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  line-height: 1.2;
+  padding: 0.25em 0.375em;
+  max-width: 300px;
+  text-align: justify;
+}
+
+@media (pointer: coarse) {
+  .vis-tooltip {
+    display: none;
+  }
 }

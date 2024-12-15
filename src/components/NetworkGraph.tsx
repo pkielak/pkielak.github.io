@@ -47,6 +47,9 @@ const VisNetworkGraph = ({ graphData }) => {
           },
         },
       },
+      interaction: {
+        hover: true,
+      },
     } satisfies Options;
 
     network = new Network(containerRef.current, graphData, options);

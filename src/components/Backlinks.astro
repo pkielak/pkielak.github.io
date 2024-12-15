@@ -29,7 +29,8 @@ const backlinks = (edges as Edge[] | undefined)?.filter(
           return (
             <li class="backlink">
               <a href={`/notes/${referenceNode?.id}`}>
-                {referenceNode?.label || backlink.from}
+                <h6>{referenceNode?.label || backlink.from}</h6>
+                {referenceNode?.title && <p>{referenceNode.title}</p>}
               </a>
             </li>
           );
@@ -45,7 +46,12 @@ const backlinks = (edges as Edge[] | undefined)?.filter(
     color: var(--nord0);
   }
 
-  .backlink a:hover p {
+  .backlink a p {
+    margin-top: 0;
+  }
+
+  .backlink a:hover p,
+  .backlink a:hover h6 {
     color: var(--nord10);
   }
 </style>

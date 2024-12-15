@@ -15,6 +15,7 @@ export async function GET({}) {
     (graph.nodes as Node[]).push({
       id: post.id,
       label: post.data.title,
+      title: post.data.description,
       ...(post.data.color ? { color: post.data.color } : {}),
     });
 
