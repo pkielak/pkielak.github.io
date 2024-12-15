@@ -4,11 +4,19 @@ import { Network, type Options } from "vis-network";
 
 const VisNetworkGraph = ({ graphData }) => {
   const containerRef = useRef(null);
-  let network;
+  let network: Network | undefined;
 
   const handleResize = () => {
     if (network) {
       network.fit();
+    }
+  };
+
+  const handlePageLoad = () => {
+    if (window && network) {
+      const locationKey = window.location.pathname.split("/").pop();
+
+      locationKey && network.selectNodes([locationKey]);
     }
   };
 
@@ -51,10 +59,13 @@ const VisNetworkGraph = ({ graphData }) => {
 
     window.addEventListener("resize", handleResize);
 
+    document.addEventListener("astro:page-load", handlePageLoad);
+
     return () => {
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("astro:page-load", handlePageLoad);
 
-      if (network && !network.destroyed) {
+      if (network) {
         network.destroy();
       }
     };
