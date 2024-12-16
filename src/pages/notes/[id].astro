@@ -4,6 +4,7 @@ import Main from "../../layouts/Main.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Backlinks from "../../components/Backlinks.astro";
 import { render } from "astro:content";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const posts = await getCollection("notes");
@@ -24,6 +25,17 @@ const { Content } = await render(post);
   isGraphSmall={true}
 >
   <div class="prose">
+    {
+      post.data.image && (
+        <Image
+          class="logo"
+          src={post.data.image}
+          alt="post logo"
+          width={100}
+          height={100}
+        />
+      )
+    }
     <div class="title">
       <h1>{post.data.title}</h1>
       <div class="date">
@@ -51,6 +63,13 @@ const { Content } = await render(post);
     margin: auto;
     padding: 0 1rem 0;
   }
+
+  .logo {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   .title {
     margin-bottom: 1em;
     padding: 1em 0;

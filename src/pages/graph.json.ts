@@ -12,12 +12,21 @@ export async function GET({}) {
   const wikilinkRegExp = /\[\[\s?([^\[\]\|\n\r]+)(\|[^\[\]\|\n\r]+)?\s?\]\]/g;
 
   posts.map((post) => {
-    (graph.nodes as Node[]).push({
+    const { title, description, image } = post.data;
+    const newNode = {
       id: post.id,
-      label: post.data.title,
-      title: post.data.description,
-      ...(post.data.color ? { color: post.data.color } : {}),
-    });
+      label: title,
+      title: description,
+      ...(image
+        ? {
+            image: image,
+            size: 24,
+            shape: "circularImage",
+          }
+        : { shape: "dot", size: 10 }),
+    };
+
+    (graph.nodes as Node[]).push(newNode);
 
     (post.body?.match(wikilinkRegExp) || []).map((slug) => {
       const newSlug = slug
