@@ -28,10 +28,12 @@ const backlinks = (edges as Edge[] | undefined)?.filter(
           );
           return (
             <li class="backlink">
-              <a href={`/notes/${referenceNode?.id}`}>
-                <h6>{referenceNode?.label || backlink.from}</h6>
-                {referenceNode?.title && <p>{referenceNode.title}</p>}
-              </a>
+              <div>
+                <a href={`/notes/${referenceNode?.id}`}>
+                  <h6>{referenceNode?.label || backlink.from}</h6>
+                  {referenceNode?.title && <p>{referenceNode.title}</p>}
+                </a>
+              </div>
             </li>
           );
         })}

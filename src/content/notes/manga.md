@@ -4,7 +4,7 @@ description: I like to read manga books
 pubDate: 10.12.2024
 updatedAt: 12.12.2024
 color: "#d08770"
-image: "https://res.cloudinary.com/dy0rxzzwa/image/upload/v1734283737/Anime_eye_1_spw8j4.png"
+image: "https://res.cloudinary.com/dy0rxzzwa/image/upload/v1734367239/Anime_eye_nord_s9itqb.png"
 ---
 
 So far I managed to read:
