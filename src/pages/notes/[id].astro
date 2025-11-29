@@ -7,11 +7,11 @@ import { render } from "astro:content";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("notes");
-  return posts.map((post: any) => ({
-    params: { id: post.id },
-    props: post,
-  }));
+    const posts = await getCollection("notes");
+    return posts.map((post: any) => ({
+        params: { id: post.id },
+        props: post,
+    }));
 }
 type Props = CollectionEntry<"notes">;
 
@@ -20,69 +20,78 @@ const { Content } = await render(post);
 ---
 
 <Main
-  description={post.data.description}
-  title={post.data.title}
-  isGraphSmall={true}
+    description={post.data.description}
+    title={post.data.title}
+    isGraphSmall={true}
 >
-  <div class="prose">
-    {
-      post.data.image && (
-        <Image
-          class="logo"
-          src={post.data.image}
-          alt="post logo"
-          width={100}
-          height={100}
-        />
-      )
-    }
-    <div class="title">
-      <h1>{post.data.title}</h1>
-      <div class="date">
-        <FormattedDate date={post.data.pubDate} />
+    <article>
+        <div class="prose">
+            {
+                post.data.image && (
+                    <Image
+                        class="logo"
+                        src={post.data.image}
+                        alt="post logo"
+                        width={100}
+                        height={100}
+                    />
+                )
+            }
+            <div class="title">
+                <h1>{post.data.title}</h1>
+                <div class="date">
+                    <FormattedDate date={post.data.pubDate} />
 
-        {
-          post.data.updatedAt && (
-            <>
-              <span>|</span>
-              <span>
-                Updated: <FormattedDate date={post.data.updatedAt} />
-              </span>
-            </>
-          )
-        }
-      </div>
-    </div>
-    <Content />
-    <Backlinks postSlug={post.id} />
-  </div>
+                    {
+                        post.data.updatedAt && (
+                            <>
+                                <span>|</span>
+                                <span>
+                                    Updated:{" "}
+                                    <FormattedDate date={post.data.updatedAt} />
+                                </span>
+                            </>
+                        )
+                    }
+                </div>
+            </div>
+            <Content />
+            <Backlinks postSlug={post.id} />
+        </div>
+    </article>
 </Main>
 <style>
-  .prose {
-    max-width: calc(100% - 2rem);
-    margin: auto;
-    padding: 0 1rem 0;
-  }
+    article {
+        max-width: 720px;
+        width: 100%;
+        padding: 2rem 0 0;
+        margin: 0 auto;
+    }
+    .prose {
+        max-width: calc(100% - 2rem);
+        margin: auto;
+        padding: 0 1rem 0;
+    }
 
-  .logo {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+    .logo {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-  .title {
-    margin-bottom: 1em;
-    padding: 1em 0;
-    line-height: 1;
-  }
-  .title h1 {
-    margin: 0;
-  }
-  .date {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 0;
-    color: var(--nord3);
-  }
+    .title {
+        margin-bottom: 1em;
+        padding: 1em 0;
+        line-height: 1;
+    }
+    .title h1 {
+        margin: 0;
+    }
+    .date {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0;
+        color: var(--nord3);
+    }
 </style>

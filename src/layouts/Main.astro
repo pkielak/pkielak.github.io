@@ -5,145 +5,61 @@ import NetworkGraph from "../components/NetworkGraph";
 
 const graph = await import("../pages/graph.json");
 const graphData = await graph.GET({}).then((response) => response.json());
-const today = new Date();
 
 interface Props {
-  title: string;
-  description: string;
-  isGraphSmall?: boolean;
+    title: string;
+    description: string;
+    isGraphSmall?: boolean;
 }
 
-const { title, description, isGraphSmall } = Astro.props;
+const { title, description } = Astro.props;
+const today = new Date();
 ---
 
+<!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead title={title} description={description} />
-  </head>
-
-  <body>
-    <Header />
-    <main>
-      <article>
-        <slot />
-      </article>
-    </main>
-    <div class="graph-wrapper">
-      <NetworkGraph
-        graphData={graphData}
-        client:idle
-        transition:persist="graph"
-      />
-    </div>
-    <footer>
-      <span
-        >&copy; {today.getFullYear()} pkielak | <a href="/privacy"
-          >Privacy policy</a
-        ></span
-      >
-    </footer>
-  </body>
+    <head>
+        <BaseHead title={title} description={description} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <slot />
+        </main>
+        <div class="graph-wrapper">
+            <NetworkGraph graphData={graphData} client:idle />
+        </div>
+        <footer>
+            <span>
+                &copy; {today.getFullYear()} pkielak | <a href="/privacy"
+                    >Privacy policy</a
+                >
+            </span>
+        </footer>
+    </body>
 </html>
 
 <style>
-  @keyframes reveal {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  body {
-    display: grid;
-    grid-template-areas: "header" "main" "graph" "footer";
-  }
-
-  main {
-    width: 100%;
-    max-width: 720px;
-    min-height: calc(50vh - var(--header-height) - var(--footer-height));
-    position: relative;
-    grid-area: main;
-    z-index: 3;
-    background: #fff;
-    margin: 0 auto;
-  }
-
-  article {
-    max-width: 720px;
-    width: 100%;
-    padding: 2rem 0 0;
-  }
-
-  .graph-wrapper {
-    width: 100%;
-    height: 50vh;
-    grid-area: graph;
-  }
-
-  footer {
-    width: 100%;
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: var(--footer-height);
-    grid-area: footer;
-    box-shadow: rgba(216, 222, 233, 0.15) 0px -10px;
-  }
-
-  @media (min-width: 768px) {
-    main {
-      min-height: calc(100vh - var(--header-height) - var(--footer-height));
-    }
-
-    article {
-      width: calc(100% - 2rem);
-      margin: 0 1rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    body {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "header header"
-        "main graph"
-        "footer graph";
-    }
-
-    main {
-      border-radius: 0 0.5rem 0.5rem 0;
-      box-shadow:
-        rgba(184, 194, 215, 0.25) 0px 4px 6px,
-        rgba(184, 194, 215, 0.1) 0px 5px 7px;
-      margin: unset;
-      max-width: unset;
+    @keyframes reveal {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 
     .graph-wrapper {
-      position: fixed;
-      z-index: 1;
-      top: var(--header-height);
-      right: 0;
-      height: calc(100vh - var(--header-height));
-      width: 50%;
-      border-top: unset;
+        width: 100%;
+        height: 75vh;
     }
 
     footer {
-      box-shadow: none;
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
-  }
-
-  @media (min-width: 1440px) {
-    article {
-      margin: 0 auto;
-    }
-  }
 </style>

@@ -29,39 +29,27 @@ const VisNetworkGraph = ({ graphData }) => {
       nodes: {
         fixed: true,
         font: {
-          color: "#2e3440",
+          color: "#eceff4",
           strokeWidth: 5,
-          strokeColor: "#eceff4",
+          strokeColor: "#2e3440",
         },
         color: {
-          border: "#4c566a",
-          background: "#eceff4",
-          hover: {
-            border: "#5e81ac",
-          },
-          highlight: {
-            border: "#5e81ac",
-            background: "#81a1c1",
-          },
+          border: "#ebcb8b",
+          background: "#ebcb8b",
+          hover: { background: "#bf616a", border: "#bf616a" },
+          highlight: { background: "#a3be8c", border: "#a3be8c" },
         },
-        imagePadding: 8,
+        shape: "star",
+        size: 20,
       },
       edges: {
         color: "#4c566a",
-        smooth: {
-          enabled: true,
-          type: "curvedCW",
-          roundness: 0.5,
-        },
-        arrows: {
-          to: {
-            enabled: true,
-            type: "triangle",
-          },
-        },
+        width: 2,
       },
       interaction: {
         hover: true,
+        dragView: false,
+        zoomView: false,
       },
     } satisfies Options;
 

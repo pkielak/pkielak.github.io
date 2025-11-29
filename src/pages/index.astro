@@ -4,134 +4,210 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import ContactForm from "../components/ContactForm.astro";
+import Earth from "../components/Earth.astro";
+import Clouds from "../components/Clouds.astro";
+import Rocket from "../components/Rocket.astro";
 
 const posts = (await getCollection("notes"))
-  .sort((a: any, b: any) => {
-    const aDate = a.data.updatedAt || a.data.pubDate;
-    const bDate = b.data.updatedAt || b.data.pubDate;
-
-    return bDate.valueOf() - aDate.valueOf();
-  })
-  .slice(0, 5);
+    .sort((a: any, b: any) => {
+        const aDate = a.data.updatedAt || a.data.pubDate;
+        const bDate = b.data.updatedAt || b.data.pubDate;
+        return bDate.valueOf() - aDate.valueOf();
+    })
+    .slice(0, 3);
 ---
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <section>
-    <h3>🧑‍🚀 Hello! I'm Piotr Kielak</h3>
-    <p>
-      I created this page to share my progress as a front-end developer and to
-      test the idea of the digital garden, whose node diagram you can see when
-      viewing the site. You can start from <a href="/notes/index">here</a> if you
-      want to explore my digital garden.
-    </p>
-    <p>
-      My main motivation as a developer is to create apps and web pages that
-      serve purpose and aid users in their daily activities and tasks. I can
-      proudly say that I made a few apps that did that. It keeps me motivated to
-      do more.
-    </p>
-    <p>
-      I can say also that I like to tinker, mainly with non-complicated
-      electronics and 3d printers. I like to read manga and play some sim racing
-      games.
-    </p>
-  </section>
+    <section>
+        <div class="note">
+            <h3>🧑‍🚀 Hello! I'm Piotr Kielak</h3>
+            <p>
+                I created this page to share my progress as a front-end
+                developer and to test the idea of the digital garden, whose node
+                diagram you can see when viewing the site. You can start from <a
+                    href="/notes/index">here</a
+                > if you want to explore my digital garden.
+            </p>
+        </div>
+        <div class="note">
+            <p>
+                My main motivation as a developer is to create apps and web
+                pages that serve purpose and aid users in their daily activities
+                and tasks. I can proudly say that I made a few apps that did
+                that, which keeps me motivated to do more.
+            </p>
+            <p>
+                I also enjoy tinkering, mainly with non-complicated electronics
+                and 3D printers. I like to read manga and play some sim racing
+                games.
+            </p>
+        </div>
+    </section>
 
-  <section>
-    <h3>Recent notes</h3>
-    <ul>
-      {
-        posts.map((post: any) => (
-          <li>
-            <a href={`/notes/${post.id}/`}>
-              <h4 class="title">{post.data.title}</h4>
-              <p class="date">
-                <FormattedDate
-                  date={post.data.updatedAt || post.data.pubDate}
-                />
-              </p>
-              <p class="description">{post.data.description}</p>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-  <section>
-    <h3>Contact Me</h3>
-    <ContactForm />
-  </section>
+    <section>
+        <div class="note">
+            <h3>Recent notes</h3>
+            <ul>
+                {
+                    posts.map((post: any) => (
+                        <li>
+                            <a href={`/notes/${post.id}/`}>
+                                <h4 class="title">{post.data.title}</h4>
+                                <p class="date">
+                                    <FormattedDate
+                                        date={
+                                            post.data.updatedAt ||
+                                            post.data.pubDate
+                                        }
+                                    />
+                                </p>
+                                <p class="description">
+                                    {post.data.description}
+                                </p>
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+        <div class="note">
+            <h3>Contact Me</h3>
+            <ContactForm />
+        </div>
+    </section>
 
-  <style>
+    <Earth />
+    <Clouds />
+    <Rocket />
+</Main>
+
+<style>
     section {
-      max-width: calc(100% - 2rem);
-      margin: 2rem auto;
-      padding: 0 1rem 0;
+        position: relative;
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        grid-template-rows: 1fr 1fr;
+        width: 100%;
+        max-width: 1024px;
+        height: 100vh;
+        margin: 0 auto;
+        padding-top: 2rem;
+        scroll-snap-align: start;
+        z-index: 200;
+        overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+        section {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .note:nth-child(odd) {
+            grid-row: 1;
+            grid-column: 1;
+            top: 2rem;
+        }
+
+        .note:nth-child(even) {
+            grid-row: 2;
+            grid-column: 2;
+            bottom: 2rem;
+        }
+    }
+
+    .note {
+        position: relative;
+        width: calc(100% - 40px);
+        margin: 0 auto;
+        padding: 18px 20px 38px;
+        background: var(--nord4-snow-storm);
+        border-radius: 3px;
+        box-shadow: var(--shadow-4);
+        font-weight: 400;
+        color: var(--nord1-polar-night);
     }
 
     h3 {
-      font-size: 1.563em;
-      margin-bottom: 1rem;
+        font-size: 1.563em;
+        margin-bottom: 1rem;
     }
 
     ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
+
     ul li {
-      width: 100%;
+        width: 100%;
     }
+
     ul li * {
-      text-decoration: none;
-      transition: 0.2s ease;
+        text-decoration: none;
+        transition: color 0.2s ease;
     }
-    ul li img {
-      margin-bottom: 0.5rem;
-      border-radius: 12px;
-    }
+
     ul li a {
-      display: block;
-      color: var(--nord0);
+        display: block;
+        color: var(--nord0-polar-night);
     }
 
     .title {
-      margin: 0;
-      line-height: 1;
+        margin: 0;
+        line-height: 1;
     }
-    .date {
-      margin: 0;
-      color: var(--nord3);
-    }
+
+    .date,
     .description {
-      margin: 0;
-      color: var(--nord3);
+        margin: 0;
+        color: var(--nord3-snow-storm);
     }
+
     ul li a:hover h4,
     ul li a:hover .date {
-      color: var(--nord10);
+        color: var(--nord10-aurora);
     }
 
     @media (max-width: 720px) {
-      ul {
-        gap: 0.5em;
-      }
+        ul {
+            gap: 0.5em;
+        }
 
-      ul li:first-child {
-        margin-bottom: 0;
-      }
-      ul li:first-child .title {
-        font-size: 1.563em;
-      }
+        ul li:first-child {
+            margin-bottom: 0;
+        }
+
+        ul li:first-child .title {
+            font-size: 1.563em;
+        }
     }
 
     @media (min-width: 720px) {
-      h3 {
-        font-size: 1.953em;
-      }
+        h3 {
+            font-size: 1.953em;
+        }
     }
-  </style>
-</Main>
+</style>
+
+<script>
+    window.onscroll = function () {
+        const rocketElement = document.querySelector(".rocket");
+
+        if (rocketElement) {
+            if (this.oldScroll > this.scrollY) {
+                if (!rocketElement.classList.contains("rotate")) {
+                    rocketElement.classList.add("rotate");
+                }
+            } else {
+                rocketElement.classList.remove("rotate");
+            }
+        }
+
+        this.oldScroll = this.scrollY;
+    };
+</script>
