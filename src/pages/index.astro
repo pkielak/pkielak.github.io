@@ -14,7 +14,7 @@ const posts = (await getCollection("notes"))
         const bDate = b.data.updatedAt || b.data.pubDate;
         return bDate.valueOf() - aDate.valueOf();
     })
-    .slice(0, 3);
+    .slice(0, 5);
 ---
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -29,6 +29,9 @@ const posts = (await getCollection("notes"))
                 > if you want to explore my digital garden.
             </p>
         </div>
+    </section>
+
+    <section>
         <div class="note">
             <p>
                 My main motivation as a developer is to create apps and web
@@ -70,6 +73,9 @@ const posts = (await getCollection("notes"))
                 }
             </ul>
         </div>
+    </section>
+
+    <section>
         <div class="note">
             <h3>Contact Me</h3>
             <ContactForm />
@@ -84,49 +90,44 @@ const posts = (await getCollection("notes"))
 <style>
     section {
         position: relative;
-        display: grid;
-        justify-content: center;
-        align-content: center;
+        display: flex;
         align-items: center;
-        grid-template-rows: 1fr 1fr;
+        justify-content: center;
         width: 100%;
         max-width: 1024px;
         height: 100vh;
-        margin: 0 auto;
         padding-top: 2rem;
+        margin: 0 auto;
         scroll-snap-align: start;
         z-index: 200;
         overflow: hidden;
     }
 
     @media (min-width: 768px) {
-        section {
-            grid-template-columns: 1fr 1fr;
+        section:nth-child(odd) {
+            justify-content: flex-end;
         }
 
-        .note:nth-child(odd) {
-            grid-row: 1;
-            grid-column: 1;
-            top: 2rem;
-        }
-
-        .note:nth-child(even) {
-            grid-row: 2;
-            grid-column: 2;
-            bottom: 2rem;
+        section:nth-child(even) {
+            justify-content: flex-start;
         }
     }
 
     .note {
         position: relative;
-        width: calc(100% - 40px);
-        margin: 0 auto;
-        padding: 18px 20px 38px;
+        padding: 2rem;
+        width: calc(100% - 4rem);
         background: var(--nord4-snow-storm);
         border-radius: 3px;
         box-shadow: var(--shadow-4);
         font-weight: 400;
         color: var(--nord1-polar-night);
+    }
+
+    @media (min-width: 768px) {
+        .note {
+            width: 50%;
+        }
     }
 
     h3 {
