@@ -33,36 +33,86 @@
         animation-timing-function: ease-in-out;
     }
 
+    .rocket.rotate {
+        transform: translate(-50%, -50%) rotate(0deg);
+        animation-name: rocketMoveReverse;
+    }
+
     @keyframes rocketMove {
         0% {
             top: -0.5rem;
             left: 1.5rem;
-            transform: scale(0.4) translate(-50%, -50%) rotate(45deg);
+            scale: 0.4;
+            transform: translate(-50%, -50%) rotate(45deg);
         }
         10% {
             top: -25vh;
             left: 25%;
-            transform: scale(2) translate(-50%, -50%) rotate(180deg);
+            scale: 2;
+            transform: translate(-50%, -50%) rotate(180deg);
         }
         30% {
             top: 50vh;
             left: 75%;
-            transform: scale(1) translate(-50%, -50%) rotate(180deg);
+            scale: 1;
+            transform: translate(-50%, -50%) rotate(180deg);
         }
         50% {
             top: 50vh;
             left: 25%;
-            transform: scale(1) translate(-50%, -50%) rotate(180deg);
+            scale: 1;
+            transform: translate(-50%, -50%) rotate(180deg);
         }
         80% {
             top: 50vh;
             left: 75%;
-            transform: scale(1) translate(-50%, -50%) rotate(180deg);
+            scale: 1;
+            transform: translate(-50%, -50%) rotate(180deg);
         }
         100% {
-            top: 125vh;
+            top: 105vh;
             left: 50%;
-            transform: scale(1) translate(-50%, -50%) rotate(180deg);
+            scale: 1;
+            transform: translate(-50%, -50%) rotate(180deg);
+        }
+    }
+
+    @keyframes rocketMoveReverse {
+        0% {
+            top: -0.5rem;
+            left: 1.5rem;
+            scale: 0.4;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        10% {
+            top: -25vh;
+            left: 25%;
+            scale: 2;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        30% {
+            top: 50vh;
+            left: 75%;
+            scale: 1;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        50% {
+            top: 50vh;
+            left: 25%;
+            scale: 1;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        80% {
+            top: 50vh;
+            left: 75%;
+            scale: 1;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+            top: 105vh;
+            left: 50%;
+            scale: 1;
+            transform: translate(-50%, -50%) rotate(0deg);
         }
     }
 
@@ -187,3 +237,25 @@
         }
     }
 </style>
+
+<script type="module" is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+        const rocket = document.getElementById("rocket");
+
+        if (!rocket) return;
+
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener("scroll", () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY < lastScrollY) {
+                rocket.classList.add("rotate");
+            } else {
+                rocket.classList.remove("rotate");
+            }
+
+            lastScrollY = currentScrollY;
+        });
+    });
+</script>

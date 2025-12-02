@@ -31,7 +31,7 @@ const posts = (await getCollection("notes"))
     </section>
 
     <section>
-        <div class="note">
+        <div class="note zoom-in-up" style="--animation-delay: 0s;">
             <p>
                 My main motivation as a developer is to create apps and web
                 pages that serve purpose and aid users in their daily activities
@@ -47,11 +47,11 @@ const posts = (await getCollection("notes"))
     </section>
 
     <section>
-        <div class="note">
+        <div class="note zoom-in-up" style="--animation-delay: 0.2s;">
             <h3>Recent notes</h3>
             <ul>
                 {
-                    posts.map((post: any) => (
+                    posts.map((post: any, index: number) => (
                         <li>
                             <a href={`/notes/${post.id}/`}>
                                 <h4 class="title">{post.data.title}</h4>
@@ -75,7 +75,7 @@ const posts = (await getCollection("notes"))
     </section>
 
     <section>
-        <div class="note">
+        <div class="note zoom-in-up" style="--animation-delay: 1s;">
             <h3>Contact Me</h3>
             <ContactForm />
         </div>
@@ -191,5 +191,29 @@ const posts = (await getCollection("notes"))
         h3 {
             font-size: 1.953em;
         }
+    }
+
+    @keyframes zoomInUpScroll {
+        0% {
+            opacity: 0;
+            transform: scale(0.3) translateY(20px);
+        }
+        50%,
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    .zoom-in-up {
+        opacity: 0;
+        transform: scale(0.3) translateY(20px);
+        animation-name: zoomInUpScroll;
+        animation-duration: var(--animation-duration, 0.7s);
+        animation-fill-mode: forwards;
+        animation-timing-function: ease;
+        animation-timeline: scroll(root);
+        animation-range: 0% 70%;
+        animation-delay: var(--animation-delay, 0s);
     }
 </style>
