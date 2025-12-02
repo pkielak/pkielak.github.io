@@ -30,5 +30,4 @@
         <path d="M40 38 L60 26 L72 36 L72 58 L66 75 L54 66 L40 58 Z" />
         <path d="M58 60 L83 92 L91 123 L79 132 L61 112 L53 85 Z" />
     </g>
-    <ellipse cx="100" cy="12" rx="30" ry="15" fill="#d8dee9" filter="url(#continentDropShadow)" />
 </svg>

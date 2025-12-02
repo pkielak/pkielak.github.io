@@ -1,0 +1,49 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 240 240"
+  width="100vh"
+  height="100vh"
+  aria-label="Cloud ring"
+  role="img"
+  fill="#1ea4e4"
+>
+  <defs>
+    <filter id="cloud-shadow" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <!-- Reduced shadow intensity with two subtle shadows -->
+      <feDropShadow dx="2" dy="3" stdDeviation="1" flood-color="rgba(0,0,0,0.12)" />
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,0.08)" />
+    </filter>
+
+    <g id="cloud" filter="url(#cloud-shadow)" transform="scale(0.1125) translate(-120 -110)">
+      <path d="m102.33 56.069a32.233 32.233 0 0 0-26.456 13.837 30.783 30.783 0 0 0-8.5676-1.2172 30.783 30.783 0 0 0-30.641 27.983 29.06 29.06 0 0 0-20.57 27.79 29.06 29.06 0 0 0 0.52968 5.4176c-0.46126 1.7389-0.71242 3.5709-0.71242 5.4679 0 11.219 8.6178 20.251 19.323 20.251h141.19c10.705 0 19.323-9.0321 19.323-20.251 0-10.972-8.2445-19.846-18.621-20.232a25.707 25.707 0 0 0-23.117-14.467 25.707 25.707 0 0 0-6.7429 0.91795 22.897 22.897 0 0 0 0.0112-0.2961 22.897 22.897 0 0 0-13.734-20.983 32.233 32.233 0 0 0-31.218-24.218z" fill="#d8dee9" />
+    </g>
+  </defs>
+
+  <!-- Invisible center marker -->
+  <circle cx="120" cy="120" r="4" fill="none" />
+
+  <g transform="translate(120, 120)">
+    <!-- Each cloud: translate(radius,0) rotate(angle + 90) with pivot at cloud center -->
+
+    <!-- Radii slightly vary between 75 and 85 -->
+
+    <use href="#cloud" transform="translate(75,0) rotate(90) scale(0.7)" />
+    <use href="#cloud" transform="rotate(20) translate(75,0) rotate(90) scale(0.85 0.95)" />
+    <use href="#cloud" transform="rotate(40) translate(76.1,-7) rotate(90) scale(0.9 0.8)" />
+    <use href="#cloud" transform="rotate(60) translate(77.2,-12) rotate(90) scale(0.7 0.6)" />
+    <use href="#cloud" transform="rotate(80) translate(78.3,-3) rotate(90) scale(0.65 0.55)" />
+    <use href="#cloud" transform="rotate(100) translate(79.4,-10) rotate(90) scale(0.95 0.7)" />
+    <use href="#cloud" transform="rotate(120) translate(80.5,-6) rotate(90) scale(0.8 1)" />
+    <use href="#cloud" transform="rotate(140) translate(81.6,-15) rotate(90) scale(0.8 0.65)" />
+    <use href="#cloud" transform="rotate(160) translate(82.7,-9) rotate(90) scale(1 1.2)" />
+    <use href="#cloud" transform="rotate(180) translate(83.8,-17) rotate(90) scale(1 0.75)" />
+    <use href="#cloud" transform="rotate(200) translate(84.9,-5) rotate(90) scale(0.9 1)" />
+    <use href="#cloud" transform="rotate(220) translate(86,-14) rotate(90) scale(0.7 0.55)" />
+    <use href="#cloud" transform="rotate(240) translate(87.1,-3) rotate(90) scale(0.55 0.65)" />
+    <use href="#cloud" transform="rotate(260) translate(88.2,-9) rotate(90) scale(0.6 0.65)" />
+    <use href="#cloud" transform="rotate(280) translate(89.3,-7) rotate(90) scale(0.8 0.7)" />
+    <use href="#cloud" transform="rotate(300) translate(90.4,-13) rotate(90) scale(0.65 0.8)" />
+    <use href="#cloud" transform="rotate(320) translate(91.5,-8) rotate(90) scale(0.95 0.85)" />
+    <use href="#cloud" transform="rotate(340) translate(92.6,-11) rotate(90) scale(0.73 0.85)" />
+  </g>
+</svg>
