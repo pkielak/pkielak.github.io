@@ -24,24 +24,46 @@
         pointer-events: none;
         user-select: none;
         z-index: 999;
-        transition:
-            transform 0.25s,
-            left 2s,
-            top 2s;
+
+        /* Scroll-driven animations using view-timeline */
+        animation-timeline: scroll(root);
+        animation-range: auto;
+        animation-name: rocketMove;
+        animation-fill-mode: both;
+        animation-timing-function: ease-in-out;
     }
 
-    .rocket.move {
-        top: 50vh;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(180deg);
-    }
-
-    .rocket.rotate {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    .rocket.away {
-        top: 150vh;
+    @keyframes rocketMove {
+        0% {
+            top: -0.5rem;
+            left: 1.5rem;
+            transform: scale(0.4) translate(-50%, -50%) rotate(45deg);
+        }
+        10% {
+            top: -25vh;
+            left: 25%;
+            transform: scale(2) translate(-50%, -50%) rotate(180deg);
+        }
+        30% {
+            top: 50vh;
+            left: 75%;
+            transform: scale(1) translate(-50%, -50%) rotate(180deg);
+        }
+        50% {
+            top: 50vh;
+            left: 25%;
+            transform: scale(1) translate(-50%, -50%) rotate(180deg);
+        }
+        80% {
+            top: 50vh;
+            left: 75%;
+            transform: scale(1) translate(-50%, -50%) rotate(180deg);
+        }
+        100% {
+            top: 125vh;
+            left: 50%;
+            transform: scale(1) translate(-50%, -50%) rotate(180deg);
+        }
     }
 
     .rocket-body {
@@ -165,62 +187,3 @@
         }
     }
 </style>
-
-<script type="module" is:inline>
-    // Wait until DOM is ready
-    document.addEventListener("DOMContentLoaded", () => {
-        const rocket = document.getElementById("rocket");
-        if (!rocket) return;
-
-        let lastScrollY = window.scrollY;
-        // Scroll listener toggles rotate class based on scroll direction
-        window.addEventListener("scroll", () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY < lastScrollY) {
-                rocket.classList.add("rotate");
-            } else {
-                rocket.classList.remove("rotate");
-            }
-
-            if (currentScrollY === 0) {
-                rocket.classList.remove("move", "rotate");
-            } else {
-                rocket.classList.add("move");
-            }
-
-            lastScrollY = currentScrollY;
-        });
-
-        // Create a sentinel element at the bottom of the document to observe
-        const sentinel = document.createElement("div");
-        sentinel.style.position = "absolute";
-        sentinel.style.width = "100%";
-        sentinel.style.height = "1px";
-        sentinel.style.bottom = "0";
-        sentinel.style.left = "0";
-        sentinel.style.pointerEvents = "none";
-        // Append sentinel to body
-        document.body.appendChild(sentinel);
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        // Sentinel visible => rocket is near bottom => add away class
-                        rocket.classList.add("away");
-                    } else {
-                        // Sentinel not visible => rocket is away from bottom => remove away class
-                        rocket.classList.remove("away");
-                    }
-                });
-            },
-            {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0,
-            },
-        );
-
-        observer.observe(sentinel);
-    });
-</script>
