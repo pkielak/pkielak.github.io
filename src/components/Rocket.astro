@@ -18,15 +18,22 @@
 <style>
     .rocket {
         position: fixed;
+        top: -0.5rem;
+        left: 1.5rem;
+        transform: scale(0.4) translate(-50%, -50%) rotate(45deg);
+        pointer-events: none;
+        user-select: none;
+        z-index: 999;
+        transition:
+            transform 0.25s,
+            left 2s,
+            top 2s;
+    }
+
+    .rocket.move {
         top: 50vh;
         left: 50%;
         transform: translate(-50%, -50%) rotate(180deg);
-        pointer-events: none;
-        user-select: none;
-        z-index: 100;
-        transition:
-            transform 0.25s,
-            top 2s;
     }
 
     .rocket.rotate {
@@ -34,12 +41,7 @@
     }
 
     .rocket.away {
-        top: 100vh;
-        transform: translate(-50%, 50%) rotate(180deg);
-    }
-
-    .rocket.rotate.away {
-        transform: translate(-50%, 50%) rotate(0deg);
+        top: 150vh;
     }
 
     .rocket-body {
@@ -179,6 +181,13 @@
             } else {
                 rocket.classList.remove("rotate");
             }
+
+            if (currentScrollY === 0) {
+                rocket.classList.remove("move", "rotate");
+            } else {
+                rocket.classList.add("move");
+            }
+
             lastScrollY = currentScrollY;
         });
 

@@ -193,21 +193,3 @@ const posts = (await getCollection("notes"))
         }
     }
 </style>
-
-<script>
-    window.onscroll = function () {
-        const rocketElement = document.querySelector(".rocket");
-
-        if (rocketElement) {
-            if (this.oldScroll > this.scrollY) {
-                if (!rocketElement.classList.contains("rotate")) {
-                    rocketElement.classList.add("rotate");
-                }
-            } else {
-                rocketElement.classList.remove("rotate");
-            }
-        }
-
-        this.oldScroll = this.scrollY;
-    };
-</script>
