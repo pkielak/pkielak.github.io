@@ -39,8 +39,8 @@ const VisNetworkGraph = ({ graphData }) => {
           hover: { background: "#bf616a", border: "#bf616a" },
           highlight: { background: "#a3be8c", border: "#a3be8c" },
         },
-        shape: "star",
-        size: 20,
+        shape: "dot",
+        size: 4,
       },
       edges: {
         color: "#4c566a",
