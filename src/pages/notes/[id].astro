@@ -64,9 +64,19 @@ const { Content } = await render(post);
     article {
         max-width: 720px;
         width: 100%;
-        padding: 2rem 0 0;
-        margin: 0 auto;
+        padding: 1rem;
+        margin: 4rem auto 2rem;
+        background: var(--nord1-polar-night);
+        box-shadow: var(--shadow-4);
+        border-radius: 3px;
     }
+
+    @media (min-width: 768px) {
+        article {
+            padding: 2rem;
+        }
+    }
+
     .prose {
         max-width: calc(100% - 2rem);
         margin: auto;

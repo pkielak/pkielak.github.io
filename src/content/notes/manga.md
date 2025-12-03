@@ -4,7 +4,6 @@ description: I like to read manga books
 pubDate: 10.12.2024
 updatedAt: 12.12.2024
 color: "#d08770"
-image: "https://res.cloudinary.com/dy0rxzzwa/image/upload/v1734367239/Anime_eye_nord_s9itqb.png"
 ---
 
 So far I managed to read:
@@ -55,7 +54,3 @@ I am currently reading:
 
 - 20th Century Boys (9 out of 11 books)
 - Death Note (4 out of 12 books)
-
----
-
-Anime eye image by Oni Lukos - Own work, CC BY-SA 2.5, https://commons.wikimedia.org/w/index.php?curid=1369700

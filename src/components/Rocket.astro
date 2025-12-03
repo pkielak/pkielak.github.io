@@ -252,15 +252,15 @@
 </style>
 
 <script type="module" is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-        const rocket = document.getElementById("rocket");
-        const flames = document.getElementById("flames");
-
-        if (!rocket && !flames) return;
-
+    (() => {
         let lastScrollY = window.scrollY;
+        let scrollListener;
 
-        window.addEventListener("scroll", () => {
+        function onScroll() {
+            const rocket = document.getElementById("rocket");
+            const flames = document.getElementById("flames");
+            if (!rocket || !flames) return;
+
             const currentScrollY = window.scrollY;
 
             if (currentScrollY < lastScrollY) {
@@ -276,6 +276,26 @@
             }
 
             lastScrollY = currentScrollY;
+        }
+
+        function init() {
+            lastScrollY = window.scrollY;
+            detachScrollListener();
+            scrollListener = onScroll;
+            window.addEventListener("scroll", scrollListener);
+            onScroll();
+        }
+
+        function detachScrollListener() {
+            if (scrollListener) {
+                window.removeEventListener("scroll", scrollListener);
+                scrollListener = null;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", init);
+        window.addEventListener("astro:navigation", () => {
+            init();
         });
-    });
+    })();
 </script>
