@@ -27,7 +27,11 @@ const today = new Date();
             <slot />
         </main>
         <div class="graph-wrapper">
-            <NetworkGraph graphData={graphData} client:idle />
+            <NetworkGraph
+                graphData={graphData}
+                client:idle
+                transition:persist
+            />
         </div>
         <footer>
             <span>

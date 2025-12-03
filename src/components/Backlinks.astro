@@ -2,58 +2,62 @@
 import { type Edge, type Data, type Node } from "vis-network";
 
 interface Props {
-  postSlug: string;
+    postSlug: string;
 }
 
 const { postSlug } = Astro.props;
 
 const graphJson = await import("../pages/graph.json");
 const { nodes, edges }: Data = await graphJson
-  .GET({})
-  .then((response) => response.json());
+    .GET({})
+    .then((response) => response.json());
 
 const backlinks = (edges as Edge[] | undefined)?.filter(
-  (edge) => edge.to === postSlug
+    (edge) => edge.to === postSlug,
 );
 ---
 
 {
-  backlinks && backlinks.length > 0 && (
-    <>
-      <h5>Backlinks</h5>
-      <ol class="backlinks">
-        {backlinks.map((backlink) => {
-          const referenceNode = (nodes as Node[] | undefined)?.find(
-            (node) => backlink.from === node?.id
-          );
-          return (
-            <li class="backlink">
-              <div>
-                <a href={`/notes/${referenceNode?.id}`}>
-                  <h6>{referenceNode?.label || backlink.from}</h6>
-                  {referenceNode?.title && <p>{referenceNode.title}</p>}
-                </a>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
-    </>
-  )
+    backlinks && backlinks.length > 0 && (
+        <>
+            <h5>Backlinks</h5>
+            <ol class="backlinks">
+                {backlinks.map((backlink) => {
+                    const referenceNode = (nodes as Node[] | undefined)?.find(
+                        (node) => backlink.from === node?.id,
+                    );
+                    return (
+                        <li class="backlink">
+                            <div>
+                                <a href={`/notes/${referenceNode?.id}`}>
+                                    <h6>
+                                        {referenceNode?.label || backlink.from}
+                                    </h6>
+                                    {referenceNode?.title && (
+                                        <p>{referenceNode.title}</p>
+                                    )}
+                                </a>
+                            </div>
+                        </li>
+                    );
+                })}
+            </ol>
+        </>
+    )
 }
 
 <style>
-  .backlink a {
-    text-decoration: none;
-    color: var(--nord0);
-  }
+    .backlink a {
+        text-decoration: none;
+        color: var(--nord0);
+    }
 
-  .backlink a p {
-    margin-top: 0;
-  }
+    .backlink a p {
+        margin-top: 0;
+    }
 
-  .backlink a:hover p,
-  .backlink a:hover h6 {
-    color: var(--nord10);
-  }
+    .backlink a:hover p,
+    .backlink a:hover h6 {
+        color: var(--nord10);
+    }
 </style>

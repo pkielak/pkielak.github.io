@@ -14,11 +14,15 @@ const VisNetworkGraph = ({ graphData }) => {
 
   const handlePageLoad = () => {
     if (window && network) {
+      const pathParts = window.location.pathname.split("/").filter(Boolean);
       const locationKey =
-        window.location.pathname.split("/").slice(-1)[0] ||
-        window.location.pathname.split("/").slice(-2)[0];
+        pathParts[pathParts.length - 1] ||
+        pathParts[pathParts.length - 2] ||
+        "";
 
-      network.findNode(locationKey) && network.selectNodes([locationKey]);
+      if (locationKey && network.findNode(locationKey)) {
+        network.selectNodes([locationKey]);
+      }
     }
   };
 
