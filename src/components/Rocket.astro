@@ -9,7 +9,7 @@
         </div>
         <div class="rocket-fin"></div>
     </div>
-    <div class="flames">
+    <div class="flames" id="flames">
         <div class="flame-wrapper"><div class="flame-inner"></div></div>
         <div class="flame-wrapper"><div class="flame-outer"></div></div>
     </div>
@@ -189,7 +189,12 @@
         width: 40px;
         height: 40px;
         clip-path: polygon(0 0, 100% 0, 50% 100%);
+        opacity: 0;
+    }
+
+    .flames.on {
         animation: flame 0.3s steps(3) infinite alternate;
+        opacity: 1;
     }
 
     .flame-wrapper {
@@ -241,8 +246,9 @@
 <script type="module" is:inline>
     document.addEventListener("DOMContentLoaded", () => {
         const rocket = document.getElementById("rocket");
+        const flames = document.getElementById("flames");
 
-        if (!rocket) return;
+        if (!rocket && !flames) return;
 
         let lastScrollY = window.scrollY;
 
@@ -253,6 +259,12 @@
                 rocket.classList.add("rotate");
             } else {
                 rocket.classList.remove("rotate");
+            }
+
+            if (currentScrollY > 0) {
+                flames.classList.add("on");
+            } else {
+                flames.classList.remove("on");
             }
 
             lastScrollY = currentScrollY;
