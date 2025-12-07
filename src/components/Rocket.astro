@@ -1,8 +1,14 @@
 <div class="rocket" id="rocket">
     <img src="/space_shuttle.png" alt="space shuttle" />
     <div class="flames" id="flames">
-        <div class="flame-wrapper"><div class="flame-inner"></div></div>
-        <div class="flame-wrapper"><div class="flame-outer"></div></div>
+        <div class="flame-wrapper">
+            <div class="flame-outer"></div>
+            <div class="flame-inner"></div>
+        </div>
+        <div class="flame-wrapper">
+            <div class="flame-outer"></div>
+            <div class="flame-inner"></div>
+        </div>
     </div>
 </div>
 
@@ -67,7 +73,7 @@
             z-index: 99;
         }
         100% {
-            top: 105vh;
+            top: calc(105vh + 100px);
             left: 50%;
             transform: translate(-50%, -50%) rotate(180deg) scale(1);
             z-index: 99;
@@ -104,139 +110,69 @@
             z-index: 99;
         }
         100% {
-            top: 105vh;
+            top: calc(105vh + 100px);
             left: 50%;
             transform: translate(-50%, -50%) rotate(0deg) scale(1);
             z-index: 99;
         }
     }
 
-    .rocket-body {
-        width: 40px;
-        height: 100px;
-        background: var(--nord4-snow-storm);
-        border-radius: 50% 50% 0 0;
-        position: relative;
-        margin: 0 auto;
-        box-shadow: var(--shadow-4);
-        z-index: 200;
-    }
-
-    .rocket-window {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 20px;
-        height: 20px;
-        background: var(--nord9-frost);
-        border-radius: 50%;
-        box-shadow: var(--shadow-2);
-    }
-
-    .rocket-fin {
-        position: absolute;
-        bottom: -10px;
-    }
-
-    .rocket-fin__inner {
-        position: relative;
-        width: 20px;
-        height: 40px;
-        background: var(--nord11-aurora);
-    }
-
-    .rocket-fin:nth-child(2),
-    .rocket-fin:nth-child(3) {
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))
-            drop-shadow(0 4px 5px rgba(0, 0, 0, 0.14))
-            drop-shadow(0 1px 10px rgba(0, 0, 0, 0.12));
-        z-index: 100;
-    }
-
-    .rocket-fin:nth-child(2) {
-        left: -20px;
-    }
-
-    .rocket-fin:nth-child(3) {
-        right: -20px;
-    }
-
-    .rocket-fin:nth-child(2) div {
-        clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-    }
-
-    .rocket-fin:nth-child(3) div {
-        clip-path: polygon(100% 100%, 0% 100%, 0% 0%);
-    }
-
-    .rocket-fin:nth-child(4) {
-        width: 5px;
-        height: 50px;
-        background: var(--nord11-aurora);
-        right: 17.5px;
-        bottom: -20px;
-        box-shadow: var(--shadow-4);
-        z-index: 100;
-    }
-
     .flames {
         position: relative;
-        top: 0;
-        left: 0;
-        transform: translateX(-100%);
-        width: 40px;
-        height: 40px;
-        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        top: -15px;
+        left: 50%;
+        transform: translate(-50%, 0) scale(1, 0.5);
+        transform-origin: top;
+        width: 25px;
+        height: 45px;
         opacity: 0;
+        display: flex;
+        gap: 0;
     }
 
     .flames.on {
-        animation: flame 0.3s steps(3) infinite alternate;
-        opacity: 1;
+        animation: flame 0.3s infinite alternate;
+        opacity: 0.9;
     }
 
     .flame-wrapper {
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))
-            drop-shadow(0 4px 5px rgba(0, 0, 0, 0.14))
-            drop-shadow(0 1px 10px rgba(0, 0, 0, 0.12));
+        position: relative;
     }
 
-    .flame-wrapper:has(.flame-inner) {
-        position: absolute;
-        top: 0;
-        left: 7.5px;
-        z-index: 2;
+    .flame-wrapper:nth-of-type(2) {
+        left: 15px;
     }
 
     .flame-inner {
-        position: relative;
-        width: 25px;
-        height: 25px;
-        clip-path: polygon(0 0, 100% 0, 50% 100%);
-        background: var(--nord13-aurora);
-    }
-
-    .flame-wrapper:has(.flame-outer) {
         position: absolute;
         top: 0;
-        left: 0;
-        z-index: 1;
+        left: 2.5px;
+        width: 5px;
+        height: 30px;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        background: var(--nord13-aurora);
+        z-index: 2;
+        border-radius: 3px;
     }
 
     .flame-outer {
-        position: relative;
-        width: 40px;
-        height: 40px;
-        clip-path: polygon(0 0, 100% 0, 50% 100%);
-        background: var(--nord11-aurora);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 45px;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        background: var(--nord12-aurora);
+        z-index: 1;
+        border-radius: 3px;
     }
 
     @keyframes flame {
         0% {
-            transform: translateY(0);
+            transform: translate(-50%, 0) scale(1, 0.5);
         }
         100% {
-            transform: translateY(-20px);
+            transform: translate(-50%, 0) scale(1, 2);
         }
     }
 </style>
