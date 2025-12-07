@@ -34,7 +34,7 @@ const VisNetworkGraph = ({ graphData }) => {
         fixed: true,
         font: {
           color: "#eceff4",
-          strokeWidth: 5,
+          size: 16,
           strokeColor: "#2e3440",
         },
         color: {
@@ -44,16 +44,18 @@ const VisNetworkGraph = ({ graphData }) => {
           highlight: { background: "#a3be8c", border: "#a3be8c" },
         },
         shape: "dot",
-        size: 4,
+        size: 12,
       },
       edges: {
         color: "#4c566a",
         width: 2,
       },
       interaction: {
-        hover: true,
-        dragView: false,
         zoomView: false,
+        dragNodes: false,
+        dragView: true,
+        selectable: true,
+        hover: true,
       },
     } satisfies Options;
 
