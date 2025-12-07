@@ -1,14 +1,5 @@
 <div class="rocket" id="rocket">
-    <div class="rocket-body">
-        <div class="rocket-window"></div>
-        <div class="rocket-fin">
-            <div class="rocket-fin__inner"></div>
-        </div>
-        <div class="rocket-fin">
-            <div class="rocket-fin__inner"></div>
-        </div>
-        <div class="rocket-fin"></div>
-    </div>
+    <img src="/space_shuttle.png" alt="space shuttle" />
     <div class="flames" id="flames">
         <div class="flame-wrapper"><div class="flame-inner"></div></div>
         <div class="flame-wrapper"><div class="flame-outer"></div></div>
@@ -17,10 +8,12 @@
 
 <style>
     .rocket {
+        width: 100px;
+        height: auto;
         position: fixed;
-        top: -0.5rem;
-        left: 1.5rem;
-        transform: scale(0.4) translate(-50%, -50%) rotate(45deg);
+        top: 2rem;
+        left: 2rem;
+        transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
         pointer-events: none;
         user-select: none;
         z-index: 999;
@@ -33,93 +26,87 @@
         animation-timing-function: ease-in-out;
     }
 
+    .rocket img {
+        position: relative;
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+    }
+
     .rocket.rotate {
-        transform: translate(-50%, -50%) rotate(0deg);
         animation-name: rocketMoveReverse;
     }
 
     @keyframes rocketMove {
         0% {
-            top: -0.5rem;
-            left: 1.5rem;
-            scale: 0.4;
-            transform: translate(-50%, -50%) rotate(45deg);
+            top: 2rem;
+            left: 2rem;
+            transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
         }
-        10% {
-            top: -25vh;
-            left: 25%;
-            scale: 2;
-            transform: translate(-50%, -50%) rotate(180deg);
+        5% {
+            top: 25vh;
+            left: 2rem;
+            transform: translate(-50%, -50%) rotate(180deg) scale(2);
         }
         30% {
             top: 50vh;
             left: 75%;
-            scale: 1;
-            transform: translate(-50%, -50%) rotate(180deg);
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
             z-index: 99;
         }
         50% {
             top: 50vh;
             left: 25%;
-            scale: 1;
-            transform: translate(-50%, -50%) rotate(180deg);
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
             z-index: 99;
         }
         80% {
             top: 50vh;
             left: 75%;
-            scale: 1;
-            transform: translate(-50%, -50%) rotate(180deg);
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
             z-index: 99;
         }
         100% {
             top: 105vh;
             left: 50%;
-            scale: 1;
-            transform: translate(-50%, -50%) rotate(180deg);
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
             z-index: 99;
         }
     }
 
     @keyframes rocketMoveReverse {
         0% {
-            top: -0.5rem;
-            left: 1.5rem;
-            scale: 0.4;
-            transform: translate(-50%, -50%) rotate(45deg);
+            top: 2rem;
+            left: 2rem;
+            transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
         }
-        10% {
-            top: -25vh;
-            left: 25%;
-            scale: 2;
-            transform: translate(-50%, -50%) rotate(0deg);
+        5% {
+            top: 25vh;
+            left: 2rem;
+            transform: translate(-50%, -50%) rotate(0deg) scale(2);
         }
         30% {
             top: 50vh;
             left: 75%;
-            scale: 1;
-            transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg) scale(1);
             z-index: 99;
         }
         50% {
             top: 50vh;
             left: 25%;
-            scale: 1;
-            transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg) scale(1);
             z-index: 99;
         }
         80% {
             top: 50vh;
             left: 75%;
-            scale: 1;
-            transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg) scale(1);
             z-index: 99;
         }
         100% {
             top: 105vh;
             left: 50%;
-            scale: 1;
-            transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg) scale(1);
             z-index: 99;
         }
     }
@@ -194,6 +181,9 @@
 
     .flames {
         position: relative;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
         width: 40px;
         height: 40px;
         clip-path: polygon(0 0, 100% 0, 50% 100%);

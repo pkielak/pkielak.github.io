@@ -10,6 +10,7 @@
     --nord1-polar-night: #3b4252;
     --nord3-polar-night: #4c566a;
     --nord4-snow-storm: #d8dee9;
+    --nord5-snow-storm: #e5e9f0;
     --nord8-frost: #88c0d0;
     --nord9-frost: #81a1c1;
     --nord10-frost: #5e81ac;
@@ -17,22 +18,12 @@
     --nord13-aurora: #ebcb8b;
     --nord14-aurora: #a3be8c;
 
-    /* Material UI Shadows */
-    --shadow-2:
-        0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-        0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-    --shadow-4:
-        0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-        0px 4px 5px 0px rgba(0, 0, 0, 0.14),
-        0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-    --shadow-6:
-        0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-        0px 6px 10px 0px rgba(0, 0, 0, 0.14),
-        0px 1px 18px 0px rgba(0, 0, 0, 0.12);
-    --shadow-8:
-        0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-        0px 8px 10px 1px rgba(0, 0, 0, 0.14),
-        0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    /* Neobrutalism Shadows using --nord3-polar-night variable */
+    /* Apply consistent rectangular offset shadows used across components */
+    --shadow-2: 4px 4px 0px 0px var(--nord3-polar-night);
+    --shadow-4: 6px 6px 0px 0px var(--nord3-polar-night);
+    --shadow-6: 8px 8px 0px 0px var(--nord3-polar-night);
+    --shadow-8: 10px 10px 0px 0px var(--nord3-polar-night);
 
     --header-height: 74px;
     --footer-height: 74px;
@@ -138,7 +129,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 0 0 0.5rem 0;
+    margin: 0.5rem 0;
     line-height: 1.2;
 }
 h1 {
@@ -185,29 +176,43 @@ table {
 img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 0;
+    box-shadow: var(--shadow-4);
 }
 code {
     padding: 2px 5px;
-    background-color: var(--nord4);
-    border-radius: 2px;
+    background-color: var(--nord4-snow-storm);
+    border-radius: 0;
+    font-weight: normal;
+    color: var(--nord0-polar-night);
+    box-shadow: var(--shadow-2);
 }
 pre {
     padding: 1.5em;
-    border-radius: 8px;
+    border-radius: 0;
+    background-color: var(--nord3-polar-night);
+    box-shadow: var(--shadow-4);
 }
 pre > code {
     all: unset;
+    font-weight: normal;
+    color: var(--nord4-snow-storm);
 }
 blockquote {
-    border-left: 4px solid var(--nord10);
+    border-left: 4px solid var(--nord10-frost);
     padding: 0 0 0 20px;
     margin: 0px;
     font-size: 1.333em;
+    background-color: transparent;
+    color: var(--nord4-snow-storm);
+    box-shadow: var(--shadow-2);
+    border-radius: 0;
 }
 hr {
     border: none;
-    border-top: 1px solid var(--nord4);
+    border-top: 1px solid var(--nord4-snow-storm);
+    box-shadow: var(--shadow-2);
+    margin: 1em 0;
 }
 
 .sr-only {

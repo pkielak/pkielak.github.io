@@ -24,19 +24,22 @@ import { SITE_TITLE } from "../consts";
         justify-content: space-between;
         padding: 1rem;
         z-index: 999;
-        backdrop-filter: blur(1px);
         color: var(--nord4-snow-storm);
+        border-radius: 0;
     }
 
     h2 {
         margin: 0 0 0 3rem;
         font-size: 2rem;
         line-height: 1;
-        font-weight: normal;
+        font-weight: 700;
+        text-transform: lowercase;
     }
-    h2 a [margin: 0;] h2 a,
-    h2 a.active {
+    h2 a {
         text-decoration: none;
+        text-shadow: 1px 1px 0 var(--nord3-polar-night);
+        color: var(--nord4-snow-storm);
+        user-select: none;
     }
     nav {
         display: flex;
@@ -47,12 +50,17 @@ import { SITE_TITLE } from "../consts";
         margin: auto;
     }
     nav a {
-        color: var(--nord0);
+        color: var(--nord4-snow-storm);
+        font-weight: 600;
         text-decoration: none;
         pointer-events: initial;
+        transition: color 0.2s ease;
     }
     nav a.active {
+        color: var(--nord10-frost);
         text-decoration: none;
-        color: var(--nord10);
+    }
+    nav a:hover {
+        color: var(--nord10-frost);
     }
 </style>

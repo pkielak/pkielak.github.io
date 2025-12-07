@@ -18,8 +18,9 @@ const posts = (await getCollection("notes"))
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
     <section>
-        <div class="note">
-            <h3>🧑‍🚀 Hello! I'm Piotr Kielak</h3>
+        <div class="note note--me">
+            <img src="/avatar.png" alt="portrait of me in spacesuit" />
+            <h3>Hello! I'm Piotr Kielak</h3>
             <p>
                 I created this page to share my progress as a front-end
                 developer and to test the idea of the digital garden, whose node
@@ -98,7 +99,6 @@ const posts = (await getCollection("notes"))
         margin: 0 auto;
         scroll-snap-align: start;
         z-index: 200;
-        overflow: hidden;
     }
 
     @media (min-width: 768px) {
@@ -120,7 +120,7 @@ const posts = (await getCollection("notes"))
         padding: 2rem;
         width: calc(100% - 4rem);
         background: var(--nord4-snow-storm);
-        border-radius: 3px;
+        border-radius: 0;
         box-shadow: var(--shadow-4);
         font-weight: 400;
         color: var(--nord1-polar-night);
@@ -131,6 +131,23 @@ const posts = (await getCollection("notes"))
         .note {
             width: 50%;
         }
+
+        .note--me {
+            animation-timeline: scroll(root);
+            animation-range: auto;
+            animation-name: earthMove;
+            animation-fill-mode: both;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes earthMove {
+            0% {
+                transform: translateX(0px);
+            }
+            20% {
+                transform: translateX(-100vw);
+            }
+        }
     }
 
     h3 {
@@ -139,26 +156,25 @@ const posts = (await getCollection("notes"))
     }
 
     ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
         list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    ul li {
-        width: 100%;
-    }
-
-    ul li * {
+    ul li a {
+        display: block;
         text-decoration: none;
+        padding: 1rem;
+        border-radius: 0;
+        background: var(--nord4-snow-storm);
+        color: var(--nord1-polar-night);
+        font-weight: 400;
         transition: color 0.2s ease;
     }
 
-    ul li a {
-        display: block;
-        color: var(--nord0-polar-night);
+    ul li a:hover h4,
+    ul li a:hover .date {
+        color: var(--nord10-frost);
     }
 
     .title {
@@ -174,7 +190,7 @@ const posts = (await getCollection("notes"))
 
     ul li a:hover h4,
     ul li a:hover .date {
-        color: var(--nord10-aurora);
+        color: var(--nord10-frost);
     }
 
     @media (max-width: 720px) {
