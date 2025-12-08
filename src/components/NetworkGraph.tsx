@@ -26,38 +26,38 @@ const VisNetworkGraph = ({ graphData }) => {
     }
   };
 
+  const options = {
+    nodes: {
+      fixed: true,
+      font: {
+        color: "#eceff4",
+        size: 16,
+        strokeColor: "#2e3440",
+      },
+      color: {
+        border: "#ebcb8b",
+        background: "#ebcb8b",
+        hover: { background: "#bf616a", border: "#bf616a" },
+        highlight: { background: "#a3be8c", border: "#a3be8c" },
+      },
+      shape: "dot",
+      size: 12,
+    },
+    edges: {
+      color: "#4c566a",
+      width: 2,
+    },
+    interaction: {
+      zoomView: false,
+      //   dragNodes: false,
+      //   // dragView: false,
+      //   selectable: true,
+      //   hover: true,
+    },
+  } satisfies Options;
+
   useEffect(() => {
     if (!containerRef.current) return;
-
-    const options = {
-      nodes: {
-        fixed: true,
-        font: {
-          color: "#eceff4",
-          size: 16,
-          strokeColor: "#2e3440",
-        },
-        color: {
-          border: "#ebcb8b",
-          background: "#ebcb8b",
-          hover: { background: "#bf616a", border: "#bf616a" },
-          highlight: { background: "#a3be8c", border: "#a3be8c" },
-        },
-        shape: "dot",
-        size: 12,
-      },
-      edges: {
-        color: "#4c566a",
-        width: 2,
-      },
-      interaction: {
-        zoomView: false,
-        dragNodes: false,
-        dragView: true,
-        selectable: true,
-        hover: true,
-      },
-    } satisfies Options;
 
     network = new Network(containerRef.current, graphData, options);
 
@@ -68,6 +68,18 @@ const VisNetworkGraph = ({ graphData }) => {
     });
 
     window.addEventListener("resize", handleResize);
+
+    // Custom Ctrl+wheel (unchanged from v9)
+    (containerRef.current as HTMLDivElement).addEventListener(
+      "wheel",
+      (e) => {
+        if (!e.ctrlKey || !network) return;
+        e.preventDefault();
+        const scale = network.getScale();
+        network.moveTo({ scale: scale * (e.deltaY > 0 ? 0.9 : 1.1) });
+      },
+      { passive: false },
+    );
 
     document.addEventListener("astro:page-load", handlePageLoad);
 
