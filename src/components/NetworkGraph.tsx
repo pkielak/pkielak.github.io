@@ -1,9 +1,13 @@
 import { navigate } from "astro:transitions/client";
 import { useEffect, useRef } from "react";
-import { Network, type Options } from "vis-network";
+import { Network, type Options, type Data } from "vis-network";
 
-const VisNetworkGraph = ({ graphData }) => {
-  const containerRef = useRef(null);
+interface VisNetworkGraphProps {
+  graphData: Data;
+}
+
+const VisNetworkGraph = ({ graphData }: VisNetworkGraphProps) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   let network: Network | undefined;
 
   const handleResize = () => {
@@ -13,7 +17,7 @@ const VisNetworkGraph = ({ graphData }) => {
   };
 
   const handlePageLoad = () => {
-    if (window && network) {
+    if (typeof window !== "undefined" && network) {
       const pathParts = window.location.pathname.split("/").filter(Boolean);
       const locationKey =
         pathParts[pathParts.length - 1] ||
@@ -26,7 +30,14 @@ const VisNetworkGraph = ({ graphData }) => {
     }
   };
 
-  const options = {
+  const handleZoom = (e: WheelEvent) => {
+    if (!e.ctrlKey || !network) return;
+    e.preventDefault();
+    const scale = network.getScale();
+    network.moveTo({ scale: scale * (e.deltaY > 0 ? 0.9 : 1.1) });
+  };
+
+  const options: Options = {
     nodes: {
       fixed: true,
       font: {
@@ -48,13 +59,11 @@ const VisNetworkGraph = ({ graphData }) => {
       width: 2,
     },
     interaction: {
-      zoomView: false,
-      //   dragNodes: false,
-      //   // dragView: false,
-      //   selectable: true,
-      //   hover: true,
+      zoomView:
+        typeof window !== "undefined" &&
+        window.matchMedia("(pointer: coarse)").matches,
     },
-  } satisfies Options;
+  };
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -69,23 +78,20 @@ const VisNetworkGraph = ({ graphData }) => {
 
     window.addEventListener("resize", handleResize);
 
-    // Custom Ctrl+wheel (unchanged from v9)
-    (containerRef.current as HTMLDivElement).addEventListener(
-      "wheel",
-      (e) => {
-        if (!e.ctrlKey || !network) return;
-        e.preventDefault();
-        const scale = network.getScale();
-        network.moveTo({ scale: scale * (e.deltaY > 0 ? 0.9 : 1.1) });
-      },
-      { passive: false },
-    );
+    const container = containerRef.current;
+    container.addEventListener("wheel", handleZoom as EventListener, {
+      passive: false,
+    });
 
     document.addEventListener("astro:page-load", handlePageLoad);
 
     return () => {
       window.removeEventListener("resize", handleResize);
       document.removeEventListener("astro:page-load", handlePageLoad);
+
+      if (container) {
+        container.removeEventListener("wheel", handleZoom as EventListener);
+      }
 
       if (network) {
         network.destroy();

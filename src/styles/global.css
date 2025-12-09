@@ -25,10 +25,8 @@
     --shadow-4: 6px 6px 0px 0px var(--nord3-polar-night);
     --shadow-6: 8px 8px 0px 0px var(--nord3-polar-night);
     --shadow-8: 10px 10px 0px 0px var(--nord3-polar-night);
-
-    --header-height: 74px;
-    --footer-height: 74px;
 }
+
 @font-face {
     font-family: "Atkinson";
     src: url("/fonts/atkinson-regular.woff") format("woff");

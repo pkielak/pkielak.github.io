@@ -27,6 +27,7 @@ const today = new Date();
             <slot />
         </main>
         <div class="graph-wrapper">
+            <span class="zoom-control-text">Hold Ctrl + Scroll to Zoom</span>
             <NetworkGraph
                 graphData={graphData}
                 client:idle
@@ -56,6 +57,22 @@ const today = new Date();
     .graph-wrapper {
         width: 100%;
         height: 75vh;
+        position: relative;
+    }
+
+    .zoom-control-text {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        user-select: none;
+        pointer-events: none;
+        display: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        .zoom-control-text {
+            display: block;
+        }
     }
 
     footer {
