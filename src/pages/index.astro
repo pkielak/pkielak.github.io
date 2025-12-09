@@ -105,6 +105,11 @@ const posts = (await getCollection("notes"))
         z-index: 200;
     }
 
+    section:last-of-type {
+        height: calc(50svh + var(--contact-form-height) / 2);
+        align-items: end;
+    }
+
     @media (min-width: 768px) {
         section {
             height: 100vh;
@@ -120,6 +125,11 @@ const posts = (await getCollection("notes"))
 
         section:nth-child(1) {
             justify-content: center;
+        }
+
+        section:last-of-type {
+            height: calc(50svh + var(--contact-form-height-desktop) / 2);
+            align-items: end;
         }
     }
 

@@ -25,6 +25,9 @@
     --shadow-4: 6px 6px 0px 0px var(--nord3-polar-night);
     --shadow-6: 8px 8px 0px 0px var(--nord3-polar-night);
     --shadow-8: 10px 10px 0px 0px var(--nord3-polar-night);
+
+    --contact-form-height: 427px;
+    --contact-form-height-desktop: 435px;
 }
 
 @font-face {
@@ -134,23 +137,24 @@ h6 {
     margin: 0.5rem 0;
     line-height: 1.2;
 }
+
 h1 {
-    font-size: 3.052em;
+    font-size: 2em;
 }
 h2 {
-    font-size: 2.441em;
+    font-size: 1.75em;
 }
 h3 {
-    font-size: 1.953em;
+    font-size: 1.5em;
 }
 h4 {
-    font-size: 1.563em;
+    font-size: 1.375em;
 }
 h5 {
     font-size: 1.25em;
 }
 h6 {
-    font-size: 1em;
+    font-size: 1.125em;
 }
 strong,
 b {

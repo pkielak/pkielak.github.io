@@ -23,11 +23,9 @@
         pointer-events: none;
         user-select: none;
         z-index: 999;
-
-        /* Scroll-driven animations using view-timeline */
+        animation-name: rocketMoveSmall;
         animation-timeline: scroll(root);
         animation-range: auto;
-        animation-name: rocketMove;
         animation-fill-mode: both;
         animation-timing-function: ease-in-out;
     }
@@ -41,6 +39,12 @@
 
     .rocket.rotate {
         animation-name: rocketMoveReverse;
+    }
+
+    @media (min-width: 768px) {
+        .rocket {
+            animation-name: rocketMove;
+        }
     }
 
     @keyframes rocketMove {
@@ -97,6 +101,11 @@
             transform: translate(-50%, -50%) rotate(405deg) scale(0.4);
         }
         5% {
+            top: 4vh;
+            left: -2rem;
+            transform: translate(-50%, -50%) rotate(360deg) scale(2);
+        }
+        15% {
             top: 25vh;
             left: 2rem;
             transform: translate(-50%, -50%) rotate(315deg) scale(2);
@@ -123,6 +132,47 @@
             top: calc(105vh + 100px);
             left: 50%;
             transform: translate(-50%, -50%) rotate(360deg) scale(1);
+            z-index: 99;
+        }
+    }
+
+    @keyframes rocketMoveSmall {
+        0% {
+            top: 2rem;
+            left: 2rem;
+            transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
+        }
+
+        5% {
+            top: calc(-50vw - 2rem);
+            left: 50vw;
+            transform: translate(-50%, -50%) rotate(180deg) scale(0.4);
+        }
+
+        30% {
+            top: 50vh;
+            left: 75%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+
+        50% {
+            top: 50vh;
+            left: 25%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+
+        80% {
+            top: 50vh;
+            left: 75%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+        100% {
+            top: calc(105vh + 100px);
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
             z-index: 99;
         }
     }

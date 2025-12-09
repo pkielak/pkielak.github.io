@@ -63,9 +63,9 @@ const { Content } = await render(post);
 <style>
     article {
         max-width: 720px;
-        width: 100%;
+        width: calc(100% - 2rem);
         padding: 1rem;
-        margin: 4rem auto 2rem;
+        margin: 4rem auto 0;
         background: var(--nord4-snow-storm);
         box-shadow: var(--shadow-4);
         border-radius: 0;
@@ -82,7 +82,7 @@ const { Content } = await render(post);
     .prose {
         max-width: calc(100% - 2rem);
         margin: auto;
-        padding: 0 1rem 0;
+        padding: 0;
     }
 
     .logo {
