@@ -24,6 +24,9 @@ const { Content } = await render(post);
     title={post.data.title}
     isGraphSmall={true}
 >
+    <div class="rocket" id="rocket">
+        <img src="/favicon_192.png" alt="space shuttle" />
+    </div>
     <article>
         <div class="prose">
             {
@@ -61,6 +64,25 @@ const { Content } = await render(post);
     </article>
 </Main>
 <style>
+    .rocket {
+        width: 40px;
+        height: auto;
+        position: fixed;
+        top: 2rem;
+        left: 2.25rem;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        user-select: none;
+        z-index: 999;
+    }
+
+    .rocket img {
+        position: relative;
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+    }
+
     article {
         max-width: 720px;
         width: calc(100% - 2rem);
