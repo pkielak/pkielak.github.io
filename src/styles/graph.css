@@ -4,17 +4,9 @@
     height: 50vh;
 }
 
-.controls {
-    display: none;
-}
-
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .graph-container,
     .graph {
         height: 100vh;
-    }
-
-    .controls {
-        display: block;
     }
 }
