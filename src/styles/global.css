@@ -62,10 +62,7 @@ body {
     scroll-behavior: smooth;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    font-size: 20px;
-    line-height: 1.7;
-
-    /* Memory efficient starry background */
+    line-height: 1.5;
     background-image:
         radial-gradient(
             0.7px 0.7px at 3% 12%,
@@ -122,6 +119,12 @@ body {
     background-color: var(--nord0-polar-night);
 }
 
+@media (min-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+}
+
 h1,
 h2,
 h3,
@@ -164,10 +167,10 @@ p {
 }
 textarea {
     width: 100%;
-    font-size: 16px;
+    font-size: 1em;
 }
 input {
-    font-size: 16px;
+    font-size: 1em;
 }
 table {
     width: 100%;
