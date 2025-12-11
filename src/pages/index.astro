@@ -8,7 +8,7 @@ import Earth from "../components/Earth.astro";
 import Rocket from "../components/Rocket.astro";
 
 const posts = (await getCollection("notes"))
-    .sort((a: any, b: any) => {
+    .sort((a, b) => {
         const aDate = a.data.updatedAt || a.data.pubDate;
         const bDate = b.data.updatedAt || b.data.pubDate;
         return bDate.valueOf() - aDate.valueOf();
@@ -27,10 +27,10 @@ const posts = (await getCollection("notes"))
                 garden project.
             </p>
             <p>
-                If you're interested in seeing how everything is organized or
-                exploring the various sections within my digital garden, take a
-                look at the node diagram at the bottom of the page or dive right
-                into it <a href="/notes/index">here</a>!
+                If you're interested in the structure or exploring different
+                parts of my digital garden, check the node diagram below or jump
+                straight in{" "}
+                <a href="/notes/index">here</a>!
             </p>
         </div>
     </section>
@@ -38,15 +38,15 @@ const posts = (await getCollection("notes"))
     <section>
         <div class="note">
             <p>
-                My main focus as a developer is to create helpful applications
-                and websites designed for users' daily tasks and activities.
-                Some of my earlier projects have achieved this goal, which keeps
-                me motivated to continue making useful solutions.
+                My main focus as a developer is building useful applications and
+                websites tailored for daily users tasks. Some of my earlier
+                projects have succeeded in this, which motivates me to keep
+                creating great solutions.
             </p>
             <p>
-                Skilled in React and TypeScript, I am also learning Next.js,
-                Astro, PostgreSQL, and AI agents to broaden my expertise in
-                full-stack web development.
+                Skilled in React and TypeScript, I'm learning Next.js, Astro,
+                PostgreSQL, and AI agents to expand my full-stack development
+                skills.
             </p>
         </div>
     </section>
@@ -56,9 +56,9 @@ const posts = (await getCollection("notes"))
             <h3>Recent notes</h3>
             <ul>
                 {
-                    posts.map((post: any, index: number) => (
+                    posts.map((post) => (
                         <li>
-                            <a href={`/notes/${post.id}/`}>
+                            <a href={`/notes/${post.id}/`} class="post-link">
                                 <h4 class="title">{post.data.title}</h4>
                                 <p class="date">
                                     <FormattedDate
@@ -107,7 +107,7 @@ const posts = (await getCollection("notes"))
 
     section:last-of-type {
         height: calc(50svh + var(--contact-form-height) / 2);
-        align-items: end;
+        align-items: flex-end;
     }
 
     @media (min-width: 768px) {
@@ -129,7 +129,7 @@ const posts = (await getCollection("notes"))
 
         section:last-of-type {
             height: calc(50svh + var(--contact-form-height-desktop) / 2);
-            align-items: end;
+            align-items: flex-end;
         }
     }
 
@@ -139,11 +139,9 @@ const posts = (await getCollection("notes"))
         justify-content: center;
         align-items: center;
         gap: 1rem;
-        position: relative;
         padding: 1rem;
         width: 100%;
         background: var(--nord4-snow-storm);
-        border-radius: 0;
         box-shadow: var(--shadow-4);
         font-weight: 400;
         color: var(--nord1-polar-night);
@@ -156,6 +154,24 @@ const posts = (await getCollection("notes"))
         margin: 0;
     }
 
+    .note--me {
+        animation-timeline: scroll(root);
+        animation-duration: 1.2s;
+        animation-range: auto;
+        animation-name: earthMove;
+        animation-fill-mode: both;
+        animation-timing-function: ease-in-out;
+    }
+
+    @keyframes earthMove {
+        0% {
+            transform: translateX(0);
+        }
+        20% {
+            transform: translateX(-100vw);
+        }
+    }
+
     .note--me img {
         width: 75%;
     }
@@ -166,25 +182,8 @@ const posts = (await getCollection("notes"))
             padding: 2rem;
         }
 
-        .note--me {
-            animation-timeline: scroll(root);
-            animation-range: auto;
-            animation-name: earthMove;
-            animation-fill-mode: both;
-            animation-timing-function: ease-in-out;
-        }
-
         .note--me img {
             width: 100%;
-        }
-
-        @keyframes earthMove {
-            0% {
-                transform: translateX(0px);
-            }
-            20% {
-                transform: translateX(-100vw);
-            }
         }
     }
 
@@ -193,27 +192,33 @@ const posts = (await getCollection("notes"))
         text-align: center;
     }
 
+    @media (min-width: 720px) {
+        h3 {
+            font-size: 1.953em;
+        }
+    }
+
     ul {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
         list-style: none;
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
-    ul li a {
+    .post-link {
         display: block;
         text-decoration: none;
-        border-radius: 0;
-        background: var(--nord4-snow-storm);
         color: var(--nord1-polar-night);
         font-weight: 400;
+        background: var(--nord4-snow-storm);
+        border-radius: 0;
         transition: color 0.2s ease;
     }
 
-    ul li a:hover h4,
-    ul li a:hover .date {
+    .post-link:hover h4,
+    .post-link:hover .date {
         color: var(--nord10-frost);
     }
 
@@ -228,28 +233,13 @@ const posts = (await getCollection("notes"))
         color: var(--nord3-snow-storm);
     }
 
-    ul li a:hover h4,
-    ul li a:hover .date {
-        color: var(--nord10-frost);
-    }
-
     @media (max-width: 720px) {
         ul {
             gap: 0.5em;
         }
 
-        ul li:first-child {
-            margin-bottom: 0;
-        }
-
         ul li:first-child .title {
             font-size: 1.563em;
-        }
-    }
-
-    @media (min-width: 720px) {
-        h3 {
-            font-size: 1.953em;
         }
     }
 
@@ -277,28 +267,28 @@ const posts = (await getCollection("notes"))
                 "section:not(:first-child)",
             );
 
-            const options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1,
-            };
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        const note = entry.target.querySelector(".note");
+                        if (!note || note.classList.contains("note--me"))
+                            return;
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    const note = entry.target.querySelector(".note");
-                    if (!note || note.classList.contains("note--me")) return;
+                        if (entry.isIntersecting) {
+                            note.classList.add("visible");
+                        } else {
+                            note.classList.remove("visible");
+                        }
+                    });
+                },
+                {
+                    root: null,
+                    rootMargin: "0px",
+                    threshold: 0.1,
+                },
+            );
 
-                    if (entry.isIntersecting) {
-                        note.classList.add("visible");
-                    } else {
-                        note.classList.remove("visible");
-                    }
-                });
-            }, options);
-
-            sections.forEach((section) => {
-                observer.observe(section);
-            });
+            sections.forEach((section) => observer.observe(section));
         });
     }
 </script>
