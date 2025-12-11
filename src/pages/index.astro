@@ -260,35 +260,45 @@ const posts = (await getCollection("notes"))
     }
 </style>
 
-<script>
-    if (typeof window !== "undefined") {
-        window.addEventListener("DOMContentLoaded", () => {
+<script type="module" is:inline data-astro-rerun>
+    (() => {
+        let observer = null;
+
+        function onNoteVisible(entries) {
+            entries.forEach((entry) => {
+                const note = entry.target.querySelector(".note");
+                if (!note || note.classList.contains("note--me")) return;
+
+                if (entry.isIntersecting) {
+                    note.classList.add("visible");
+                } else {
+                    note.classList.remove("visible");
+                }
+            });
+        }
+
+        function detachObserver(sections) {
+            if (observer) {
+                sections.forEach((section) => observer?.unobserve(section));
+                observer = null;
+            }
+        }
+
+        function init() {
             const sections = document.querySelectorAll(
                 "section:not(:first-child)",
             );
 
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        const note = entry.target.querySelector(".note");
-                        if (!note || note.classList.contains("note--me"))
-                            return;
+            detachObserver(sections);
+            observer = new IntersectionObserver(onNoteVisible, {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.05,
+            });
 
-                        if (entry.isIntersecting) {
-                            note.classList.add("visible");
-                        } else {
-                            note.classList.remove("visible");
-                        }
-                    });
-                },
-                {
-                    root: null,
-                    rootMargin: "0px",
-                    threshold: 0.05,
-                },
-            );
+            sections.forEach((section) => observer?.observe(section));
+        }
 
-            sections.forEach((section) => observer.observe(section));
-        });
-    }
+        document.addEventListener("astro:page-load", init);
+    })();
 </script>
