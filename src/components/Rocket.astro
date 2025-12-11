@@ -243,7 +243,7 @@
     }
 </style>
 
-<script type="module" is:inline>
+<script type="module" is:inline data-astro-rerun>
     (() => {
         let lastScrollY = window.scrollY;
         let scrollListener;
@@ -285,9 +285,6 @@
             }
         }
 
-        document.addEventListener("DOMContentLoaded", init);
-        window.addEventListener("astro:navigation", () => {
-            init();
-        });
+        document.addEventListener("astro:page-load", init);
     })();
 </script>
