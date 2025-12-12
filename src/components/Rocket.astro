@@ -1,0 +1,290 @@
+<div class="rocket" id="rocket">
+    <img src="/space_shuttle.png" alt="space shuttle" />
+    <div class="flames" id="flames">
+        <div class="flame-wrapper">
+            <div class="flame-outer"></div>
+            <div class="flame-inner"></div>
+        </div>
+        <div class="flame-wrapper">
+            <div class="flame-outer"></div>
+            <div class="flame-inner"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .rocket {
+        width: 100px;
+        height: auto;
+        position: fixed;
+        top: 2rem;
+        left: 2rem;
+        transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
+        pointer-events: none;
+        user-select: none;
+        z-index: 999;
+        animation-name: rocketMoveSmall;
+        animation-timeline: scroll(root);
+        animation-range: auto;
+        animation-fill-mode: both;
+        animation-timing-function: ease-in-out;
+    }
+
+    .rocket img {
+        position: relative;
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+    }
+
+    .rocket.rotate {
+        animation-name: rocketMoveReverse;
+    }
+
+    @media (min-width: 768px) {
+        .rocket {
+            animation-name: rocketMove;
+        }
+    }
+
+    @keyframes rocketMove {
+        0% {
+            top: 2rem;
+            left: 2rem;
+            transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
+        }
+
+        7% {
+            top: calc(-3vh - 2rem);
+            left: 6.25vh;
+            transform: translate(-50%, -50%) rotate(90deg) scale(0.4);
+        }
+
+        15% {
+            top: 18vh;
+            left: 25vh;
+            transform: translate(-50%, -50%) rotate(135deg) scale(2);
+        }
+
+        35% {
+            top: 40vh;
+            left: 75%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+
+        55% {
+            top: 50vh;
+            left: 25%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+
+        85% {
+            top: 60vh;
+            left: 75%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+        100% {
+            top: calc(105vh + 100px);
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+    }
+
+    @keyframes rocketMoveReverse {
+        0% {
+            top: 2rem;
+            left: 2rem;
+            transform: translate(-50%, -50%) rotate(405deg) scale(0.4);
+        }
+        8% {
+            top: 8vh;
+            left: -2rem;
+            transform: translate(-50%, -50%) rotate(360deg) scale(2);
+        }
+        17% {
+            top: 22vh;
+            left: 2rem;
+            transform: translate(-50%, -50%) rotate(315deg) scale(2);
+        }
+        35% {
+            top: 40vh;
+            left: 75%;
+            transform: translate(-50%, -50%) rotate(360deg) scale(1);
+            z-index: 99;
+        }
+        55% {
+            top: 60vh;
+            left: 25%;
+            transform: translate(-50%, -50%) rotate(360deg) scale(1);
+            z-index: 99;
+        }
+        85% {
+            top: 80vh;
+            left: 75%;
+            transform: translate(-50%, -50%) rotate(360deg) scale(1);
+            z-index: 99;
+        }
+        100% {
+            top: calc(105vh + 100px);
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(360deg) scale(1);
+            z-index: 99;
+        }
+    }
+
+    @keyframes rocketMoveSmall {
+        0% {
+            top: 2rem;
+            left: 2rem;
+            transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
+        }
+
+        7% {
+            top: calc(-30vw - 2rem);
+            left: 50vw;
+            transform: translate(-50%, -50%) rotate(180deg) scale(0.4);
+        }
+
+        17% {
+            top: 18vh;
+            left: calc(25vw + 37.5%);
+            transform: translate(-50%, -50%) rotate(180deg) scale(0.4);
+        }
+
+        35% {
+            top: 40vh;
+            left: 75%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+
+        55% {
+            top: 60vh;
+            left: 25%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+
+        85% {
+            top: 80vh;
+            left: 75%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+        100% {
+            top: calc(105vh + 100px);
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(180deg) scale(1);
+            z-index: 99;
+        }
+    }
+
+    .flames {
+        position: relative;
+        top: -15px;
+        left: 50%;
+        transform: translate(-50%, 0) scale(1, 0.5);
+        transform-origin: top;
+        width: 25px;
+        height: 45px;
+        opacity: 0;
+        display: flex;
+        gap: 0;
+    }
+
+    .flames.on {
+        animation: flame 0.3s infinite alternate;
+        opacity: 0.9;
+    }
+
+    .flame-wrapper {
+        position: relative;
+    }
+
+    .flame-wrapper:nth-of-type(2) {
+        left: 15px;
+    }
+
+    .flame-inner {
+        position: absolute;
+        top: 0;
+        left: 2.5px;
+        width: 5px;
+        height: 30px;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        background: var(--nord13-aurora);
+        z-index: 2;
+        border-radius: 3px;
+    }
+
+    .flame-outer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 45px;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        background: var(--nord12-aurora);
+        z-index: 1;
+        border-radius: 3px;
+    }
+
+    @keyframes flame {
+        0% {
+            transform: translate(-50%, 0) scale(1, 0.5);
+        }
+        100% {
+            transform: translate(-50%, 0) scale(1, 2);
+        }
+    }
+</style>
+
+<script type="module" is:inline data-astro-rerun>
+    (() => {
+        let lastScrollY = window.scrollY;
+        let scrollListener;
+
+        function onScroll() {
+            const rocket = document.getElementById("rocket");
+            const flames = document.getElementById("flames");
+            if (!rocket || !flames) return;
+
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY < lastScrollY) {
+                rocket.classList.add("rotate");
+            } else {
+                rocket.classList.remove("rotate");
+            }
+
+            if (currentScrollY > 0) {
+                flames.classList.add("on");
+            } else {
+                flames.classList.remove("on");
+            }
+
+            lastScrollY = currentScrollY;
+        }
+
+        function init() {
+            lastScrollY = window.scrollY;
+            detachScrollListener();
+            scrollListener = onScroll;
+            window.addEventListener("scroll", scrollListener);
+            onScroll();
+        }
+
+        function detachScrollListener() {
+            if (scrollListener) {
+                window.removeEventListener("scroll", scrollListener);
+                scrollListener = null;
+            }
+        }
+
+        document.addEventListener("astro:page-load", init);
+    })();
+</script>

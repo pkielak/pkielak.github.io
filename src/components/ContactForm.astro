@@ -5,107 +5,125 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
 ---
 
 <form id="form" action="https://api.web3forms.com/submit" method="POST">
-  <input type="hidden" name="access_key" value={WEB_3_FORMS_KEY} />
-  <div class="small-inputs">
-    <div>
-      <label for="name">First Name</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        placeholder="First name"
-        required
-      />
-    </div>
+    <input type="hidden" name="access_key" value={WEB_3_FORMS_KEY} />
+    <div class="small-inputs">
+        <div>
+            <label for="name">First Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="First name"
+                required
+            />
+        </div>
 
-    <div>
-      <label for="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        name="email"
-        inputmode="email"
-        placeholder="Email Address"
-        required
-      />
+        <div>
+            <label for="email">Email</label>
+            <input
+                id="email"
+                type="email"
+                name="email"
+                inputmode="email"
+                placeholder="Email Address"
+                required
+            />
+        </div>
     </div>
-  </div>
-  <div>
-    <label for="message">Message</label>
-    <textarea
-      id="message"
-      name="message"
-      rows="6"
-      placeholder="Message"
-      required></textarea>
-  </div>
-  <button type="submit"
-    ><Icon size="22px" icon="paper-plane-tilt" /> Submit</button
-  >
+    <div>
+        <label for="message">Message</label>
+        <textarea
+            id="message"
+            name="message"
+            rows="6"
+            placeholder="Message"
+            required></textarea>
+    </div>
+    <button type="submit"
+        ><Icon size="22px" icon="paper-plane-tilt" /> Submit</button
+    >
 </form>
 
 <style>
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  input,
-  textarea {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--nord3);
-    border-radius: 0.25rem;
-  }
-
-  input:focus-visible,
-  textarea:focus-visible {
-    outline-color: var(--nord10);
-    border-color: var(--nord10);
-  }
-
-  textarea {
-    width: 100%;
-    box-sizing: border-box;
-    resize: none;
-  }
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem;
-    border: 1px solid var(--nord10);
-    background: var(--nord10);
-    border-radius: 0.25rem;
-    padding: 0.5rem 0.75rem;
-    color: #fff;
-    align-self: center;
-    width: 150px;
-    font-size: 1em;
-    cursor: pointer;
-  }
-
-  button:hover {
-    border: 1px solid var(--nord3);
-    background: var(--nord3);
-  }
-
-  .small-inputs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .small-inputs > div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  @media (min-width: 768px) {
-    .small-inputs > div {
-      width: calc(50% - 0.5rem);
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
-  }
+
+    input,
+    textarea {
+        padding: 0.5rem 0.75rem;
+        border: 2px solid var(--nord3-polar-night);
+        border-radius: 0;
+        box-shadow: var(--shadow-4);
+        background-color: var(--nord5-snow-storm);
+        color: var(--nord1-polar-night);
+        font-weight: normal;
+        transition:
+            border-color 0.2s,
+            box-shadow 0.2s;
+    }
+
+    input:focus-visible,
+    textarea:focus-visible {
+        outline: none;
+        border-color: var(--nord10-frost);
+        box-shadow: 6px 6px 0 var(--nord10-frost);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: var(--nord3-polar-night);
+        font-weight: 300;
+    }
+
+    textarea {
+        width: 100%;
+        box-sizing: border-box;
+        resize: none;
+    }
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        border: none;
+        background: var(--nord10-frost);
+        box-shadow: var(--shadow-4);
+        border-radius: 0;
+        padding: 0.5rem 0.75rem;
+        color: var(--nord5-snow-storm);
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+            background-color 0.2s,
+            box-shadow 0.2s;
+    }
+
+    button:hover {
+        border: none;
+        background: var(--nord9-frost);
+        box-shadow: var(--shadow-2);
+        color: var(--nord0-polar-night);
+    }
+
+    .small-inputs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .small-inputs > div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        .small-inputs > div {
+            width: calc(50% - 0.5rem);
+        }
+    }
 </style>

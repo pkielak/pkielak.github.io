@@ -12,18 +12,11 @@ export async function GET({}) {
   const wikilinkRegExp = /\[\[\s?([^\[\]\|\n\r]+)(\|[^\[\]\|\n\r]+)?\s?\]\]/g;
 
   posts.map((post) => {
-    const { title, description, image } = post.data;
+    const { title, description } = post.data;
     const newNode = {
       id: post.id,
       label: title,
       title: description,
-      ...(image
-        ? {
-            image: image,
-            size: 24,
-            shape: "circularImage",
-          }
-        : { shape: "dot", size: 10 }),
     };
 
     (graph.nodes as Node[]).push(newNode);
