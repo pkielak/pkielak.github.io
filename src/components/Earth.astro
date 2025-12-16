@@ -1,4 +1,4 @@
-<div class="earth">
+<div class="earth earth--move">
     <img src="/earth.png" alt="planet earth" />
 </div>
 
@@ -9,21 +9,6 @@
         left: -96px;
         width: 512px;
         aspect-ratio: 1;
-        animation-timeline: scroll(root);
-        animation-range: auto;
-        animation-name: earthMove;
-        animation-duration: 1.2s;
-        animation-fill-mode: both;
-        animation-timing-function: ease-in-out;
-    }
-
-    @keyframes earthMove {
-        0% {
-            left: -96px;
-        }
-        20% {
-            left: -100vw;
-        }
     }
 
     .earth img {
@@ -36,5 +21,6 @@
         display: block;
         box-shadow: none;
         border-width: 2px;
+        box-shadow: var(--shadow-4);
     }
 </style>
