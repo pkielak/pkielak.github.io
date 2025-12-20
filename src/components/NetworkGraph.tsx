@@ -44,11 +44,12 @@ const VisNetworkGraph = ({ graphData }: VisNetworkGraphProps) => {
         color: "#eceff4",
         size: 16,
         strokeColor: "#2e3440",
+        face: "IBM Plex Mono",
       },
       color: {
         border: "#ebcb8b",
         background: "#ebcb8b",
-        hover: { background: "#bf616a", border: "#bf616a" },
+        hover: "#5e81ac",
         highlight: { background: "#a3be8c", border: "#a3be8c" },
       },
       shape: "dot",
@@ -57,8 +58,10 @@ const VisNetworkGraph = ({ graphData }: VisNetworkGraphProps) => {
     edges: {
       color: "#4c566a",
       width: 2,
+      dashes: true,
     },
     interaction: {
+      hover: true,
       zoomView:
         typeof window !== "undefined" &&
         window.matchMedia("(pointer: coarse)").matches,

@@ -6,6 +6,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 import ContactForm from "../components/ContactForm.astro";
 import Earth from "../components/Earth.astro";
 import Rocket from "../components/Rocket.astro";
+import CurvedText from "../components/CurvedText.astro";
 
 const posts = (await getCollection("notes"))
     .sort((a, b) => {
@@ -50,29 +51,7 @@ const posts = (await getCollection("notes"))
                 PostgreSQL, and AI agents to expand my full-stack development
                 skills.
             </p>
-            <div class="curvedTextWrapper">
-                <div class="curvedText">
-                    <svg viewBox="0 0 220 220" aria-hidden="true">
-                        <defs>
-                            <path
-                                id="circlePath"
-                                d="M110,110 m-100,0 a100,100 0 1,1 200,0 a100,100 0 1,1 -200,0"
-                            ></path>
-                        </defs>
-                        <text font-size="16" fill="var(--nord4-snow-storm)">
-                            <textPath
-                                href="#circlePath"
-                                startOffset="50%"
-                                text-anchor="middle"
-                            >
-                                {
-                                    "JavaScript — TypeScript — CSS — SCSS — React  — Astro  —  Nextjs  —  Postgres  —  AI Agents  —"
-                                }
-                            </textPath>
-                        </text>
-                    </svg>
-                </div>
-            </div>
+            <CurvedText />
         </div>
     </section>
     <section>
@@ -156,14 +135,15 @@ const posts = (await getCollection("notes"))
         flex: 0 1 auto;
         max-width: 100%;
         min-width: 0;
-        background: var(--nord4-snow-storm);
-        box-shadow: var(--shadow-4);
+        background: var(--nord0-polar-night);
+        color: var(--nord4-snow-storm);
         font-weight: 400;
         z-index: 999;
     }
 
-    .photo {
-        color: var(--nord1-polar-night);
+    .photo,
+    .photo img {
+        border: var(--dashed-border4);
     }
 
     .photo img {
@@ -175,85 +155,37 @@ const posts = (await getCollection("notes"))
         transition:
             opacity 1.2s ease-in-out,
             transform 1.2s ease-in-out;
-        color: var(--nord4-snow-storm);
         border-radius: 50%;
         padding: 1rem 2rem;
         aspect-ratio: 1;
         z-index: 0;
         opacity: 0;
+        border-width: 3px !important;
     }
 
     .planet * {
         margin: 0;
     }
 
-    .planet > * {
-        position: relative;
-        z-index: 10;
+    section:nth-of-type(2) .planet,
+    section:nth-of-type(9) .planet {
+        border: var(--dashed-border9);
     }
-
-    .planet::before,
-    .planet::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        border-radius: 50%;
+    section:nth-of-type(3) .planet {
+        border: var(--dashed-border11);
     }
-
-    .planet::before {
-        z-index: 1;
+    section:nth-of-type(4) .planet {
+        border: var(--dashed-border14);
     }
-
-    .planet::after {
-        position: absolute;
-        background: url("/moon.svg") center/cover no-repeat;
-        transform-origin: center;
-        z-index: 0;
-        filter: brightness(0.3);
+    section:nth-of-type(5) .planet {
+        border: var(--dashed-border12);
     }
-
-    section:nth-of-type(2) .planet::after,
-    section:nth-of-type(7) .planet::after {
-        transform: rotate(270deg) scale(-1, -1);
+    section:nth-of-type(6) .planet,
+    section:nth-of-type(7) .planet {
+        border: var(--dashed-border8);
     }
-
-    section:nth-of-type(3) .planet::after,
-    section:nth-of-type(5) .planet::after {
-        transform: rotate(45deg) scale(-1, -1);
-    }
-
-    section:nth-of-type(4) .planet::after {
-        transform: rotate(135deg) scale(-1, -1);
-    }
-
-    section:nth-of-type(6) .planet::after,
-    section:nth-of-type(8) .planet::after {
-        transform: rotate(270deg) scale(-1, -1);
-    }
-
-    section:nth-of-type(2) .planet::before,
-    section:nth-of-type(9) .planet::before {
-        background-color: #81a1c190;
-    }
-    section:nth-of-type(3) .planet::before {
-        background-color: #bf616a90;
-    }
-    section:nth-of-type(4) .planet::before {
-        background-color: #a3be8c90;
-    }
-    section:nth-of-type(5) .planet::before {
-        background-color: #d0877090;
-    }
-    section:nth-of-type(6) .planet::before,
-    section:nth-of-type(7) .planet::before {
-        background-color: #88c0d090;
-    }
-    section:nth-of-type(8) .planet::before {
-        background-color: #ebcb8b90;
+    section:nth-of-type(8) .planet {
+        border: var(--dashed-border13);
     }
 
     section:nth-of-type(even) .planet {
@@ -285,17 +217,6 @@ const posts = (await getCollection("notes"))
         z-index: 99;
         user-select: none;
         pointer-events: none;
-    }
-
-    .curvedText {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 120%;
-        height: 120%;
-        transform: translate(-50%, -50%) rotate(0deg);
-        z-index: 99;
-        animation: rotate 8s linear infinite;
     }
 
     @keyframes rotate {
@@ -391,6 +312,9 @@ const posts = (await getCollection("notes"))
 
         .photo img {
             width: 100%;
+            border-width: 2px;
+            border-color: var(--nord4-snow-storm);
+            border-style: dashed;
         }
     }
 </style>
@@ -434,6 +358,6 @@ const posts = (await getCollection("notes"))
             sections.forEach((section) => observer?.observe(section));
         }
 
-        document.addEventListener("DOMContentLoaded", init);
+        document.addEventListener("astro:page-load", init);
     })();
 </script>

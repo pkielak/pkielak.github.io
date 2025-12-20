@@ -1,6 +1,4 @@
 ---
-import Icon from "./Icon.astro";
-
 const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
 ---
 
@@ -39,9 +37,7 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
             placeholder="Message"
             required></textarea>
     </div>
-    <button type="submit"
-        ><Icon size="22px" icon="paper-plane-tilt" /> Submit</button
-    >
+    <button type="submit">Submit</button>
 </form>
 
 <style>
@@ -56,27 +52,23 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
     input,
     textarea {
         padding: 0.5rem 0.75rem;
-        border: 2px solid var(--nord3-polar-night);
+        border: var(--dashed-border4);
         border-radius: 0;
-        box-shadow: var(--shadow-4);
-        background-color: var(--nord5-snow-storm);
-        color: var(--nord1-polar-night);
+        background-color: var(--nord0-polar-night);
+        color: var(--nord4-snow-storm);
         font-weight: normal;
-        transition:
-            border-color 0.2s,
-            box-shadow 0.2s;
+        transition: border 0.2s;
     }
 
     input:focus-visible,
     textarea:focus-visible {
         outline: none;
-        border-color: var(--nord10-frost);
-        box-shadow: 6px 6px 0 var(--nord10-frost);
+        border: var(--dashed-border8);
     }
 
     input::placeholder,
     textarea::placeholder {
-        color: var(--nord3-polar-night);
+        color: #d8dee995;
         font-weight: 300;
     }
 
@@ -87,30 +79,54 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
     }
 
     button {
+        font-family: "IBM Plex Mono";
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0.25rem;
         width: 50%;
+        background:;
         border: none;
-        background: var(--nord10-frost);
-        box-shadow: var(--shadow-4);
-        border-radius: 0;
         margin: 0 auto;
         padding: 0.5rem 0.75rem;
-        color: var(--nord5-snow-storm);
+        color: var(--nord4-snow-storm);
+        font-size: 1.25rem;
         font-weight: 700;
         cursor: pointer;
-        transition:
-            background-color 0.2s,
-            box-shadow 0.2s;
+        background:
+            linear-gradient(90deg, var(--nord10-frost) 50%, transparent 0)
+                repeat-x,
+            linear-gradient(90deg, var(--nord10-frost) 50%, transparent 0)
+                repeat-x,
+            linear-gradient(0deg, var(--nord10-frost) 50%, transparent 0)
+                repeat-y,
+            linear-gradient(0deg, var(--nord10-frost) 50%, transparent 0)
+                repeat-y;
+        background-size:
+            4px 2px,
+            4px 2px,
+            2px 4px,
+            2px 4px;
+        background-position:
+            0 0,
+            0 100%,
+            0 0,
+            100% 0;
     }
 
     button:hover {
-        border: none;
-        background: var(--nord9-frost);
-        box-shadow: var(--shadow-2);
-        color: var(--nord0-polar-night);
+        animation: borderMove 0.3s infinite linear;
+        color: var(--nord10-frost);
+    }
+
+    @keyframes borderMove {
+        100% {
+            background-position:
+                4px 0,
+                -4px 100%,
+                0 -4px,
+                100% 4px;
+        }
     }
 
     .small-inputs {
