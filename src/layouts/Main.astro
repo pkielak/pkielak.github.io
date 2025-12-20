@@ -26,13 +26,22 @@ const today = new Date();
         <main>
             <slot />
         </main>
-        <div class="graph-wrapper">
-            <span class="zoom-control-text">Hold Ctrl + Scroll to Zoom</span>
-            <NetworkGraph
-                graphData={graphData}
-                client:idle
-                transition:persist
-            />
+
+        <div class="controls-wrapper">
+            <div id="tap-to-unlock" class="tap-to-unlock visible">
+                Tap to unlock the graph
+            </div>
+            <button id="lock-graph" class="lock-graph"> Lock graph </button>
+            <div id="graph-wrapper" class="graph-wrapper">
+                <span class="zoom-control-text">Hold Ctrl + Scroll to Zoom</span
+                >
+
+                <NetworkGraph
+                    graphData={graphData}
+                    client:idle
+                    transition:persist
+                />
+            </div>
         </div>
         <footer>
             <span>
@@ -57,28 +66,51 @@ const today = new Date();
         position: relative;
     }
 
-    @media (min-width: 768px) {
-        .graph-wrapper {
-            height: 100vh;
-        }
+    .lock-graph {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        display: none;
+        font-family: "IBM Plex Mono", monospace;
+        border: 0;
+        padding: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        color: var(--nord4-snow-storm);
     }
 
     .zoom-control-text {
+        font-family: "IBM Plex Mono", monospace;
         position: absolute;
         bottom: 0;
         left: 1rem;
-        user-select: none;
         pointer-events: none;
         display: none;
     }
 
-    @media (hover: hover) and (pointer: fine) {
-        .zoom-control-text {
-            display: block;
-        }
+    .tap-to-unlock {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 75svh;
+        background: #2e344090;
+        font-family: "IBM Plex Mono", monospace;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    .visible {
+        display: flex;
     }
 
     footer {
+        font-family: "IBM Plex Mono", monospace;
         width: 100%;
         position: absolute;
         left: 0;
@@ -87,5 +119,56 @@ const today = new Date();
         align-items: center;
         justify-content: center;
         text-align: center;
+        z-index: 2;
+    }
+
+    .controls-wrapper {
+        position: relative;
+        z-index: 1;
+    }
+
+    @media (min-width: 768px) {
+        .graph-wrapper {
+            height: 100vh;
+        }
+
+        .tap-to-unlock {
+            height: 100vh;
+        }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        .zoom-control-text {
+            display: block;
+        }
+
+        .tap-to-unlock {
+            display: none;
+        }
+
+        .lock-graph {
+            display: none;
+        }
     }
 </style>
+
+<script type="module" is:inline data-astro-rerun>
+    (() => {
+        function onUnlock(overlay, button) {
+            overlay?.classList.toggle("visible");
+            button?.classList.toggle("visible");
+        }
+
+        function init() {
+            const tapToUnlock = document.getElementById("tap-to-unlock");
+            const lockGraph = document.getElementById("lock-graph");
+
+            [tapToUnlock, lockGraph].forEach((element) =>
+                element.addEventListener("click", () =>
+                    onUnlock(tapToUnlock, lockGraph),
+                ),
+            );
+        }
+        init();
+    })();
+</script>

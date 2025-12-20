@@ -6,6 +6,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 import ContactForm from "../components/ContactForm.astro";
 import Earth from "../components/Earth.astro";
 import Rocket from "../components/Rocket.astro";
+import CurvedText from "../components/CurvedText.astro";
 
 const posts = (await getCollection("notes"))
     .sort((a, b) => {
@@ -17,13 +18,16 @@ const posts = (await getCollection("notes"))
 ---
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
+    <Earth />
+    <Rocket />
+
     <section>
-        <div class="note note--me">
+        <div class="photo earth--move">
             <img src="/avatar.png" alt="portrait of me in spacesuit" />
             <h3>Hello! I'm Piotr Kielak</h3>
             <p>
                 I'm a front-end developer with a few years of experience in web
-                development and enjoy sharing my thoughts through this digital
+                development and I enjoy sharing my thoughts through this digital
                 garden project.
             </p>
             <p>
@@ -34,9 +38,8 @@ const posts = (await getCollection("notes"))
             </p>
         </div>
     </section>
-
     <section>
-        <div class="note">
+        <div class="planet">
             <p>
                 My main focus as a developer is building useful applications and
                 websites tailored for daily users tasks. Some of my earlier
@@ -48,154 +51,43 @@ const posts = (await getCollection("notes"))
                 PostgreSQL, and AI agents to expand my full-stack development
                 skills.
             </p>
+            <CurvedText />
         </div>
     </section>
-
     <section>
-        <div class="note">
+        <div class="planet">
             <h3>Recent notes</h3>
-            <ul>
-                {
-                    posts.map((post) => (
-                        <li>
-                            <a href={`/notes/${post.id}/`} class="post-link">
-                                <h4 class="title">{post.data.title}</h4>
-                                <p class="date">
-                                    <FormattedDate
-                                        date={
-                                            post.data.updatedAt ||
-                                            post.data.pubDate
-                                        }
-                                    />
-                                </p>
-                                <p class="description">
-                                    {post.data.description}
-                                </p>
-                            </a>
-                        </li>
-                    ))
-                }
-            </ul>
         </div>
     </section>
-
+    {
+        posts.map((post) => (
+            <section>
+                <div class="planet">
+                    <a href={`/notes/${post.id}/`} class="post">
+                        <h4 class="title">{post.data.title}</h4>
+                        <p class="date">
+                            <FormattedDate
+                                date={post.data.updatedAt || post.data.pubDate}
+                            />
+                        </p>
+                        <p class="description">{post.data.description}</p>
+                    </a>
+                </div>
+            </section>
+        ))
+    }
     <section>
-        <div class="note">
+        <div class="planet">
             <h3>Contact Me</h3>
             <ContactForm />
         </div>
     </section>
-
-    <Earth />
-    <Rocket />
 </Main>
 
 <style>
-    section {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calc(100% - 2rem);
-        max-width: 1024px;
-        height: 100svh;
-        padding-top: 2rem;
-        margin: 0 auto;
-        scroll-snap-align: start;
-        z-index: 200;
-    }
-
-    section:last-of-type {
-        height: calc(50svh + var(--contact-form-height) / 2);
-        align-items: flex-end;
-    }
-
-    @media (min-width: 768px) {
-        section {
-            height: 100vh;
-        }
-
-        section:nth-child(odd) {
-            justify-content: flex-end;
-        }
-
-        section:nth-child(even) {
-            justify-content: flex-start;
-        }
-
-        section:nth-child(1) {
-            justify-content: center;
-        }
-
-        section:last-of-type {
-            height: calc(50svh + var(--contact-form-height-desktop) / 2);
-            align-items: flex-end;
-        }
-    }
-
-    .note {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-        width: 100%;
-        background: var(--nord4-snow-storm);
-        box-shadow: var(--shadow-4);
-        font-weight: 400;
-        color: var(--nord1-polar-night);
-        z-index: 999;
-    }
-
-    .note h3,
-    .note p,
-    .note img {
-        margin: 0;
-    }
-
-    .note--me {
-        animation-timeline: scroll(root);
-        animation-duration: 1.2s;
-        animation-range: auto;
-        animation-name: earthMove;
-        animation-fill-mode: both;
-        animation-timing-function: ease-in-out;
-    }
-
-    @keyframes earthMove {
-        0% {
-            transform: translateX(0);
-        }
-        20% {
-            transform: translateX(-100vw);
-        }
-    }
-
-    .note--me img {
-        width: 75%;
-    }
-
-    @media (min-width: 768px) {
-        .note {
-            width: 50%;
-            padding: 2rem;
-        }
-
-        .note--me img {
-            width: 100%;
-        }
-    }
-
     h3 {
         font-size: 1.563em;
         text-align: center;
-    }
-
-    @media (min-width: 720px) {
-        h3 {
-            font-size: 1.953em;
-        }
     }
 
     ul {
@@ -207,18 +99,146 @@ const posts = (await getCollection("notes"))
         gap: 1rem;
     }
 
-    .post-link {
+    section {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(100% - 2rem);
+        max-width: 1024px;
+        height: 100svh;
+        margin: 0 auto;
+        scroll-snap-align: start;
+        z-index: 200;
+    }
+
+    section:nth-of-type(2),
+    section:last-of-type {
+        width: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    section:not(:nth-of-type(2), :last-of-type):has(.planet) {
+        margin-top: 2rem;
+        height: auto;
+    }
+
+    .photo,
+    .planet {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        flex: 0 1 auto;
+        max-width: 100%;
+        min-width: 0;
+        background: var(--nord0-polar-night);
+        color: var(--nord4-snow-storm);
+        font-weight: 400;
+        z-index: 999;
+    }
+
+    .photo,
+    .photo img {
+        border: var(--dashed-border4);
+    }
+
+    .photo img {
+        width: 75%;
+    }
+
+    .planet {
+        position: relative;
+        transition:
+            opacity 1.2s ease-in-out,
+            transform 1.2s ease-in-out;
+        border-radius: 50%;
+        padding: 1rem 2rem;
+        aspect-ratio: 1;
+        z-index: 0;
+        opacity: 0;
+        border-width: 3px !important;
+    }
+
+    .planet * {
+        margin: 0;
+    }
+
+    section:nth-of-type(2) .planet,
+    section:nth-of-type(9) .planet {
+        border: var(--dashed-border9);
+    }
+    section:nth-of-type(3) .planet {
+        border: var(--dashed-border11);
+    }
+    section:nth-of-type(4) .planet {
+        border: var(--dashed-border14);
+    }
+    section:nth-of-type(5) .planet {
+        border: var(--dashed-border12);
+    }
+    section:nth-of-type(6) .planet,
+    section:nth-of-type(7) .planet {
+        border: var(--dashed-border8);
+    }
+    section:nth-of-type(8) .planet {
+        border: var(--dashed-border13);
+    }
+
+    section:nth-of-type(even) .planet {
+        transform-origin: 50% -300vh;
+        transform: rotate(15deg);
+    }
+
+    section:nth-of-type(odd) .planet {
+        transform-origin: 50% -300vh;
+        transform: rotate(-15deg);
+    }
+
+    section .planet.visible {
+        transform: rotate(0);
+        opacity: 1;
+    }
+
+    section:nth-of-type(2) .planet,
+    section:last-of-type .planet {
+        padding: 1rem 4rem;
+    }
+
+    .planet .curvedTextWrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    @keyframes rotate {
+        from {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        to {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    .post {
         display: block;
         text-decoration: none;
-        color: var(--nord1-polar-night);
         font-weight: 400;
-        background: var(--nord4-snow-storm);
         border-radius: 0;
         transition: color 0.2s ease;
     }
 
-    .post-link:hover h4,
-    .post-link:hover .date {
+    .post:hover h4,
+    .post:hover .date {
         color: var(--nord10-frost);
     }
 
@@ -233,7 +253,11 @@ const posts = (await getCollection("notes"))
         color: var(--nord3-snow-storm);
     }
 
-    @media (max-width: 720px) {
+    @media (min-width: 720px) {
+        h3 {
+            font-size: 1.953em;
+        }
+
         ul {
             gap: 0.5em;
         }
@@ -243,20 +267,55 @@ const posts = (await getCollection("notes"))
         }
     }
 
-    .note:not(.note--me) {
-        transition: transform 1.2s ease-in-out;
-    }
+    @media (min-width: 768px) {
+        section {
+            height: 100vh;
+        }
 
-    section:nth-child(odd) .note:not(.note--me) {
-        transform: translateX(50vw) scale(0.1);
-    }
+        section:nth-of-type(odd) {
+            justify-content: flex-end;
+        }
 
-    section:nth-child(even) .note:not(.note--me) {
-        transform: translateX(-50vw) scale(0.1);
-    }
+        section:nth-of-type(even) {
+            justify-content: flex-start;
+        }
 
-    section .note:not(.note--me).visible {
-        transform: translateX(0) scale(1);
+        section:nth-of-type(1) {
+            justify-content: center;
+        }
+
+        section:not(:nth-of-type(2), :last-of-type):has(.planet) {
+            height: 33vh;
+            margin-top: 0;
+        }
+
+        section:nth-of-type(2),
+        section:last-of-type {
+            width: initial;
+            left: initial;
+            transform: initial;
+        }
+
+        .planet {
+            padding: 2rem;
+            max-width: 448px;
+        }
+
+        section:last-of-type .planet {
+            max-width: unset;
+        }
+
+        .photo {
+            width: 50%;
+            max-width: unset;
+        }
+
+        .photo img {
+            width: 100%;
+            border-width: 2px;
+            border-color: var(--nord4-snow-storm);
+            border-style: dashed;
+        }
     }
 </style>
 
@@ -264,15 +323,15 @@ const posts = (await getCollection("notes"))
     (() => {
         let observer = null;
 
-        function onNoteVisible(entries) {
+        function onPlanetVisible(entries) {
             entries.forEach((entry) => {
-                const note = entry.target.querySelector(".note");
-                if (!note || note.classList.contains("note--me")) return;
+                const planet = entry.target.querySelector(".planet");
+                if (!planet) return;
 
                 if (entry.isIntersecting) {
-                    note.classList.add("visible");
+                    planet.classList.add("visible");
                 } else {
-                    note.classList.remove("visible");
+                    planet.classList.remove("visible");
                 }
             });
         }
@@ -286,11 +345,11 @@ const posts = (await getCollection("notes"))
 
         function init() {
             const sections = document.querySelectorAll(
-                "section:not(:first-child)",
+                "section:not(section:first-child)",
             );
 
             detachObserver(sections);
-            observer = new IntersectionObserver(onNoteVisible, {
+            observer = new IntersectionObserver(onPlanetVisible, {
                 root: null,
                 rootMargin: "0px",
                 threshold: 0.05,

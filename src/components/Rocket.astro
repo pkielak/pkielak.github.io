@@ -1,5 +1,6 @@
 <div class="rocket" id="rocket">
     <img src="/space_shuttle.png" alt="space shuttle" />
+    <div class="rocket-bg"></div>
     <div class="flames" id="flames">
         <div class="flame-wrapper">
             <div class="flame-outer"></div>
@@ -14,20 +15,73 @@
 
 <style>
     .rocket {
+        --rocket-top-0: 2rem;
+        --rocket-left-0: 2rem;
+        --rocket-rotate-0: 45deg;
+        --rocket-scale-0: 0.4;
+
+        --rocket-top-5: calc(-20vw + 2rem);
+        --rocket-left-5: 25vw;
+        --rocket-rotate-5: 150deg;
+        --rocket-scale-5: 0.4;
+
+        --rocket-top-10: 0;
+        --rocket-left-10: 50vw;
+        --rocket-rotate-10: 180deg;
+        --rocket-scale-10: 2;
+
+        --rocket-top-20: 20vh;
+        --rocket-left-20: 50vw;
+        --rocket-rotate-20: 180deg;
+        --rocket-scale-20: 1;
+
+        --rocket-top-35: 37.5vh;
+        --rocket-left-35: 50vw;
+        --rocket-rotate-35: 180deg;
+        --rocket-scale-35: 1;
+
+        --rocket-top-50: 50vh;
+        --rocket-left-50: 50vw;
+        --rocket-rotate-50: 180deg;
+        --rocket-scale-50: 1;
+
+        --rocket-top-75: 75vh;
+        --rocket-left-75: 50vw;
+        --rocket-rotate-75: 180deg;
+        --rocket-scale-75: 1;
+
+        --rocket-top-100: calc(105vh + 100px);
+        --rocket-left-100: 50vw;
+        --rocket-rotate-100: 180deg;
+        --rocket-scale-100: 1;
+
         width: 100px;
         height: auto;
         position: fixed;
-        top: 2rem;
-        left: 2rem;
-        transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
+        top: var(--rocket-top-0);
+        left: var(--rocket-left-0);
         pointer-events: none;
         user-select: none;
         z-index: 999;
-        animation-name: rocketMoveSmall;
+        animation-name: rocketMove;
         animation-timeline: scroll(root);
         animation-range: auto;
         animation-fill-mode: both;
-        animation-timing-function: ease-in-out;
+        animation-timing-function: linear;
+        transform-origin: center center;
+        transform: translate(-50%, -50%) rotate(var(--rocket-rotate-0))
+            scale(var(--rocket-scale-0));
+    }
+
+    .rocket-bg {
+        position: absolute;
+        bottom: 55px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 120px;
+        z-index: 2;
+        background: var(--nord0-polar-night);
     }
 
     .rocket img {
@@ -35,157 +89,124 @@
         width: 100%;
         height: auto;
         box-shadow: none;
+        z-index: 3;
     }
 
     .rocket.rotate {
-        animation-name: rocketMoveReverse;
+        --rocket-rotate-0: 405deg;
+
+        --rocket-rotate-5: 330deg;
+
+        --rocket-rotate-10: 360deg;
+
+        --rocket-rotate-20: 360deg;
+
+        --rocket-rotate-35: 360deg;
+
+        --rocket-rotate-50: 360deg;
+
+        --rocket-rotate-75: 360deg;
+
+        --rocket-rotate-100: 360deg;
     }
 
     @media (min-width: 768px) {
         .rocket {
-            animation-name: rocketMove;
+            --rocket-left-0: 2rem;
+            --rocket-rotate-0: 45deg;
+
+            --rocket-left-5: 25vw;
+            --rocket-rotate-5: 140deg;
+
+            --rocket-left-10: 50vw;
+            --rocket-rotate-10: 160deg;
+
+            --rocket-left-20: 75vw;
+            --rocket-rotate-20: 200deg;
+
+            --rocket-left-35: 37.5vw;
+            --rocket-rotate-35: 160deg;
+
+            --rocket-left-50: 50vw;
+            --rocket-rotate-50: 200deg;
+
+            --rocket-left-75: 37.5vw;
+            --rocket-rotate-75: 180deg;
+
+            --rocket-left-100: 50vw;
+            --rocket-rotate-100: 160deg;
+        }
+
+        .rocket.rotate {
+            --rocket-rotate-10: 320deg;
+
+            --rocket-rotate-20: 340deg;
+
+            --rocket-rotate-35: 380deg;
+
+            --rocket-rotate-50: 340deg;
+
+            --rocket-rotate-75: 380deg;
+
+            --rocket-rotate-100: 340deg;
         }
     }
 
     @keyframes rocketMove {
         0% {
-            top: 2rem;
-            left: 2rem;
-            transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
+            top: var(--rocket-top-0);
+            left: var(--rocket-left-0);
+            transform: translate(-50%, -50%) rotate(var(--rocket-rotate-0))
+                scale(var(--rocket-scale-0));
         }
-
-        7% {
-            top: calc(-3vh - 2rem);
-            left: 6.25vh;
-            transform: translate(-50%, -50%) rotate(90deg) scale(0.4);
+        5% {
+            top: var(--rocket-top-5);
+            left: var(--rocket-left-5);
+            transform: translate(-50%, -50%) rotate(var(--rocket-rotate-5))
+                scale(var(--rocket-scale-5));
         }
-
-        15% {
-            top: 18vh;
-            left: 25vh;
-            transform: translate(-50%, -50%) rotate(135deg) scale(2);
+        10% {
+            top: var(--rocket-top-10);
+            left: var(--rocket-left-10);
+            transform: translate(-50%, -50%) rotate(var(--rocket-rotate-10))
+                scale(var(--rocket-scale-10));
         }
-
-        35% {
-            top: 40vh;
-            left: 75%;
-            transform: translate(-50%, -50%) rotate(180deg) scale(1);
-            z-index: 99;
-        }
-
-        55% {
-            top: 50vh;
-            left: 25%;
-            transform: translate(-50%, -50%) rotate(180deg) scale(1);
-            z-index: 99;
-        }
-
-        85% {
-            top: 60vh;
-            left: 75%;
-            transform: translate(-50%, -50%) rotate(180deg) scale(1);
-            z-index: 99;
-        }
-        100% {
-            top: calc(105vh + 100px);
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(180deg) scale(1);
-            z-index: 99;
-        }
-    }
-
-    @keyframes rocketMoveReverse {
-        0% {
-            top: 2rem;
-            left: 2rem;
-            transform: translate(-50%, -50%) rotate(405deg) scale(0.4);
-        }
-        8% {
-            top: 8vh;
-            left: -2rem;
-            transform: translate(-50%, -50%) rotate(360deg) scale(2);
-        }
-        17% {
-            top: 22vh;
-            left: 2rem;
-            transform: translate(-50%, -50%) rotate(315deg) scale(2);
-        }
-        35% {
-            top: 40vh;
-            left: 75%;
-            transform: translate(-50%, -50%) rotate(360deg) scale(1);
-            z-index: 99;
-        }
-        55% {
-            top: 60vh;
-            left: 25%;
-            transform: translate(-50%, -50%) rotate(360deg) scale(1);
-            z-index: 99;
-        }
-        85% {
-            top: 80vh;
-            left: 75%;
-            transform: translate(-50%, -50%) rotate(360deg) scale(1);
-            z-index: 99;
-        }
-        100% {
-            top: calc(105vh + 100px);
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(360deg) scale(1);
-            z-index: 99;
-        }
-    }
-
-    @keyframes rocketMoveSmall {
-        0% {
-            top: 2rem;
-            left: 2rem;
-            transform: translate(-50%, -50%) rotate(45deg) scale(0.4);
-        }
-
-        7% {
-            top: calc(-30vw - 2rem);
-            left: 50vw;
-            transform: translate(-50%, -50%) rotate(180deg) scale(0.4);
-        }
-
-        17% {
-            top: 18vh;
-            left: calc(25vw + 37.5%);
-            transform: translate(-50%, -50%) rotate(180deg) scale(0.4);
+        20% {
+            top: var(--rocket-top-20);
+            left: var(--rocket-left-20);
+            transform: translate(-50%, -50%) rotate(var(--rocket-rotate-20))
+                scale(var(--rocket-scale-20));
         }
 
         35% {
-            top: 40vh;
-            left: 75%;
-            transform: translate(-50%, -50%) rotate(180deg) scale(1);
-            z-index: 99;
+            top: var(--rocket-top-35);
+            left: var(--rocket-left-35);
+            transform: translate(-50%, -50%) rotate(var(--rocket-rotate-35))
+                scale(var(--rocket-scale-35));
         }
-
-        55% {
-            top: 60vh;
-            left: 25%;
-            transform: translate(-50%, -50%) rotate(180deg) scale(1);
-            z-index: 99;
+        50% {
+            top: var(--rocket-top-50);
+            left: var(--rocket-left-50);
+            transform: translate(-50%, -50%) rotate(var(--rocket-rotate-50))
+                scale(var(--rocket-scale-50));
         }
-
-        85% {
-            top: 80vh;
-            left: 75%;
-            transform: translate(-50%, -50%) rotate(180deg) scale(1);
-            z-index: 99;
+        75% {
+            top: var(--rocket-top-75);
+            left: var(--rocket-left-75);
+            transform: translate(-50%, -50%) rotate(var(--rocket-rotate-75))
+                scale(var(--rocket-scale-75));
         }
         100% {
-            top: calc(105vh + 100px);
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(180deg) scale(1);
-            z-index: 99;
+            top: var(--rocket-top-100);
+            left: var(--rocket-left-100);
+            transform: translate(-50%, -50%) rotate(var(--rocket-rotate-100))
+                scale(var(--rocket-scale-100));
         }
     }
 
     .flames {
         position: relative;
-        top: -15px;
+        top: -10px;
         left: 50%;
         transform: translate(-50%, 0) scale(1, 0.5);
         transform-origin: top;
@@ -194,10 +215,12 @@
         opacity: 0;
         display: flex;
         gap: 0;
+        z-index: 1;
     }
 
     .flames.on {
-        animation: flame 0.3s infinite alternate;
+        animation: flame 0.4s infinite alternate;
+        animation-timing-function: steps(4);
         opacity: 0.9;
     }
 
@@ -206,39 +229,62 @@
     }
 
     .flame-wrapper:nth-of-type(2) {
-        left: 15px;
-    }
-
-    .flame-inner {
-        position: absolute;
-        top: 0;
-        left: 2.5px;
-        width: 5px;
-        height: 30px;
-        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-        background: var(--nord13-aurora);
-        z-index: 2;
-        border-radius: 3px;
+        left: 20px;
     }
 
     .flame-outer {
         position: absolute;
         top: 0;
         left: 0;
-        width: 10px;
+        width: 7.5px;
         height: 45px;
-        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-        background: var(--nord12-aurora);
+        background:
+            linear-gradient(
+                    to bottom,
+                    var(--nord12-aurora) 0%,
+                    var(--nord12-aurora) 20%,
+                    transparent 20%,
+                    transparent 25%,
+                    var(--nord12-aurora) 25%,
+                    var(--nord12-aurora) 45%,
+                    transparent 45%,
+                    transparent 50%,
+                    var(--nord12-aurora) 50%,
+                    var(--nord12-aurora) 70%,
+                    transparent 70%,
+                    transparent 75%,
+                    var(--nord12-aurora) 75%,
+                    var(--nord12-aurora) 100%
+                )
+                0 0 / 50% 100% no-repeat,
+            linear-gradient(
+                    to bottom,
+                    var(--nord12-aurora) 0%,
+                    var(--nord12-aurora) 20%,
+                    transparent 20%,
+                    transparent 25%,
+                    var(--nord12-aurora) 25%,
+                    var(--nord12-aurora) 45%,
+                    transparent 45%,
+                    transparent 50%,
+                    var(--nord12-aurora) 50%,
+                    var(--nord12-aurora) 70%,
+                    transparent 70%,
+                    transparent 75%,
+                    var(--nord12-aurora) 75%,
+                    var(--nord12-aurora) 100%
+                )
+                50% 0 / 50% 100% no-repeat;
+        background-repeat: no-repeat;
         z-index: 1;
-        border-radius: 3px;
     }
 
     @keyframes flame {
         0% {
-            transform: translate(-50%, 0) scale(1, 0.5);
+            transform: scale(1, 2) translate(-50%, 0);
         }
         100% {
-            transform: translate(-50%, 0) scale(1, 2);
+            transform: scale(1, 2) translate(-50%, -120%);
         }
     }
 </style>
@@ -254,10 +300,12 @@
             if (!rocket || !flames) return;
 
             const currentScrollY = window.scrollY;
+            const isScrollingUp = currentScrollY < lastScrollY;
+            const isScrollingDown = currentScrollY > lastScrollY;
 
-            if (currentScrollY < lastScrollY) {
+            if (isScrollingUp) {
                 rocket.classList.add("rotate");
-            } else {
+            } else if (isScrollingDown) {
                 rocket.classList.remove("rotate");
             }
 

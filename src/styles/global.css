@@ -11,6 +11,7 @@
     --nord3-polar-night: #4c566a;
     --nord4-snow-storm: #d8dee9;
     --nord5-snow-storm: #e5e9f0;
+    --nord6-snow-storm: #eceff4;
     --nord8-frost: #88c0d0;
     --nord9-frost: #81a1c1;
     --nord10-frost: #5e81ac;
@@ -19,12 +20,14 @@
     --nord13-aurora: #ebcb8b;
     --nord14-aurora: #a3be8c;
 
-    /* Neobrutalism Shadows using --nord3-polar-night variable */
-    /* Apply consistent rectangular offset shadows used across components */
-    --shadow-2: 4px 4px 0px 0px var(--nord3-polar-night);
-    --shadow-4: 6px 6px 0px 0px var(--nord3-polar-night);
-    --shadow-6: 8px 8px 0px 0px var(--nord3-polar-night);
-    --shadow-8: 10px 10px 0px 0px var(--nord3-polar-night);
+    --dashed-border4: 2px dashed var(--nord4-snow-storm);
+    --dashed-border8: 2px dashed var(--nord8-frost);
+    --dashed-border9: 2px dashed var(--nord9-frost);
+    --dashed-border10: 2px dashed var(--nord10-frost);
+    --dashed-border11: 2px dashed var(--nord11-aurora);
+    --dashed-border12: 2px dashed var(--nord12-aurora);
+    --dashed-border13: 2px dashed var(--nord13-aurora);
+    --dashed-border14: 2px dashed var(--nord14-aurora);
 
     --contact-form-height: 427px;
     --contact-form-height-desktop: 435px;
@@ -40,6 +43,30 @@
 @font-face {
     font-family: "Atkinson";
     src: url("/fonts/atkinson-bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("/fonts/ibmplexmono-regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("/fonts/ibmplexmono-semibold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("/fonts/ibmplexmono-bold.woff") format("woff");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -122,6 +149,20 @@ body {
     background-color: var(--nord0-polar-night);
 }
 
+code,
+pre,
+textarea,
+input,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.date {
+    font-family: "IBM Plex Mono", monospace;
+}
+
 @media (min-width: 768px) {
     body {
         font-size: 18px;
@@ -183,7 +224,6 @@ img {
     max-width: 100%;
     height: auto;
     border-radius: 0;
-    box-shadow: var(--shadow-4);
 }
 code {
     padding: 2px 5px;
@@ -191,13 +231,11 @@ code {
     border-radius: 0;
     font-weight: normal;
     color: var(--nord0-polar-night);
-    box-shadow: var(--shadow-2);
 }
 pre {
     padding: 1.5em;
     border-radius: 0;
     background-color: var(--nord3-polar-night);
-    box-shadow: var(--shadow-4);
 }
 pre > code {
     all: unset;
@@ -211,13 +249,11 @@ blockquote {
     font-size: 1.333em;
     background-color: transparent;
     color: var(--nord4-snow-storm);
-    box-shadow: var(--shadow-2);
     border-radius: 0;
 }
 hr {
     border: none;
     border-top: 1px solid var(--nord4-snow-storm);
-    box-shadow: var(--shadow-2);
     margin: 1em 0;
 }
 
@@ -255,5 +291,26 @@ hr {
 @media (pointer: coarse) {
     .vis-tooltip {
         display: none;
+    }
+}
+
+.earth--move {
+    animation-timeline: scroll(root);
+    animation-range: auto;
+    animation-name: earthMove;
+    animation-duration: 1.2s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+    transform-origin: 50% -200vh;
+}
+
+@keyframes earthMove {
+    0% {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+    20% {
+        transform: rotate(30deg);
+        opacity: 0;
     }
 }

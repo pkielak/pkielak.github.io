@@ -1,5 +1,5 @@
-<div class="earth">
-    <img src="/earth.png" alt="planet earth" />
+<div class="earth earth--move">
+    <img src="/earth-outline.png" alt="planet earth" />
 </div>
 
 <style>
@@ -9,32 +9,37 @@
         left: -96px;
         width: 512px;
         aspect-ratio: 1;
-        animation-timeline: scroll(root);
-        animation-range: auto;
-        animation-name: earthMove;
-        animation-duration: 1.2s;
-        animation-fill-mode: both;
-        animation-timing-function: ease-in-out;
-    }
-
-    @keyframes earthMove {
-        0% {
-            left: -96px;
-        }
-        20% {
-            left: -100vw;
-        }
     }
 
     .earth img {
-        position: relative;
+        position: absolute;
+        top: 0;
         left: 0;
-        right: 0;
         width: 100%;
         height: auto;
         border-radius: 50%;
         display: block;
         box-shadow: none;
-        border-width: 2px;
+        background: var(--nord0-polar-night);
+    }
+
+    .earth:after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%) rotate(0deg);
+        content: "";
+        border: var(--dashed-border10);
+        border-width: 3px;
+        border-radius: 50%;
+        animation: 32s rotate linear infinite;
+    }
+
+    @animation rotate {
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
     }
 </style>
