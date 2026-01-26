@@ -156,8 +156,8 @@ const posts = (await getCollection("notes"))
   .planet {
     position: relative;
     transition:
-      opacity 1.2s ease-in-out,
-      transform 1.2s ease-in-out;
+      opacity 1s ease-in-out,
+      transform 1s ease-in-out;
     border-radius: 50%;
     padding: 1rem 2rem;
     aspect-ratio: 1;
@@ -195,7 +195,6 @@ const posts = (await getCollection("notes"))
     z-index: 2;
   }
 
-  /* base color: --nord9-frost */
   section:nth-of-type(2) .planet,
   section:nth-of-type(3) .planet,
   section:nth-of-type(4) .planet,
@@ -231,7 +230,6 @@ const posts = (await getCollection("notes"))
     outline-color: #5e81ac60;
   }
 
-  /* base color: --nord9-frost */
   section:nth-of-type(2) .planet::after {
     background: radial-gradient(
       circle at 50% -100%,
@@ -249,7 +247,6 @@ const posts = (await getCollection("notes"))
     );
   }
 
-  /* base color: --nord11-aurora */
   section:nth-of-type(3) .planet::after {
     background: radial-gradient(
       circle at 50% -100%,
@@ -267,80 +264,75 @@ const posts = (await getCollection("notes"))
     );
   }
 
-  /* base color: --nord14-aurora */
   section:nth-of-type(4) .planet::after {
     background: radial-gradient(
       circle at 50% -100%,
-      rgba(163, 190, 140, 1) 0%,
-      rgba(163, 190, 140, 0.3) 10%,
-      rgba(163, 190, 140, 1) 20%,
-      rgba(163, 190, 140, 0.3) 30%,
-      rgba(163, 190, 140, 1) 40%,
-      rgba(163, 190, 140, 0.3) 50%,
-      rgba(163, 190, 140, 1) 60%,
-      rgba(163, 190, 140, 0.3) 70%,
-      rgba(163, 190, 140, 1) 80%,
-      rgba(163, 190, 140, 0.3) 90%,
-      rgba(163, 190, 140, 1) 100%
+      rgba(163, 190, 140, 0.6) 0%,
+      rgba(163, 190, 140, 0.15) 10%,
+      rgba(163, 190, 140, 0.6) 20%,
+      rgba(163, 190, 140, 0.15) 30%,
+      rgba(163, 190, 140, 0.6) 40%,
+      rgba(163, 190, 140, 0.15) 50%,
+      rgba(163, 190, 140, 0.6) 60%,
+      rgba(163, 190, 140, 0.15) 70%,
+      rgba(163, 190, 140, 0.6) 80%,
+      rgba(163, 190, 140, 0.15) 90%,
+      rgba(163, 190, 140, 0.6) 100%
     );
   }
 
-  /* base color: --nord12-aurora */
   section:nth-of-type(5) .planet::after {
     background: radial-gradient(
       circle at 50% -100%,
-      rgba(208, 135, 112, 1) 0%,
+      rgba(208, 135, 112, 0.8) 0%,
       rgba(208, 135, 112, 0.3) 10%,
-      rgba(208, 135, 112, 1) 20%,
+      rgba(208, 135, 112, 0.8) 20%,
       rgba(208, 135, 112, 0.3) 30%,
-      rgba(208, 135, 112, 1) 40%,
+      rgba(208, 135, 112, 0.8) 40%,
       rgba(208, 135, 112, 0.3) 50%,
-      rgba(208, 135, 112, 1) 60%,
+      rgba(208, 135, 112, 0.8) 60%,
       rgba(208, 135, 112, 0.3) 70%,
-      rgba(208, 135, 112, 1) 80%,
+      rgba(208, 135, 112, 0.8) 80%,
       rgba(208, 135, 112, 0.3) 90%,
-      rgba(208, 135, 112, 1) 100%
+      rgba(208, 135, 112, 0.8) 100%
     );
   }
 
-  /* base color: --nord8-frost */
   section:nth-of-type(6) .planet::after,
   section:nth-of-type(7) .planet::after {
     background: radial-gradient(
       circle at 50% -100%,
-      rgba(136, 192, 208, 1) 0%,
-      rgba(136, 192, 208, 0.3) 10%,
-      rgba(136, 192, 208, 1) 20%,
-      rgba(136, 192, 208, 0.3) 30%,
-      rgba(136, 192, 208, 1) 40%,
-      rgba(136, 192, 208, 0.3) 50%,
-      rgba(136, 192, 208, 1) 60%,
-      rgba(136, 192, 208, 0.3) 70%,
-      rgba(136, 192, 208, 1) 80%,
-      rgba(136, 192, 208, 0.3) 90%,
-      rgba(136, 192, 208, 1) 100%
+      rgba(136, 192, 208, 0.6) 0%,
+      rgba(136, 192, 208, 0.15) 10%,
+      rgba(136, 192, 208, 0.6) 20%,
+      rgba(136, 192, 208, 0.15) 30%,
+      rgba(136, 192, 208, 0.6) 40%,
+      rgba(136, 192, 208, 0.15) 50%,
+      rgba(136, 192, 208, 0.6) 60%,
+      rgba(136, 192, 208, 0.15) 70%,
+      rgba(136, 192, 208, 0.6) 80%,
+      rgba(136, 192, 208, 0.15) 90%,
+      rgba(136, 192, 208, 0.6) 100%
     );
   }
 
-  /* base color: --nord13-aurora */
   section:nth-of-type(8) .planet::after {
     background: radial-gradient(
       circle at 50% -100%,
-      rgba(235, 203, 139, 1) 0%,
-      rgba(235, 203, 139, 0.3) 10%,
-      rgba(235, 203, 139, 1) 20%,
-      rgba(235, 203, 139, 0.3) 30%,
-      rgba(235, 203, 139, 1) 40%,
-      rgba(235, 203, 139, 0.3) 50%,
-      rgba(235, 203, 139, 1) 60%,
-      rgba(235, 203, 139, 0.3) 70%,
-      rgba(235, 203, 139, 1) 80%,
-      rgba(235, 203, 139, 0.3) 90%,
-      rgba(235, 203, 139, 1) 100%
+      rgba(235, 203, 139, 0.6) 0%,
+      rgba(235, 203, 139, 0.15) 10%,
+      rgba(235, 203, 139, 0.6) 20%,
+      rgba(235, 203, 139, 0.15) 30%,
+      rgba(235, 203, 139, 0.6) 40%,
+      rgba(235, 203, 139, 0.15) 50%,
+      rgba(235, 203, 139, 0.6) 60%,
+      rgba(235, 203, 139, 0.15) 70%,
+      rgba(235, 203, 139, 0.6) 80%,
+      rgba(235, 203, 139, 0.15) 90%,
+      rgba(235, 203, 139, 0.6) 100%
     );
   }
 
-  /* base color: --nord10-frost */
   section:nth-of-type(9) .planet::after {
     background: radial-gradient(
       circle at 50% -100%,
@@ -358,13 +350,16 @@ const posts = (await getCollection("notes"))
     );
   }
 
-  section:nth-of-type(even) .planet {
+  section:nth-of-type(even) .planet,
+  section:nth-of-type(odd) .planet {
     transform-origin: 50% -300vh;
+  }
+
+  section:nth-of-type(even) .planet {
     transform: rotate(15deg);
   }
 
   section:nth-of-type(odd) .planet {
-    transform-origin: 50% -300vh;
     transform: rotate(-15deg);
   }
 
@@ -389,16 +384,6 @@ const posts = (await getCollection("notes"))
     pointer-events: none;
   }
 
-  @keyframes rotate {
-    from {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-
-    to {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-
   .post {
     display: block;
     text-decoration: none;
@@ -407,9 +392,9 @@ const posts = (await getCollection("notes"))
     transition: color 0.2s ease;
   }
 
-  .post:hover h4,
-  .post:hover .date {
-    color: var(--nord10-frost);
+  .post:hover * {
+    color: var(--nord8-frost);
+    text-shadow: 1px 1px 0 var(--nord3-polar-night);
   }
 
   .title {
@@ -421,6 +406,16 @@ const posts = (await getCollection("notes"))
   .description {
     margin: 0;
     color: var(--nord3-snow-storm);
+  }
+
+  @keyframes rotate {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
   }
 
   @media (min-width: 720px) {
@@ -519,7 +514,7 @@ const posts = (await getCollection("notes"))
       observer = new IntersectionObserver(onPlanetVisible, {
         root: null,
         rootMargin: "0px",
-        threshold: 0.05,
+        threshold: 0.025,
       });
 
       sections.forEach((section) => observer?.observe(section));
