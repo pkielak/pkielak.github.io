@@ -32,7 +32,7 @@ const posts = (await getCollection("notes"))
       <p>
         If you're interested in the structure or exploring different parts of my
         digital garden, check the node diagram below or jump straight in{" "}
-        <a href="/notes/index">here</a>!
+        <a href="/notes/index">here!</a>
       </p>
     </div>
   </section>
@@ -151,6 +151,10 @@ const posts = (await getCollection("notes"))
 
   .photo img {
     width: 75%;
+  }
+
+  .photo a {
+    color: var(--nord3-polar-night);
   }
 
   .planet {
