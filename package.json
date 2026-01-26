@@ -23,6 +23,8 @@
   "devDependencies": {
     "@types/react": "^18.3.16",
     "@types/react-dom": "^18.3.5",
-    "@types/vis": "^4.21.27"
+    "@types/vis": "^4.21.27",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

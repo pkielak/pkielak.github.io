@@ -6,358 +6,520 @@ import FormattedDate from "../components/FormattedDate.astro";
 import ContactForm from "../components/ContactForm.astro";
 import Earth from "../components/Earth.astro";
 import Rocket from "../components/Rocket.astro";
-import CurvedText from "../components/CurvedText.astro";
 
 const posts = (await getCollection("notes"))
-    .sort((a, b) => {
-        const aDate = a.data.updatedAt || a.data.pubDate;
-        const bDate = b.data.updatedAt || b.data.pubDate;
-        return bDate.valueOf() - aDate.valueOf();
-    })
-    .slice(0, 5);
+  .sort((a, b) => {
+    const aDate = a.data.updatedAt || a.data.pubDate;
+    const bDate = b.data.updatedAt || b.data.pubDate;
+    return bDate.valueOf() - aDate.valueOf();
+  })
+  .slice(0, 5);
 ---
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
-    <Earth />
-    <Rocket />
+  <Earth />
+  <Rocket />
 
-    <section>
-        <div class="photo earth--move">
-            <img src="/avatar.png" alt="portrait of me in spacesuit" />
-            <h3>Hello! I'm Piotr Kielak</h3>
-            <p>
-                I'm a front-end developer with a few years of experience in web
-                development and I enjoy sharing my thoughts through this digital
-                garden project.
-            </p>
-            <p>
-                If you're interested in the structure or exploring different
-                parts of my digital garden, check the node diagram below or jump
-                straight in{" "}
-                <a href="/notes/index">here</a>!
-            </p>
-        </div>
-    </section>
-    <section>
+  <section>
+    <div class="photo earth--move">
+      <img src="/avatar.png" alt="portrait of me in spacesuit" />
+      <h3>Hello! I'm Piotr Kielak</h3>
+      <p>
+        I'm a front-end developer with a few years of experience in web
+        development and I enjoy sharing my thoughts through this digital garden
+        project.
+      </p>
+      <p>
+        If you're interested in the structure or exploring different parts of my
+        digital garden, check the node diagram below or jump straight in{" "}
+        <a href="/notes/index">here</a>!
+      </p>
+    </div>
+  </section>
+  <section>
+    <div class="planet">
+      <div class="planet-content">
+        <p>
+          My main focus as a developer is building useful applications and
+          websites tailored for daily users tasks. Some of my earlier projects
+          have succeeded in this, which motivates me to keep creating great
+          solutions.
+        </p>
+        <p>
+          Skilled in React and TypeScript, I'm learning Next.js, Astro,
+          PostgreSQL, and AI agents to expand my full-stack development skills.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="planet">
+      <div class="planet-content">
+        <h3>Recent notes</h3>
+      </div>
+    </div>
+  </section>
+  {
+    posts.map((post) => (
+      <section>
         <div class="planet">
-            <p>
-                My main focus as a developer is building useful applications and
-                websites tailored for daily users tasks. Some of my earlier
-                projects have succeeded in this, which motivates me to keep
-                creating great solutions.
+          <a href={`/notes/${post.id}/`} class="post">
+            <h4 class="title">{post.data.title}</h4>
+            <p class="date">
+              <FormattedDate date={post.data.updatedAt || post.data.pubDate} />
             </p>
-            <p>
-                Skilled in React and TypeScript, I'm learning Next.js, Astro,
-                PostgreSQL, and AI agents to expand my full-stack development
-                skills.
-            </p>
-            <CurvedText />
+            <p class="description">{post.data.description}</p>
+          </a>
         </div>
-    </section>
-    <section>
-        <div class="planet">
-            <h3>Recent notes</h3>
-        </div>
-    </section>
-    {
-        posts.map((post) => (
-            <section>
-                <div class="planet">
-                    <a href={`/notes/${post.id}/`} class="post">
-                        <h4 class="title">{post.data.title}</h4>
-                        <p class="date">
-                            <FormattedDate
-                                date={post.data.updatedAt || post.data.pubDate}
-                            />
-                        </p>
-                        <p class="description">{post.data.description}</p>
-                    </a>
-                </div>
-            </section>
-        ))
-    }
-    <section>
-        <div class="planet">
-            <h3>Contact Me</h3>
-            <ContactForm />
-        </div>
-    </section>
+      </section>
+    ))
+  }
+  <section>
+    <div class="planet">
+      <div class="planet-content">
+        <h3>Contact Me</h3>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
 </Main>
 
 <style>
+  h3 {
+    font-size: 1.563em;
+    text-align: center;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2rem);
+    max-width: 1024px;
+    height: 100svh;
+    margin: 0 auto;
+    scroll-snap-align: start;
+    z-index: 200;
+  }
+
+  section:nth-of-type(2),
+  section:last-of-type {
+    width: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  section:not(:nth-of-type(2), :last-of-type):has(.planet) {
+    margin-top: 2rem;
+    height: auto;
+  }
+
+  .photo,
+  .planet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    flex: 0 1 auto;
+    max-width: 100%;
+    min-width: 0;
+    background: var(--nord0-polar-night);
+    color: var(--nord4-snow-storm);
+    font-weight: 400;
+    z-index: 999;
+  }
+
+  .photo,
+  .photo img {
+    background: var(--nord4-snow-storm);
+    color: var(--nord3-polar-night);
+    border: 2px solid var(--nord0-polar-night);
+    border-radius: 0.5rem;
+  }
+
+  .photo img {
+    width: 75%;
+  }
+
+  .planet {
+    position: relative;
+    transition:
+      opacity 1s ease-in-out,
+      transform 1s ease-in-out;
+    border-radius: 50%;
+    padding: 1rem 2rem;
+    aspect-ratio: 1;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  .planet * {
+    margin: 0;
+  }
+
+  .planet-content,
+  .planet a {
+    position: relative;
+    z-index: 3;
+    text-align: justify;
+  }
+
+  .planet::before,
+  .planet::after {
+    top: 0;
+    left: 0;
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+  }
+
+  .planet::before {
+    background: var(--nord0-polar-night);
+    z-index: 1;
+  }
+
+  .planet::after {
+    z-index: 2;
+  }
+
+  section:nth-of-type(2) .planet,
+  section:nth-of-type(3) .planet,
+  section:nth-of-type(4) .planet,
+  section:nth-of-type(5) .planet,
+  section:nth-of-type(6) .planet,
+  section:nth-of-type(7) .planet,
+  section:nth-of-type(8) .planet,
+  section:nth-of-type(9) .planet {
+    outline: 1rem solid transparent;
+    outline-offset: 2px;
+  }
+
+  section:nth-of-type(2) .planet {
+    outline-color: #81a1c160;
+  }
+  section:nth-of-type(3) .planet {
+    outline-color: #bf616a60;
+  }
+  section:nth-of-type(4) .planet {
+    outline-color: #a3be8c60;
+  }
+  section:nth-of-type(5) .planet {
+    outline-color: #d0877060;
+  }
+  section:nth-of-type(6) .planet,
+  section:nth-of-type(7) .planet {
+    outline-color: #88c0d060;
+  }
+  section:nth-of-type(8) .planet {
+    outline-color: #ebcb8b60;
+  }
+  section:nth-of-type(9) .planet {
+    outline-color: #5e81ac60;
+  }
+
+  section:nth-of-type(2) .planet::after {
+    background: radial-gradient(
+      circle at 50% -100%,
+      rgba(46, 52, 64, 1) 0%,
+      rgba(129, 161, 193, 0.3) 10%,
+      rgba(46, 52, 64, 1) 20%,
+      rgba(129, 161, 193, 0.3) 30%,
+      rgba(46, 52, 64, 1) 40%,
+      rgba(129, 161, 193, 0.3) 50%,
+      rgba(46, 52, 64, 1) 60%,
+      rgba(129, 161, 193, 0.3) 70%,
+      rgba(46, 52, 64, 1) 80%,
+      rgba(129, 161, 193, 0.3) 90%,
+      rgba(46, 52, 64, 1) 100%
+    );
+  }
+
+  section:nth-of-type(3) .planet::after {
+    background: radial-gradient(
+      circle at 50% -100%,
+      rgba(191, 97, 106, 1) 0%,
+      rgba(191, 97, 106, 0.3) 10%,
+      rgba(191, 97, 106, 1) 20%,
+      rgba(191, 97, 106, 0.3) 30%,
+      rgba(191, 97, 106, 1) 40%,
+      rgba(191, 97, 106, 0.3) 50%,
+      rgba(191, 97, 106, 1) 60%,
+      rgba(191, 97, 106, 0.3) 70%,
+      rgba(191, 97, 106, 1) 80%,
+      rgba(191, 97, 106, 0.3) 90%,
+      rgba(191, 97, 106, 1) 100%
+    );
+  }
+
+  section:nth-of-type(4) .planet::after {
+    background: radial-gradient(
+      circle at 50% -100%,
+      rgba(163, 190, 140, 0.6) 0%,
+      rgba(163, 190, 140, 0.15) 10%,
+      rgba(163, 190, 140, 0.6) 20%,
+      rgba(163, 190, 140, 0.15) 30%,
+      rgba(163, 190, 140, 0.6) 40%,
+      rgba(163, 190, 140, 0.15) 50%,
+      rgba(163, 190, 140, 0.6) 60%,
+      rgba(163, 190, 140, 0.15) 70%,
+      rgba(163, 190, 140, 0.6) 80%,
+      rgba(163, 190, 140, 0.15) 90%,
+      rgba(163, 190, 140, 0.6) 100%
+    );
+  }
+
+  section:nth-of-type(5) .planet::after {
+    background: radial-gradient(
+      circle at 50% -100%,
+      rgba(208, 135, 112, 0.8) 0%,
+      rgba(208, 135, 112, 0.3) 10%,
+      rgba(208, 135, 112, 0.8) 20%,
+      rgba(208, 135, 112, 0.3) 30%,
+      rgba(208, 135, 112, 0.8) 40%,
+      rgba(208, 135, 112, 0.3) 50%,
+      rgba(208, 135, 112, 0.8) 60%,
+      rgba(208, 135, 112, 0.3) 70%,
+      rgba(208, 135, 112, 0.8) 80%,
+      rgba(208, 135, 112, 0.3) 90%,
+      rgba(208, 135, 112, 0.8) 100%
+    );
+  }
+
+  section:nth-of-type(6) .planet::after,
+  section:nth-of-type(7) .planet::after {
+    background: radial-gradient(
+      circle at 50% -100%,
+      rgba(136, 192, 208, 0.6) 0%,
+      rgba(136, 192, 208, 0.15) 10%,
+      rgba(136, 192, 208, 0.6) 20%,
+      rgba(136, 192, 208, 0.15) 30%,
+      rgba(136, 192, 208, 0.6) 40%,
+      rgba(136, 192, 208, 0.15) 50%,
+      rgba(136, 192, 208, 0.6) 60%,
+      rgba(136, 192, 208, 0.15) 70%,
+      rgba(136, 192, 208, 0.6) 80%,
+      rgba(136, 192, 208, 0.15) 90%,
+      rgba(136, 192, 208, 0.6) 100%
+    );
+  }
+
+  section:nth-of-type(8) .planet::after {
+    background: radial-gradient(
+      circle at 50% -100%,
+      rgba(235, 203, 139, 0.6) 0%,
+      rgba(235, 203, 139, 0.15) 10%,
+      rgba(235, 203, 139, 0.6) 20%,
+      rgba(235, 203, 139, 0.15) 30%,
+      rgba(235, 203, 139, 0.6) 40%,
+      rgba(235, 203, 139, 0.15) 50%,
+      rgba(235, 203, 139, 0.6) 60%,
+      rgba(235, 203, 139, 0.15) 70%,
+      rgba(235, 203, 139, 0.6) 80%,
+      rgba(235, 203, 139, 0.15) 90%,
+      rgba(235, 203, 139, 0.6) 100%
+    );
+  }
+
+  section:nth-of-type(9) .planet::after {
+    background: radial-gradient(
+      circle at 50% -100%,
+      rgba(94, 129, 172, 1) 0%,
+      rgba(94, 129, 172, 0.3) 10%,
+      rgba(94, 129, 172, 1) 20%,
+      rgba(94, 129, 172, 0.3) 30%,
+      rgba(94, 129, 172, 1) 40%,
+      rgba(94, 129, 172, 0.3) 50%,
+      rgba(94, 129, 172, 1) 60%,
+      rgba(94, 129, 172, 0.3) 70%,
+      rgba(94, 129, 172, 1) 80%,
+      rgba(94, 129, 172, 0.3) 90%,
+      rgba(94, 129, 172, 1) 100%
+    );
+  }
+
+  section:nth-of-type(even) .planet,
+  section:nth-of-type(odd) .planet {
+    transform-origin: 50% -300vh;
+  }
+
+  section:nth-of-type(even) .planet {
+    transform: rotate(15deg);
+  }
+
+  section:nth-of-type(odd) .planet {
+    transform: rotate(-15deg);
+  }
+
+  section .planet.visible {
+    transform: rotate(0);
+    opacity: 1;
+  }
+
+  section:nth-of-type(2) .planet,
+  section:last-of-type .planet {
+    padding: 1rem 4rem;
+  }
+
+  .planet .curvedTextWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .post {
+    display: block;
+    text-decoration: none;
+    font-weight: 400;
+    border-radius: 0;
+    transition: color 0.2s ease;
+  }
+
+  .post:hover * {
+    color: var(--nord8-frost);
+    text-shadow: 1px 1px 0 var(--nord3-polar-night);
+  }
+
+  .title {
+    margin: 0;
+    line-height: 1;
+  }
+
+  .date,
+  .description {
+    margin: 0;
+    color: var(--nord3-snow-storm);
+  }
+
+  @keyframes rotate {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  @media (min-width: 720px) {
     h3 {
-        font-size: 1.563em;
-        text-align: center;
+      font-size: 1.953em;
     }
 
     ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+      gap: 0.5em;
     }
 
+    ul li:first-child .title {
+      font-size: 1.563em;
+    }
+  }
+
+  @media (min-width: 768px) {
     section {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calc(100% - 2rem);
-        max-width: 1024px;
-        height: 100svh;
-        margin: 0 auto;
-        scroll-snap-align: start;
-        z-index: 200;
+      height: 100vh;
+    }
+
+    section:nth-of-type(odd) {
+      justify-content: flex-end;
+    }
+
+    section:nth-of-type(even) {
+      justify-content: flex-start;
+    }
+
+    section:nth-of-type(1) {
+      justify-content: center;
+    }
+
+    section:not(:nth-of-type(2), :last-of-type):has(.planet) {
+      height: 33vh;
+      margin-top: 0;
     }
 
     section:nth-of-type(2),
     section:last-of-type {
-        width: 125%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    section:not(:nth-of-type(2), :last-of-type):has(.planet) {
-        margin-top: 2rem;
-        height: auto;
-    }
-
-    .photo,
-    .planet {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-        flex: 0 1 auto;
-        max-width: 100%;
-        min-width: 0;
-        background: var(--nord0-polar-night);
-        color: var(--nord4-snow-storm);
-        font-weight: 400;
-        z-index: 999;
-    }
-
-    .photo,
-    .photo img {
-        border: var(--dashed-border4);
-    }
-
-    .photo img {
-        width: 75%;
+      width: initial;
+      left: initial;
+      transform: initial;
     }
 
     .planet {
-        position: relative;
-        transition:
-            opacity 1.2s ease-in-out,
-            transform 1.2s ease-in-out;
-        border-radius: 50%;
-        padding: 1rem 2rem;
-        aspect-ratio: 1;
-        z-index: 0;
-        opacity: 0;
-        border-width: 3px !important;
+      padding: 2rem;
+      max-width: 448px;
     }
 
-    .planet * {
-        margin: 0;
-    }
-
-    section:nth-of-type(2) .planet,
-    section:nth-of-type(9) .planet {
-        border: var(--dashed-border9);
-    }
-    section:nth-of-type(3) .planet {
-        border: var(--dashed-border11);
-    }
-    section:nth-of-type(4) .planet {
-        border: var(--dashed-border14);
-    }
-    section:nth-of-type(5) .planet {
-        border: var(--dashed-border12);
-    }
-    section:nth-of-type(6) .planet,
-    section:nth-of-type(7) .planet {
-        border: var(--dashed-border8);
-    }
-    section:nth-of-type(8) .planet {
-        border: var(--dashed-border13);
-    }
-
-    section:nth-of-type(even) .planet {
-        transform-origin: 50% -300vh;
-        transform: rotate(15deg);
-    }
-
-    section:nth-of-type(odd) .planet {
-        transform-origin: 50% -300vh;
-        transform: rotate(-15deg);
-    }
-
-    section .planet.visible {
-        transform: rotate(0);
-        opacity: 1;
-    }
-
-    section:nth-of-type(2) .planet,
     section:last-of-type .planet {
-        padding: 1rem 4rem;
+      max-width: unset;
     }
 
-    .planet .curvedTextWrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 99;
-        user-select: none;
-        pointer-events: none;
+    .photo {
+      width: 50%;
+      max-width: unset;
     }
 
-    @keyframes rotate {
-        from {
-            transform: translate(-50%, -50%) rotate(0deg);
-        }
-
-        to {
-            transform: translate(-50%, -50%) rotate(360deg);
-        }
+    .photo img {
+      width: 100%;
     }
-
-    .post {
-        display: block;
-        text-decoration: none;
-        font-weight: 400;
-        border-radius: 0;
-        transition: color 0.2s ease;
-    }
-
-    .post:hover h4,
-    .post:hover .date {
-        color: var(--nord10-frost);
-    }
-
-    .title {
-        margin: 0;
-        line-height: 1;
-    }
-
-    .date,
-    .description {
-        margin: 0;
-        color: var(--nord3-snow-storm);
-    }
-
-    @media (min-width: 720px) {
-        h3 {
-            font-size: 1.953em;
-        }
-
-        ul {
-            gap: 0.5em;
-        }
-
-        ul li:first-child .title {
-            font-size: 1.563em;
-        }
-    }
-
-    @media (min-width: 768px) {
-        section {
-            height: 100vh;
-        }
-
-        section:nth-of-type(odd) {
-            justify-content: flex-end;
-        }
-
-        section:nth-of-type(even) {
-            justify-content: flex-start;
-        }
-
-        section:nth-of-type(1) {
-            justify-content: center;
-        }
-
-        section:not(:nth-of-type(2), :last-of-type):has(.planet) {
-            height: 33vh;
-            margin-top: 0;
-        }
-
-        section:nth-of-type(2),
-        section:last-of-type {
-            width: initial;
-            left: initial;
-            transform: initial;
-        }
-
-        .planet {
-            padding: 2rem;
-            max-width: 448px;
-        }
-
-        section:last-of-type .planet {
-            max-width: unset;
-        }
-
-        .photo {
-            width: 50%;
-            max-width: unset;
-        }
-
-        .photo img {
-            width: 100%;
-            border-width: 2px;
-            border-color: var(--nord4-snow-storm);
-            border-style: dashed;
-        }
-    }
+  }
 </style>
 
 <script type="module" is:inline data-astro-rerun>
-    (() => {
-        let observer = null;
+  (() => {
+    let observer = null;
 
-        function onPlanetVisible(entries) {
-            entries.forEach((entry) => {
-                const planet = entry.target.querySelector(".planet");
-                if (!planet) return;
+    function onPlanetVisible(entries) {
+      entries.forEach((entry) => {
+        const planet = entry.target.querySelector(".planet");
+        if (!planet) return;
 
-                if (entry.isIntersecting) {
-                    planet.classList.add("visible");
-                } else {
-                    planet.classList.remove("visible");
-                }
-            });
+        if (entry.isIntersecting) {
+          planet.classList.add("visible");
+        } else {
+          planet.classList.remove("visible");
         }
+      });
+    }
 
-        function detachObserver(sections) {
-            if (observer) {
-                sections.forEach((section) => observer?.unobserve(section));
-                observer = null;
-            }
-        }
+    function detachObserver(sections) {
+      if (observer) {
+        sections.forEach((section) => observer?.unobserve(section));
+        observer = null;
+      }
+    }
 
-        function init() {
-            const sections = document.querySelectorAll(
-                "section:not(section:first-child)",
-            );
+    function init() {
+      const sections = document.querySelectorAll(
+        "section:not(section:first-child)",
+      );
 
-            detachObserver(sections);
-            observer = new IntersectionObserver(onPlanetVisible, {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.05,
-            });
+      detachObserver(sections);
+      observer = new IntersectionObserver(onPlanetVisible, {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.025,
+      });
 
-            sections.forEach((section) => observer?.observe(section));
-        }
+      sections.forEach((section) => observer?.observe(section));
+    }
 
-        document.addEventListener("astro:page-load", init);
-    })();
+    document.addEventListener("astro:page-load", init);
+  })();
 </script>
