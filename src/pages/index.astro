@@ -145,7 +145,7 @@ const posts = (await getCollection("notes"))
   .photo img {
     background: var(--nord4-snow-storm);
     color: var(--nord3-polar-night);
-    border: 2px solid var(--nord0-polar-night);
+    border: 2px solid var(--nord3-polar-night);
     border-radius: 0.5rem;
   }
 
@@ -163,6 +163,7 @@ const posts = (await getCollection("notes"))
       opacity 1s ease-in-out,
       transform 1s ease-in-out;
     border-radius: 50%;
+    border: 2px solid var(--nord3-polar-night);
     padding: 1rem 2rem;
     aspect-ratio: 1;
     overflow: hidden;
@@ -199,39 +200,21 @@ const posts = (await getCollection("notes"))
     z-index: 2;
   }
 
-  section:nth-of-type(2) .planet,
-  section:nth-of-type(3) .planet,
-  section:nth-of-type(4) .planet,
-  section:nth-of-type(5) .planet,
-  section:nth-of-type(6) .planet,
-  section:nth-of-type(7) .planet,
-  section:nth-of-type(8) .planet,
-  section:nth-of-type(9) .planet {
-    outline: 1rem solid transparent;
-    outline-offset: 2px;
+  .planet::after {
+    animation: pulse-planet 2s ease-in-out infinite;
+    transform-origin: center;
   }
 
-  section:nth-of-type(2) .planet {
-    outline-color: #81a1c160;
-  }
-  section:nth-of-type(3) .planet {
-    outline-color: #bf616a60;
-  }
-  section:nth-of-type(4) .planet {
-    outline-color: #a3be8c60;
-  }
-  section:nth-of-type(5) .planet {
-    outline-color: #d0877060;
-  }
-  section:nth-of-type(6) .planet,
-  section:nth-of-type(7) .planet {
-    outline-color: #88c0d060;
-  }
-  section:nth-of-type(8) .planet {
-    outline-color: #ebcb8b60;
-  }
-  section:nth-of-type(9) .planet {
-    outline-color: #5e81ac60;
+  @keyframes pulse-planet {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1, 1.05) skew(1deg, 1deg);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 
   section:nth-of-type(2) .planet::after {
@@ -266,6 +249,7 @@ const posts = (await getCollection("notes"))
       rgba(191, 97, 106, 0.3) 90%,
       rgba(191, 97, 106, 1) 100%
     );
+    animation-delay: 0.2s;
   }
 
   section:nth-of-type(4) .planet::after {
@@ -283,6 +267,7 @@ const posts = (await getCollection("notes"))
       rgba(163, 190, 140, 0.15) 90%,
       rgba(163, 190, 140, 0.6) 100%
     );
+    animation-delay: 0.4s;
   }
 
   section:nth-of-type(5) .planet::after {
@@ -300,6 +285,7 @@ const posts = (await getCollection("notes"))
       rgba(208, 135, 112, 0.3) 90%,
       rgba(208, 135, 112, 0.8) 100%
     );
+    animation-delay: 0.6s;
   }
 
   section:nth-of-type(6) .planet::after,
@@ -318,6 +304,11 @@ const posts = (await getCollection("notes"))
       rgba(136, 192, 208, 0.15) 90%,
       rgba(136, 192, 208, 0.6) 100%
     );
+    animation-delay: 0.8s;
+  }
+
+  section:nth-of-type(7) .planet::after {
+    animation-delay: 1s;
   }
 
   section:nth-of-type(8) .planet::after {
@@ -335,6 +326,7 @@ const posts = (await getCollection("notes"))
       rgba(235, 203, 139, 0.15) 90%,
       rgba(235, 203, 139, 0.6) 100%
     );
+    animation-delay: 1.2s;
   }
 
   section:nth-of-type(9) .planet::after {
@@ -352,6 +344,7 @@ const posts = (await getCollection("notes"))
       rgba(94, 129, 172, 0.3) 90%,
       rgba(94, 129, 172, 1) 100%
     );
+    animation-delay: 1.4s;
   }
 
   section:nth-of-type(even) .planet,
