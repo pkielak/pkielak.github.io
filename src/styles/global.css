@@ -21,15 +21,6 @@
   --nord13-aurora: #ebcb8b;
   --nord14-aurora: #a3be8c;
 
-  --dashed-border4: 2px dashed var(--nord4-snow-storm);
-  --dashed-border8: 2px dashed var(--nord8-frost);
-  --dashed-border9: 2px dashed var(--nord9-frost);
-  --dashed-border10: 2px dashed var(--nord10-frost);
-  --dashed-border11: 2px dashed var(--nord11-aurora);
-  --dashed-border12: 2px dashed var(--nord12-aurora);
-  --dashed-border13: 2px dashed var(--nord13-aurora);
-  --dashed-border14: 2px dashed var(--nord14-aurora);
-
   --contact-form-height: 427px;
   --contact-form-height-desktop: 435px;
 }
@@ -96,6 +87,43 @@ body {
   background-color: var(--nord0-polar-night);
 }
 
+/* Scanlines - horizontal lines */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(163, 190, 140, 0.1) 0px,
+    rgba(163, 190, 140, 0.1) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.6;
+}
+
+/* Glow effect on text elements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  text-shadow: 0 0 5px rgba(163, 190, 140, 0.5);
+  position: relative;
+}
+
+/* Stronger glow on hover */
+a:hover {
+  text-shadow: 0 0 10px rgba(163, 190, 140, 0.8);
+}
+
 code,
 pre,
 textarea,
@@ -108,6 +136,15 @@ h5,
 h6,
 .date {
   font-family: "IBM Plex Mono", monospace;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  color: var(--nord14-aurora);
 }
 
 @media (min-width: 768px) {
@@ -147,9 +184,6 @@ h6 {
 strong,
 b {
   font-weight: 700;
-}
-a {
-  color: var(--nord4-snow-storm);
 }
 p {
   margin-bottom: 1em;
@@ -236,26 +270,5 @@ hr {
 @media (pointer: coarse) {
   .vis-tooltip {
     display: none;
-  }
-}
-
-.earth--move {
-  animation-timeline: scroll(root);
-  animation-range: auto;
-  animation-name: earthMove;
-  animation-duration: 1.2s;
-  animation-fill-mode: both;
-  animation-timing-function: ease-in-out;
-  transform-origin: 50% -200vh;
-}
-
-@keyframes earthMove {
-  0% {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-  20% {
-    transform: rotate(30deg);
-    opacity: 0;
   }
 }

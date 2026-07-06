@@ -48,11 +48,11 @@ const VisNetworkGraph = ({ graphData }: VisNetworkGraphProps) => {
       },
       color: {
         border: "#2e3440",
-        background: "#ebcb8b",
+        background: "#a3be8c",
         hover: { background: "#5e81ac", border: "#2e3440" },
-        highlight: { background: "#a3be8c", border: "#2e3440" },
+        highlight: { background: "#bf616a", border: "#2e3440" },
       },
-      shape: "dot",
+      shape: "square",
       size: 12,
     },
     edges: {

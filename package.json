@@ -10,15 +10,19 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.12",
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/rss": "^4.0.14",
-    "@astrojs/sitemap": "^3.6.0",
-    "astro": "^5.16.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@astrojs/mdx": "^7.0.2",
+    "@astrojs/react": "^6.0.1",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.0.6",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "remark-wiki-link": "^2.0.1",
-    "vis-network": "^9.1.9"
+    "vis-network": "^9.1.9",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@types/three": "^0.185.0",
+    "three": "^0.185.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.16",

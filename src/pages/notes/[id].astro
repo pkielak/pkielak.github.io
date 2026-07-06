@@ -1,17 +1,17 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import Main from "../../layouts/Main.astro";
+import Note from "../../layouts/Note.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Backlinks from "../../components/Backlinks.astro";
 import { render } from "astro:content";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("notes");
-    return posts.map((post: any) => ({
-        params: { id: post.id },
-        props: post,
-    }));
+  const posts = await getCollection("notes");
+  return posts.map((post: any) => ({
+    params: { id: post.id },
+    props: post,
+  }));
 }
 type Props = CollectionEntry<"notes">;
 
@@ -19,112 +19,88 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Main
-    description={post.data.description}
-    title={post.data.title}
-    isGraphSmall={true}
+<Note
+  description={post.data.description}
+  title={post.data.title}
+  isGraphSmall={true}
 >
-    <div class="rocket" id="rocket">
-        <img src="/favicon_192.png" alt="space shuttle" />
-    </div>
-    <article>
-        <div class="prose">
-            {
-                post.data.image && (
-                    <Image
-                        class="logo"
-                        src={post.data.image}
-                        alt="post logo"
-                        width={100}
-                        height={100}
-                    />
-                )
-            }
-            <div class="title">
-                <h1>{post.data.title}</h1>
-                <div class="date">
-                    <FormattedDate date={post.data.pubDate} />
+  <article>
+    <div class="prose">
+      {
+        post.data.image && (
+          <Image
+            class="logo"
+            src={post.data.image}
+            alt="post logo"
+            width={100}
+            height={100}
+          />
+        )
+      }
+      <div class="title">
+        <h1>{post.data.title}</h1>
+        <div class="date">
+          <FormattedDate date={post.data.pubDate} />
 
-                    {
-                        post.data.updatedAt && (
-                            <>
-                                <span>|</span>
-                                <span>
-                                    Updated:{" "}
-                                    <FormattedDate date={post.data.updatedAt} />
-                                </span>
-                            </>
-                        )
-                    }
-                </div>
-            </div>
-            <Content />
-            <Backlinks postSlug={post.id} />
+          {
+            post.data.updatedAt && (
+              <>
+                <span>|</span>
+                <span>
+                  Updated: <FormattedDate date={post.data.updatedAt} />
+                </span>
+              </>
+            )
+          }
         </div>
-    </article>
-</Main>
+      </div>
+      <Content />
+      <Backlinks postSlug={post.id} />
+    </div>
+  </article>
+</Note>
 <style>
-    .rocket {
-        width: 40px;
-        height: auto;
-        position: absolute;
-        top: 2rem;
-        left: 2.25rem;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        user-select: none;
-        z-index: 999;
-    }
+  article {
+    max-width: 720px;
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    margin: 4rem auto 0;
+    color: var(--nord4-snow-storm);
+    font-weight: 400;
+  }
 
-    .rocket img {
-        position: relative;
-        width: 100%;
-        height: auto;
-        box-shadow: none;
-    }
-
+  @media (min-width: 768px) {
     article {
-        max-width: 720px;
-        width: calc(100% - 2rem);
-        padding: 1rem;
-        margin: 4rem auto 0;
-        color: var(--nord4-snow-storm);
-        background: var(--nord0-polar-night);
-        font-weight: 400;
+      padding: 2rem;
     }
+  }
 
-    @media (min-width: 768px) {
-        article {
-            padding: 2rem;
-        }
-    }
+  .prose {
+    max-width: calc(100% - 2rem);
+    margin: auto;
+    padding: 0;
+  }
 
-    .prose {
-        max-width: calc(100% - 2rem);
-        margin: auto;
-        padding: 0;
-    }
+  .logo {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-    .logo {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .title {
-        margin-bottom: 1em;
-        padding: 1em 0;
-        line-height: 1;
-    }
-    .title h1 {
-        margin: 0;
-    }
-    .date {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin: 0;
-        color: var(--nord5-snow-storm);
-        font-weight: 400;
-    }
+  .title {
+    margin-bottom: 1em;
+    padding: 1em 0;
+    line-height: 1;
+  }
+  .title h1 {
+    margin: 0;
+  }
+  .date {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    color: var(--nord5-snow-storm);
+    font-weight: 400;
+  }
 </style>
