@@ -4,6 +4,8 @@ export function inView(entry) {
     anchor,
   );
   const section = document.querySelectorAll(".content-section")[index];
+  const sections = document.querySelectorAll(".content-section");
+  const isLastSection = index === sections.length - 1;
 
   if (!section) return;
 
@@ -12,6 +14,14 @@ export function inView(entry) {
   const viewportHeight = window.innerHeight;
 
   let scale, opacity;
+
+  // Set global flag for last section visibility
+  window.isLastSectionFullyVisible = isLastSection && ratio === 1;
+
+  // Reset flag when leaving the last section
+  if (isLastSection && ratio < 1) {
+    window.isLastSectionFullyVisible = false;
+  }
 
   if (ratio === 0) {
     // Not visible at all

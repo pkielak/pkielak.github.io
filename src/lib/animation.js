@@ -1,4 +1,5 @@
 import { getSpaceship } from "./spaceship";
+import * as THREE from "three";
 import {
   trackScrollPosition,
   updateStarParallaxEffect,
@@ -22,6 +23,16 @@ const rotationAnimationDuration = 500;
 function handleShipRotation(time, scrollDirection) {
   // Rotate around Z-axis: 0 for normal, Math.PI for 180 degree spin when scrolling up
   const targetRotation = scrollDirection === -1 ? Math.PI : 0;
+  targetShipRotationZ = targetRotation;
+
+  // Check if we should skip animation (coming from last section)
+  if (window.skipRotationAnimation) {
+    currentShipRotationZ = targetRotation;
+    window.skipRotationAnimation = false;
+    isRotating = false;
+    ship.rotation.z = currentShipRotationZ;
+    return;
+  }
 
   // Check if we need to start a new rotation animation
   // Trigger when scroll direction changes and we're not already animating
@@ -29,7 +40,6 @@ function handleShipRotation(time, scrollDirection) {
     // Start new rotation animation
     rotationAnimationStartTime = time * 1000;
     animationStartRotation = currentShipRotationZ;
-    targetShipRotationZ = targetRotation;
     isRotating = true;
   }
 
@@ -88,6 +98,22 @@ function animationLoop() {
 
   trackScrollPosition();
   updateStarParallaxEffect();
+
+  // Track previous last section state
+  const prevIsLastSectionFullyVisible =
+    window.prevIsLastSectionFullyVisible || false;
+  window.prevIsLastSectionFullyVisible = window.isLastSectionFullyVisible;
+
+  // Track if we should skip rotation animation
+  window.skipRotationAnimation = prevIsLastSectionFullyVisible;
+
+  // Scale down the ship when the last section is fully in view
+  if (window.isLastSectionFullyVisible === true) {
+    ship.scale.lerp(new THREE.Vector3(0, 0, 0), 0.1);
+  } else {
+    // Scale back up when not in the last section
+    ship.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
+  }
 
   // Smoothly interpolate current position toward target using linear interpolation
   // Higher smoothFactor = faster response, lower = smoother
