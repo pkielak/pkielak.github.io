@@ -1,5 +1,5 @@
 /// <reference types="three" />
-import { getStars } from "./stars";
+import { getStars } from "./stars.js";
 
 let lastScrollY = 0;
 export let currentScrollVelocity = 0;

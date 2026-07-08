@@ -1,8 +1,8 @@
 /// <reference types="three" />
-import { initScene, getScene } from "./scene";
-import { createSpaceship } from "./spaceship";
-import { createStars } from "./stars";
-import { startAnimationLoop } from "./animation";
+import { initScene, getScene } from "./scene.js";
+import { createSpaceship } from "./spaceship.js";
+import { createStars } from "./stars.js";
+import { startAnimationLoop } from "./animation.js";
 
 export function init() {
   initScene("space-canvas");

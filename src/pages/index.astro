@@ -260,12 +260,12 @@ const posts = (await getCollection("notes"))
 </style>
 
 <script type="module" is:inline data-astro-rerun>
-  import { inView } from "/src/lib/inView";
+  import { inView } from "/src/lib/inView.js";
   import {
     startAnimationLoop,
     triggerAnimationUpdate,
-  } from "/src/lib/animation";
-  import { init } from "/src/lib/init";
+  } from "/src/lib/animation.js";
+  import { init } from "/src/lib/init.js";
 
   init();
 

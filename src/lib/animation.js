@@ -1,12 +1,12 @@
-import { getSpaceship } from "./spaceship";
+import { getSpaceship } from "./spaceship.js";
 import * as THREE from "three";
 import {
   trackScrollPosition,
   updateStarParallaxEffect,
   currentScrollVelocity,
   scrollDirection,
-} from "./scroll";
-import { getRenderer, getCamera, getScene } from "./scene";
+} from "./scroll.js";
+import { getRenderer, getCamera, getScene } from "./scene.js";
 
 let targetShipX = 0;
 let currentShipX = 0;
