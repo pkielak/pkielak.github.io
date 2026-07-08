@@ -68,6 +68,21 @@ const posts = (await getCollection("notes"))
       </section>
       <div class="scroll-anchor"></div>
 
+      <section class="content-section"></section>
+      <div class="scroll-anchor"></div>
+
+      <section class="content-section">
+        <div class="container">
+          <h3>
+            Latest Notes from the blog<span
+              class="cursor"
+              style="--cursor-opacity: 1;">_</span
+            >
+          </h3>
+        </div>
+      </section>
+      <div class="scroll-anchor"></div>
+
       {
         posts.map((post) => (
           <>
@@ -178,7 +193,12 @@ const posts = (await getCollection("notes"))
     border-radius: 8px;
   }
 
-  .content-section:nth-of-type(1) .container {
+  .container p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .content-section:nth-of-type(1) .container,
+  .content-section:nth-of-type(5) .container {
     border: none;
     padding: 0;
   }
@@ -217,12 +237,12 @@ const posts = (await getCollection("notes"))
     }
 
     .content-section:nth-of-type(4n + 1) .container,
-    .content-section:nth-of-type(4n + 3) .container {
+    .content-section:nth-of-type(4n) .container {
       left: 8rem;
     }
 
     .content-section:nth-of-type(4n + 2) .container,
-    .content-section:nth-of-type(4n) .container {
+    .content-section:nth-of-type(4n + 3) .container {
       left: unset;
       right: 8rem;
     }
