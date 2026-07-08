@@ -40,13 +40,13 @@ export function inView(entry) {
     } else if (rect.top < 0) {
       // Scrolled past - exiting viewport
       // ratio goes from 1 to 0 as we scroll past
-      scale = 1 + (1 - ratio);
-      opacity = 1 - (1 - ratio);
+      scale = 1 + 7 * (1 - ratio);
+      opacity = 1 - 7 * (1 - ratio); // Fade out when leaving
     } else {
       // Entering viewport
       // ratio goes from 0 to 1 as anchor enters
       scale = ratio;
-      opacity = ratio;
+      opacity = 1; // Keep opacity at 1 when entering
     }
   }
 
