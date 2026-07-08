@@ -17,7 +17,7 @@ let animationStartRotation = 0;
 let animationFrameId = null;
 const smoothFactor = 0.2; // Increased for snappier response to frequent updates
 const rotationSmoothFactor = 0.02; // Much smoother factor for rotation changes (1+ second transition)
-const rotationAnimationDuration = 1000; // 1 second for full rotation animation
+const rotationAnimationDuration = 500; // 1 second for full rotation animation
 
 /**
  * Handles smooth rotation animation for the spaceship based on scroll direction

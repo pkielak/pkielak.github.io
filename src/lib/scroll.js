@@ -29,23 +29,21 @@ export function updateStarParallaxEffect() {
   const starPositions = stars.geometry.attributes.position.array;
 
   // Configuration for parallax effect
-  const baseSpeed = 0.02; // Base movement speed
-  const scrollRange = 500; // Range within which stars are positioned
+  const scrollRange = 2000; // Must match the distribution range in stars.js
 
-  // Calculate star movement speed based on scroll
-  let starSpeed = baseSpeed * scrollDirection;
+  // Move all stars together based on scroll velocity
+  // Stars move toward viewer when scrolling down (positive velocity)
+  // Stars move away when scrolling up (negative velocity)
+  // Plus slow constant drift in the current scroll direction
+  const baseSpeed = 0.02; // Slow constant movement speed
+  const velocitySpeed = 0.05; // Speed multiplier for scroll velocity
 
-  // Add acceleration based on scroll velocity
-  if (Math.abs(currentScrollVelocity) > 0.1) {
-    starSpeed += Math.abs(currentScrollVelocity) * 0.05 * scrollDirection;
-  }
-
-  // Update each star's position
   for (let i = 0; i < starPositions.length; i += 3) {
-    // Move stars along Z axis (depth)
-    starPositions[i + 2] += starSpeed;
+    // Base movement + velocity-based movement
+    starPositions[i + 2] +=
+      baseSpeed * scrollDirection + currentScrollVelocity * velocitySpeed;
 
-    // Wrap stars around when they go out of bounds
+    // Wrap stars when they go out of bounds
     if (starPositions[i + 2] > scrollRange) {
       starPositions[i + 2] = -scrollRange;
     } else if (starPositions[i + 2] < -scrollRange) {
@@ -53,6 +51,5 @@ export function updateStarParallaxEffect() {
     }
   }
 
-  // Mark positions as updated for Three.js
   stars.geometry.attributes.position.needsUpdate = true;
 }

@@ -9,8 +9,8 @@ export function createStars() {
   const posArray = new Float32Array(starCount * 3);
   const originalPositions = new Float32Array(starCount * 3);
 
-  // Natural random distribution across a larger scroll area
-  const scrollRange = 500;
+  // Even distribution across a large scroll area to cover entire page
+  const scrollRange = 2000; // Large range to ensure even distribution
   const distributionRadius = 90;
 
   for (let i = 0; i < starCount; i++) {
@@ -21,7 +21,7 @@ export function createStars() {
 
     posArray[i * 3] = r * Math.sin(phi) * Math.cos(theta);
     posArray[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-    // Spread stars along Z axis for scroll effect
+    // Even distribution along entire Z axis
     posArray[i * 3 + 2] = (Math.random() - 0.5) * scrollRange * 2;
 
     originalPositions[i * 3] = posArray[i * 3];
