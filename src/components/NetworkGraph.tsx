@@ -27,6 +27,8 @@ const VisNetworkGraph = ({ graphData }: VisNetworkGraphProps) => {
       if (locationKey && network.findNode(locationKey)) {
         network.selectNodes([locationKey]);
       }
+
+      window.scrollTo(0, 0);
     }
   };
 
