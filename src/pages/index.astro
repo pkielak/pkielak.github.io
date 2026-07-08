@@ -21,9 +21,12 @@ const posts = (await getCollection("notes"))
     <div class="ui-overlay">
       <section class="content-section">
         <div class="container">
-          <h1>Piotr Kielak</h1>
+          <h1>Hi, I'm <span>P</span>iotr <span>Kielak</span></h1>
           <h3 class="opacity-70">
-            Let me take you on a journey into deep space...
+            Let me take you on a trip into deep space<span
+              class="cursor"
+              style="--cursor-opacity: 1;">_</span
+            >
           </h3>
         </div>
       </section>
@@ -103,6 +106,27 @@ const posts = (await getCollection("notes"))
 </Main>
 
 <style>
+  h1 span {
+    color: var(--nord14-aurora);
+  }
+
+  .cursor {
+    display: inline-block;
+    animation: blink 1s step-end infinite;
+    color: var(--nord14-aurora);
+    opacity: var(--cursor-opacity, 1);
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: var(--cursor-opacity, 1);
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
   .canvas-container {
     position: relative;
     top: 0;
