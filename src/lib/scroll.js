@@ -1,14 +1,10 @@
 /// <reference types="three" />
 import { getStars } from "./stars";
 
-// Scroll state tracking
 let lastScrollY = 0;
-export let currentScrollVelocity = 0; // Current scroll velocity for star acceleration
+export let currentScrollVelocity = 0;
 export let scrollDirection = 1; // 1 for down, -1 for up
 
-/**
- * Updates the scroll state by tracking scroll position and velocity
- */
 export function trackScrollPosition() {
   const currentScrollY = window.scrollY;
   currentScrollVelocity = currentScrollY - lastScrollY;
@@ -20,23 +16,14 @@ export function trackScrollPosition() {
   }
 }
 
-/**
- * Updates star positions based on scroll velocity and direction
- * Creates a parallax effect where stars move at different speeds
- */
 export function updateStarParallaxEffect() {
   const stars = getStars();
   const starPositions = stars.geometry.attributes.position.array;
 
-  // Configuration for parallax effect
   const scrollRange = 2000; // Must match the distribution range in stars.js
 
-  // Move all stars together based on scroll velocity
-  // Stars move toward viewer when scrolling down (positive velocity)
-  // Stars move away when scrolling up (negative velocity)
-  // Plus slow constant drift in the current scroll direction
-  const baseSpeed = 0.02; // Slow constant movement speed
-  const velocitySpeed = 0.05; // Speed multiplier for scroll velocity
+  const baseSpeed = 0.02;
+  const velocitySpeed = 0.05;
 
   for (let i = 0; i < starPositions.length; i += 3) {
     // Base movement + velocity-based movement

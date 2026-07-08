@@ -9,7 +9,6 @@ export function createStars() {
   const posArray = new Float32Array(starCount * 3);
   const originalPositions = new Float32Array(starCount * 3);
 
-  // Even distribution across a large scroll area to cover entire page
   const scrollRange = 2000; // Large range to ensure even distribution
   const distributionRadius = 90;
 

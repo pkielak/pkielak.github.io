@@ -9,19 +9,16 @@ import { getRenderer, getCamera, getScene } from "./scene";
 
 let targetShipX = 0;
 let currentShipX = 0;
-let currentShipRotationZ = 0; // Start with no Z-axis rotation
-let targetShipRotationZ = 0; // Start with no Z-axis rotation
+let currentShipRotationZ = 0;
+let targetShipRotationZ = 0;
 let rotationAnimationStartTime = 0;
 let isRotating = false;
 let animationStartRotation = 0;
 let animationFrameId = null;
-const smoothFactor = 0.2; // Increased for snappier response to frequent updates
-const rotationSmoothFactor = 0.02; // Much smoother factor for rotation changes (1+ second transition)
-const rotationAnimationDuration = 500; // 1 second for full rotation animation
+const smoothFactor = 0.2;
+const rotationSmoothFactor = 0.02;
+const rotationAnimationDuration = 500;
 
-/**
- * Handles smooth rotation animation for the spaceship based on scroll direction
- */
 function handleShipRotation(time, scrollDirection) {
   // Rotate around Z-axis: 0 for normal, Math.PI for 180 degree spin when scrolling up
   const targetRotation = scrollDirection === -1 ? Math.PI : 0;
@@ -30,7 +27,7 @@ function handleShipRotation(time, scrollDirection) {
   // Trigger when scroll direction changes and we're not already animating
   if (Math.abs(currentShipRotationZ - targetRotation) > 0.1 && !isRotating) {
     // Start new rotation animation
-    rotationAnimationStartTime = time * 1000; // Convert to milliseconds
+    rotationAnimationStartTime = time * 1000;
     animationStartRotation = currentShipRotationZ;
     targetShipRotationZ = targetRotation;
     isRotating = true;
@@ -46,14 +43,12 @@ function handleShipRotation(time, scrollDirection) {
         ? 2 * progress * progress
         : -1 + (4 - 2 * progress) * progress;
 
-    // Calculate the rotation difference from animation start
     const rotationDiff = targetShipRotationZ - animationStartRotation;
 
     // Directly interpolate based on eased progress for smooth animation
     currentShipRotationZ =
       animationStartRotation + rotationDiff * easedProgress;
 
-    // Check if animation is complete
     if (progress >= 1) {
       isRotating = false;
       currentShipRotationZ = targetShipRotationZ;
@@ -67,10 +62,6 @@ function handleShipRotation(time, scrollDirection) {
   ship.rotation.z = currentShipRotationZ;
 }
 
-/**
- * Triggers an animation update, ensuring the animation loop is running
- * This is called when scroll changes are detected to update the scene
- */
 export function triggerAnimationUpdate() {
   // Update target position for smooth ship movement
   const time = Date.now() * 0.001;
@@ -82,10 +73,6 @@ export function triggerAnimationUpdate() {
   }
 }
 
-/**
- * Starts the continuous animation loop
- * Initializes ship position and begins the rendering cycle
- */
 export function startAnimationLoop() {
   const time = Date.now() * 0.001;
   targetShipX = Math.sin(time) * 1.2;
@@ -99,10 +86,7 @@ function animationLoop() {
   const time = Date.now() * 0.001;
   ship = getSpaceship();
 
-  // Track scroll position and velocity
   trackScrollPosition();
-
-  // Update star parallax effect based on scroll
   updateStarParallaxEffect();
 
   // Smoothly interpolate current position toward target using linear interpolation
@@ -146,12 +130,9 @@ function animationLoop() {
   // Add scroll-based Z rotation to the position-based rotation
   ship.rotation.z = positionBasedZRotation + currentShipRotationZ;
 
-  // Handle smooth rotation animation based on scroll direction
   handleShipRotation(time, scrollDirection);
 
-  // Render the scene
   renderer.render(scene, camera);
 
-  // Keep animation loop running continuously
   animationFrameId = requestAnimationFrame(animationLoop);
 }

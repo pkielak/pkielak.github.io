@@ -4,7 +4,6 @@ import * as THREE from "three";
 let ship;
 
 export function createSpaceship() {
-  // --- Spaceship Construction ---
   const shape = new THREE.Shape();
   shape.moveTo(0, 0.75);
   shape.lineTo(-0.6, -0.75);
@@ -21,7 +20,6 @@ export function createSpaceship() {
 
   const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
 
-  // Hull: nebula-purple (#a3be8c)
   const hullMaterial = new THREE.MeshStandardMaterial({
     color: 0xa3be8c,
     emissive: 0x2e3440,
