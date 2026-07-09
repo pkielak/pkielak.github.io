@@ -259,44 +259,10 @@ const posts = (await getCollection("notes"))
   }
 </style>
 
-<script type="module" is:inline data-astro-rerun>
-  import { inView } from "/src/lib/inView.js";
-  import {
-    startAnimationLoop,
-    triggerAnimationUpdate,
-  } from "/src/lib/animation.js";
-  import { init } from "/src/lib/init.js";
+<script>
+  import { init } from "../lib/init.js";
 
   init();
 
-  // Intersection Observer for scroll anchors
-  const observer = new IntersectionObserver(
-    (entries) => {
-      // Update the space scene whenever scroll changes
-      triggerAnimationUpdate();
-
-      entries.forEach(inView);
-    },
-    {
-      root: null,
-      rootMargin: "0px",
-      threshold: Array.from({ length: 101 }, (_, i) => i / 100),
-    },
-  );
-
-  // Observe all scroll anchors
-  document.querySelectorAll(".scroll-anchor").forEach((anchor) => {
-    observer.observe(anchor);
-  });
-
-  // Initial check on load
-  window.addEventListener("load", () => {
-    document.querySelectorAll(".scroll-anchor").forEach((anchor) => {
-      observer.observe(anchor);
-    });
-    // Start animation loop
-    startAnimationLoop();
-    // Initial animation update
-    triggerAnimationUpdate();
-  });
+  document.addEventListener("astro:page-load", init);
 </script>
