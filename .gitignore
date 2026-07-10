@@ -27,4 +27,4 @@ pnpm-debug.log*
 .obsidian/
 
 # Notes folder
-/src/content/notes
+/src/content/notes/*.md
