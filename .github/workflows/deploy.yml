@@ -31,6 +31,7 @@ jobs:
           path: "notes-repo"
       - name: Copy Notes to Astro Content
         run: |
+          rm -rf notes-repo/.github
           cp -r notes-repo/* src/content/notes/
       - name: Install, build, and upload your site
         env:
