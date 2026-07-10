@@ -7,6 +7,9 @@ on:
     branches: [main]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
+  # Trigger workflow from other repos
+  repository_dispatch:
+    types: [rebuild-astro-site]
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
@@ -20,6 +23,15 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v6
+      - name: Checkout Notes Repo
+        uses: actions/checkout@v6
+        with:
+          repository: "pkielak/notes"
+          token: ${{ secrets.MY_GITHUB_PAT }}
+          path: "notes-repo"
+      - name: Copy Notes to Astro Content
+        run: |
+          cp -r notes-repo/* src/content/notes/
       - name: Install, build, and upload your site
         env:
           WEB_3_FORMS_KEY: ${{ secrets.WEB_3_FORMS_KEY }}
