@@ -68,9 +68,6 @@ const posts = (await getCollection("notes"))
       </section>
       <div class="scroll-anchor"></div>
 
-      <section class="content-section"></section>
-      <div class="scroll-anchor"></div>
-
       <section class="content-section">
         <div class="container">
           <h3>
@@ -189,7 +186,7 @@ const posts = (await getCollection("notes"))
     left: 50%;
     border: 1px solid var(--nord14-aurora);
     padding: 1rem;
-    max-width: 90%;
+    width: calc(100% - 2rem);
     border-radius: 8px;
   }
 
@@ -198,7 +195,7 @@ const posts = (await getCollection("notes"))
   }
 
   .content-section:nth-of-type(1) .container,
-  .content-section:nth-of-type(5) .container {
+  .content-section:nth-of-type(4) .container {
     border: none;
     padding: 0;
   }
@@ -219,6 +216,13 @@ const posts = (await getCollection("notes"))
     width: 1px;
     height: 100svh;
     pointer-events: none;
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      width: auto;
+      max-width: 90%;
+    }
   }
 
   @media (min-width: 1280px) {
