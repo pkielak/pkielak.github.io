@@ -16,13 +16,19 @@ import { SITE_TITLE } from "../consts";
 <style>
   header {
     max-width: 720px;
-    width: calc(100% - 6rem);
+    width: calc(100% - 2rem);
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    padding: 0.75rem 2.5rem;
+    padding: 0.75rem 0;
     color: var(--nord4-snow-storm);
+  }
+
+  @media (min-width: 768px) {
+    header {
+      width: calc(100% - 4rem);
+    }
   }
 
   h2 {
