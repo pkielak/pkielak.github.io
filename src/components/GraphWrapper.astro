@@ -26,14 +26,14 @@ const graphData = await graph.GET({}).then((response) => response.json());
 
   .graph-wrapper {
     width: 100%;
-    height: 75svh;
+    height: 100svh;
     position: relative;
   }
 
   .lock-graph {
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 1rem;
+    bottom: 2rem;
     z-index: 2;
     display: none;
     font-family: "IBM Plex Mono", monospace;
@@ -79,10 +79,6 @@ const graphData = await graph.GET({}).then((response) => response.json());
   }
 
   @media (min-width: 768px) {
-    .graph-wrapper {
-      height: 100vh;
-    }
-
     .tap-to-unlock {
       height: 100vh;
     }

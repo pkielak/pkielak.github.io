@@ -13,7 +13,7 @@ const posts = (await getCollection("notes"))
     const bDate = b.data.updatedAt || b.data.pubDate;
     return bDate.valueOf() - aDate.valueOf();
   })
-  .slice(0, 5);
+  .slice(0, 3);
 ---
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -74,36 +74,25 @@ const posts = (await getCollection("notes"))
 
       <section class="content-section">
         <div class="container">
-          <h3>
-            Latest Notes from the blog<span
-              class="cursor"
-              style="--cursor-opacity: 1;">_</span
-            >
-          </h3>
-        </div>
-      </section>
-      <div class="scroll-anchor"></div>
-
-      {
-        posts.map((post) => (
-          <>
-            <section class="content-section">
-              <div class="container">
+          <h3>Latest posts from the blog</h3>
+          {
+            posts.map((post) => (
+              <div>
                 <a href={`/notes/${post.id}/`} class="post">
-                  <h3>
+                  <p>
                     {post.data.title} |{" "}
                     <FormattedDate
                       date={post.data.updatedAt || post.data.pubDate}
                     />
-                  </h3>
+                  </p>
                 </a>
                 <p>{post.data.description}</p>
               </div>
-            </section>
-            <div class="scroll-anchor" />
-          </>
-        ))
-      }
+            ))
+          }
+        </div>
+      </section>
+      <div class="scroll-anchor"></div>
 
       <section class="content-section">
         <div class="container">
@@ -114,6 +103,15 @@ const posts = (await getCollection("notes"))
       <div class="scroll-anchor"></div>
 
       <section class="content-section">
+        <div class="overlay">
+          <h3>
+            The end of the known universe is the beginning of my universe...
+          </h3>
+          <p>
+            Navigate through my universe of thoughts by clicking on the star
+            representing the blog post.
+          </p>
+        </div>
         <GraphWrapper />
       </section>
       <div class="scroll-anchor"></div>
@@ -198,8 +196,7 @@ const posts = (await getCollection("notes"))
     margin-bottom: 0;
   }
 
-  .content-section:nth-of-type(1) .container,
-  .content-section:nth-of-type(4) .container {
+  .content-section:nth-of-type(1) .container {
     border: none;
     padding: 0;
   }
@@ -220,6 +217,13 @@ const posts = (await getCollection("notes"))
     width: 1px;
     height: 100svh;
     pointer-events: none;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 9;
   }
 
   @media (min-width: 1024px) {
