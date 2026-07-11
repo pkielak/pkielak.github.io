@@ -88,7 +88,8 @@ body {
 }
 
 /* Scanlines - horizontal lines */
-body::after {
+body::after,
+.terminal-loading::after {
   content: "";
   position: fixed;
   top: 0;

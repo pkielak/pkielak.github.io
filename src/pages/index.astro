@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import ContactForm from "../components/ContactForm.astro";
 import GraphWrapper from "src/components/GraphWrapper.astro";
+import ConsoleLoading from "../components/ConsoleLoading.astro";
 
 const posts = (await getCollection("notes"))
   .sort((a, b) => {
@@ -16,6 +17,9 @@ const posts = (await getCollection("notes"))
 ---
 
 <Main title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <!-- Console-like Initialization Screen -->
+  <ConsoleLoading />
+
   <main class="canvas-container">
     <canvas id="space-canvas"></canvas>
     <div class="ui-overlay">

@@ -1,0 +1,123 @@
+---
+export interface ConsoleLog {
+  message: string;
+  type?: "info" | "success";
+}
+
+interface Props {
+  logs?: ConsoleLog[];
+}
+
+const defaultLogs: ConsoleLog[] = [
+  { message: "Initializing system...", type: "info" },
+  { message: "Loading core modules...", type: "info" },
+  { message: "[OK] Scene renderer initialized", type: "success" },
+  { message: "[OK] Animation loop started", type: "success" },
+  { message: "[OK] Spaceship system loaded", type: "success" },
+  { message: "[OK] Star field generated", type: "success" },
+  { message: "[OK] Intersection observers active", type: "success" },
+  { message: "System ready.", type: "success" },
+];
+
+const { logs = defaultLogs } = Astro.props;
+---
+
+<div class="terminal-loading" id="terminal-loading">
+  <div class="terminal-content">
+    {
+      logs.map((log) => (
+        <div class={`log-entry log-${log.type || "info"}`}>
+          <span class="log-prefix">{log.type === "success" ? "✓" : ">"}</span>
+          <span class="log-message">{log.message}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .terminal-loading {
+    position: fixed;
+    inset: 0;
+    background-color: var(--nord0-polar-night);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    z-index: 10000;
+    animation: 0.2s ease-out 1.8s forwards hideScreen;
+  }
+
+  .terminal-loading.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .terminal-content {
+    width: 100%;
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--nord14-aurora);
+    text-shadow: 0 0 5px rgba(163, 190, 140, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .log-entry {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideIn 0.3s ease-out forwards;
+    white-space: pre-wrap;
+  }
+
+  .log-entry:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  .log-entry:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .log-entry:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  .log-entry:nth-child(4) {
+    animation-delay: 0.8s;
+  }
+  .log-entry:nth-child(5) {
+    animation-delay: 1s;
+  }
+  .log-entry:nth-child(6) {
+    animation-delay: 1.2s;
+  }
+  .log-entry:nth-child(7) {
+    animation-delay: 1.4s;
+  }
+  .log-entry:nth-child(8) {
+    animation-delay: 1.6s;
+  }
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes hideScreen {
+    to {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  .log-prefix {
+    margin-right: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .terminal-content {
+      font-size: 1.2rem;
+    }
+  }
+</style>
