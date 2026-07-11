@@ -253,7 +253,8 @@ hr {
   white-space: nowrap;
 }
 
-ul {
+ul,
+ol {
   list-style: none; /* Hides the native browser marker */
   padding: 0;
   margin: 0;
@@ -272,6 +273,28 @@ ul li::before {
   top: 0;
   width: 15px; /* You can now safely assign a width */
   text-align: center;
+}
+
+ol {
+  position: relative;
+  counter-reset: list-counter;
+}
+
+ol li {
+  counter-increment: list-counter;
+  padding-left: 1.75rem;
+  margin-bottom: 0.5em;
+}
+
+ol li::before {
+  position: absolute;
+  left: 0;
+  content: counter(list-counter) ".";
+}
+
+ol li:last-child,
+ul li:last-child {
+  margin-bottom: 1em;
 }
 
 .vis-tooltip {
