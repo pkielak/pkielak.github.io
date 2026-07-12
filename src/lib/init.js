@@ -5,7 +5,12 @@ import { createStars } from "./stars.js";
 import { startAnimationLoop, triggerAnimationUpdate } from "./animation.js";
 import { inView } from "./inView.js";
 
+let initialized = false;
+
 export function init() {
+  if (initialized) return;
+  initialized = true;
+
   initScene("space-canvas");
 
   const ship = createSpaceship();
@@ -28,7 +33,7 @@ export function init() {
     {
       root: null,
       rootMargin: "0px",
-      threshold: Array.from({ length: 101 }, (_, i) => i / 100),
+      threshold: Array.from({ length: 60 }, (_, i) => i / 60),
     },
   );
 
@@ -37,14 +42,8 @@ export function init() {
     observer.observe(anchor);
   });
 
-  // Initial check on load
-  window.addEventListener("load", () => {
-    document.querySelectorAll(".scroll-anchor").forEach((anchor) => {
-      observer.observe(anchor);
-    });
-    // Start animation loop
-    startAnimationLoop();
-    // Initial animation update
-    triggerAnimationUpdate();
-  });
+  // Start animation loop
+  startAnimationLoop();
+  // Initial animation update
+  triggerAnimationUpdate();
 }
