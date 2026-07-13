@@ -1,0 +1,210 @@
+---
+// OrbitSystem.astro
+import { Image } from "astro:assets";
+
+// Import the logo images
+import tsLogo from "/public/ts-logo.svg";
+import reactLogo from "/public/react-logo.svg";
+import astroLogo from "/public/astro-logo.svg";
+
+// Component props
+interface Props {
+  /** Optional title for the center (default: "Skills") */
+  title?: string;
+}
+
+const { title = "Skills" } = Astro.props;
+---
+
+<div class="orbit-system">
+  <!-- Orbit Circles -->
+  <div class="orbit-circle orbit-circle-1"></div>
+  <div class="orbit-circle orbit-circle-2"></div>
+  <div class="orbit-circle orbit-circle-3"></div>
+  <div class="orbit-circle orbit-circle-4"></div>
+  <div class="orbit-circle orbit-circle-5"></div>
+  <div class="orbit-circle orbit-circle-6"></div>
+
+  <!-- Center Title -->
+  <h2 class="orbit-center">{title}</h2>
+
+  <!-- Orbiting Logos -->
+  <Image src={tsLogo} alt="Typescript logo" class="orbiting-item orbit-1" />
+  <Image src={reactLogo} alt="React logo" class="orbiting-item orbit-2" />
+  <Image
+    src={astroLogo}
+    alt="Astro.js framework logo"
+    class="orbiting-item orbit-3"
+  />
+
+  <!-- Orbiting Text Elements -->
+  <div class="orbiting-item orbit-4 orbiting-text">Svelte</div>
+  <div class="orbiting-item orbit-5 orbiting-text">Next.js</div>
+  <div class="orbiting-item orbit-6 orbiting-text">CSS</div>
+</div>
+
+<style>
+  .orbit-system {
+    position: absolute;
+    width: 1200px;
+    height: 1200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+  }
+
+  .orbit-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid var(--nord14-aurora);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .orbit-circle-1 {
+    width: 360px;
+    height: 360px;
+  }
+  .orbit-circle-2 {
+    width: 720px;
+    height: 720px;
+  }
+  .orbit-circle-3 {
+    width: 960px;
+    height: 960px;
+  }
+  .orbit-circle-4 {
+    width: 560px;
+    height: 560px;
+  }
+  .orbit-circle-5 {
+    width: 840px;
+    height: 840px;
+  }
+  .orbit-circle-6 {
+    width: 1080px;
+    height: 1080px;
+  }
+
+  .orbit-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    margin: 0;
+  }
+
+  .orbiting-item {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 0;
+    z-index: 5;
+  }
+
+  .orbiting-text {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Animation Classes */
+  .orbit-1 {
+    animation: orbit-1 20s linear infinite;
+  }
+  .orbit-2 {
+    animation: orbit-2 20s linear infinite;
+  }
+  .orbit-3 {
+    animation: orbit-3 20s linear infinite;
+  }
+  .orbit-4 {
+    animation: orbit-4 20s linear infinite;
+  }
+  .orbit-5 {
+    animation: orbit-5 20s linear infinite;
+  }
+  .orbit-6 {
+    animation: orbit-6 20s linear infinite;
+  }
+
+  /* Keyframes Animations */
+  @keyframes orbit-1 {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg) translateX(180px)
+        rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg) translateX(180px)
+        rotate(-360deg);
+    }
+  }
+
+  @keyframes orbit-2 {
+    0% {
+      transform: translate(-50%, -50%) rotate(120deg) translateX(360px)
+        rotate(-120deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(480deg) translateX(360px)
+        rotate(-480deg);
+    }
+  }
+
+  @keyframes orbit-3 {
+    0% {
+      transform: translate(-50%, -50%) rotate(240deg) translateX(480px)
+        rotate(-240deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(600deg) translateX(480px)
+        rotate(-600deg);
+    }
+  }
+
+  @keyframes orbit-4 {
+    0% {
+      transform: translate(-50%, -50%) rotate(60deg) translateX(280px)
+        rotate(-60deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(420deg) translateX(280px)
+        rotate(-420deg);
+    }
+  }
+
+  @keyframes orbit-5 {
+    0% {
+      transform: translate(-50%, -50%) rotate(180deg) translateX(420px)
+        rotate(-180deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(540deg) translateX(420px)
+        rotate(-540deg);
+    }
+  }
+
+  @keyframes orbit-6 {
+    0% {
+      transform: translate(-50%, -50%) rotate(300deg) translateX(540px)
+        rotate(-300deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(660deg) translateX(540px)
+        rotate(-660deg);
+    }
+  }
+</style>
