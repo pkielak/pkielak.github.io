@@ -16,6 +16,15 @@ let rotationAnimationStartTime = 0;
 let isRotating = false;
 let animationStartRotation = 0;
 let animationFrameId = null;
+
+// Expose cleanup function
+export function cleanupAnimation() {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+}
+
 const smoothFactor = 0.2;
 const rotationSmoothFactor = 0.02;
 const rotationAnimationDuration = 500;

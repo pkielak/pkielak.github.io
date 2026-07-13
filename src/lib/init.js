@@ -1,13 +1,42 @@
 /// <reference types="three" />
-import { initScene, getScene } from "./scene.js";
+import { initScene, getScene, getRenderer } from "./scene.js";
 import { createSpaceship } from "./spaceship.js";
 import { createStars } from "./stars.js";
-import { startAnimationLoop, triggerAnimationUpdate } from "./animation.js";
+import { startAnimationLoop, triggerAnimationUpdate, cleanupAnimation } from "./animation.js";
 import { inView } from "./inView.js";
 
 let initialized = false;
+let observer;
+
+function cleanup() {
+  // Cancel any ongoing animation frames
+  cleanupAnimation();
+
+  // Disconnect intersection observer
+  if (observer) {
+    observer.disconnect();
+    observer = null;
+  }
+
+  // Clean up Three.js resources
+  const renderer = getRenderer();
+  if (renderer) {
+    renderer.dispose();
+  }
+
+  // Reset initialized flag
+  initialized = false;
+
+  // Remove window properties
+  delete window.skipRotationAnimation;
+  delete window.prevIsLastSectionFullyVisible;
+  delete window.isLastSectionFullyVisible;
+}
 
 export function init() {
+  // Clean up any previous initialization
+  cleanup();
+
   if (initialized) return;
   initialized = true;
 
@@ -46,4 +75,7 @@ export function init() {
   startAnimationLoop();
   // Initial animation update
   triggerAnimationUpdate();
+
+  // Set up cleanup for page navigation
+  window.addEventListener('astro:before-unload', cleanup);
 }
