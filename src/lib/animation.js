@@ -16,13 +16,31 @@ let rotationAnimationStartTime = 0;
 let isRotating = false;
 let animationStartRotation = 0;
 let animationFrameId = null;
+let isCleaningUp = false;
 
 // Expose cleanup function
 export function cleanupAnimation() {
+  // Set cleanup flag first to prevent any running animation loops
+  isCleaningUp = true;
+  
   if (animationFrameId) {
     cancelAnimationFrame(animationFrameId);
     animationFrameId = null;
   }
+  
+  // Reset animation state variables
+  targetShipX = 0;
+  currentShipX = 0;
+  currentShipRotationZ = 0;
+  targetShipRotationZ = 0;
+  rotationAnimationStartTime = 0;
+  isRotating = false;
+  animationStartRotation = 0;
+}
+
+// Function to reset the cleanup flag when re-initializing
+export function resetAnimationState() {
+  isCleaningUp = false;
 }
 
 const smoothFactor = 0.2;
@@ -93,6 +111,9 @@ export function triggerAnimationUpdate() {
 }
 
 export function startAnimationLoop() {
+  // Reset cleanup flag when starting animation
+  isCleaningUp = false;
+  
   const time = Date.now() * 0.001;
   targetShipX = Math.sin(time) * 1.2;
   currentShipX = targetShipX;
@@ -102,6 +123,11 @@ export function startAnimationLoop() {
 let ship;
 
 function animationLoop() {
+  // Check if cleanup was requested
+  if (isCleaningUp) {
+    return;
+  }
+  
   const time = Date.now() * 0.001;
   ship = getSpaceship();
 
@@ -167,7 +193,14 @@ function animationLoop() {
 
   handleShipRotation(time, scrollDirection);
 
-  renderer.render(scene, camera);
+  // Safety check in case cleanup happened during animation
+  if (renderer && scene && camera) {
+    renderer.render(scene, camera);
+  } else {
+    // If any component is missing, stop the animation loop
+    cleanupAnimation();
+    return;
+  }
 
   animationFrameId = requestAnimationFrame(animationLoop);
 }

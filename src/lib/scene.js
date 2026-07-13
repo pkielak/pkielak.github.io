@@ -3,6 +3,30 @@ import * as THREE from "three";
 
 let scene, camera, renderer;
 
+// Add cleanup function for scene resources
+export function cleanupScene() {
+  if (scene) {
+    // Dispose of all children in the scene
+    while (scene.children.length > 0) {
+      const obj = scene.children[0];
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) {
+        // Handle materials properly
+        if (Array.isArray(obj.material)) {
+          obj.material.forEach(m => m.dispose());
+        } else {
+          obj.material.dispose();
+        }
+      }
+      scene.remove(obj);
+    }
+    scene = null;
+  }
+  
+  camera = null;
+  renderer = null;
+}
+
 export function initScene(canvasId) {
   scene = new THREE.Scene();
 

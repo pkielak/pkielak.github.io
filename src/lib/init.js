@@ -1,5 +1,6 @@
 /// <reference types="three" />
-import { initScene, getScene, getRenderer } from "./scene.js";
+import { initScene, getScene, getRenderer, cleanupScene } from "./scene.js";
+import { resetAnimationState } from "./animation.js";
 import { createSpaceship } from "./spaceship.js";
 import { createStars } from "./stars.js";
 import { startAnimationLoop, triggerAnimationUpdate, cleanupAnimation } from "./animation.js";
@@ -7,6 +8,13 @@ import { inView } from "./inView.js";
 
 let initialized = false;
 let observer;
+let pageLoadListenerRegistered = false;
+
+// Register the page load listener once when this module is loaded
+if (typeof document !== 'undefined') {
+  document.addEventListener("astro:page-load", init);
+  pageLoadListenerRegistered = true;
+}
 
 function cleanup() {
   // Cancel any ongoing animation frames
@@ -18,11 +26,8 @@ function cleanup() {
     observer = null;
   }
 
-  // Clean up Three.js resources
-  const renderer = getRenderer();
-  if (renderer) {
-    renderer.dispose();
-  }
+  // Clean up Three.js resources properly
+  cleanupScene();
 
   // Reset initialized flag
   initialized = false;
@@ -34,11 +39,25 @@ function cleanup() {
 }
 
 export function init() {
+  // Check if the canvas element exists on this page
+  const canvasElement = document.getElementById("space-canvas");
+  if (!canvasElement) {
+    // Canvas doesn't exist on this page, skip initialization
+    // But don't cleanup if we're not initialized (to preserve event listener)
+    if (initialized) {
+      cleanup();
+    }
+    return;
+  }
+
   // Clean up any previous initialization
   cleanup();
 
   if (initialized) return;
   initialized = true;
+
+  // Reset animation state for fresh start
+  resetAnimationState();
 
   initScene("space-canvas");
 
