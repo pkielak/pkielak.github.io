@@ -38,12 +38,12 @@ const { title = "Skills" } = Astro.props;
 <style>
   .orbit-system {
     position: absolute;
-    width: 1200px;
-    height: 1200px;
+    width: 1300px; /* Increased to prevent cropping */
+    height: 1300px; /* Increased to prevent cropping */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow: visible; /* Ensure orbits aren't clipped */
+    overflow: visible; /* Ensure nothing is clipped */
     will-change: transform;
   }
 
@@ -101,9 +101,6 @@ const { title = "Skills" } = Astro.props;
     z-index: 5;
     will-change: transform;
     backface-visibility: hidden;
-    /* Performance optimizations */
-    transform: translateZ(0); /* Enable GPU acceleration */
-    content-visibility: auto; /* Optimize rendering */
   }
 
   .orbiting-text {
@@ -228,32 +225,38 @@ const { title = "Skills" } = Astro.props;
   }
 
   @media (max-width: 768px) {
-    .orbit-1,
-    .orbit-2,
-    .orbit-3,
-    .orbit-4,
-    .orbit-5,
+    /* Mobile: Disable animations but keep orbital positions */
+  @media (max-width: 768px) {
+    /* Mobile: Disable animations but keep orbital positions */
+    .orbit-1 {
+      animation: none !important;
+      transform: translate(-50%, -50%) rotate(0deg) translateX(180px) rotate(0deg);
+    }
+    .orbit-2 {
+      animation: none !important;
+      transform: translate(-50%, -50%) rotate(120deg) translateX(360px) rotate(-120deg);
+    }
+    .orbit-3 {
+      animation: none !important;
+      transform: translate(-50%, -50%) rotate(240deg) translateX(480px) rotate(-240deg);
+    }
+    .orbit-4 {
+      animation: none !important;
+      transform: translate(-50%, -50%) rotate(60deg) translateX(280px) rotate(-60deg);
+    }
+    .orbit-5 {
+      animation: none !important;
+      transform: translate(-50%, -50%) rotate(180deg) translateX(420px) rotate(-180deg);
+    }
     .orbit-6 {
-      animation-duration: 30s; /* Slower animations for better performance */
+      animation: none !important;
+      transform: translate(-50%, -50%) rotate(300deg) translateX(540px) rotate(-300deg);
     }
 
-    /* Optimize animations on mobile without hiding content */
-    .orbit-1,
-    .orbit-2,
-    .orbit-3,
-    .orbit-4,
-    .orbit-5,
-    .orbit-6 {
-      will-change: transform; /* Help browser optimize animations */
-    }
-  }
-
-  /* Low performance devices */
-  @media (max-width: 480px) {
-    /* Keep all skills visible even on small screens */
+    /* Mobile system size - large enough to prevent cropping */
     .orbit-system {
-      width: 1000px;
-      height: 1000px; /* Slightly smaller but keeps all content */
+      width: 1100px;
+      height: 1100px;
     }
   }
 </style>
