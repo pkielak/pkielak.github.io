@@ -54,7 +54,20 @@ export function inView(entry) {
   scale = Math.max(0, Math.min(2, scale));
   opacity = Math.max(0, Math.min(1, opacity));
 
+  // Performance optimizations
   section.style.transform = `scale(${scale})`;
   section.style.opacity = `${opacity}`;
   section.style.transition = "transform 0.05s linear, opacity 0.05s linear";
+  
+  // Use will-change for GPU acceleration
+  if (scale > 0 && scale < 1) {
+    section.style.willChange = 'transform, opacity';
+  } else {
+    section.style.willChange = 'auto';
+  }
+  
+  // Use transform: translateZ(0) to enable GPU compositing
+  if (scale === 1) {
+    section.style.transform += ' translateZ(0)';
+  }
 }
