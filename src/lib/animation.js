@@ -17,6 +17,7 @@ let isRotating = false;
 let animationStartRotation = 0;
 let animationFrameId = null;
 let isCleaningUp = false;
+export let animationQuality = 'high'; // 'high', 'medium', 'low'
 
 // Expose cleanup function
 export function cleanupAnimation() {
@@ -43,9 +44,11 @@ export function resetAnimationState() {
   isCleaningUp = false;
 }
 
-const smoothFactor = 0.2;
-const rotationSmoothFactor = 0.02;
-const rotationAnimationDuration = 500;
+let smoothFactor = 0.2;
+let rotationSmoothFactor = 0.02;
+let rotationAnimationDuration = 500;
+let animationFrameInterval = 16; // ~60fps
+let lastAnimationFrameTime = 0;
 
 function handleShipRotation(time, scrollDirection) {
   // Rotate around Z-axis: 0 for normal, Math.PI for 180 degree spin when scrolling up
@@ -110,6 +113,35 @@ export function triggerAnimationUpdate() {
   }
 }
 
+export function setAnimationQuality(quality) {
+  animationQuality = quality;
+  
+  // Adjust animation parameters based on quality
+  switch (quality) {
+    case 'low':
+      smoothFactor = 0.1; // Slower movement for better performance
+      rotationSmoothFactor = 0.01;
+      rotationAnimationDuration = 300; // Faster animations
+      animationFrameInterval = 32; // ~30fps
+      break;
+    case 'medium':
+      smoothFactor = 0.15;
+      rotationSmoothFactor = 0.015;
+      rotationAnimationDuration = 400;
+      animationFrameInterval = 24; // ~40fps
+      break;
+    case 'high':
+    default:
+      smoothFactor = 0.2;
+      rotationSmoothFactor = 0.02;
+      rotationAnimationDuration = 500;
+      animationFrameInterval = 16; // ~60fps
+      break;
+  }
+  
+  console.log(`Animation quality set to: ${quality}`);
+}
+
 export function startAnimationLoop() {
   // Reset cleanup flag when starting animation
   isCleaningUp = false;
@@ -122,11 +154,19 @@ export function startAnimationLoop() {
 
 let ship;
 
-function animationLoop() {
+function animationLoop(timestamp) {
   // Check if cleanup was requested
   if (isCleaningUp) {
     return;
   }
+  
+  // Throttle animation frames based on quality setting
+  if (timestamp - lastAnimationFrameTime < animationFrameInterval) {
+    animationFrameId = requestAnimationFrame(animationLoop);
+    return;
+  }
+  
+  lastAnimationFrameTime = timestamp;
   
   const time = Date.now() * 0.001;
   ship = getSpaceship();

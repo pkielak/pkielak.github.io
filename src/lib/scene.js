@@ -41,13 +41,18 @@ export function initScene(canvasId) {
   camera.position.set(0, 0, 15);
   camera.lookAt(0, 0, 0);
 
+  const isMobile = typeof window !== 'undefined' && window.isMobileDevice;
+  
   renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById(canvasId),
-    antialias: true,
+    antialias: !isMobile, // Disable antialiasing on mobile for better performance
     alpha: true,
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
+  
+  // Limit pixel ratio on mobile devices to improve performance
+  const pixelRatio = isMobile ? Math.min(1.5, window.devicePixelRatio) : window.devicePixelRatio;
+  renderer.setPixelRatio(pixelRatio);
 
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);

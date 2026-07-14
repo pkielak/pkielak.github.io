@@ -5,7 +5,9 @@ let stars;
 
 export function createStars() {
   const starGeometry = new THREE.BufferGeometry();
-  const starCount = 5000;
+  // Balanced approach: good visual quality on desktop, optimized for mobile
+  const isMobile = typeof window !== 'undefined' && window.isMobileDevice;
+  const starCount = isMobile ? 3000 : 5000; // 3000 on mobile, 5000 on desktop
   const posArray = new Float32Array(starCount * 3);
   const originalPositions = new Float32Array(starCount * 3);
 
@@ -30,8 +32,11 @@ export function createStars() {
   starGeometry.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
   starGeometry.userData.originalPositions = originalPositions;
 
+  // Adjust star size based on device for optimal performance
+  const starSize = isMobile ? 0.3 : 0.4;
+  
   const starMaterial = new THREE.PointsMaterial({
-    size: 0.4,
+    size: starSize,
     color: 0xa3be8c,
   });
 

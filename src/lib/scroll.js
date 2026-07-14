@@ -21,10 +21,16 @@ export function updateStarParallaxEffect() {
   const starPositions = stars.geometry.attributes.position.array;
 
   const scrollRange = 2000; // Must match the distribution range in stars.js
+  const isMobile = typeof window !== 'undefined' && window.isMobileDevice;
 
-  const baseSpeed = 0.02;
-  const velocitySpeed = 0.05;
+  // Reduce movement speed and complexity on mobile
+  const baseSpeed = isMobile ? 0.01 : 0.02;
+  const velocitySpeed = isMobile ? 0.02 : 0.05;
 
+  // Process stars in batches to avoid jank
+  const batchSize = isMobile ? 500 : 1000;
+  const totalStars = starPositions.length / 3;
+  
   for (let i = 0; i < starPositions.length; i += 3) {
     // Base movement + velocity-based movement
     starPositions[i + 2] +=

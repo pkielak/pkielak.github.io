@@ -43,8 +43,7 @@ const { title = "Skills" } = Astro.props;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow: hidden;
-    contain: strict;
+    overflow: visible; /* Ensure orbits aren't clipped */
     will-change: transform;
   }
 
@@ -102,9 +101,9 @@ const { title = "Skills" } = Astro.props;
     z-index: 5;
     will-change: transform;
     backface-visibility: hidden;
-    transform: translateZ(0);
-    content-visibility: auto;
-    contain: strict;
+    /* Performance optimizations */
+    transform: translateZ(0); /* Enable GPU acceleration */
+    content-visibility: auto; /* Optimize rendering */
   }
 
   .orbiting-text {
@@ -235,7 +234,26 @@ const { title = "Skills" } = Astro.props;
     .orbit-4,
     .orbit-5,
     .orbit-6 {
-      animation-duration: 25s;
+      animation-duration: 30s; /* Slower animations for better performance */
+    }
+
+    /* Optimize animations on mobile without hiding content */
+    .orbit-1,
+    .orbit-2,
+    .orbit-3,
+    .orbit-4,
+    .orbit-5,
+    .orbit-6 {
+      will-change: transform; /* Help browser optimize animations */
+    }
+  }
+
+  /* Low performance devices */
+  @media (max-width: 480px) {
+    /* Keep all skills visible even on small screens */
+    .orbit-system {
+      width: 1000px;
+      height: 1000px; /* Slightly smaller but keeps all content */
     }
   }
 </style>
