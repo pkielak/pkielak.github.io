@@ -1,15 +1,11 @@
 ---
-// OrbitSystem.astro
 import { Image } from "astro:assets";
 
-// Import the logo images
 import tsLogo from "/public/ts-logo.svg";
 import reactLogo from "/public/react-logo.svg";
 import astroLogo from "/public/astro-logo.svg";
 
-// Component props
 interface Props {
-  /** Optional title for the center (default: "Skills") */
   title?: string;
 }
 
@@ -17,7 +13,6 @@ const { title = "Skills" } = Astro.props;
 ---
 
 <div class="orbit-system">
-  <!-- Orbit Circles -->
   <div class="orbit-circle orbit-circle-1"></div>
   <div class="orbit-circle orbit-circle-2"></div>
   <div class="orbit-circle orbit-circle-3"></div>
@@ -25,10 +20,8 @@ const { title = "Skills" } = Astro.props;
   <div class="orbit-circle orbit-circle-5"></div>
   <div class="orbit-circle orbit-circle-6"></div>
 
-  <!-- Center Title -->
   <h2 class="orbit-center">{title}</h2>
 
-  <!-- Orbiting Logos -->
   <Image src={tsLogo} alt="Typescript logo" class="orbiting-item orbit-1" />
   <Image src={reactLogo} alt="React logo" class="orbiting-item orbit-2" />
   <Image
@@ -37,7 +30,6 @@ const { title = "Skills" } = Astro.props;
     class="orbiting-item orbit-3"
   />
 
-  <!-- Orbiting Text Elements -->
   <div class="orbiting-item orbit-4 orbiting-text">Svelte</div>
   <div class="orbiting-item orbit-5 orbiting-text">Next.js</div>
   <div class="orbiting-item orbit-6 orbiting-text">CSS</div>
@@ -52,6 +44,8 @@ const { title = "Skills" } = Astro.props;
     left: 50%;
     transform: translate(-50%, -50%);
     overflow: hidden;
+    contain: strict;
+    will-change: transform;
   }
 
   .orbit-circle {
@@ -64,35 +58,29 @@ const { title = "Skills" } = Astro.props;
     pointer-events: none;
   }
 
-  /* Orbit circle sizes - using CSS variables for consistency */
   .orbit-circle-1 {
-    --size: 360px;
+    width: 360px;
+    height: 360px;
   }
   .orbit-circle-2 {
-    --size: 720px;
+    width: 720px;
+    height: 720px;
   }
   .orbit-circle-3 {
-    --size: 960px;
+    width: 960px;
+    height: 960px;
   }
   .orbit-circle-4 {
-    --size: 560px;
+    width: 560px;
+    height: 560px;
   }
   .orbit-circle-5 {
-    --size: 840px;
+    width: 840px;
+    height: 840px;
   }
   .orbit-circle-6 {
-    --size: 1080px;
-  }
-
-  /* Apply size using CSS variable */
-  .orbit-circle-1,
-  .orbit-circle-2,
-  .orbit-circle-3,
-  .orbit-circle-4,
-  .orbit-circle-5,
-  .orbit-circle-6 {
-    width: var(--size);
-    height: var(--size);
+    width: 1080px;
+    height: 1080px;
   }
 
   .orbit-center {
@@ -115,6 +103,8 @@ const { title = "Skills" } = Astro.props;
     will-change: transform;
     backface-visibility: hidden;
     transform: translateZ(0);
+    content-visibility: auto;
+    contain: strict;
   }
 
   .orbiting-text {
@@ -130,14 +120,13 @@ const { title = "Skills" } = Astro.props;
     justify-content: center;
   }
 
-  /* Animation Classes - using common properties */
   .orbit-1,
   .orbit-2,
   .orbit-3,
   .orbit-4,
   .orbit-5,
   .orbit-6 {
-    animation-duration: 15s;
+    animation-duration: 20s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     will-change: transform;
@@ -162,7 +151,6 @@ const { title = "Skills" } = Astro.props;
     animation-name: orbit-6;
   }
 
-  /* Keyframes Animations - using CSS variables for orbit parameters */
   @keyframes orbit-1 {
     0% {
       transform: translate(-50%, -50%) rotate(0deg) translateX(180px)
@@ -226,6 +214,28 @@ const { title = "Skills" } = Astro.props;
     100% {
       transform: translate(-50%, -50%) rotate(660deg) translateX(540px)
         rotate(-660deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-1,
+    .orbit-2,
+    .orbit-3,
+    .orbit-4,
+    .orbit-5,
+    .orbit-6 {
+      animation: none !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .orbit-1,
+    .orbit-2,
+    .orbit-3,
+    .orbit-4,
+    .orbit-5,
+    .orbit-6 {
+      animation-duration: 25s;
     }
   }
 </style>
