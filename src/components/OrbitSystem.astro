@@ -165,55 +165,67 @@ const { title = "Skills" } = Astro.props;
   /* Keyframes Animations - using CSS variables for orbit parameters */
   @keyframes orbit-1 {
     0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(180px);
+      transform: translate(-50%, -50%) rotate(0deg) translateX(180px)
+        rotate(0deg);
     }
     100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(180px);
+      transform: translate(-50%, -50%) rotate(360deg) translateX(180px)
+        rotate(-360deg);
     }
   }
 
   @keyframes orbit-2 {
     0% {
-      transform: translate(-50%, -50%) rotate(120deg) translateX(360px);
+      transform: translate(-50%, -50%) rotate(120deg) translateX(360px)
+        rotate(-120deg);
     }
     100% {
-      transform: translate(-50%, -50%) rotate(480deg) translateX(360px);
+      transform: translate(-50%, -50%) rotate(480deg) translateX(360px)
+        rotate(-480deg);
     }
   }
 
   @keyframes orbit-3 {
     0% {
-      transform: translate(-50%, -50%) rotate(240deg) translateX(480px);
+      transform: translate(-50%, -50%) rotate(240deg) translateX(480px)
+        rotate(-240deg);
     }
     100% {
-      transform: translate(-50%, -50%) rotate(600deg) translateX(480px);
+      transform: translate(-50%, -50%) rotate(600deg) translateX(480px)
+        rotate(-600deg);
     }
   }
 
   @keyframes orbit-4 {
     0% {
-      transform: translate(-50%, -50%) rotate(60deg) translateX(280px);
+      transform: translate(-50%, -50%) rotate(60deg) translateX(280px)
+        rotate(-60deg);
     }
     100% {
-      transform: translate(-50%, -50%) rotate(420deg) translateX(280px);
+      transform: translate(-50%, -50%) rotate(420deg) translateX(280px)
+        rotate(-420deg);
     }
   }
 
   @keyframes orbit-5 {
     0% {
-      transform: translate(-50%, -50%) rotate(180deg) translateX(420px);
+      transform: translate(-50%, -50%) rotate(180deg) translateX(420px)
+        rotate(-180deg);
     }
     100% {
-      transform: translate(-50%, -50%) rotate(540deg) translateX(420px);
+      transform: translate(-50%, -50%) rotate(540deg) translateX(420px)
+        rotate(-540deg);
     }
   }
 
   @keyframes orbit-6 {
     0% {
-      transform: translate(-50%, -50%) rotate(300deg) translateX(540px);
+      transform: translate(-50%, -50%) rotate(300deg) translateX(540px)
+        rotate(-300deg);
     }
     100% {
-      transform: translate(-50%, -50%) rotate(660deg) translateX(540px);
+      transform: translate(-50%, -50%) rotate(660deg) translateX(540px)
+        rotate(-660deg);
     }
   }
 </style>
