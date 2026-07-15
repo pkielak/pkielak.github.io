@@ -22,22 +22,22 @@ const { title = "Skills" } = Astro.props;
 
   <h2 class="orbit-center">{title}</h2>
 
-  <div class="orbiting-item orbit-1 orbiting-text" style="--orbit-r: 180px;">
+  <div class="orbiting-item orbit-1 orbiting-text" style="--orbit-r: 15vmin">
     TypeScript
   </div>
-  <div class="orbiting-item orbit-2 orbiting-text" style="--orbit-r: 360px;">
+  <div class="orbiting-item orbit-2 orbiting-text" style="--orbit-r: 30vmin">
     React
   </div>
-  <div class="orbiting-item orbit-3 orbiting-text" style="--orbit-r: 480px;">
+  <div class="orbiting-item orbit-3 orbiting-text" style="--orbit-r: 40vmin">
     Astro
   </div>
-  <div class="orbiting-item orbit-4 orbiting-text" style="--orbit-r: 280px;">
+  <div class="orbiting-item orbit-4 orbiting-text" style="--orbit-r: 23.35vmin">
     Svelte
   </div>
-  <div class="orbiting-item orbit-5 orbiting-text" style="--orbit-r: 420px;">
+  <div class="orbiting-item orbit-5 orbiting-text" style="--orbit-r: 35vmin">
     Next.js
   </div>
-  <div class="orbiting-item orbit-6 orbiting-text" style="--orbit-r: 540px;">
+  <div class="orbiting-item orbit-6 orbiting-text" style="--orbit-r: 45vmin">
     CSS
   </div>
 </div>
@@ -49,8 +49,8 @@ const { title = "Skills" } = Astro.props;
 
   .orbit-system {
     position: absolute;
-    width: 1200px;
-    height: 1200px;
+    width: 120vmin;
+    height: 120vmin;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -68,28 +68,28 @@ const { title = "Skills" } = Astro.props;
   }
 
   .orbit-circle-1 {
-    width: 360px;
-    height: 360px;
+    width: 30vmin;
+    height: 30vmin;
   }
   .orbit-circle-2 {
-    width: 720px;
-    height: 720px;
+    width: 60vmin;
+    height: 60vmin;
   }
   .orbit-circle-3 {
-    width: 960px;
-    height: 960px;
+    width: 80vmin;
+    height: 80vmin;
   }
   .orbit-circle-4 {
-    width: 560px;
-    height: 560px;
+    width: 46.7vmin;
+    height: 46.7vmin;
   }
   .orbit-circle-5 {
-    width: 840px;
-    height: 840px;
+    width: 70vmin;
+    height: 70vmin;
   }
   .orbit-circle-6 {
-    width: 1080px;
-    height: 1080px;
+    width: 90vmin;
+    height: 90vmin;
   }
 
   .orbit-center {
@@ -116,6 +116,7 @@ const { title = "Skills" } = Astro.props;
     font-weight: bold;
     font-size: 1.5rem;
     font-family: "IBM Plex Mono", monospace;
+    text-shadow: 0 0 5px rgba(163, 190, 140, 0.5);
     width: var(--item-size);
     height: var(--item-size);
     display: flex;
@@ -155,67 +156,67 @@ const { title = "Skills" } = Astro.props;
 
   @keyframes orbit-1 {
     from {
-      transform: translate(-50%, -50%) rotate(0deg)
-        translateX(var(--orbit-r, 180px)) rotate(0deg);
+      transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-r))
+        rotate(0deg);
     }
     to {
-      transform: translate(-50%, -50%) rotate(360deg)
-        translateX(var(--orbit-r, 180px)) rotate(-360deg);
+      transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-r))
+        rotate(-360deg);
     }
   }
 
   @keyframes orbit-2 {
     from {
-      transform: translate(-50%, -50%) rotate(120deg)
-        translateX(var(--orbit-r, 360px)) rotate(-120deg);
+      transform: translate(-50%, -50%) rotate(120deg) translateX(var(--orbit-r))
+        rotate(-120deg);
     }
     to {
-      transform: translate(-50%, -50%) rotate(480deg)
-        translateX(var(--orbit-r, 360px)) rotate(-480deg);
+      transform: translate(-50%, -50%) rotate(480deg) translateX(var(--orbit-r))
+        rotate(-480deg);
     }
   }
 
   @keyframes orbit-3 {
     from {
-      transform: translate(-50%, -50%) rotate(240deg)
-        translateX(var(--orbit-r, 480px)) rotate(-240deg);
+      transform: translate(-50%, -50%) rotate(240deg) translateX(var(--orbit-r))
+        rotate(-240deg);
     }
     to {
-      transform: translate(-50%, -50%) rotate(600deg)
-        translateX(var(--orbit-r, 480px)) rotate(-600deg);
+      transform: translate(-50%, -50%) rotate(600deg) translateX(var(--orbit-r))
+        rotate(-600deg);
     }
   }
 
   @keyframes orbit-4 {
     from {
-      transform: translate(-50%, -50%) rotate(60deg)
-        translateX(var(--orbit-r, 280px)) rotate(-60deg);
+      transform: translate(-50%, -50%) rotate(60deg) translateX(var(--orbit-r))
+        rotate(-60deg);
     }
     to {
-      transform: translate(-50%, -50%) rotate(420deg)
-        translateX(var(--orbit-r, 280px)) rotate(-420deg);
+      transform: translate(-50%, -50%) rotate(420deg) translateX(var(--orbit-r))
+        rotate(-420deg);
     }
   }
 
   @keyframes orbit-5 {
     from {
-      transform: translate(-50%, -50%) rotate(180deg)
-        translateX(var(--orbit-r, 420px)) rotate(-180deg);
+      transform: translate(-50%, -50%) rotate(180deg) translateX(var(--orbit-r))
+        rotate(-180deg);
     }
     to {
-      transform: translate(-50%, -50%) rotate(540deg)
-        translateX(var(--orbit-r, 420px)) rotate(-540deg);
+      transform: translate(-50%, -50%) rotate(540deg) translateX(var(--orbit-r))
+        rotate(-540deg);
     }
   }
 
   @keyframes orbit-6 {
     from {
-      transform: translate(-50%, -50%) rotate(300deg)
-        translateX(var(--orbit-r, 540px)) rotate(-300deg);
+      transform: translate(-50%, -50%) rotate(300deg) translateX(var(--orbit-r))
+        rotate(-300deg);
     }
     to {
-      transform: translate(-50%, -50%) rotate(660deg)
-        translateX(var(--orbit-r, 540px)) rotate(-660deg);
+      transform: translate(-50%, -50%) rotate(660deg) translateX(var(--orbit-r))
+        rotate(-660deg);
     }
   }
 
