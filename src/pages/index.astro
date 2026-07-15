@@ -75,8 +75,30 @@ const posts = (await getCollection("notes"))
       <div class="scroll-anchor"></div>
 
       <section class="content-section">
+        <div class="container projects">
+          <h3>Projects</h3>
+          <div>
+            <div>
+              <h4>
+                <a href="https://pkielak.me/kopista/" target="_blank">Kopista</a
+                >
+              </h4>
+              <p>
+                Kopista is a handwriting to markdown converter that lets you
+                capture handwritten notes and convert them into markdown text.
+              </p>
+              <a href="https://github.com/pkielak/kopista" target="_blank"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="scroll-anchor"></div>
+
+      <section class="content-section">
         <div class="container">
-          <h3>Latest posts from the blog</h3>
+          <h3>Blog posts</h3>
           {
             posts.map((post) => (
               <div>
