@@ -40,6 +40,9 @@ const posts = (await getCollection("notes"))
 
       <section class="content-section">
         <div class="container">
+          <div class="avatar-section">
+            <img src="avatar.png" alt="Avatar" class="avatar" />
+          </div>
           <h3>Hello!</h3>
           <p>
             I'm a front-end developer with a few years of experience in web
@@ -47,9 +50,9 @@ const posts = (await getCollection("notes"))
             page.
           </p>
           <p>
-            If you're interested, you can jump straight in{" "}
-            <a href="/notes/index">here</a> or scroll down to the blog posts on the
-            bottom of the page.
+            If you're interested, you can jump straight in{" "}<a
+              href="/notes/index">here</a
+            > or scroll down to the blog posts on the bottom of the page.
           </p>
         </div>
       </section>
@@ -144,6 +147,31 @@ const posts = (await getCollection("notes"))
 </Main>
 
 <style>
+  .avatar-section {
+    position: relative;
+    background-color: var(--nord14-aurora);
+    opacity: 0.6;
+    aspect-ratio: 1;
+    max-width: 256px;
+    margin: 0 auto;
+  }
+
+  .avatar {
+    height: auto;
+    margin: 0 auto;
+    max-width: 256px;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.2) brightness(0.75);
+    mix-blend-mode: overlay;
+  }
+
+  @media (min-width: 768px) {
+    .avatar-section {
+      float: left;
+      margin-right: 1.5rem;
+    }
+  }
+
   h1 span {
     color: var(--nord14-aurora);
   }
