@@ -22,29 +22,39 @@ const { title = "Skills" } = Astro.props;
 
   <h2 class="orbit-center">{title}</h2>
 
-  <Image src={tsLogo} alt="Typescript logo" class="orbiting-item orbit-1" />
-  <Image src={reactLogo} alt="React logo" class="orbiting-item orbit-2" />
-  <Image
-    src={astroLogo}
-    alt="Astro.js framework logo"
-    class="orbiting-item orbit-3"
-  />
-
-  <div class="orbiting-item orbit-4 orbiting-text">Svelte</div>
-  <div class="orbiting-item orbit-5 orbiting-text">Next.js</div>
-  <div class="orbiting-item orbit-6 orbiting-text">CSS</div>
+  <div class="orbiting-item orbit-1 orbiting-text" style="--orbit-r: 180px;">
+    TypeScript
+  </div>
+  <div class="orbiting-item orbit-2 orbiting-text" style="--orbit-r: 360px;">
+    React
+  </div>
+  <div class="orbiting-item orbit-3 orbiting-text" style="--orbit-r: 480px;">
+    Astro
+  </div>
+  <div class="orbiting-item orbit-4 orbiting-text" style="--orbit-r: 280px;">
+    Svelte
+  </div>
+  <div class="orbiting-item orbit-5 orbiting-text" style="--orbit-r: 420px;">
+    Next.js
+  </div>
+  <div class="orbiting-item orbit-6 orbiting-text" style="--orbit-r: 540px;">
+    CSS
+  </div>
 </div>
 
 <style>
+  :root {
+    --item-size: 5vmin;
+  }
+
   .orbit-system {
     position: absolute;
-    width: 1300px; /* Increased to prevent cropping */
-    height: 1300px; /* Increased to prevent cropping */
+    width: 1200px;
+    height: 1200px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow: visible; /* Ensure nothing is clipped */
-    will-change: transform;
+    overflow: visible;
   }
 
   .orbit-circle {
@@ -89,28 +99,25 @@ const { title = "Skills" } = Astro.props;
     transform: translate(-50%, -50%);
     z-index: 10;
     margin: 0;
+    font-size: 1.5rem;
   }
 
   .orbiting-item {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: var(--item-size);
+    height: var(--item-size);
     top: 50%;
     left: 50%;
-    transform-origin: 0 0;
     z-index: 5;
-    will-change: transform;
-    backface-visibility: hidden;
   }
 
   .orbiting-text {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    color: white;
+    color: var(--nord14-aurora);
     font-weight: bold;
-    font-size: 14px;
-    width: 80px;
-    height: 80px;
+    font-size: 1.5rem;
+    font-family: "IBM Plex Mono", monospace;
+    width: var(--item-size);
+    height: var(--item-size);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,7 +132,6 @@ const { title = "Skills" } = Astro.props;
     animation-duration: 20s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    will-change: transform;
   }
 
   .orbit-1 {
@@ -148,68 +154,68 @@ const { title = "Skills" } = Astro.props;
   }
 
   @keyframes orbit-1 {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(180px)
-        rotate(0deg);
+    from {
+      transform: translate(-50%, -50%) rotate(0deg)
+        translateX(var(--orbit-r, 180px)) rotate(0deg);
     }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(180px)
-        rotate(-360deg);
+    to {
+      transform: translate(-50%, -50%) rotate(360deg)
+        translateX(var(--orbit-r, 180px)) rotate(-360deg);
     }
   }
 
   @keyframes orbit-2 {
-    0% {
-      transform: translate(-50%, -50%) rotate(120deg) translateX(360px)
-        rotate(-120deg);
+    from {
+      transform: translate(-50%, -50%) rotate(120deg)
+        translateX(var(--orbit-r, 360px)) rotate(-120deg);
     }
-    100% {
-      transform: translate(-50%, -50%) rotate(480deg) translateX(360px)
-        rotate(-480deg);
+    to {
+      transform: translate(-50%, -50%) rotate(480deg)
+        translateX(var(--orbit-r, 360px)) rotate(-480deg);
     }
   }
 
   @keyframes orbit-3 {
-    0% {
-      transform: translate(-50%, -50%) rotate(240deg) translateX(480px)
-        rotate(-240deg);
+    from {
+      transform: translate(-50%, -50%) rotate(240deg)
+        translateX(var(--orbit-r, 480px)) rotate(-240deg);
     }
-    100% {
-      transform: translate(-50%, -50%) rotate(600deg) translateX(480px)
-        rotate(-600deg);
+    to {
+      transform: translate(-50%, -50%) rotate(600deg)
+        translateX(var(--orbit-r, 480px)) rotate(-600deg);
     }
   }
 
   @keyframes orbit-4 {
-    0% {
-      transform: translate(-50%, -50%) rotate(60deg) translateX(280px)
-        rotate(-60deg);
+    from {
+      transform: translate(-50%, -50%) rotate(60deg)
+        translateX(var(--orbit-r, 280px)) rotate(-60deg);
     }
-    100% {
-      transform: translate(-50%, -50%) rotate(420deg) translateX(280px)
-        rotate(-420deg);
+    to {
+      transform: translate(-50%, -50%) rotate(420deg)
+        translateX(var(--orbit-r, 280px)) rotate(-420deg);
     }
   }
 
   @keyframes orbit-5 {
-    0% {
-      transform: translate(-50%, -50%) rotate(180deg) translateX(420px)
-        rotate(-180deg);
+    from {
+      transform: translate(-50%, -50%) rotate(180deg)
+        translateX(var(--orbit-r, 420px)) rotate(-180deg);
     }
-    100% {
-      transform: translate(-50%, -50%) rotate(540deg) translateX(420px)
-        rotate(-540deg);
+    to {
+      transform: translate(-50%, -50%) rotate(540deg)
+        translateX(var(--orbit-r, 420px)) rotate(-540deg);
     }
   }
 
   @keyframes orbit-6 {
-    0% {
-      transform: translate(-50%, -50%) rotate(300deg) translateX(540px)
-        rotate(-300deg);
+    from {
+      transform: translate(-50%, -50%) rotate(300deg)
+        translateX(var(--orbit-r, 540px)) rotate(-300deg);
     }
-    100% {
-      transform: translate(-50%, -50%) rotate(660deg) translateX(540px)
-        rotate(-660deg);
+    to {
+      transform: translate(-50%, -50%) rotate(660deg)
+        translateX(var(--orbit-r, 540px)) rotate(-660deg);
     }
   }
 
@@ -221,42 +227,6 @@ const { title = "Skills" } = Astro.props;
     .orbit-5,
     .orbit-6 {
       animation: none !important;
-    }
-  }
-
-  @media (max-width: 768px) {
-    /* Mobile: Disable animations but keep orbital positions */
-  @media (max-width: 768px) {
-    /* Mobile: Disable animations but keep orbital positions */
-    .orbit-1 {
-      animation: none !important;
-      transform: translate(-50%, -50%) rotate(0deg) translateX(180px) rotate(0deg);
-    }
-    .orbit-2 {
-      animation: none !important;
-      transform: translate(-50%, -50%) rotate(120deg) translateX(360px) rotate(-120deg);
-    }
-    .orbit-3 {
-      animation: none !important;
-      transform: translate(-50%, -50%) rotate(240deg) translateX(480px) rotate(-240deg);
-    }
-    .orbit-4 {
-      animation: none !important;
-      transform: translate(-50%, -50%) rotate(60deg) translateX(280px) rotate(-60deg);
-    }
-    .orbit-5 {
-      animation: none !important;
-      transform: translate(-50%, -50%) rotate(180deg) translateX(420px) rotate(-180deg);
-    }
-    .orbit-6 {
-      animation: none !important;
-      transform: translate(-50%, -50%) rotate(300deg) translateX(540px) rotate(-300deg);
-    }
-
-    /* Mobile system size - large enough to prevent cropping */
-    .orbit-system {
-      width: 1100px;
-      height: 1100px;
     }
   }
 </style>

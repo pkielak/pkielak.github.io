@@ -108,7 +108,7 @@ export function init() {
     {
       root: null,
       rootMargin: "0px",
-      threshold: Array.from({ length: 30 }, (_, i) => i / 30), // 30 thresholds for smooth detection
+      threshold: Array.from({ length: 31 }, (_, i) => i / 30), // 30 thresholds for smooth detection
     },
   );
 
