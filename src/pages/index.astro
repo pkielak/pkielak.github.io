@@ -39,21 +39,23 @@ const posts = (await getCollection("notes"))
       <div class="scroll-anchor"></div>
 
       <section class="content-section">
-        <div class="container">
+        <div class="container container-avatar">
           <div class="avatar-section">
             <img src="avatar.png" alt="Avatar" class="avatar" />
           </div>
-          <h3>Hello!</h3>
-          <p>
-            I'm a front-end developer with a few years of experience in web
-            development, and it's nice to share my experiences here, on this
-            page.
-          </p>
-          <p>
-            If you're interested, you can jump straight in{" "}<a
-              href="/notes/index">here</a
-            > or scroll down to the blog posts on the bottom of the page.
-          </p>
+          <div>
+            <h3>Hello!</h3>
+            <p>
+              I'm a front-end developer with a few years of experience in web
+              development, and it's nice to share my experiences here, on this
+              page.
+            </p>
+            <p>
+              If you're interested, you can jump straight in{" "}<a
+                href="/notes/index">here</a
+              > or scroll down to the blog posts on the bottom of the page.
+            </p>
+          </div>
         </div>
       </section>
       <div class="scroll-anchor"></div>
@@ -145,8 +147,11 @@ const posts = (await getCollection("notes"))
     </div>
   </main>
 </Main>
-
 <style>
+  h3 {
+    margin-top: 0;
+  }
+
   .avatar-section {
     position: relative;
     background-color: var(--nord14-aurora);
@@ -154,6 +159,21 @@ const posts = (await getCollection("notes"))
     aspect-ratio: 1;
     max-width: 256px;
     margin: 0 auto;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.08) 0,
+        rgba(0, 0, 0, 0.08) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+      pointer-events: none;
+      aspect-ratio: 1;
+    }
   }
 
   .avatar {
@@ -161,13 +181,12 @@ const posts = (await getCollection("notes"))
     margin: 0 auto;
     max-width: 256px;
     object-fit: cover;
-    filter: grayscale(100%) contrast(1.2) brightness(0.75);
+    filter: grayscale(100%) contrast(3) brightness(0.75) saturate(50%);
     mix-blend-mode: overlay;
   }
 
   @media (min-width: 768px) {
     .avatar-section {
-      float: left;
       margin-right: 1.5rem;
     }
   }
@@ -243,6 +262,7 @@ const posts = (await getCollection("notes"))
     position: absolute;
     left: 50%;
     border: 1px solid var(--nord14-aurora);
+    box-shadow: 0 0 5px rgba(163, 190, 140, 0.5);
     padding: 1rem;
     width: calc(100% - 2rem);
   }
@@ -251,9 +271,21 @@ const posts = (await getCollection("notes"))
     margin-bottom: 0;
   }
 
+  .container-avatar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+  }
+
+  .container-avatar h3 {
+    margin-top: 0.5rem;
+  }
+
   .content-section:nth-of-type(1) .container,
   .container.skills {
     border: none;
+    box-shadow: none;
     padding: 0;
   }
 
@@ -281,6 +313,16 @@ const posts = (await getCollection("notes"))
     left: 1rem;
     z-index: 9;
     font-family: "IBM Plex Mono", monospace;
+  }
+
+  @media (min-width: 768px) {
+    .container-avatar {
+      flex-direction: row;
+    }
+
+    .container-avatar h3 {
+      margin-top: 0;
+    }
   }
 
   @media (min-width: 1024px) {
