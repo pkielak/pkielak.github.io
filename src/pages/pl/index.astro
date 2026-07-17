@@ -1,0 +1,7 @@
+---
+import Index from "../../layouts/Index.astro";
+
+const locale = await import("../../locales/pl.json");
+---
+
+<Index locale={locale.default} />

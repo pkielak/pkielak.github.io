@@ -6,7 +6,7 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://p.kielak.github,io",
+  site: "https://pkielak.me",
   integrations: [mdx(), sitemap(), react()],
   markdown: {
     remarkPlugins: [
@@ -18,5 +18,9 @@ export default defineConfig({
         },
       ],
     ],
+  },
+  i18n: {
+    locales: ["en", "pl"],
+    defaultLocale: "en",
   },
 });
