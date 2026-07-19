@@ -7,9 +7,15 @@
   "cta": "here",
   "motivationTitle": "Why I'm a Software Developer",
   "motivationText": "As a software developer, I want to build useful apps and pages that leave a positive impact. I think this way I can change the world around for better. Some of my earlier projects comercial or private have succeeded in this misson, it keeps me motivated to keep going.",
+  "skills": "Skills",
   "projectTitle": "Projects",
   "kopistaDescription": "Kopista is a handwriting to markdown converter that lets you capture handwritten notes and convert them into markdown text.",
   "postsTitle": "Blog posts",
+  "contactTitle": "Contact",
   "universeHeading": "And there it is, my own, personal universe...",
-  "universeSubheading": "Navigate by clicking on the star representing the blog post/note."
+  "universeSubheading": "Navigate by clicking on the star representing the blog post/note.",
+  "name": "Name",
+  "email": "Email",
+  "message": "Message",
+  "submit": "Send"
 }

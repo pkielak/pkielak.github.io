@@ -1,15 +1,21 @@
 {
   "description": "Kosmicznie fajny",
   "heading": "Piotr Kielak jest kosmicznie fajny",
-  "subheading": "And I will tell you why. Let's go into the deep space to find out why",
-  "introText1": "I'm a front-end developer with a few years of experience in web development. I always wanted to create unique and tailored experiences, and this page is one of them. It combines retro look with three.js to tell the story of going into space.",
-  "introText2": "There's also my personal blog/digital garden, but I call it my own personal universe, if you want explore it, you can scroll down to the bottom of the page",
+  "subheading": "i powiem Ci dlaczego. Polećmy w kosmiczną podróż aby się o tym przekonać",
+  "introText1": "Jestem front-end developerem z paroma latami doświadczenia. Od zawsze chciałem tworzyć unikalne i dopasowane do użytkowników doświadczenia. Starałem się aby moja strona domowa to pokazywała. Miesza ona retro stylistykę razem z biblioteką three.js aby opowiedzieć historię o kosmicznej wędrówce.",
+  "introText2": "Można też tu znaleźć mój blog (prywatny kosmos). Jeśli chcesz go odwiedzić, przeskroluj do końca strony, albo kliknij",
   "cta": "tutaj",
   "motivationTitle": "Dlaczego jestem programistą",
-  "motivationText": "As a software developer, I want to build useful apps and pages that leave a positive impact. I think this way I can change the world around for better. Some of my earlier projects comercial or private have succeeded in this misson, it keeps me motivated to keep going.",
+  "motivationText": "Jako programista zawsze chciałem tworzyć oprogramowanie, które sprawia że świat staje się lepszym miejscem. Myślę, że programowanie ma taką moc. Myślę, że paru moim projektom, czy to prywatnym czy komercyjnym się to udało, motywuje mnie to do dalszego działania.",
+  "skills": "Umiejętności",
   "projectTitle": "Projekty",
   "kopistaDescription": "Kopista to konwerter pisma odręcznego do pliku tekstowego. Przy pomocy modelu OCR zamienia zdjęcie z odręczną notatką na tekst cyfrowy, który można zapisać do formatu markdown lub txt.",
   "postsTitle": "Najnowsze teksty",
+  "contactTitle": "Kontakt",
   "universeHeading": "I oto jest, moje własne uniwersum...",
-  "universeSubheading": "Każdy kwadracik reprezentuje jeden tekst, kliknij na niego aby przejść do danego tekstu"
+  "universeSubheading": "Każdy kwadracik reprezentuje jeden tekst, kliknij na niego aby przejść do danego tekstu",
+  "name": "Imię",
+  "email": "Email",
+  "message": "Wiadomość",
+  "submit": "Wyślij"
 }

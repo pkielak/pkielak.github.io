@@ -7,9 +7,13 @@ import ContactForm from "../components/ContactForm.astro";
 import GraphWrapper from "src/components/GraphWrapper.astro";
 import ConsoleLoading from "../components/ConsoleLoading.astro";
 import OrbitSystem from "../components/OrbitSystem.astro";
+import { Image } from "astro:assets";
+import { type IndexLocale } from "../content.config";
+
+import avatar from "../../public/avatar.png";
 
 interface Props {
-  locale: { [key: string]: string };
+  locale: IndexLocale;
 }
 
 const { locale } = Astro.props;
@@ -45,7 +49,7 @@ const posts = (await getCollection("notes"))
       <section class="content-section">
         <div class="container container-avatar">
           <div class="avatar-section">
-            <img src="avatar.png" alt="Avatar" class="avatar" />
+            <Image src={avatar} alt="Avatar" class="avatar" />
           </div>
           <div>
             <h3>Hello!</h3>
@@ -72,7 +76,7 @@ const posts = (await getCollection("notes"))
 
       <section class="content-section">
         <div class="container skills">
-          <OrbitSystem />
+          <OrbitSystem title={locale.skills} />
         </div>
       </section>
       <div class="scroll-anchor"></div>
@@ -122,8 +126,8 @@ const posts = (await getCollection("notes"))
 
       <section class="content-section">
         <div class="container">
-          <h3>Contact</h3>
-          <ContactForm />
+          <h3>{locale.contactTitle}</h3>
+          <ContactForm locale={locale} />
         </div>
       </section>
       <div class="scroll-anchor"></div>
@@ -411,6 +415,27 @@ const posts = (await getCollection("notes"))
   import { init } from "../lib/init.js";
   import { detectPerformanceCapabilities } from "../lib/performance.js";
 
+  (function () {
+    const supportedLocales = ["en", "pl"];
+    const defaultLocale = "en";
+
+    const browserLang = navigator.language || defaultLocale;
+    const userLang = browserLang.split("-")[0].toLowerCase();
+    const targetLocale = supportedLocales.includes(userLang)
+      ? userLang
+      : defaultLocale;
+
+    console.log("Browser language:", browserLang);
+    console.log("Target locale:", targetLocale);
+
+    // Only skip redirect if already on the correct locale path
+    const currentPath = window.location.pathname;
+    if (currentPath === `/${targetLocale}/`) {
+      return;
+    }
+
+    window.location.replace(`/${targetLocale}/`);
+  })();
   // Early performance detection to set body classes
   if (typeof window !== "undefined") {
     const { isMobile } = detectPerformanceCapabilities();

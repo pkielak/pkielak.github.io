@@ -1,43 +1,51 @@
 ---
+import type { IndexLocale } from "src/content.config";
+
 const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
+
+interface Props {
+  locale: IndexLocale;
+}
+
+const { locale } = Astro.props;
 ---
 
 <form id="form" action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value={WEB_3_FORMS_KEY} />
   <div class="small-inputs">
     <div>
-      <label for="name">First Name</label>
+      <label for="name">{locale.name}</label>
       <input
         type="text"
         id="name"
         name="name"
-        placeholder="First name"
+        placeholder={locale.name}
         required
       />
     </div>
 
     <div>
-      <label for="email">Email</label>
+      <label for="email">{locale.email}</label>
       <input
         id="email"
         type="email"
         name="email"
         inputmode="email"
-        placeholder="Email Address"
+        placeholder={locale.email}
         required
       />
     </div>
   </div>
   <div>
-    <label for="message">Message</label>
+    <label for="message">{locale.message}</label>
     <textarea
       id="message"
       name="message"
       rows="6"
-      placeholder="Message"
+      placeholder={locale.message}
       required></textarea>
   </div>
-  <button type="submit">Submit</button>
+  <button type="submit">{locale.submit}</button>
 </form>
 
 <style>

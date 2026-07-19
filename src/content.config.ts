@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
 const notes = defineCollection({
@@ -16,3 +17,28 @@ const notes = defineCollection({
 });
 
 export const collections = { notes };
+
+const indexLocale = z.object({
+  description: z.string(),
+  heading: z.string(),
+  subheading: z.string(),
+  introText1: z.string(),
+  introText2: z.string(),
+  cta: z.string(),
+  motivationTitle: z.string(),
+  motivationText: z.string(),
+  skills: z.string(),
+  projectTitle: z.string(),
+  kopistaDescription: z.string(),
+  postsTitle: z.string(),
+  contactTitle: z.string(),
+  universeHeading: z.string(),
+  universeSubheading: z.string(),
+  name: z.string(),
+  email: z.string(),
+  message: z.string(),
+  submit: z.string(),
+
+});
+
+export type IndexLocale = z.infer<typeof indexLocale>;
