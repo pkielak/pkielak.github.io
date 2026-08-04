@@ -2,6 +2,7 @@
   "description": "Kosmicznie fajny",
   "heading": "Piotr Kielak jest kosmicznie fajny",
   "subheading": "i powiem Ci dlaczego. Polećmy w kosmiczną podróż aby się o tym przekonać",
+  "greeting": "Cześć",
   "introText1": "Jestem front-end developerem z paroma latami doświadczenia. Od zawsze chciałem tworzyć unikalne i dopasowane do użytkowników doświadczenia. Starałem się aby moja strona domowa to pokazywała. Miesza ona retro stylistykę razem z biblioteką three.js aby opowiedzieć historię o kosmicznej wędrówce.",
   "introText2": "Można też tu znaleźć mój blog (prywatny kosmos). Jeśli chcesz go odwiedzić, przeskroluj do końca strony, albo kliknij",
   "cta": "tutaj",
@@ -17,5 +18,5 @@
   "name": "Imię",
   "email": "Email",
   "message": "Wiadomość",
-  "submit": "Wyślij"
+  "submit": "Wyslij"
 }

@@ -22,6 +22,7 @@ const indexLocale = z.object({
   description: z.string(),
   heading: z.string(),
   subheading: z.string(),
+  greeting: z.string(),
   introText1: z.string(),
   introText2: z.string(),
   cta: z.string(),
