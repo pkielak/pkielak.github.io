@@ -25,7 +25,6 @@ const indexLocale = z.object({
   greeting: z.string(),
   introText1: z.string(),
   introText2: z.string(),
-  cta: z.string(),
   motivationTitle: z.string(),
   motivationText: z.string(),
   skills: z.string(),
@@ -39,7 +38,6 @@ const indexLocale = z.object({
   email: z.string(),
   message: z.string(),
   submit: z.string(),
-
 });
 
 export type IndexLocale = z.infer<typeof indexLocale>;

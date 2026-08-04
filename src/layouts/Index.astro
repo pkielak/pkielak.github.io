@@ -67,9 +67,6 @@ const posts = (await getCollection("notes"))
             <p>
               {locale.introText1}
             </p>
-            <p>
-              {locale.introText2}{" "}<a href="/notes/index">{locale.cta}</a>.
-            </p>
           </div>
         </div>
       </section>
@@ -187,7 +184,7 @@ const posts = (await getCollection("notes"))
       </section>
       <div class="scroll-anchor"></div>
 
-      <section class="content-section">
+      <section id="universe" class="content-section">
         <div class="overlay">
           <h3>
             {locale.universeHeading}
