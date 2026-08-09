@@ -19,8 +19,6 @@
     "react-dom": "^19.2.7",
     "remark-wiki-link": "^2.0.1",
     "vis-network": "^9.1.9",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
     "@types/three": "^0.185.0",
     "three": "^0.185.0"
   },
