@@ -1,10 +1,5 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import NetworkGraph from "../components/NetworkGraph";
-
-const graph = await import("../pages/graph.json");
-const graphData = await graph.GET({}).then((response) => response.json());
 
 interface Props {
   title: string;

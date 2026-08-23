@@ -1,8 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "jsx": "preserve",
-    "jsxImportSource": "react", // Domyślnie dla plików .tsx
     "baseUrl": ".",
     "paths": {
       "astro:content": ["./.astro/types.d.ts"],

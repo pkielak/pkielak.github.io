@@ -1,8 +1,13 @@
 ---
-import NetworkGraph from "./NetworkGraph";
+import type { Data } from "vis-network";
 
 const graph = await import("../pages/graph.json");
-const graphData = await graph.GET({}).then((response) => response.json());
+const graphData = (await graph
+  .GET({})
+  .then((response) => response.json())) as Data;
+
+// Escape `<` so labels containing e.g. `</script>` can't break out of the tag.
+const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
 ---
 
 <div class="controls-wrapper">
@@ -13,7 +18,9 @@ const graphData = await graph.GET({}).then((response) => response.json());
   <div id="graph-wrapper" class="graph-wrapper">
     <span class="zoom-control-text">Hold Ctrl + Scroll to Zoom</span>
 
-    <NetworkGraph graphData={graphData} client:idle transition:persist />
+    <div id="network-container" class="network-container" transition:persist>
+    </div>
+    <script type="application/json" id="graph-data" set:html={graphDataJson} />
   </div>
 </div>
 
@@ -30,6 +37,11 @@ const graphData = await graph.GET({}).then((response) => response.json());
     position: relative;
   }
 
+  .network-container {
+    height: 100%;
+    width: 100%;
+  }
+
   .lock-graph {
     position: absolute;
     left: 1rem;
@@ -39,7 +51,6 @@ const graphData = await graph.GET({}).then((response) => response.json());
     font-family: "IBM Plex Mono", monospace;
     border: 0;
     padding: 0;
-    display: none;
     justify-content: center;
     align-items: center;
     background: none;
@@ -118,4 +129,81 @@ const graphData = await graph.GET({}).then((response) => response.json());
     }
     init();
   })();
+</script>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+  import { Network, type Data, type Options } from "vis-network";
+
+  const container = document.getElementById("network-container");
+  const data = document.getElementById("graph-data")?.textContent;
+
+  if (container && data) {
+    const graphData = JSON.parse(data) as Data;
+
+    const options: Options = {
+      nodes: {
+        fixed: true,
+        font: {
+          color: "#eceff4",
+          size: 16,
+          strokeColor: "#2e3440",
+          face: "IBM Plex Mono",
+        },
+        color: {
+          border: "#2e3440",
+          background: "#a3be8c",
+          hover: { background: "#5e81ac", border: "#2e3440" },
+          highlight: { background: "#bf616a", border: "#2e3440" },
+        },
+        shape: "square",
+        size: 12,
+      },
+      edges: {
+        color: "#4c566a",
+        width: 2,
+      },
+      interaction: {
+        hover: true,
+        zoomView: window.matchMedia("(pointer: coarse)").matches,
+      },
+    };
+
+    const network = new Network(container, graphData, options);
+
+    network.on("click", (params) => {
+      if (params.nodes.length > 0) {
+        navigate(`/notes/${params.nodes[0]}/`);
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      network.fit();
+    });
+
+    container.addEventListener(
+      "wheel",
+      (e: WheelEvent) => {
+        if (!e.ctrlKey) return;
+        e.preventDefault();
+        const scale = network.getScale();
+        network.moveTo({ scale: scale * (e.deltaY > 0 ? 0.9 : 1.1) });
+      },
+      { passive: false },
+    );
+
+    document.addEventListener("astro:page-load", () => {
+      const pathParts = window.location.pathname.split("/").filter(Boolean);
+      const locationKey =
+        pathParts[pathParts.length - 1] ||
+        pathParts[pathParts.length - 2] ||
+        "";
+
+      if (locationKey && network.findNode(locationKey)) {
+        network.selectNodes([locationKey]);
+      }
+
+      window.scrollTo(0, 0);
+    });
+  }
 </script>
