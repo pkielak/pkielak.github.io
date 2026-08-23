@@ -1,5 +1,5 @@
 ---
-import { type Edge, type Data, type Node } from "vis-network";
+import { getGraph } from "../lib/graph";
 
 interface Props {
   postSlug: string;
@@ -7,23 +7,18 @@ interface Props {
 
 const { postSlug } = Astro.props;
 
-const graphJson = await import("../pages/graph.json");
-const { nodes, edges }: Data = await graphJson
-  .GET({})
-  .then((response) => response.json());
+const { nodes, edges } = await getGraph();
 
-const backlinks = (edges as Edge[] | undefined)?.filter(
-  (edge) => edge.to === postSlug,
-);
+const backlinks = edges.filter((edge) => edge.to === postSlug);
 ---
 
 {
-  backlinks && backlinks.length > 0 && (
+  backlinks.length > 0 && (
     <>
       <h5 class="backlinks-title">Backlinks</h5>
       <ol class="backlinks">
         {backlinks.map((backlink) => {
-          const referenceNode = (nodes as Node[] | undefined)?.find(
+          const referenceNode = nodes.find(
             (node) => backlink.from === node?.id,
           );
           return (

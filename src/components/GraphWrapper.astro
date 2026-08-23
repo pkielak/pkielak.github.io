@@ -1,10 +1,7 @@
 ---
-import type { Data } from "vis-network";
+import { getGraph } from "../lib/graph";
 
-const graph = await import("../pages/graph.json");
-const graphData = (await graph
-  .GET({})
-  .then((response) => response.json())) as Data;
+const graphData = await getGraph();
 
 // Escape `<` so labels containing e.g. `</script>` can't break out of the tag.
 const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
