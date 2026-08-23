@@ -1,0 +1,68 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+// Self-hosted JetBrains Mono (weights used across the site: 400, 600, 700).
+// Without these @font-face rules the "JetBrains Mono" family is never loaded,
+// so canvas-rendered text (e.g. the graph) falls back to a default font.
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/600.css';
+import '@fontsource/jetbrains-mono/700.css';
+import '@/styles/global.css';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import BackToTop from '@/components/BackToTop.astro';
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+
+// getRelativeLocaleUrl() prepends the target locale to the given path, so the
+// current locale prefix (e.g. "/pl") must be stripped first. Otherwise the
+// slug accumulates, e.g. /pl/ -> /en/pl/ instead of /en/.
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const localeFreePath =
+    Astro.currentLocale && segments[0] === Astro.currentLocale
+        ? `/${segments.slice(1).join('/')}`
+        : Astro.url.pathname;
+
+---
+<!doctype html>
+<html lang={Astro.currentLocale ?? 'en'}>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{t.meta.title}</title>
+        <meta name="description" content={t.meta.description} />
+        <meta name="keywords" content={t.meta.keywords} />
+        <meta property="og:title" content={t.meta.ogTitle} />
+        <meta property="og:description" content={t.meta.ogDescription} />
+        <meta property="og:image" content={new URL(t.meta.ogImage, Astro.url)} />
+        <link
+            rel="alternate"
+            hreflang="en"
+            href={getRelativeLocaleUrl('en', localeFreePath)}
+        />
+        <link
+            rel="alternate"
+            hreflang="pl"
+            href={getRelativeLocaleUrl('pl', localeFreePath)}
+        />
+    </head>
+    <body>
+        <a class="skip-link" href="#home">
+            {t.nav.home}
+        </a>
+
+        <Header />
+
+        <slot />
+
+        <Footer />
+
+        <BackToTop />
+    </body>
+</html>

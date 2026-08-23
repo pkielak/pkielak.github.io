@@ -1,0 +1,81 @@
+---
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+
+const year = new Date().getFullYear();
+const years = Math.max(year - 2021, 1); // first front-end role: 02/2021
+const interpolate = (
+    template: string,
+    values: Record<string, string> = { year: String(year), years: String(years) }
+) =>
+    template.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
+---
+<section id="about" class="section" aria-labelledby="about-title">
+    <h2 id="about-title" class="section__title">{t.about.title}</h2>
+    <p class="section__intro">{interpolate(t.about.intro)}</p>
+
+    <h3 class="subheading">{t.about.experienceTitle}</h3>
+    <ul class="timeline">
+        {
+            t.about.experience.map((job) => (
+                <li class="timeline__item card">
+                    <h4 class="timeline__role">{job.role}</h4>
+                    <p class="timeline__meta">
+                        {job.company} · {job.period}
+                    </p>
+                    <p>{job.description}</p>
+                </li>
+            ))
+        }
+    </ul>
+
+    <h3 class="subheading">{t.about.educationTitle}</h3>
+    <ul class="timeline">
+        {
+            t.about.education.map((edu) => (
+                <li class="timeline__item card">
+                    <h4 class="timeline__role">{edu.degree}</h4>
+                    <p class="timeline__meta">
+                        {edu.institution} · {edu.period}
+                    </p>
+                    <p>{edu.description}</p>
+                </li>
+            ))
+        }
+    </ul>
+
+    <p class="fun-fact">{t.about.funFact}</p>
+</section>
+
+<style>
+    .timeline {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    .timeline__role {
+        margin: 0 0 0.25rem;
+    }
+
+    .timeline__meta {
+        color: var(--color-muted);
+        font-size: 0.9rem;
+        margin: 0 0 0.5rem;
+    }
+
+    .fun-fact {
+        margin-top: 2rem;
+        padding: 1rem 1.25rem;
+        border-left: 3px solid var(--color-accent);
+        background: var(--nord2-polar-night);
+        border-radius: 0 var(--radius) var(--radius) 0;
+        color: var(--color-muted);
+    }
+</style>

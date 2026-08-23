@@ -1,21 +1,34 @@
 ---
-import { getGraph } from "../lib/graph";
+import { getGraph } from "@/lib/graph";
 
+interface Props {
+  /** Render as a bordered inline block (e.g. on the home page) instead of
+   *  the full-viewport page view. */
+  embedded?: boolean;
+}
+
+const { embedded = false } = Astro.props;
 const graphData = await getGraph();
 
 // Escape `<` so labels containing e.g. `</script>` can't break out of the tag.
 const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
 ---
 
-<div class="controls-wrapper">
-  <div id="tap-to-unlock" class="tap-to-unlock visible">
-    Tap to unlock the graph
-  </div>
-  <button id="lock-graph" class="lock-graph"> Lock graph </button>
-  <div id="graph-wrapper" class="graph-wrapper">
-    <span class="zoom-control-text">Hold Ctrl + Scroll to Zoom</span>
+<div class={embedded ? "controls-wrapper controls-wrapper--embedded" : "controls-wrapper"}>
+  {embedded ? null : (
+    <>
+      <div id="tap-to-unlock" class="tap-to-unlock visible">
+        Tap to unlock the graph
+      </div>
+      <button id="lock-graph" class="lock-graph"> Lock graph </button>
+    </>
+  )}
+  <div id="graph-wrapper" class={embedded ? "graph-wrapper graph-wrapper--embedded" : "graph-wrapper"}>
+    {embedded ? null : (
+      <span class="zoom-control-text">Hold Ctrl + Scroll to Zoom</span>
+    )}
 
-    <div id="network-container" class="network-container" transition:persist>
+    <div id="network-container" class="network-container">
     </div>
     <script type="application/json" id="graph-data" set:html={graphDataJson} />
   </div>
@@ -31,7 +44,16 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
   .graph-wrapper {
     width: 100%;
     height: 100svh;
+    padding-top: var(--header-height);
     position: relative;
+  }
+
+  /* Inline variant: a bordered, fixed-height block for embedding in a section */
+  .graph-wrapper--embedded {
+    height: min(60svh, 480px);
+    padding-top: 0;
+    border: 1px solid var(--color-border);
+    background: var(--nord0-polar-night);
   }
 
   .network-container {
@@ -45,7 +67,7 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
     bottom: 2rem;
     z-index: 2;
     display: none;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: var(--font-mono);
     border: 0;
     padding: 0;
     justify-content: center;
@@ -55,7 +77,7 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
   }
 
   .zoom-control-text {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: var(--font-mono);
     position: absolute;
     bottom: 0;
     left: 1rem;
@@ -68,11 +90,11 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100svh;
+    height: calc(100svh - var(--header-height));
     background: #2e344090;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: var(--font-mono);
     position: absolute;
-    top: 0;
+    top: var(--header-height);
     left: 0;
     z-index: 1;
   }
@@ -84,12 +106,6 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
   .controls-wrapper {
     position: relative;
     z-index: 1;
-  }
-
-  @media (min-width: 768px) {
-    .tap-to-unlock {
-      height: 100vh;
-    }
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -118,8 +134,11 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
       const tapToUnlock = document.getElementById("tap-to-unlock");
       const lockGraph = document.getElementById("lock-graph");
 
+      // Embedded variant has no unlock overlay / lock button.
+      if (!tapToUnlock && !lockGraph) return;
+
       [tapToUnlock, lockGraph].forEach((element) =>
-        element.addEventListener("click", () =>
+        element?.addEventListener("click", () =>
           onUnlock(tapToUnlock, lockGraph),
         ),
       );
@@ -129,13 +148,25 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
 </script>
 
 <script>
-  import { navigate } from "astro:transitions/client";
   import { Network, type Data, type Options } from "vis-network";
 
   const container = document.getElementById("network-container");
   const data = document.getElementById("graph-data")?.textContent;
 
+  // Note: can't use define:vars here — Astro emits define:vars scripts as
+  // classic (non-module) inline scripts, which breaks the import below.
+  // The embedded variant is detected via the wrapper class instead.
+  const embedded = container?.closest(".graph-wrapper--embedded") !== null;
+
   if (container && data) {
+    // vis-network draws labels onto a canvas at init, so make sure the
+    // label font is actually loaded first or it falls back to a default.
+    if ("fonts" in document) {
+      await document.fonts
+        .load('16px "JetBrains Mono"')
+        .catch(() => {});
+    }
+
     const graphData = JSON.parse(data) as Data;
 
     const options: Options = {
@@ -145,7 +176,7 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
           color: "#eceff4",
           size: 16,
           strokeColor: "#2e3440",
-          face: "IBM Plex Mono",
+          face: "JetBrains Mono",
         },
         color: {
           border: "#2e3440",
@@ -160,17 +191,21 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
         color: "#4c566a",
         width: 2,
       },
-      interaction: {
-        hover: true,
-        zoomView: window.matchMedia("(pointer: coarse)").matches,
-      },
+      // Embedded in a scrolling page: no pan/zoom so touch gestures and
+      // the wheel keep scrolling the page instead of moving the graph.
+      interaction: embedded
+        ? { hover: true }
+        : {
+            hover: true,
+            zoomView: window.matchMedia("(pointer: coarse)").matches,
+          },
     };
 
     const network = new Network(container, graphData, options);
 
     network.on("click", (params) => {
       if (params.nodes.length > 0) {
-        navigate(`/notes/${params.nodes[0]}/`);
+        window.location.href = `/notes/${params.nodes[0]}/`;
       }
     });
 
@@ -178,29 +213,18 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
       network.fit();
     });
 
-    container.addEventListener(
-      "wheel",
-      (e: WheelEvent) => {
-        if (!e.ctrlKey) return;
-        e.preventDefault();
-        const scale = network.getScale();
-        network.moveTo({ scale: scale * (e.deltaY > 0 ? 0.9 : 1.1) });
-      },
-      { passive: false },
-    );
+    if (!embedded) {
+      container.addEventListener(
+        "wheel",
+        (e: WheelEvent) => {
+          if (!e.ctrlKey) return;
+          e.preventDefault();
+          const scale = network.getScale();
+          network.moveTo({ scale: scale * (e.deltaY > 0 ? 0.9 : 1.1) });
+        },
+        { passive: false },
+      );
+    }
 
-    document.addEventListener("astro:page-load", () => {
-      const pathParts = window.location.pathname.split("/").filter(Boolean);
-      const locationKey =
-        pathParts[pathParts.length - 1] ||
-        pathParts[pathParts.length - 2] ||
-        "";
-
-      if (locationKey && network.findNode(locationKey)) {
-        network.selectNodes([locationKey]);
-      }
-
-      window.scrollTo(0, 0);
-    });
   }
 </script>

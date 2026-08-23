@@ -1,0 +1,87 @@
+---
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale)
+    ? translations[locale as keyof typeof translations]
+    : en;
+---
+<button class="back-to-top" type="button" aria-label={t.common.backToTop} title={t.common.backToTop}>
+    ↑
+</button>
+
+<script>
+    // Back to top button: hidden until halfway through the hero section.
+    const backToTop = document.querySelector('.back-to-top');
+    if (backToTop) {
+        const reduceMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+        });
+
+        // Reveal once we've scrolled halfway through the hero section.
+        const hero = document.querySelector<HTMLElement>('.hero');
+        const threshold = hero
+            ? hero.offsetTop + hero.offsetHeight / 2
+            : window.innerHeight / 2;
+
+        let ticking = false;
+        const update = () => {
+            backToTop.classList.toggle(
+                'back-to-top--visible',
+                window.scrollY >= threshold
+            );
+            ticking = false;
+        };
+        window.addEventListener(
+            'scroll',
+            () => {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(update);
+                }
+            },
+            { passive: true }
+        );
+        update();
+    }
+</script>
+
+<style>
+    .back-to-top {
+        position: fixed;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        z-index: 40;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--color-border);
+        background: var(--color-surface);
+        color: var(--color-text);
+        font-family: var(--font-mono);
+        font-size: 1.1rem;
+        cursor: pointer;
+        /* hidden until scrolled down; visibility keeps it out of the tab order
+           / a11y tree while faded */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(0.5rem);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s,
+            border-color 0.15s ease, color 0.15s ease;
+    }
+    .back-to-top--visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .back-to-top:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+</style>

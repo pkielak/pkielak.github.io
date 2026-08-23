@@ -1,0 +1,74 @@
+# Career-Ops Profile Configuration
+# Single source of truth for personal data across all modes.
+# Fields marked "TBD" need your input.
+
+candidate:
+  full_name: "Piotr Kielak"
+  email: "p.kielak@outlook.com"
+  phone: "+48 532 215 418"
+  location: "Barczewo, Warmian–Masurian Voivodeship, Poland"
+  linkedin: "linkedin.com/in/piotr-kielak"
+  portfolio_url: "https://pkielak.me"
+  github: ""
+  twitter: ""
+  photo: "config/photo.jpg"
+
+target_roles:
+  # Your North Star roles — what you're optimizing for
+  primary:
+    - "Front-end Developer"
+    - "Frontend Engineer"
+  # Archetypes help the evaluation system score fit
+  archetypes:
+    - name: "Front-end Developer"
+      level: "Mid"
+      fit: "primary"
+    - name: "React / Next.js Developer"
+      level: "Mid"
+      fit: "secondary"
+    - name: "Full-stack Developer (Next.js)"
+      level: "Junior-Mid"
+      fit: "adjacent"
+
+narrative:
+  headline: "Front-end Developer specializing in React and Next.js"
+  exit_story: "Mechatronics engineer who switched to front-end development; ~4 years building React and Next.js applications, including a financial-app MVP."
+  superpowers:
+    - "React & Next.js application development (MVP to production)"
+    - "Consistent delivery in Scrum teams"
+    - "Responsive, scalable user interfaces"
+  proof_points:
+    - name: "Financial-app MVP (Daifin)"
+      url: ""
+      hero_metric: "MVP built with React and Next.js" # add a real metric if you have one
+    - name: "Job-search platform (Profil Software)"
+      url: ""
+      hero_metric: "Front-end development in React" # add a real metric if you have one
+
+compensation:
+  target_range: "8000-12000 PLN/month"
+  currency: "PLN"
+  minimum: "8000 PLN/month"
+  location_flexibility: "Remote-first; hybrid/onsite only in Olsztyn neighborhood"
+
+location:
+  country: "Poland"
+  city: "Barczewo"
+  timezone: "Europe/Warsaw"
+  visa_status: "Polish citizen (EU)"
+  authorized_in: ["Poland"]
+  needs_sponsorship: false
+
+language:
+  output: en
+
+spend_tier: standard
+
+auto_pdf_score_threshold: 3.75
+
+cv:
+  output_format: "html"
+
+cover_letter:
+  notice_period_days: 30
+  primary_domain: "front-end web development"

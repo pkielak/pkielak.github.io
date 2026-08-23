@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+    <!-- Pixelated P (5x7 grid) on nord0, in nord14 -->
+    <rect width="128" height="128" rx="16" fill="#2e3440" />
+    <g fill="#a3be8c">
+        <rect x="36" y="22" width="48" height="12" />
+        <rect x="36" y="34" width="12" height="24" />
+        <rect x="80" y="34" width="12" height="24" />
+        <rect x="36" y="58" width="48" height="12" />
+        <rect x="36" y="70" width="12" height="36" />
+    </g>
+</svg>

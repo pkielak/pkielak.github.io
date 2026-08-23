@@ -1,24 +1,41 @@
 ---
-const today = new Date();
----
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
 
-<footer>
-  <span>
-    &copy; {today.getFullYear()} pkielak | <a href="/privacy">Privacy policy</a>
-  </span>
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+
+const year = new Date().getFullYear();
+const interpolate = (
+    template: string,
+    values: Record<string, string> = { year: String(year) }
+) =>
+    template.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
+---
+<footer class="site-footer">
+    <p>{interpolate(t.footer.copyright)}</p>
+    <p>
+        {interpolate(t.footer.credits, {
+            year: String(year),
+            astro: t.footer.astro,
+        })}
+    </p>
 </footer>
 
 <style>
-  footer {
-    font-family: "IBM Plex Mono", monospace;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    z-index: 2;
-  }
+    .site-footer {
+        border-top: 1px solid var(--color-border);
+        color: var(--color-muted);
+        text-align: center;
+        padding: 2rem 1rem;
+        font-size: 0.9rem;
+    }
+    .site-footer p {
+        margin: 0.25rem 0;
+    }
+    .site-footer p::before {
+        content: '// ';
+        opacity: 0.55;
+    }
 </style>

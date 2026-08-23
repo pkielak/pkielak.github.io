@@ -1,0 +1,225 @@
+{
+  "meta": {
+    "title": "Piotr Kielak — Front-end Developer",
+    "description": "Piotr Kielak to front-end developer budujący responsywne aplikacje webowe w React i Next.js.",
+    "keywords": "Piotr Kielak, front-end developer, frontend engineer, React, Next.js, TypeScript, JavaScript, web developer, Polska",
+    "ogTitle": "Piotr Kielak — Front-end Developer",
+    "ogDescription": "Front-end developer specjalizujący się w React i Next.js. Od MVP po produkcję.",
+    "ogImage": "/og-image-pl.png"
+  },
+
+  "nav": {
+    "home": "główna",
+    "about": "o mnie",
+    "skills": "umiejętności",
+    "projects": "projekty",
+    "notes": "notatki",
+    "graph": "graf",
+    "contact": "kontakt",
+    "language": "Język"
+  },
+
+  "hero": {
+    "greeting": "hej, jestem Piotr",
+    "tagline": "robię rzeczy do internetu",
+    "subtagline": "lubię budować rzeczy",
+    "ctaPrimary": "> zobacz projekty",
+    "ctaSecondary": "> napisz do mnie",
+    "typingText": [
+      "piszę strony, które nie bolą w oczy",
+      "React i Next.js — od rana do wieczora",
+      "lubię szybkie strony i czysty kod",
+      "facet od mechatroniki, który pisze front-end"
+    ]
+  },
+
+  "about": {
+    "title": "o mnie",
+    "intro": "React i Next.js to moja domena — {years} lat, od startu do finału. Mechatronika przyszła wcześniej, co pewnie tłumaczy moją obsesję na punkcie tego, jak elementy do siebie pasują.",
+    "experienceTitle": "doświadczenie zawodowe",
+    "experience": [
+      {
+        "role": "Front-end Developer",
+        "company": "Daifin",
+        "period": "10/2024 – 01/2025",
+        "description": "Zbudowałem MVP aplikacji finansowej w React i Next.js — responsywne, skalowalne i wdrożone. Zdalnie, Sztokholm."
+      },
+      {
+        "role": "Front-end Developer",
+        "company": "Profil Software",
+        "period": "06/2022 – 07/2024",
+        "description": "Prowadziłem front-end w React dla platformy do szukania pracy, a przy okazji narzędzia dla kadry technicznej i zespołu treści."
+      },
+      {
+        "role": "Front-end Developer",
+        "company": "Bluewom",
+        "period": "02/2021 – 05/2022",
+        "description": "Front-end na całym ówczesnym arsenale: WordPress, jQuery, React, Vue, Twig. Scrum, solidny zespół, sporo wdrożone."
+      }
+    ],
+    "educationTitle": "wykształcenie",
+    "education": [
+      {
+        "degree": "Magister mechatroniki (niedokończone)",
+        "institution": "Politechnika Warszawska",
+        "period": "2014 – 2016",
+        "description": "Drugi krąg mechatroniki. Zostawiłem niedokończone — web był ciekawszy."
+      },
+      {
+        "degree": "Inżynier mechatroniki (BSc)",
+        "institution": "Politechnika Warszawska",
+        "period": "2010 – 2014",
+        "description": "Mój pierwszy inżynierski dyplom. Od tego wszystko się zaczęło."
+      }
+    ],
+    "funFact": "Po godzinach: drukarka 3D, kierownica do simracingu albo dobra manga."
+  },
+
+  "skills": {
+    "title": "umiejętności i ekspertyza",
+    "categories": {
+      "frontend": {
+        "title": "Technologie Frontend",
+        "description": "Moje codzienne bronie.",
+        "items": [
+          { "name": "JavaScript", "level": "expert" },
+          { "name": "React", "level": "expert" },
+          { "name": "TypeScript", "level": "advanced" },
+          { "name": "Next.js", "level": "advanced" },
+          { "name": "Vue", "level": "intermediate" },
+          { "name": "jQuery", "level": "intermediate" },
+          { "name": "Twig", "level": "intermediate" },
+          { "name": "WordPress", "level": "intermediate" }
+        ]
+      },
+      "styling": {
+        "title": "Styling & CSS",
+        "description": "Dzięki temu nie wygląda jak szablon.",
+        "items": [
+          { "name": "CSS", "level": "advanced" },
+          { "name": "SCSS", "level": "advanced" }
+        ]
+      },
+      "backend": {
+        "title": "Backend & API",
+        "description": "Spójnik między front-endem a danymi.",
+        "items": [
+          { "name": "REST API", "level": "intermediate" }
+        ]
+      },
+      "tools": {
+        "title": "Narzędzia i Platformy",
+        "description": "Zaufani pomocnicy.",
+        "items": [
+          { "name": "Git", "level": "expert" },
+          { "name": "GitHub", "level": "advanced" },
+          { "name": "Astro", "level": "intermediate" }
+        ]
+      },
+      "methodologies": {
+        "title": "Metodologie",
+        "description": "Jak utrzymuję tempo w zespole.",
+        "items": [
+          { "name": "Scrum", "level": "expert" },
+          { "name": "Agile", "level": "advanced" }
+        ]
+      }
+    },
+    "aiAssisted": "Wspomagane przez AI",
+    "levels": {
+      "expert": "Ekspert",
+      "advanced": "Zaawansowany",
+      "intermediate": "Średniozaawansowany",
+      "beginner": "Początkujący"
+    }
+  },
+
+  "projects": {
+    "title": "wybrane projekty",
+    "intro": "Moje najlepsze projekty. Prace komercyjne z software house'ów, więc bez linków i screenshotów.",
+    "items": [
+      {
+        "id": "daifin-mvp",
+        "title": "MVP aplikacji finansowej",
+        "description": "Aplikacja finansowa, która zaczęła się jako prototyp i stała się produktem — budowana z zespołem w Daifin, dowieziona do końca.",
+        "role": "Front-end Developer",
+        "technologies": ["React", "Next.js", "TypeScript", "CSS/SCSS"],
+        "aiTools": [],
+        "features": [
+          "UI, które nie rozjeżdża się na żadnym ekranie",
+          "Nie demo, tylko produkt",
+          "Zdalny setup Scrum"
+        ],
+        "url": "",
+        "github": "",
+        "image": "",
+        "imageAlt": "MVP aplikacji finansowej zbudowane w React i Next.js"
+      },
+      {
+        "id": "profil-job-search",
+        "title": "Platforma do szukania pracy",
+        "description": "Front-end w React dla platformy do szukania pracy, z której ludzie naprawdę korzystają — plus wewnętrzne narzędzia w Profil Software.",
+        "role": "Front-end Developer",
+        "technologies": ["React", "JavaScript", "CSS/SCSS"],
+        "aiTools": [],
+        "features": [
+          "Szukanie pracy, którego ludzie używają na co dzień",
+          "Interfejsy zarządcze dla kadry technicznej",
+          "Narzędzia do treści w SM"
+        ],
+        "url": "",
+        "github": "",
+        "image": "",
+        "imageAlt": "Front-end platformy do szukania pracy"
+      }
+    ]
+  },
+
+  "notes": {
+    "title": "ostatnie notatki",
+    "intro": "Myśli i notatki z życia w front-endzie.",
+    "cta": "wszystkie notatki",
+    "allArticlesUrl": "/notes"
+  },
+
+  "contact": {
+    "title": "skontaktuj się",
+    "or": "lub",
+    "intro": "Masz projekt albo ofertę? Porozmawiajmy — moja skrzynka jest otwarta.",
+    "form": {
+      "name": "imię i nazwisko",
+      "namePlaceholder": "Twoje imię",
+      "email": "e-mail",
+      "emailPlaceholder": "twoj@email.com",
+      "subject": "temat",
+      "subjectPlaceholder": "W czym mogę pomóc?",
+      "message": "wiadomość",
+      "messagePlaceholder": "Opowiedz mi o swoim projekcie...",
+      "submit": "wyślij wiadomość",
+      "success": "Dziękuję za wiadomość! Wkrótce się odezwę.",
+      "error": "Ups! Coś poszło nie tak. Spróbuj ponownie."
+    },
+    "social": {
+      "title": "Pozostańmy w kontakcie",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter",
+      "email": "E-mail"
+    }
+  },
+
+  "footer": {
+    "copyright": "© {year} Piotr Kielak. Wszelkie prawa zastrzeżone.",
+    "credits": "Zbudowano z {astro}.",
+    "astro": "Astro"
+  },
+
+  "common": {
+    "backToTop": "Powrót na górę",
+    "readMore": "czytaj więcej",
+    "visitWebsite": "otwórz stronę",
+    "viewCode": "zobacz kod",
+    "comingSoon": "Wkrótce",
+    "lastUpdated": "Ostatnia aktualizacja: {date}"
+  }
+}

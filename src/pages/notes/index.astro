@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+import Layout from '@/layouts/Layout.astro';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+
+const notes = (await getCollection('notes')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const dateFormat: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: 'numeric' };
+---
+<Layout>
+	<main id="home">
+		<section id="notes" class="section" aria-labelledby="notes-title">
+			<h1 id="notes-title" class="section__title">{t.notes.title}</h1>
+			<ol class="notes-list">
+				{
+					notes.map((note) => (
+						<li class="notes-list__item">
+							<time
+								class="notes-list__date"
+								datetime={note.data.pubDate.toISOString()}
+							>
+								{note.data.pubDate.toLocaleDateString(locale, dateFormat)}
+							</time>
+							<a class="notes-list__title" href={`/notes/${note.id}`}>
+								{note.data.title}
+							</a>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	/* the fixed navbar overlays the top of the page, so clear it first
+	   (same treatment as the note detail page) */
+	#notes {
+		padding-top: calc(var(--header-height) + 4rem);
+		/* the header eats the first 4rem of that, so only 2rem is visible
+		   above the title; match it below for visual balance */
+		padding-bottom: 4rem;
+	}
+
+	.notes-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.notes-list__item {
+		display: flex;
+		align-items: baseline;
+		gap: 0.75rem 1.1rem;
+		padding: 0.85rem 0;
+		border-bottom: 1px solid var(--color-border);
+		transition: background-color 0.15s ease;
+	}
+
+	.notes-list__item:first-child {
+		border-top: 1px solid var(--color-border);
+	}
+
+	.notes-list__item::before {
+		/* dim terminal prompt that lights up on hover */
+		content: '❯';
+		flex-shrink: 0;
+		color: var(--color-border);
+		font-size: 0.85rem;
+		transition: color 0.15s ease;
+	}
+
+	.notes-list__item:hover {
+		background-color: color-mix(in srgb, var(--nord1-polar-night) 45%, transparent);
+	}
+
+	.notes-list__item:hover::before {
+		color: var(--color-accent);
+	}
+
+	.notes-list__date {
+		color: var(--color-muted);
+		font-size: 0.8rem;
+		line-height: 1;
+		font-variant-numeric: tabular-nums;
+		/* '23 Aug 2026' = 11 chars, keeps titles left-aligned across rows */
+		min-width: 11ch;
+		flex-shrink: 0;
+	}
+
+	.notes-list__title {
+		color: var(--color-text);
+		text-decoration: none;
+		font-size: 1.05rem;
+		font-weight: 600;
+		line-height: 1.4;
+		letter-spacing: 0.01em;
+		transition: color 0.15s ease, text-shadow 0.15s ease;
+	}
+
+	.notes-list__title:hover,
+	.notes-list__title:focus-visible {
+		color: var(--color-accent);
+		text-shadow: 0 0 12px color-mix(in srgb, var(--color-accent) 35%, transparent);
+	}
+
+	/* narrow screens: wrap the date above the title */
+	@media (max-width: 420px) {
+		.notes-list__item {
+			flex-wrap: wrap;
+			row-gap: 0.15rem;
+		}
+
+		.notes-list__title {
+			flex-basis: 100%;
+			padding-left: calc(0.85rem + 1.1rem); /* align under the date, past prompt + gap */
+		}
+	}
+</style>

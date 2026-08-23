@@ -1,0 +1,169 @@
+<!-- Fixed to the viewport: the stars stay in place while the page
+     scrolls, and the opaque content below the hero slides over them. -->
+<div class="space-scene">
+  <canvas class="space-scene__canvas" id="space-canvas"></canvas>
+</div>
+
+<style>
+  .space-scene {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .space-scene__canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .space-scene__canvas {
+      display: none;
+    }
+
+    .space-scene {
+      background: linear-gradient(
+        180deg,
+        #2e3440 0%,
+        #3b4252 50%,
+        #2e3440 100%
+      );
+    }
+  }
+</style>
+
+<script>
+  import * as THREE from "three";
+
+  const canvas = document.getElementById("space-canvas");
+
+  // The canvas is hidden by CSS under reduced motion, so skip the
+  // whole WebGL setup in that case.
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (canvas && !reduceMotion) {
+    const container = canvas.parentElement ?? document.body;
+    // The hero section the canvas lives in: used to pause rendering
+    // once it scrolls out of view.
+    const hero = canvas.closest("section") ?? document.body;
+    const starRange = 2000;
+    const starCount = 5000;
+    const starSpeed = 0.05;
+
+    try {
+      // Scene, camera, renderer
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000,
+      );
+      camera.position.set(0, 0, 15);
+      camera.lookAt(0, 0, 0);
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(container.clientWidth, container.clientHeight);
+
+      // Stars: random positions in a sphere, spread along the Z axis
+      const starGeometry = new THREE.BufferGeometry();
+      const posArray = new Float32Array(starCount * 3);
+      const distributionRadius = 90;
+
+      for (let i = 0; i < starCount; i++) {
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(2 * Math.random() - 1);
+        const r = Math.cbrt(Math.random()) * distributionRadius;
+
+        posArray[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+        posArray[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+        posArray[i * 3 + 2] = (Math.random() - 0.5) * starRange * 2;
+      }
+      starGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(posArray, 3),
+      );
+
+      const starMaterial = new THREE.PointsMaterial({
+        size: 0.4,
+        color: 0xa3be8c,
+      });
+      const stars = new THREE.Points(starGeometry, starMaterial);
+      scene.add(stars);
+
+      // Animation loop: drift stars along Z and wrap them
+      let animationFrameId = null;
+
+      function startLoop() {
+        if (animationFrameId === null) {
+          animationFrameId = requestAnimationFrame(animationLoop);
+        }
+      }
+
+      function stopLoop() {
+        if (animationFrameId !== null) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+      }
+
+      function animationLoop() {
+        const positions = stars.geometry.attributes.position.array;
+        for (let i = 2; i < positions.length; i += 3) {
+          positions[i] += starSpeed;
+          if (positions[i] > starRange) {
+            positions[i] -= starRange * 2;
+          }
+        }
+        stars.geometry.attributes.position.needsUpdate = true;
+
+        renderer.render(scene, camera);
+        animationFrameId = requestAnimationFrame(animationLoop);
+      }
+
+      // The canvas is fixed, so it stays on screen even when the hero
+      // scrolls away. Pause rendering while the hero is out of view —
+      // the content covers the canvas anyway.
+      const heroObserver = new IntersectionObserver(
+        ([entry]) => (entry.isIntersecting ? startLoop() : stopLoop()),
+        { threshold: 0 },
+      );
+      heroObserver.observe(hero);
+
+      const resizeObserver = new ResizeObserver(() => {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+      resizeObserver.observe(container);
+
+      function cleanup() {
+        stopLoop();
+        starGeometry.dispose();
+        starMaterial.dispose();
+        renderer.dispose();
+        heroObserver.disconnect();
+        resizeObserver.disconnect();
+        window.removeEventListener("astro:before-unload", cleanup);
+      }
+
+      window.addEventListener("astro:before-unload", cleanup);
+      startLoop();
+    } catch (error) {
+      console.error("Error during scene initialization:", error);
+      // Fallback: show a simple gradient background
+      canvas.style.background =
+        "linear-gradient(180deg, #2e3440 0%, #3b4252 50%, #2e3440 100%)";
+    }
+  }
+</script>
