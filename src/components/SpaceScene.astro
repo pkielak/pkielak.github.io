@@ -1,5 +1,4 @@
-<!-- Fixed to the viewport: the stars stay in place while the page
-     scrolls, and the opaque content below the hero slides over them. -->
+<!-- Fixed to the viewport: the stars stay in place while the page scrolls-->
 <div class="space-scene">
   <canvas class="space-scene__canvas" id="space-canvas"></canvas>
 </div>
@@ -47,9 +46,6 @@
 
   if (canvas && !reduceMotion) {
     const container = canvas.parentElement ?? document.body;
-    // The hero section the canvas lives in: used to pause rendering
-    // once it scrolls out of view.
-    const hero = canvas.closest("section") ?? document.body;
     const starRange = 2000;
     const starCount = 5000;
     const starSpeed = 0.05;
@@ -102,7 +98,7 @@
       scene.add(stars);
 
       // Animation loop: drift stars along Z and wrap them
-      let animationFrameId = null;
+      let animationFrameId: number | null = null;
 
       function startLoop() {
         if (animationFrameId === null) {
@@ -131,15 +127,6 @@
         animationFrameId = requestAnimationFrame(animationLoop);
       }
 
-      // The canvas is fixed, so it stays on screen even when the hero
-      // scrolls away. Pause rendering while the hero is out of view —
-      // the content covers the canvas anyway.
-      const heroObserver = new IntersectionObserver(
-        ([entry]) => (entry.isIntersecting ? startLoop() : stopLoop()),
-        { threshold: 0 },
-      );
-      heroObserver.observe(hero);
-
       const resizeObserver = new ResizeObserver(() => {
         camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();
@@ -152,7 +139,6 @@
         starGeometry.dispose();
         starMaterial.dispose();
         renderer.dispose();
-        heroObserver.disconnect();
         resizeObserver.disconnect();
         window.removeEventListener("astro:before-unload", cleanup);
       }

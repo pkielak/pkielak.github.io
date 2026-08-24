@@ -17,16 +17,7 @@ const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typ
                     <ul class="skill-card__items">
                         {
                             category.items.map((item) => (
-                                <li class="skill">
-                                    <span class="skill__name">{item.name}</span>
-                                    <span class="skill__level" title={t.skills.aiAssisted}>
-                                        {
-                                            t.skills.levels[
-                                                item.level as keyof typeof t.skills.levels
-                                            ]
-                                        }
-                                    </span>
-                                </li>
+                                <li class="skill">{item.name}</li>
                             ))
                         }
                     </ul>
@@ -56,17 +47,6 @@ const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typ
     }
 
     .skill {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.5rem;
         font-size: 0.95rem;
-    }
-
-    .skill__level {
-        color: var(--color-accent);
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
     }
 </style>

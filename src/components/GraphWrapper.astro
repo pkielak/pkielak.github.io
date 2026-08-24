@@ -23,7 +23,7 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
       <button id="lock-graph" class="lock-graph"> Lock graph </button>
     </>
   )}
-  <div id="graph-wrapper" class={embedded ? "graph-wrapper graph-wrapper--embedded" : "graph-wrapper"}>
+  <div id="graph-wrapper" class={embedded ? "graph-wrapper graph-wrapper--embedded card" : "graph-wrapper"}>
     {embedded ? null : (
       <span class="zoom-control-text">Hold Ctrl + Scroll to Zoom</span>
     )}
@@ -52,8 +52,10 @@ const graphDataJson = JSON.stringify(graphData).replace(/</g, "\\u003c");
   .graph-wrapper--embedded {
     height: min(60svh, 480px);
     padding-top: 0;
-    border: 1px solid var(--color-border);
-    background: var(--nord0-polar-night);
+  }
+
+  .graph-wrapper--embedded {
+      background: #3b425299;
   }
 
   .network-container {

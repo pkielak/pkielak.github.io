@@ -18,7 +18,7 @@
   /* Project palette mapped onto Nord */
   --color-bg: var(--nord0-polar-night);
   --color-surface: var(--nord1-polar-night);
-  --color-border: var(--nord3-polar-night);
+  --color-border: #a3be8c80;
   /* nord6 for body text: ~8.7:1 on the section background (AAA) */
   --color-text: var(--nord6-snow-storm);
   /* raised to 70% nord5 so muted text stays above 4.5:1 (AA) on both the
@@ -35,8 +35,9 @@
     var(--nord0-polar-night)
   );
   --color-on-accent: var(--nord0-polar-night);
-  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular,
-    Menlo, Consolas, "Liberation Mono", monospace;
+  --font-mono:
+    "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, "Liberation Mono", monospace;
   --radius: 0;
   --max-width: 64rem;
   --header-height: 4rem;
@@ -66,10 +67,11 @@ html {
 body {
   /* faint CRT scanlines over the base background */
   font-family: var(--font-mono);
-  background: repeating-linear-gradient(
+  background:
+    repeating-linear-gradient(
       0deg,
-      rgb(255 255 255 / 0.015) 0 1px,
-      transparent 1px 3px
+      rgba(0, 0, 0, 0.04) 0px 0.75px,
+      transparent 0.75px 7.5px
     ),
     var(--color-bg);
   color: var(--color-text);
@@ -77,9 +79,9 @@ body {
   font-size: 0.95rem;
   letter-spacing: 0.01em;
   /* faint phosphor glow on all text (nord4) */
-  text-shadow: 0 0 1px color-mix(in srgb, var(--nord4-snow-storm) 18%, transparent);
+  text-shadow: 0 0 1px
+    color-mix(in srgb, var(--nord4-snow-storm) 18%, transparent);
 }
-
 
 /* stronger phosphor glow on accent-colored elements */
 .section__title,
@@ -178,22 +180,6 @@ a {
   top: 0;
 }
 
-/* Opaque layer under the hero on the home page: it sits above the fixed
-   starfield and slides over it as you scroll, hiding the stars */
-.home__content {
-  position: relative;
-  z-index: 1;
-  /* one tone lighter than the page background to divide it from the starfield */
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgb(255 255 255 / 0.015) 0 1px,
-      transparent 1px 3px
-    ),
-    var(--color-surface);
-}
-
-/* The footer sits after .home__content, so it must cover the starfield too */
 .site-footer {
   position: relative;
   z-index: 1;
@@ -276,7 +262,7 @@ a {
 /* Shared card + grid primitives */
 /* one tone above the section background so cards still stand out */
 .card {
-  background: var(--nord2-polar-night);
+  background: var(--nord1-polar-night);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: 1.25rem;

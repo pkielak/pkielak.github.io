@@ -82,56 +82,50 @@
         "title": "Technologie Frontend",
         "description": "Moje codzienne bronie.",
         "items": [
-          { "name": "JavaScript", "level": "expert" },
-          { "name": "React", "level": "expert" },
-          { "name": "TypeScript", "level": "advanced" },
-          { "name": "Next.js", "level": "advanced" },
-          { "name": "Vue", "level": "intermediate" },
-          { "name": "jQuery", "level": "intermediate" },
-          { "name": "Twig", "level": "intermediate" },
-          { "name": "WordPress", "level": "intermediate" }
+          { "name": "JavaScript" },
+          { "name": "React" },
+          { "name": "TypeScript" },
+          { "name": "Next.js" },
+          { "name": "Vue" },
+          { "name": "jQuery" },
+          { "name": "Twig" },
+          { "name": "WordPress" }
         ]
       },
       "styling": {
         "title": "Styling & CSS",
         "description": "Dzięki temu nie wygląda jak szablon.",
         "items": [
-          { "name": "CSS", "level": "advanced" },
-          { "name": "SCSS", "level": "advanced" }
+          { "name": "CSS" },
+          { "name": "SCSS" }
         ]
       },
       "backend": {
         "title": "Backend & API",
         "description": "Spójnik między front-endem a danymi.",
         "items": [
-          { "name": "REST API", "level": "intermediate" }
+          { "name": "REST API" }
         ]
       },
       "tools": {
         "title": "Narzędzia i Platformy",
         "description": "Zaufani pomocnicy.",
         "items": [
-          { "name": "Git", "level": "expert" },
-          { "name": "GitHub", "level": "advanced" },
-          { "name": "Astro", "level": "intermediate" }
+          { "name": "Git" },
+          { "name": "GitHub" },
+          { "name": "Astro" }
         ]
       },
       "methodologies": {
         "title": "Metodologie",
         "description": "Jak utrzymuję tempo w zespole.",
         "items": [
-          { "name": "Scrum", "level": "expert" },
-          { "name": "Agile", "level": "advanced" }
+          { "name": "Scrum" },
+          { "name": "Agile" }
         ]
       }
     },
-    "aiAssisted": "Wspomagane przez AI",
-    "levels": {
-      "expert": "Ekspert",
-      "advanced": "Zaawansowany",
-      "intermediate": "Średniozaawansowany",
-      "beginner": "Początkujący"
-    }
+    "aiAssisted": "Wspomagane przez AI"
   },
 
   "projects": {

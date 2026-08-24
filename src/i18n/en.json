@@ -82,56 +82,50 @@
         "title": "Frontend Technologies",
         "description": "My daily weapons of choice.",
         "items": [
-          { "name": "JavaScript", "level": "expert" },
-          { "name": "React", "level": "expert" },
-          { "name": "TypeScript", "level": "advanced" },
-          { "name": "Next.js", "level": "advanced" },
-          { "name": "Vue", "level": "intermediate" },
-          { "name": "jQuery", "level": "intermediate" },
-          { "name": "Twig", "level": "intermediate" },
-          { "name": "WordPress", "level": "intermediate" }
+          { "name": "JavaScript" },
+          { "name": "React" },
+          { "name": "TypeScript" },
+          { "name": "Next.js" },
+          { "name": "Vue" },
+          { "name": "jQuery" },
+          { "name": "Twig" },
+          { "name": "WordPress" }
         ]
       },
       "styling": {
         "title": "Styling & CSS",
         "description": "Where it stops looking generic.",
         "items": [
-          { "name": "CSS", "level": "advanced" },
-          { "name": "SCSS", "level": "advanced" }
+          { "name": "CSS" },
+          { "name": "SCSS" }
         ]
       },
       "backend": {
         "title": "Backend & APIs",
         "description": "The glue between front-end and data.",
         "items": [
-          { "name": "REST APIs", "level": "intermediate" }
+          { "name": "REST APIs" }
         ]
       },
       "tools": {
         "title": "Tools & Platforms",
         "description": "The trusted helpers.",
         "items": [
-          { "name": "Git", "level": "expert" },
-          { "name": "GitHub", "level": "advanced" },
-          { "name": "Astro", "level": "intermediate" }
+          { "name": "Git" },
+          { "name": "GitHub" },
+          { "name": "Astro" }
         ]
       },
       "methodologies": {
         "title": "Methodologies",
         "description": "How I keep teams moving.",
         "items": [
-          { "name": "Scrum", "level": "expert" },
-          { "name": "Agile", "level": "advanced" }
+          { "name": "Scrum" },
+          { "name": "Agile" }
         ]
       }
     },
-    "aiAssisted": "AI-Assisted",
-    "levels": {
-      "expert": "Expert",
-      "advanced": "Advanced",
-      "intermediate": "Intermediate",
-      "beginner": "Beginner"
-    }
+    "aiAssisted": "AI-Assisted"
   },
 
   "projects": {
