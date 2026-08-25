@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "Piotr Kielak — Front-end Developer",
-    "description": "Piotr Kielak is a front-end developer building responsive web apps with React and Next.js.",
-    "keywords": "Piotr Kielak, front-end developer, frontend engineer, React, Next.js, TypeScript, JavaScript, web developer, Poland",
-    "ogTitle": "Piotr Kielak — Front-end Developer",
-    "ogDescription": "Front-end developer specializing in React and Next.js. From MVP to production.",
+    "title": "Piotr Kielak — Software Engineer",
+    "description": "Piotr Kielak is a software engineer — at home in the front-end (React, Next.js), with mechatronics roots, a 3D printer, and a growing taste for AI-assisted workflows.",
+    "keywords": "Piotr Kielak, software engineer, front-end developer, frontend engineer, React, Next.js, TypeScript, JavaScript, 3D printing, hardware, Poland",
+    "ogTitle": "Piotr Kielak — Software Engineer",
+    "ogDescription": "Software engineer. Frontend in muscle memory, engineer in mind — 3D printer in the corner.",
     "ogImage": "/og-image-en.png"
   },
 
@@ -14,28 +14,28 @@
     "skills": "skills",
     "projects": "projects",
     "notes": "notes",
-    "graph": "graph",
     "contact": "contact",
     "language": "Language"
   },
 
   "hero": {
     "greeting": "hey, I'm Piotr",
-    "tagline": "I make things for the web",
-    "subtagline": "i love building stuff",
+    "tagline": "I build software — and other stuff",
+    "subtagline": "frontend in muscle memory, engineer in mind",
     "ctaPrimary": "> view projects",
     "ctaSecondary": "> get in touch",
     "typingText": [
       "shipping web apps that don't hurt the eyes",
       "React & Next.js, all day, every day",
-      "I like fast sites and clean code",
-      "mechatronics guy, now writing front-end"
+      "mechatronics roots — gears, printers, hardware",
+      "dipping toes into AI-assisted workflows",
+      "idea backlog: slightly out of control"
     ]
   },
 
   "about": {
     "title": "about me",
-    "intro": "React and Next.js are my home turf — {years} years in, start to finish. Mechatronics came first, which probably explains my obsession with how the pieces fit.",
+    "intro": "Software engineer with a front-end bias — {years} years of React and Next.js, start to finish. Mechatronics came first, and it shows: the 3D printer, the hardware tinkering, the obsession with how the pieces fit. Lately I'm dipping my toes into AI-assisted workflows. Ideas: many. Half of them involve the printer.",
     "experienceTitle": "professional experience",
     "experience": [
       {
@@ -72,7 +72,7 @@
         "description": "My first engineering degree. Where it all started."
       }
     ],
-    "funFact": "Off the clock: a 3D printer, a sim-racing wheel, or a good manga."
+    "funFact": "Off the clock: a 3D printer, a sim-racing wheel, a good manga — and an idea backlog that outpaces the weekend."
   },
 
   "skills": {
@@ -123,6 +123,23 @@
           { "name": "Scrum" },
           { "name": "Agile" }
         ]
+      },
+      "hardware": {
+        "title": "Hardware & Making",
+        "description": "The stuff that lives off the screen.",
+        "items": [
+          { "name": "3D Printing" },
+          { "name": "Computer Hardware" },
+          { "name": "Mechatronics" }
+        ]
+      },
+      "ai": {
+        "title": "AI-Assisted Workflows",
+        "description": "Newer territory — but the toes are in.",
+        "items": [
+          { "name": "AI Coding Assistants" },
+          { "name": "Prompt-Driven Workflows" }
+        ]
       }
     },
     "aiAssisted": "AI-Assisted"
@@ -171,7 +188,7 @@
 
   "notes": {
     "title": "latest notes",
-    "intro": "Thoughts and notes from life in front-end.",
+    "intro": "Thoughts and notes from the web, the workshop, and the backlog of ideas.",
     "cta": "view all notes",
     "allArticlesUrl": "/notes"
   },
