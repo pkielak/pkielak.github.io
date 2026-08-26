@@ -1,0 +1,19 @@
+---
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+import GraphWrapper from './GraphWrapper.astro';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+---
+<section id="notes" class="section" aria-labelledby="notes-title">
+    <h2 id="notes-title" class="section__title">{t.notes.title}</h2>
+    <p class="section__intro">{t.notes.intro}</p>
+    <GraphWrapper embedded />
+    <div class="section__actions">
+        <a class="btn btn--secondary" href={t.notes.allArticlesUrl}>
+          {t.notes.cta}
+        </a>
+    </div>
+</section>

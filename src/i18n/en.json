@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "title": "Piotr Kielak — Software Engineer",
+    "description": "Piotr Kielak is a software engineer with a passion for front-end development, alongside interests in mechatronics, 3D printing, and AI.",
+    "keywords": "Piotr Kielak, software engineer, front-end developer, React, Next.js, TypeScript, JavaScript, 3D printing, hardware, Poland",
+    "ogTitle": "Piotr Kielak — Software Engineer",
+    "ogDescription": "Software engineer. Front-end in his bones, engineering in his mind — 3D printer in the corner.",
+    "ogImage": "/og-image-en.png"
+  },
+
+  "nav": {
+    "home": "Home",
+    "about": "About Me",
+    "skills": "Skills",
+    "projects": "Projects",
+    "notes": "Notes",
+    "contact": "Contact",
+    "language": "Language"
+  },
+
+  "hero": {
+    "greeting": "hey, i'm Piotr",
+    "tagline": "building software — and other things",
+    "subtagline": "typing in my fingers, engineering in my mind",
+    "ctaPrimary": "> explore projects",
+    "ctaSecondary": "> contact me",
+    "typingText": [
+      "crafting websites that don't stick out",
+      "programming — from morning till night",
+      "rooted in mechatronics — design, hardware, 3D printing",
+      "backlog of ideas: more is better"
+    ]
+  },
+
+  "about": {
+    "title": "about me",
+    "intro": "Software engineer with a front-end focus — {years} years of React and more, from start to finish. Mechatronics came earlier and left behind: 3D printer, hardware tinkering, and an obsession with how things fit together. Recently exploring agent-based AI. Ideas: plenty, but time isn't stretchy.",
+    "experienceTitle": "professional experience",
+    "experience": [
+      {
+        "role": "Front-end Developer",
+        "company": "Daifin",
+        "period": "10/2024 – 1/2025",
+        "description": "Built MVP for a financial app using React and Next.js."
+      },
+      {
+        "role": "Front-end Developer",
+        "company": "Profil Software",
+        "period": "6/2022 – 7/2024",
+        "description": "Developed React front-end for a job-search platform, technical tools, and a social media content management site."
+      },
+      {
+        "role": "Front-end Developer",
+        "company": "Bluewom",
+        "period": "2/2021 – 5/2022",
+        "description": "Front-end across WordPress, jQuery, React, Vue, Twig. Scrum, strong team, numerous deployments."
+      }
+    ],
+    "educationTitle": "education",
+    "education": [
+      {
+        "degree": "Masters in Mechatronics (uncompleted)",
+        "institution": "Politechnika Warszawska",
+        "period": "2014 – 2016",
+        "description": "Masters in Mechatronics (uncompleted). Life was just too interesting."
+      },
+      {
+        "degree": "Engineer in Mechatronics",
+        "institution": "Politechnika Warszawska",
+        "period": "2010 – 2014",
+        "description": "First engineering degree. Where it all began."
+      }
+    ],
+    "funFact": "Off-hours: 3D printer, simracing car, good manga — and a backlog of ideas ahead of the weekend."
+  },
+
+  "skills": {
+    "title": "skills and expertise",
+    "categories": {
+      "frontend": {
+        "title": "Frontend Technologies",
+        "description": "My daily arsenal.",
+        "items": [
+          "JavaScript",
+          "React",
+          "TypeScript",
+          "Astro",
+          "Next.js",
+          "Vue",
+          "jQuery",
+          "Twig",
+          "WordPress"
+        ]
+      },
+      "styling": {
+        "title": "Styling & CSS",
+        "description": "Making it not look like a template.",
+        "items": [
+          "CSS",
+          "SCSS",
+          "Tailwind"
+        ]
+      },
+      "tools": {
+        "title": "Tools & Platforms",
+        "description": "Trusted allies.",
+        "items": [
+          "Git",
+          "GitHub"
+        ]
+      },
+      "methodologies": {
+        "title": "Methodologies",
+        "description": "How I maintain pace in the team.",
+        "items": [
+          "Scrum"
+        ]
+      },
+      "hardware": {
+        "title": "Hardware & Craftmanship",
+        "description": "Things that live beyond the screen.",
+        "items": [
+          "3D Printing",
+          "Hardware"
+        ]
+      },
+      "ai": {
+        "title": "AI-Assisted Workflow",
+        "description": "A new frontier to explore.",
+        "items": [
+          "AI Code Assistants",
+          "llama.cpp"
+        ]
+      }
+    },
+    "aiAssisted": "Assisted by AI"
+  },
+
+  "projects": {
+    "title": "selected projects",
+    "intro": "Projects I've worked on. Commercial works from software houses, so no links or screenshots.",
+    "items": [
+      {
+        "id": "daifin-mvp",
+        "title": "Financial App MVP",
+        "description": "A financial app built with the team at Daifin.",
+        "role": "Front-end Developer",
+        "technologies": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "CSS/SCSS"
+        ],
+        "aiTools": [],
+        "features": [
+          "Full-responsive UI",
+          "Entirely remote team"
+        ],
+        "url": "",
+        "github": "",
+        "image": "",
+        "imageAlt": "MVP of a financial app built with React and Next.js"
+      },
+      {
+        "id": "profil-job-search",
+        "title": "Job Search Platform",
+        "description": "React frontend for a job-search platform used daily by people.",
+        "role": "Front-end Developer",
+        "technologies": [
+          "React",
+          "JavaScript",
+          "CSS/SCSS"
+        ],
+        "aiTools": [],
+        "features": [
+          "Daily-used job search platform"
+        ],
+        "url": "",
+        "github": "",
+        "image": "",
+        "imageAlt": "React frontend of a job search platform"
+      }
+    ]
+  },
+
+  "notes": {
+    "title": "recent notes",
+    "intro": "Thoughts, observations, and backlog items.",
+    "cta": "all notes",
+    "allArticlesUrl": "/notes"
+  },
+
+  "contact": {
+    "title": "connect",
+    "or": "or",
+    "intro": "Have a project or offer? Let's talk.",
+    "form": {
+      "name": "name",
+      "namePlaceholder": "Your name",
+      "email": "email",
+      "emailPlaceholder": "your@email.com",
+      "subject": "subject",
+      "subjectPlaceholder": "How can I help?",
+      "message": "message",
+      "messagePlaceholder": "Tell me about your project...",
+      "submit": "send message",
+      "success": "Thank you for reaching out! I'll respond soon.",
+      "error": "Oops! Something went wrong. Try again."
+    },
+    "social": {
+      "title": "Stay Connected",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter",
+      "email": "Email"
+    }
+  },
+
+  "footer": {
+    "privacy": "Privacy Policy",
+    "copyright": "© {year} Piotr Kielak. All rights reserved.",
+    "credits": "Built with {astro}.",
+    "astro": "Astro"
+  },
+
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated: {date}",
+    "lastUpdatedDate": "16.10.2024",
+    "sections": [
+      {
+        "heading": "Introduction",
+        "body": "This privacy policy outlines how I collect, use, and protect your personal information when you interact with my website."
+      },
+      {
+        "heading": "GitHub Pages",
+        "body": "This website is hosted on GitHub Pages. GitHub may collect visitors' personal information, including logs of visitor IP addresses, to comply with legal obligations and to maintain the security and integrity of this website and the service. See the {link} for details.",
+        "link": {
+          "label": "GitHub Privacy Statement",
+          "url": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+        }
+      },
+      {
+        "heading": "Web3Forms",
+        "body": "I use Web3Forms to handle my contact form. You can read their privacy policy {link}.",
+        "link": {
+          "label": "here",
+          "url": "https://web3forms.com/privacy"
+        }
+      },
+      {
+        "heading": "Linked Services",
+        "body": "This website contains links to other services. If you follow these links, you should review their terms of service."
+      },
+      {
+        "heading": "Information I Collect",
+        "body": "My website collects the following type of information:",
+        "list": [
+          "Information you voluntarily provide through my contact form, including your name and email address."
+        ]
+      },
+      {
+        "heading": "How I Collect Information",
+        "body": "I collect information solely through my contact form, which is powered by Web3Forms."
+      },
+      {
+        "heading": "How I Use Your Information",
+        "body": "I use the information I collect for the following purpose:",
+        "list": [
+          "To respond to inquiries submitted through my contact form."
+        ]
+      },
+      {
+        "heading": "Data Retention",
+        "body": "I retain your information for as long as necessary to fulfill the purpose for which it was collected. After that, I will delete it from my systems."
+      },
+      {
+        "heading": "Security Measures",
+        "body": "I take reasonable measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction."
+      },
+      {
+        "heading": "Your Rights",
+        "body": "You have the right to request access to, correction of, or deletion of your personal information. Please contact me using my contact form to exercise this right."
+      },
+      {
+        "heading": "Changes to This Privacy Policy",
+        "body": "I reserve the right to update this privacy policy at any time. When I do, I will revise the \"Last Updated\" date below."
+      },
+      {
+        "heading": "Contact Me",
+        "body": "If you have any questions or concerns about this privacy policy, please don't hesitate to reach out via my contact form."
+      }
+    ]
+  },
+
+  "common": {
+    "backToTop": "Back to Top",
+    "readMore": "Read More",
+    "visitWebsite": "Visit Website",
+    "viewCode": "View Code",
+    "comingSoon": "Soon",
+    "lastUpdated": "Last Updated: {date}"
+  }
+}

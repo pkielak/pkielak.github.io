@@ -1,0 +1,226 @@
+---
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+
+const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
+---
+<section id="contact" class="section" aria-labelledby="contact-title">
+    <h2 id="contact-title" class="section__title">{t.contact.title}</h2>
+    <p class="section__intro">{t.contact.intro}</p>
+    <div class="contact__grid">
+        <form id="form" class="contact__form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value={WEB_3_FORMS_KEY} />
+            <div class="field">
+                <label for="name">{t.contact.form.name}</label>
+                <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder={t.contact.form.namePlaceholder}
+                    required
+                />
+            </div>
+            <div class="field">
+                <label for="email">{t.contact.form.email}</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    inputmode="email"
+                    placeholder={t.contact.form.emailPlaceholder}
+                    required
+                />
+            </div>
+            <div class="field">
+                <label for="subject">{t.contact.form.subject}</label>
+                <input
+                    id="subject"
+                    name="subject"
+                    type="text"
+                    placeholder={t.contact.form.subjectPlaceholder}
+                />
+            </div>
+            <div class="field">
+                <label for="message">{t.contact.form.message}</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    placeholder={t.contact.form.messagePlaceholder}
+                    required
+                ></textarea>
+            </div>
+            <button class="btn btn--primary" type="submit">
+                {t.contact.form.submit}
+            </button>
+            <p class="form__status" role="status" hidden></p>
+        </form>
+
+        <div class="contact__divider" aria-hidden="true">
+            {t.contact.or}
+        </div>
+
+        <div class="contact__social">
+            <h3 class="subheading">{t.contact.social.title}</h3>
+            <ul class="social__list">
+                <li>
+                    <a class="social__link" href="https://github.com" target="_blank" rel="noopener noreferrer">
+                        {t.contact.social.github}
+                    </a>
+                </li>
+                <li>
+                    <a class="social__link" href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                        {t.contact.social.linkedin}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Simple contact form status placeholder (no backend yet).
+    const form = document.querySelector('.contact__form');
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const status = form.querySelector('.form__status');
+            if (status) {
+                status.textContent =
+                    'TODO: wire up a form endpoint, then show the translated success/error message.';
+            }
+        });
+    }
+</script>
+
+<style>
+    .contact__grid {
+        display: grid;
+        gap: 2.05rem;
+        margin-top: 1.5rem;
+    }
+
+    .contact__divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        color: var(--color-muted);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+    .contact__divider::before,
+    .contact__divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--color-border);
+    }
+
+    .contact__social {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .contact__social .subheading {
+        text-align: center;
+        margin: 0 0 1.25rem;
+    }
+
+    @media (min-width: 48rem) {
+        .contact__grid {
+            grid-template-columns: 1fr auto 1fr;
+            align-items: stretch;
+        }
+
+        .contact__divider {
+            flex-direction: column;
+            padding: 0 0.5rem;
+        }
+        .contact__divider::before,
+        .contact__divider::after {
+            width: 1px;
+            height: auto;
+        }
+    }
+
+    .contact__form {
+        display: grid;
+        gap: 1rem;
+        align-content: start;
+    }
+
+    .field {
+        display: grid;
+        gap: 0.35rem;
+    }
+
+    .field label {
+        font-size: 0.9rem;
+        color: var(--color-muted);
+    }
+    .field label::after {
+        content: ':';
+        color: var(--color-accent);
+    }
+
+    .field input,
+    .field textarea {
+        /* 75% nord5 ≈ 4.5:1 on the input background; dimmer than the
+           entered text (nord6) so hints stay visually secondary */
+        ::placeholder {
+            color: color-mix(
+                in srgb,
+                var(--nord5-snow-storm) 75%,
+                var(--nord0-polar-night)
+            );
+            opacity: 1;
+        }
+
+        background: var(--nord1-polar-night);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        color: var(--color-text);
+        padding: 0.65rem 0.85rem;
+        font: inherit;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+        border-color: var(--color-accent);
+    }
+
+    .form__status {
+        color: var(--color-accent);
+        margin: 0;
+    }
+
+    .social__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .social__link {
+        color: var(--color-text);
+        text-decoration: none;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        padding: 0.6rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .social__link:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+</style>

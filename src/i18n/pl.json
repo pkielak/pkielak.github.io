@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "title": "Piotr Kielak — Inżynier Oprogramowania",
+    "description": "Piotr Kielak to inżynier oprogramowania — front-end to jego żywioł, a w tle mechatronika, drukarka 3D i rosnąca fascynacja AI.",
+    "keywords": "Piotr Kielak, software engineer, front-end developer, frontend engineer, React, Next.js, TypeScript, JavaScript, druk 3D, hardware, Polska",
+    "ogTitle": "Piotr Kielak — Inżynier Oprogramowania",
+    "ogDescription": "Software engineer. Front-end w mięśniach, inżynier w głowie — drukarka 3D w kącie.",
+    "ogImage": "/og-image-pl.png"
+  },
+
+  "nav": {
+    "home": "główna",
+    "about": "o mnie",
+    "skills": "umiejętności",
+    "projects": "projekty",
+    "notes": "notatki",
+    "contact": "kontakt",
+    "language": "Język"
+  },
+
+  "hero": {
+    "greeting": "hej, jestem Piotr",
+    "tagline": "buduję software — i inne rzeczy",
+    "subtagline": "kodowanie w palcach, inżynier w głowie",
+    "ctaPrimary": "> zobacz projekty",
+    "ctaSecondary": "> napisz do mnie",
+    "typingText": [
+      "piszę strony, które nie kłują w oczy",
+      "programowanie — od rana do wieczora",
+      "korzenie w mechatronice — projektowanie, drukarki, hardware",
+      "backlog pomysłów: od przybytku głowa nie boli"
+    ]
+  },
+
+  "about": {
+    "title": "o mnie",
+    "intro": "Software engineer z front-endowym zacięciem — {years} lat Reacta i reszty, od startu do finiszu. Mechatronika przyszła wcześniej i po niej została: drukarka 3D, grzebanie w hardware i obsesja na punkcie tego, jak elementy do siebie pasują. Ostatnio interesują mnie systemy agentowe AI. Pomysłów: sporo, a czas nie jest z gumy.",
+    "experienceTitle": "doświadczenie zawodowe",
+    "experience": [
+      {
+        "role": "Front-end Developer",
+        "company": "Daifin",
+        "period": "10/2024 – 01/2025",
+        "description": "Budowałem MVP aplikacji finansowej w React i Next.js."
+      },
+      {
+        "role": "Front-end Developer",
+        "company": "Profil Software",
+        "period": "06/2022 – 07/2024",
+        "description": "Tworzyłem front-end w React do platformy do szukania pracy; narzędzia dla kadry technicznej; strona do zarządzania treścią z serwisów społecznościowych."
+      },
+      {
+        "role": "Front-end Developer",
+        "company": "Bluewom",
+        "period": "02/2021 – 05/2022",
+        "description": "Front-end na całym ówczesnym arsenale: WordPress, jQuery, React, Vue, Twig. Scrum, solidny zespół, sporo wdrożeń."
+      }
+    ],
+    "educationTitle": "wykształcenie",
+    "education": [
+      {
+        "degree": "Magister mechatroniki (niedokończone)",
+        "institution": "Politechnika Warszawska",
+        "period": "2014 – 2016",
+        "description": "Drugi stopień mechatroniki. Niedokończony. Życie było ciekawsze."
+      },
+      {
+        "degree": "Inżynier mechatroniki",
+        "institution": "Politechnika Warszawska",
+        "period": "2010 – 2014",
+        "description": "Mój pierwszy inżynierski dyplom. Od tego wszystko się zaczęło."
+      }
+    ],
+    "funFact": "Po godzinach: drukarka 3D, kierownica do simracingu, dobra manga — i backlog pomysłów, który wyprzedza weekend."
+  },
+
+  "skills": {
+    "title": "umiejętności i ekspertyza",
+    "categories": {
+      "frontend": {
+        "title": "Technologie Frontend",
+        "description": "Moje codzienne bronie.",
+        "items": [
+          { "name": "JavaScript" },
+          { "name": "React" },
+          { "name": "TypeScript" },
+          { "name": "Astro" },
+          { "name": "Next.js" },
+          { "name": "Vue" },
+          { "name": "jQuery" },
+          { "name": "Twig" },
+          { "name": "WordPress" }
+        ]
+      },
+      "styling": {
+        "title": "Styling & CSS",
+        "description": "Dzięki temu nie wygląda jak szablon.",
+        "items": [{ "name": "CSS" }, { "name": "SCSS" }, { "name": "Tailwind" }]
+      },
+      "tools": {
+        "title": "Narzędzia i Platformy",
+        "description": "Zaufani pomocnicy.",
+        "items": [{ "name": "Git" }, { "name": "GitHub" }]
+      },
+      "methodologies": {
+        "title": "Metodologie",
+        "description": "Jak utrzymuję tempo w zespole.",
+        "items": [{ "name": "Scrum" }]
+      },
+      "hardware": {
+        "title": "Hardware & Majsterkowanie",
+        "description": "Rzeczy, które żyją poza ekranem.",
+        "items": [{ "name": "Druk 3D" }, { "name": "Sprzęt komputerowy" }]
+      },
+      "ai": {
+        "title": "AI-Assisted Workflow",
+        "description": "Nowy teren do odkrycia.",
+        "items": [{ "name": "Asystenci kodowania AI" }, { "name": "llama.cpp" }]
+      }
+    },
+    "aiAssisted": "Wspomagane przez AI"
+  },
+
+  "projects": {
+    "title": "wybrane projekty",
+    "intro": "Projekty, które wykonałem. Prace komercyjne z software house'ów, więc bez linków i screenshotów.",
+    "items": [
+      {
+        "id": "daifin-mvp",
+        "title": "MVP aplikacji finansowej",
+        "description": "Aplikacja finansowa — budowana z zespołem w Daifin.",
+        "role": "Front-end Developer",
+        "technologies": ["React", "Next.js", "TypeScript", "CSS/SCSS"],
+        "aiTools": [],
+        "features": [
+          "Pełna resposnsywność UI",
+          "Cały zespół zdalnie"
+        ],
+        "url": "",
+        "github": "",
+        "image": "",
+        "imageAlt": "MVP aplikacji finansowej zbudowane w React i Next.js"
+      },
+      {
+        "id": "profil-job-search",
+        "title": "Platforma do szukania pracy",
+        "description": "Front-end w React dla platformy do szukania pracy, z której ludzie naprawdę korzystają.",
+        "role": "Front-end Developer",
+        "technologies": ["React", "JavaScript", "CSS/SCSS"],
+        "aiTools": [],
+        "features": [
+          "Wyszukiwarka pracy, której ludzie używają na co dzień"
+        ],
+        "url": "",
+        "github": "",
+        "image": "",
+        "imageAlt": "Front-end platformy do szukania pracy"
+      }
+    ]
+  },
+
+  "notes": {
+    "title": "ostatnie notatki",
+    "intro": "Myśli i notatki z sieci, warsztatu i backlogu pomysłów.",
+    "cta": "wszystkie notatki",
+    "allArticlesUrl": "/notes"
+  },
+
+  "contact": {
+    "title": "skontaktuj się",
+    "or": "lub",
+    "intro": "Masz projekt albo ofertę? Porozmawiajmy.",
+    "form": {
+      "name": "imię i nazwisko",
+      "namePlaceholder": "Twoje imię",
+      "email": "e-mail",
+      "emailPlaceholder": "twoj@email.com",
+      "subject": "temat",
+      "subjectPlaceholder": "W czym mogę pomóc?",
+      "message": "wiadomość",
+      "messagePlaceholder": "Opowiedz mi o swoim projekcie...",
+      "submit": "wyślij wiadomość",
+      "success": "Dziękuję za wiadomość! Wkrótce się odezwę.",
+      "error": "Ups! Coś poszło nie tak. Spróbuj ponownie."
+    },
+    "social": {
+      "title": "Pozostańmy w kontakcie",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter",
+      "email": "E-mail"
+    }
+  },
+
+  "footer": {
+    "privacy": "Polityka prywatności",
+    "copyright": "© {year} Piotr Kielak. Wszelkie prawa zastrzeżone.",
+    "credits": "Zbudowano z {astro}.",
+    "astro": "Astro"
+  },
+
+  "privacy": {
+    "title": "Polityka prywatności",
+    "lastUpdated": "Ostatnia aktualizacja: {date}",
+    "lastUpdatedDate": "16.10.2024",
+    "sections": [
+      {
+        "heading": "Wstęp",
+        "body": "Ta polityka prywatności opisuje, w jaki sposób zbieram, wykorzystuję i chronię Twoje dane osobowe podczas korzystania z mojej strony internetowej."
+      },
+      {
+        "heading": "GitHub Pages",
+        "body": "Ta strona jest hostowana na GitHub Pages. GitHub może zbierać dane osobowe odwiedzających, w tym logi adresów IP, aby spełniać obowiązki prawne oraz utrzymywać bezpieczeństwo i integralność tej strony i usługi. Więcej szczegółów znajdziesz w {link}.",
+        "link": {
+          "label": "oświadczeniu prywatności GitHuba",
+          "url": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+        }
+      },
+      {
+        "heading": "Web3Forms",
+        "body": "Używam Web3Forms do obsługi formularza kontaktowego. Ich politykę prywatności możesz przeczytać {link}.",
+        "link": {
+          "label": "tutaj",
+          "url": "https://web3forms.com/privacy"
+        }
+      },
+      {
+        "heading": "Powiązane usługi",
+        "body": "Ta strona zawiera linki do innych usług. Jeśli skorzystasz z tych linków, zapoznaj się z ich warunkami korzystania."
+      },
+      {
+        "heading": "Zebrane informacje",
+        "body": "Moja strona zbiera następujące informacje:",
+        "list": [
+          "Informacje, które dobrowolnie podajesz przez mój formularz kontaktowy, w tym imię i adres e-mail."
+        ]
+      },
+      {
+        "heading": "Sposób zbierania informacji",
+        "body": "Zbieram informacje wyłącznie za pośrednictwem mojego formularza kontaktowego, opartego o Web3Forms."
+      },
+      {
+        "heading": "Jak wykorzystuję Twoje informacje",
+        "body": "Wykorzystuję zebrane informacje w następującym celu:",
+        "list": [
+          "Odpowiadania na zapytania wysłane przez mój formularz kontaktowy."
+        ]
+      },
+      {
+        "heading": "Przechowywanie danych",
+        "body": "Przechowuję Twoje informacje tak długo, jak jest to potrzebne do realizacji celu, w którym zostały zebrane. Po tym czasie je usuwam."
+      },
+      {
+        "heading": "Środki bezpieczeństwa",
+        "body": "Podjąłem rozsądne środki, aby chronić Twoje dane osobowe przed nieuprawnionym dostępem, ujawnieniem, zmianą lub zniszczeniem."
+      },
+      {
+        "heading": "Twoje prawa",
+        "body": "Masz prawo zażądać dostępu do swoich danych osobowych, ich sprostowania lub usunięcia. Aby skorzystać z tego prawa, skontaktuj się ze mną przez formularz kontaktowy."
+      },
+      {
+        "heading": "Zmiany w tej polityce prywatności",
+        "body": "Zastrzegam sobie prawo do aktualizacji tej polityki prywatności w dowolnym momencie. W takim przypadku zaktualizuję poniższą datę ostatniej aktualizacji."
+      },
+      {
+        "heading": "Skontaktuj się ze mną",
+        "body": "Jeśli masz pytania lub obawy dotyczące tej polityki prywatności, nie wahaj się skontaktować ze mną przez formularz kontaktowy."
+      }
+    ]
+  },
+
+  "common": {
+    "backToTop": "Powrót na górę",
+    "readMore": "czytaj więcej",
+    "visitWebsite": "otwórz stronę",
+    "viewCode": "zobacz kod",
+    "comingSoon": "Wkrótce",
+    "lastUpdated": "Ostatnia aktualizacja: {date}"
+  }
+}

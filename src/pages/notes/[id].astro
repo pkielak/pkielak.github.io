@@ -1,95 +1,162 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import Note from "../../layouts/Note.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
-import Backlinks from "../../components/Backlinks.astro";
-import { render } from "astro:content";
-import { Image } from "astro:assets";
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Backlinks from '@/components/Backlinks.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection("notes");
-  return posts.map((post: any) => ({
-    params: { id: post.id },
-    props: post,
-  }));
+	const posts = await getCollection('notes');
+	return posts.map((post) => ({
+		params: { id: post.id },
+		props: { post },
+	}));
 }
-type Props = CollectionEntry<"notes">;
 
-const post = Astro.props;
+interface Props {
+	post: CollectionEntry<'notes'>;
+}
+
+const { post } = Astro.props;
 const { Content } = await render(post);
+
+const locale = Astro.currentLocale ?? 'en';
+const dateFormat: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: 'numeric' };
+const pubDate = post.data.pubDate.toLocaleDateString(locale, dateFormat);
+const updatedAt = post.data.updatedAt?.toLocaleDateString(locale, dateFormat);
 ---
 
-<Note description={post.data.description} title={post.data.title}>
-  <article>
-    {
-      post.data.image && (
-        <Image
-          class="logo"
-          src={post.data.image}
-          alt="post logo"
-          width={100}
-          height={100}
-        />
-      )
-    }
-    <div class="title">
-      <h1>{post.data.title}</h1>
-      <div class="date">
-        <FormattedDate date={post.data.pubDate} />
+<Layout>
+	<main>
+		<article class="note">
+			<header class="note__header">
+		<h1>{post.data.title}</h1>
+		<p class="note__date">
+			{pubDate}
+			{
+				updatedAt && (
+					<>
+						<span aria-hidden="true"> | </span>
+						<span>updated: {updatedAt}</span>
+					</>
+				)
+			}
+		</p>
+	</header>
 
-        {
-          post.data.updatedAt && (
-            <>
-              <span>|</span>
-              <span>
-                Updated: <FormattedDate date={post.data.updatedAt} />
-              </span>
-            </>
-          )
-        }
-      </div>
-    </div>
-    <Content />
-    <Backlinks postSlug={post.id} />
-  </article>
-</Note>
+			<div class="note__body">
+				<Content />
+			</div>
+
+			<Backlinks postSlug={post.id} />
+		</article>
+	</main>
+</Layout>
+
 <style>
-  article {
-    max-width: 720px;
-    width: calc(100% - 2rem);
-    padding: 1rem 0;
-    margin: 0 auto;
-    color: var(--nord4-snow-storm);
-    font-weight: 400;
-  }
+	.note {
+		max-width: 46rem;
+		width: calc(100% - 2rem);
+		margin: calc(var(--header-height) + 1rem) auto 0;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+	}
 
-  @media (min-width: 768px) {
-    article {
-      width: calc(100% - 4rem);
-      padding: 2rem 0;
-    }
-  }
+	@media (min-width: 768px) {
+		.note {
+			width: calc(100% - 4rem);
+			margin-top: calc(var(--header-height) + 2rem);
+			margin-bottom: 2rem;
+		}
+	}
 
-  .logo {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+	.note__header {
+		margin-bottom: 1em;
+		padding: 1em 0;
+		border-bottom: 1px solid var(--color-border);
+		line-height: 1.3;
+	}
 
-  .title {
-    margin-bottom: 1em;
-    padding: 1em 0;
-    line-height: 1;
-  }
-  .title h1 {
-    margin: 0;
-  }
-  .date {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 0;
-    color: var(--nord5-snow-storm);
-    font-weight: 400;
-  }
+	.note__header h1 {
+		margin: 0 0 0.5rem;
+		font-size: 1.5rem;
+	}
+
+	.note__date {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 0.5rem;
+		margin: 0;
+		color: var(--color-muted);
+		font-size: 0.85rem;
+	}
+
+	/* markdown content */
+	.note__body h1,
+	.note__body h2,
+	.note__body h3,
+	.note__body h4,
+	.note__body h5,
+	.note__body h6 {
+		line-height: 1.3;
+		margin: 1.5em 0 0.5em;
+	}
+
+	.note__body h2::before {
+		content: '# ';
+		color: var(--color-accent);
+	}
+
+	.note__body h3::before {
+		content: '## ';
+		color: var(--color-accent);
+	}
+
+	.note__body p {
+		margin: 0.75em 0;
+	}
+
+	.note__body ul,
+	.note__body ol {
+		padding-left: 1.4rem;
+		margin: 0.75em 0;
+	}
+
+	.note__body li + li {
+		margin-top: 0.3rem;
+	}
+
+	.note__body ul li::marker,
+	.note__body ol li::marker {
+		color: var(--color-accent);
+	}
+
+	.note__body code {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		padding: 0.1rem 0.35rem;
+		font-size: 0.85em;
+	}
+
+	.note__body pre {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		padding: 1rem;
+		overflow-x: auto;
+	}
+
+	.note__body pre code {
+		background: none;
+		border: none;
+		padding: 0;
+	}
+
+	.note__body blockquote {
+		margin: 0.75em 0;
+		padding-left: 1rem;
+		border-left: 2px solid var(--color-accent);
+		color: var(--color-muted);
+	}
+
+	.note__body a {
+		color: var(--color-accent);
+	}
 </style>

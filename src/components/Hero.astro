@@ -1,0 +1,128 @@
+---
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+import SpaceScene from './SpaceScene.astro';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+---
+<section class="hero section" aria-labelledby="hero-title">
+    <SpaceScene />
+    <p class="hero__greeting">{t.hero.greeting}</p>
+    <h1 id="hero-title" class="hero__tagline">{t.hero.tagline}</h1>
+    <p class="hero__subtagline">{t.hero.subtagline}</p>
+    <p class="hero__typing" aria-hidden="true">
+        <span id="typing-text"></span><span class="hero__cursor">█</span>
+    </p>
+    <div class="hero__actions">
+        <a class="btn btn--primary" href="#projects">
+            {t.hero.ctaPrimary}
+        </a>
+        <a class="btn btn--secondary" href="#contact">
+            {t.hero.ctaSecondary}
+        </a>
+    </div>
+</section>
+
+<script define:vars={{ phrases: t.hero.typingText }}>
+    // Typing effect for the hero phrases.
+    // `phrases` is injected via define:vars above.
+    const el = document.getElementById('typing-text');
+    if (el && phrases.length > 0) {
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        const tick = () => {
+            const phrase = phrases[phraseIndex];
+            charIndex += deleting ? -1 : 1;
+            el.textContent = phrase.slice(0, charIndex);
+
+            let delay = deleting ? 40 : 90;
+            if (!deleting && charIndex === phrase.length) {
+                delay = 1800;
+                deleting = true;
+            } else if (deleting && charIndex === 0) {
+                deleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                delay = 400;
+            }
+            setTimeout(tick, delay);
+        };
+        tick();
+    }
+</script>
+
+<style>
+    .hero {
+        /* header is fixed (out of flow), so the hero fills the full viewport
+           and sits beneath the translucent bar */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        /* anchor for the absolutely-positioned SpaceScene background */
+        position: relative;
+        isolation: isolate;
+    }
+
+    /* keep hero content above the background layer (z-index: 0) */
+    .hero > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero__greeting {
+        color: var(--color-accent);
+        font-weight: 600;
+        margin: 0 0 0.5rem;
+    }
+    .hero__greeting::before {
+        content: '// ';
+        opacity: 0.6;
+    }
+
+    /* prompt in front of the typing line */
+    .hero__typing::before {
+        content: '❯ ';
+    }
+
+    .hero__tagline {
+        font-size: clamp(2.25rem, 6vw, 4rem);
+        line-height: 1.1;
+        margin: 0 0 1rem;
+    }
+
+    .hero__subtagline {
+        color: var(--color-muted);
+        font-size: 1.25rem;
+        margin: 0 0 1.5rem;
+    }
+
+    .hero__typing {
+        min-height: 1.6em;
+        color: var(--color-accent);
+        font-size: 1.05rem;
+        margin: 0 0 2rem;
+    }
+
+    .hero__cursor {
+        animation: blink 1s step-end infinite;
+        text-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 60%, transparent);
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .hero__actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+</style>

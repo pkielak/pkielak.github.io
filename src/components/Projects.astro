@@ -1,0 +1,113 @@
+---
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+---
+<section id="projects" class="section" aria-labelledby="projects-title">
+    <h2 id="projects-title" class="section__title">{t.projects.title}</h2>
+    <p class="section__intro">{t.projects.intro}</p>
+    <div class="grid">
+        {
+            t.projects.items.map((project) => (
+                <article class="project-card card">
+                    {project.image && (
+                        <img
+                            class="project-card__image"
+                            src={project.image}
+                            alt={project.imageAlt}
+                            loading="lazy"
+                        />
+                    )}
+                    <div class="project-card__body">
+                        <h3 class="project-card__title">{project.title}</h3>
+                        <p class="project-card__role">{project.role}</p>
+                        <p>{project.description}</p>
+                        <ul class="tags">
+                            {project.technologies.map((tech) => (
+                                <li class="tag">{tech}</li>
+                            ))}
+                            {
+                                project.aiTools.map((tool) => (
+                                    <li class="tag tag--ai" title={t.skills.aiAssisted}>
+                                        {tool}
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                        <ul class="feature-list">
+                            {project.features.map((feature) => (
+                                <li>{feature}</li>
+                            ))}
+                        </ul>
+                        <div class="project-card__actions">
+                            {project.url && (
+                                <a class="btn btn--secondary btn--sm" href={project.url} target="_blank" rel="noopener noreferrer">
+                                    {t.common.visitWebsite}
+                                </a>
+                            )}
+                            {project.github && (
+                                <a class="btn btn--secondary btn--sm" href={project.github} target="_blank" rel="noopener noreferrer">
+                                    {t.common.viewCode}
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                </article>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .project-card__image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        display: block;
+        /* faint scanlines so a missing image reads as an empty terminal screen */
+        background:
+            repeating-linear-gradient(
+                0deg,
+                rgb(255 255 255 / 0.015) 0 1px,
+                transparent 1px 3px
+            ),
+            var(--color-bg);
+    }
+
+    .project-card__body {
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+    }
+
+    .project-card__title {
+        margin: 0;
+    }
+
+    .project-card__role {
+        color: var(--color-accent);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 0;
+    }
+
+    .project-card__actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: auto;
+    }
+</style>

@@ -1,0 +1,52 @@
+---
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+---
+<section id="skills" class="section" aria-labelledby="skills-title">
+    <h2 id="skills-title" class="section__title">{t.skills.title}</h2>
+    <div class="grid">
+        {
+            Object.entries(t.skills.categories).map(([key, category]) => (
+                <article class="skill-card card">
+                    <h3 class="skill-card__title">{category.title}</h3>
+                    <p class="skill-card__description">{category.description}</p>
+                    <ul class="skill-card__items">
+                        {
+                            category.items.map((item) => (
+                                <li class="skill">{item.name}</li>
+                            ))
+                        }
+                    </ul>
+                </article>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    .skill-card__title {
+        margin: 0 0 0.5rem;
+    }
+
+    .skill-card__description {
+        color: var(--color-muted);
+        font-size: 0.9rem;
+        margin: 0 0 1rem;
+    }
+
+    .skill-card__items {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    .skill {
+        font-size: 0.95rem;
+    }
+</style>

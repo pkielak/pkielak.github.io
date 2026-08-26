@@ -1,5 +1,5 @@
 ---
-import { type Edge, type Data, type Node } from "vis-network";
+import { getGraph } from '@/lib/graph';
 
 interface Props {
   postSlug: string;
@@ -7,52 +7,71 @@ interface Props {
 
 const { postSlug } = Astro.props;
 
-const graphJson = await import("../pages/graph.json");
-const { nodes, edges }: Data = await graphJson
-  .GET({})
-  .then((response) => response.json());
+const { nodes, edges } = await getGraph();
 
-const backlinks = (edges as Edge[] | undefined)?.filter(
-  (edge) => edge.to === postSlug,
-);
+const backlinks = edges.filter((edge) => edge.to === postSlug);
 ---
 
 {
-  backlinks && backlinks.length > 0 && (
-    <>
-      <h5 class="backlinks-title">Backlinks</h5>
-      <ol class="backlinks">
-        {backlinks.map((backlink) => {
-          const referenceNode = (nodes as Node[] | undefined)?.find(
-            (node) => backlink.from === node?.id,
-          );
-          return (
-            <li class="backlink">
-              <div>
-                <a href={`/notes/${referenceNode?.id}`}>
-                  <h6>{referenceNode?.label || backlink.from}</h6>
-                  {referenceNode?.title && <p>{referenceNode.title}</p>}
-                </a>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
-    </>
-  )
+	backlinks.length > 0 && (
+		<>
+			<h5 class="backlinks-title">backlinks</h5>
+			<ol class="backlinks">
+				{backlinks.map((backlink) => {
+					const referenceNode = nodes.find(
+						(node) => backlink.from === node?.id,
+					);
+					return (
+						<li class="backlink">
+							<div>
+								<a href={`/notes/${referenceNode?.id}`}>
+									<h6>{referenceNode?.label || backlink.from}</h6>
+									{referenceNode?.title && (
+										<p>{referenceNode.title}</p>
+									)}
+								</a>
+							</div>
+						</li>
+					);
+				})}
+			</ol>
+		</>
+	)
 }
 
 <style>
-  .backlink a {
-    text-decoration: none;
-    color: var(--nord0);
-  }
+	.backlinks-title {
+		margin: 2em 0 1em;
+		font-size: 1.05rem;
+		font-weight: 600;
+	}
 
-  .backlink a p {
-    margin-top: 0;
-  }
+	.backlinks-title::before {
+		content: '# ';
+		color: var(--color-accent);
+	}
 
-  .backlinks-title {
-    margin: 1.5em 0 1em;
-  }
+	.backlinks {
+		padding-left: 1.4rem;
+	}
+
+	.backlink a {
+		text-decoration: none;
+		color: var(--color-accent);
+	}
+
+	.backlink a:hover {
+		text-decoration: underline;
+	}
+
+	.backlink h6 {
+		margin: 0;
+		font-size: 0.95rem;
+	}
+
+	.backlink p {
+		margin: 0.25em 0 0;
+		color: var(--color-muted);
+		font-size: 0.85rem;
+	}
 </style>

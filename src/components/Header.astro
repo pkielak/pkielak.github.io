@@ -1,69 +1,234 @@
 ---
-// import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../consts";
+import LanguageSelector from '@/components/LanguageSelector.astro';
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+
+const navItems = [
+    { key: 'home', href: '#home' },
+    { key: 'about', href: '#about' },
+    { key: 'skills', href: '#skills' },
+    { key: 'projects', href: '#projects' },
+    { key: 'notes', href: '#notes' },
+    { key: 'contact', href: '#contact' },
+] as const;
+
+// Section anchors only exist on the home page. From other pages (e.g. a note)
+// they must route back to the home page of the current locale, e.g. /pl/#about.
+// Only non-default locales are URL-prefixed (prefixDefaultLocale: false),
+// so the prefix is present exactly when the current path starts with it.
+const localePrefix =
+    Astro.currentLocale && Astro.url.pathname.startsWith(`/${Astro.currentLocale}/`)
+        ? `/${Astro.currentLocale}`
+        : '';
+const isHome = Astro.url.pathname === `${localePrefix}/`;
+// Home page of the current locale: '/' for the default locale, '/pl/' etc.
+// for prefixed ones.
+const homeBase = `${localePrefix}/`;
+const resolveHref = (href: string) =>
+    href.startsWith('#') && !isHome ? `${homeBase}#${href.slice(1)}` : href;
 ---
-
-<header>
-  <nav>
-    <div class="title">
-      <h2><a href="/">{SITE_TITLE}</a></h2>
+<header class="site-header">
+    <div class="site-header__content">
+        <LanguageSelector />
+        <nav id="main-nav" class="nav" aria-label="Main">
+            <ul class="nav__list">
+            {
+                navItems.map((item) => (
+                    <li>
+                        <a class="nav__link" href={resolveHref(item.href)}>
+                            {t.nav[item.key]}
+                        </a>
+                    </li>
+                ))
+            }
+            </ul>
+        </nav>
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="main-nav"
+            aria-label="Menu"
+        >
+            <span class="menu-toggle__icon" aria-hidden="true">[+]</span>
+        </button>
     </div>
-    <div class="internal-links">
-      <!-- <HeaderLink href="/about">About</HeaderLink> -->
-    </div>
-  </nav>
 </header>
-<style>
-  header {
-    max-width: 720px;
-    width: calc(100% - 2rem);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
-    padding: 0.75rem 0;
-    color: var(--nord4-snow-storm);
-  }
 
-  @media (min-width: 768px) {
-    header {
-      width: calc(100% - 4rem);
+<script>
+    // IntelliHide navbar: hide on scroll down, reveal on scroll up.
+    const header = document.querySelector<HTMLElement>('.site-header');
+    if (header) {
+        const mainNav = document.getElementById('main-nav');
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        const update = () => {
+            const y = window.scrollY;
+            // Never hide the header while the mobile menu is open, or
+            // the open panel scrolls out of reach with no way back.
+            if (mainNav?.classList.contains('nav--open')) {
+                header.classList.remove('site-header--hidden');
+                lastY = y;
+                ticking = false;
+                return;
+            }
+            // Only hide once we've scrolled past the header itself.
+            const shouldHide = y > lastY && y > header.offsetHeight;
+            header.classList.toggle('site-header--hidden', shouldHide);
+            lastY = y;
+            ticking = false;
+        };
+
+        window.addEventListener(
+            'scroll',
+            () => {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(update);
+                }
+            },
+            { passive: true }
+        );
     }
-  }
+</script>
 
-  h2 {
-    margin: 0;
-    font-size: 2rem;
-    line-height: 1;
-    font-weight: 700;
-    text-transform: lowercase;
-  }
-  h2 a {
-    text-decoration: none;
-    color: var(--nord4-snow-storm);
-    user-select: none;
-  }
+<script>
+    // Mobile menu toggle.
+    const menuToggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    if (menuToggle && mainNav) {
+        const setOpen = (open: boolean) => {
+            menuToggle.setAttribute('aria-expanded', String(open));
+            mainNav.classList.toggle('nav--open', open);
+        };
 
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
-    margin: auto;
-  }
-  nav a {
-    color: var(--nord4-snow-storm);
-    font-weight: 600;
-    text-decoration: none;
-    pointer-events: initial;
-    transition: color 0.2s ease;
-  }
-  nav a.active {
-    color: var(--nord14-aurora);
-    text-decoration: none;
-  }
-  nav a:hover {
-    color: var(--nord14-aurora);
-  }
+        menuToggle.addEventListener('click', () => {
+            setOpen(!mainNav.classList.contains('nav--open'));
+        });
+
+        mainNav.addEventListener('click', (event) => {
+            if ((event.target as HTMLElement).closest('a')) setOpen(false);
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') setOpen(false);
+        });
+    }
+</script>
+
+<style>
+    .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        height: var(--header-height);
+        background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--color-border);
+        transition: transform 0.3s ease;
+    }
+
+    .site-header--hidden {
+        transform: translateY(-100%);
+    }
+
+    .site-header__content {
+        max-width: var(--max-width);
+        height: 100%;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .nav {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem 1rem;
+    }
+
+    .menu-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1.25rem;
+        color: var(--color-text);
+        background: transparent;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        cursor: pointer;
+    }
+    .menu-toggle:hover,
+    .menu-toggle:focus-visible,
+    .menu-toggle[aria-expanded='true'] {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+
+    @media (max-width: 48rem) {
+        .menu-toggle {
+            display: inline-flex;
+        }
+
+        .nav {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: auto;
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: 0 12px 30px rgb(0 0 0 / 0.45);
+            display: none;
+            padding: 0.5rem 1rem 1rem;
+        }
+
+        .nav--open {
+            display: block;
+        }
+
+        .nav__list {
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .nav__link {
+            display: block;
+            padding: 0.6rem 0.25rem;
+        }
+    }
+
+    .nav__link {
+        color: var(--color-muted);
+        text-decoration: none;
+        font-size: 0.95rem;
+        padding: 0.35rem 0.25rem;
+        border-bottom: 1px solid transparent;
+        letter-spacing: 0.02em;
+    }
+    .nav__link:hover,
+    .nav__link:focus-visible {
+        color: var(--color-text);
+        border-bottom-color: var(--color-accent);
+    }
 </style>

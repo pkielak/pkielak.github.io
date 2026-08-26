@@ -1,0 +1,77 @@
+---
+import { localeUrl } from '@/utils/locale-url';
+import globe from '@/assets/flags/globe.svg?url';
+import beaver from '@/assets/flags/beaver.svg?url';
+
+const locales = [
+    { code: 'en', label: 'English', short: 'EN', flag: globe },
+    { code: 'pl', label: 'Polski', short: 'PL', flag: beaver },
+];
+
+// getRelativeLocaleUrl() prepends the target locale to the given path, so the
+// current locale prefix (e.g. "/pl") must be stripped first. Otherwise the
+// slug accumulates, e.g. /pl/ -> /en/pl/ instead of /en/.
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const localeFreePath =
+    Astro.currentLocale && segments[0] === Astro.currentLocale
+        ? `/${segments.slice(1).join('/')}`
+        : Astro.url.pathname;
+---
+
+<nav aria-label="Language selection" class="lang">
+    {
+        locales.map(({ code, label, short, flag }) => (
+            <a
+                class="lang__option"
+                href={localeUrl(code, localeFreePath)}
+                hreflang={code}
+                title={label}
+                aria-current={code === Astro.currentLocale ? 'true' : undefined}
+            >
+                <img class="lang-flag" src={flag} alt="" width="22" height="22" aria-hidden="true" />
+                <span class="lang-code">{short}</span>
+            </a>
+        ))
+    }
+</nav>
+
+<style>
+    .lang {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.2rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        background: var(--color-surface);
+    }
+
+    .lang__option {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        color: var(--color-muted);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        padding: 0.25rem 0.6rem;
+        border-radius: var(--radius);
+        transition: color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .lang-flag {
+        width: 1.2rem;
+        height: 1.2rem;
+        object-fit: contain;
+    }
+
+    .lang__option:hover {
+        color: var(--color-text);
+    }
+
+    .lang__option[aria-current='true'] {
+        color: var(--color-text);
+        background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    }
+</style>

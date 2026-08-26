@@ -1,7 +1,33 @@
 ---
-import Index from "../layouts/Index.astro";
-
-const locale = await import("../locales/en.json");
+import Hero from '@/components/Hero.astro';
+import About from '@/components/About.astro';
+import Skills from '@/components/Skills.astro';
+import Projects from '@/components/Projects.astro';
+import NotesGraph from '@/components/NotesGraph.astro';
+import Contact from '@/components/Contact.astro';
+import Layout from '@/layouts/Layout.astro';
 ---
+<Layout>
+    <main id="home">
+        <!-- Hero (transparent, starfield shows through) -->
+        <Hero />
 
-<Index locale={locale.default} />
+        <!-- Opaque layer that slides over the fixed starfield on scroll -->
+        <div>
+            <!-- About -->
+            <About />
+
+            <!-- Skills -->
+            <Skills />
+
+            <!-- Projects -->
+            <Projects />
+
+            <!-- Notes graph (replaces the notes list) -->
+            <NotesGraph />
+
+            <!-- Contact -->
+            <Contact />
+        </div>
+    </main>
+</Layout>

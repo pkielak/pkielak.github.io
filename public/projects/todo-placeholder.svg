@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#2e3440"/>
+  <g fill="none" stroke="#a3be8c" stroke-opacity="0.4" stroke-width="3" stroke-dasharray="14 10">
+    <rect x="40" y="40" width="1520" height="820"/>
+  </g>
+  <text x="800" y="430" font-family="'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace" font-size="56" fill="#8c929d" text-anchor="middle">❯ screenshot.png</text>
+  <text x="800" y="510" font-family="'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace" font-size="34" fill="#8c929d" opacity="0.55" text-anchor="middle">// drop a preview in public/projects/</text>
+</svg>
