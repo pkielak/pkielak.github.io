@@ -82,21 +82,6 @@ const WEB_3_FORMS_KEY = import.meta.env.WEB_3_FORMS_KEY;
     </div>
 </section>
 
-<script>
-    // Simple contact form status placeholder (no backend yet).
-    const form = document.querySelector('.contact__form');
-    if (form) {
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const status = form.querySelector('.form__status');
-            if (status) {
-                status.textContent =
-                    'TODO: wire up a form endpoint, then show the translated success/error message.';
-            }
-        });
-    }
-</script>
-
 <style>
     .contact__grid {
         display: grid;
