@@ -1,5 +1,5 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
+import { localeUrl } from '@/utils/locale-url';
 import globe from '@/assets/flags/globe.svg?url';
 import beaver from '@/assets/flags/beaver.svg?url';
 
@@ -23,7 +23,7 @@ const localeFreePath =
         locales.map(({ code, label, short, flag }) => (
             <a
                 class="lang__option"
-                href={getRelativeLocaleUrl(code, localeFreePath)}
+                href={localeUrl(code, localeFreePath)}
                 hreflang={code}
                 title={label}
                 aria-current={code === Astro.currentLocale ? 'true' : undefined}

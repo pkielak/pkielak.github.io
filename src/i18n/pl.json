@@ -28,7 +28,6 @@
       "piszę strony, które nie kłują w oczy",
       "programowanie — od rana do wieczora",
       "korzenie w mechatronice — projektowanie, drukarki, hardware",
-      "systemy agentowe AI: to mój chleb powszedni",
       "backlog pomysłów: od przybytku głowa nie boli"
     ]
   },
@@ -194,9 +193,80 @@
   },
 
   "footer": {
+    "privacy": "Polityka prywatności",
     "copyright": "© {year} Piotr Kielak. Wszelkie prawa zastrzeżone.",
     "credits": "Zbudowano z {astro}.",
     "astro": "Astro"
+  },
+
+  "privacy": {
+    "title": "Polityka prywatności",
+    "lastUpdated": "Ostatnia aktualizacja: {date}",
+    "lastUpdatedDate": "16.10.2024",
+    "sections": [
+      {
+        "heading": "Wstęp",
+        "body": "Ta polityka prywatności opisuje, w jaki sposób zbieram, wykorzystuję i chronię Twoje dane osobowe podczas korzystania z mojej strony internetowej."
+      },
+      {
+        "heading": "GitHub Pages",
+        "body": "Ta strona jest hostowana na GitHub Pages. GitHub może zbierać dane osobowe odwiedzających, w tym logi adresów IP, aby spełniać obowiązki prawne oraz utrzymywać bezpieczeństwo i integralność tej strony i usługi. Więcej szczegółów znajdziesz w {link}.",
+        "link": {
+          "label": "oświadczeniu prywatności GitHuba",
+          "url": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+        }
+      },
+      {
+        "heading": "Web3Forms",
+        "body": "Używam Web3Forms do obsługi formularza kontaktowego. Ich politykę prywatności możesz przeczytać {link}.",
+        "link": {
+          "label": "tutaj",
+          "url": "https://web3forms.com/privacy"
+        }
+      },
+      {
+        "heading": "Powiązane usługi",
+        "body": "Ta strona zawiera linki do innych usług. Jeśli skorzystasz z tych linków, zapoznaj się z ich warunkami korzystania."
+      },
+      {
+        "heading": "Zebrane informacje",
+        "body": "Moja strona zbiera następujące informacje:",
+        "list": [
+          "Informacje, które dobrowolnie podajesz przez mój formularz kontaktowy, w tym imię i adres e-mail."
+        ]
+      },
+      {
+        "heading": "Sposób zbierania informacji",
+        "body": "Zbieram informacje wyłącznie za pośrednictwem mojego formularza kontaktowego, opartego o Web3Forms."
+      },
+      {
+        "heading": "Jak wykorzystuję Twoje informacje",
+        "body": "Wykorzystuję zebrane informacje w następującym celu:",
+        "list": [
+          "Odpowiadania na zapytania wysłane przez mój formularz kontaktowy."
+        ]
+      },
+      {
+        "heading": "Przechowywanie danych",
+        "body": "Przechowuję Twoje informacje tak długo, jak jest to potrzebne do realizacji celu, w którym zostały zebrane. Po tym czasie je usuwam."
+      },
+      {
+        "heading": "Środki bezpieczeństwa",
+        "body": "Podjąłem rozsądne środki, aby chronić Twoje dane osobowe przed nieuprawnionym dostępem, ujawnieniem, zmianą lub zniszczeniem."
+      },
+      {
+        "heading": "Twoje prawa",
+        "body": "Masz prawo zażądać dostępu do swoich danych osobowych, ich sprostowania lub usunięcia. Aby skorzystać z tego prawa, skontaktuj się ze mną przez formularz kontaktowy."
+      },
+      {
+        "heading": "Zmiany w tej polityce prywatności",
+        "body": "Zastrzegam sobie prawo do aktualizacji tej polityki prywatności w dowolnym momencie. W takim przypadku zaktualizuję poniższą datę ostatniej aktualizacji."
+      },
+      {
+        "heading": "Skontaktuj się ze mną",
+        "body": "Jeśli masz pytania lub obawy dotyczące tej polityki prywatności, nie wahaj się skontaktować ze mną przez formularz kontaktowy."
+      }
+    ]
   },
 
   "common": {

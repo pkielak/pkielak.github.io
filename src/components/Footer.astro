@@ -1,10 +1,14 @@
 ---
 import en from '@/i18n/en.json';
 import pl from '@/i18n/pl.json';
+import { localeUrl } from '@/utils/locale-url';
 
 const translations = { en, pl } as const;
 const locale = Astro.currentLocale ?? 'en';
 const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+
+// Defaults to the en page if a given path has no counterpart in this locale.
+const privacyUrl = localeUrl(locale, '/privacy');
 
 const year = new Date().getFullYear();
 const interpolate = (
@@ -15,6 +19,9 @@ const interpolate = (
 ---
 <footer class="site-footer">
     <p>{interpolate(t.footer.copyright)}</p>
+    <p>
+        <a href={privacyUrl}>{t.footer.privacy}</a>
+    </p>
     <p>
         {interpolate(t.footer.credits, {
             year: String(year),
@@ -37,5 +44,15 @@ const interpolate = (
     .site-footer p::before {
         content: '// ';
         opacity: 0.55;
+    }
+    .site-footer a {
+        color: var(--color-muted);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.2s ease;
+    }
+    .site-footer a:hover {
+        color: var(--nord4-snow-storm);
+        text-decoration-thickness: 2px;
     }
 </style>

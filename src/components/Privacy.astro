@@ -1,0 +1,118 @@
+---
+import en from '@/i18n/en.json';
+import pl from '@/i18n/pl.json';
+
+const translations = { en, pl } as const;
+const locale = Astro.currentLocale ?? 'en';
+const t = Object.hasOwn(translations, locale) ? translations[locale as keyof typeof translations] : en;
+
+type PrivacySection = {
+    heading: string;
+    body: string;
+    list?: string[];
+    link?: { label: string; url: string };
+};
+
+type Privacy = {
+    title: string;
+    lastUpdated: string;
+    lastUpdatedDate: string;
+    sections: PrivacySection[];
+};
+
+const privacy = t.privacy as Privacy;
+
+const interpolate = (template: string, values: Record<string, string>) =>
+    template.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
+
+// Splits section bodies around the {link} placeholder so the template can
+// render the actual <a> element (JSX isn't allowed in frontmatter).
+type RenderedSection = {
+    heading: string;
+    body?: string;
+    before?: string;
+    after?: string;
+    list?: string[];
+    link?: { label: string; url: string };
+};
+
+const sections: RenderedSection[] = privacy.sections.map((section) => {
+    if (!section.link) return section;
+    const [before, after] = section.body.split('{link}');
+    return { heading: section.heading, before, after, list: section.list, link: section.link };
+});
+---
+
+<section class="privacy">
+    <h3>{privacy.title}</h3>
+    {sections.map((section) => (
+        <Fragment>
+            <h4>{section.heading}</h4>
+            {section.link ? (
+                <p>
+                    {section.before}
+                    <a href={section.link.url} target="_blank" rel="noopener noreferrer">
+                        {section.link.label}
+                    </a>
+                    {section.after}
+                </p>
+            ) : (
+                <p>{section.body}</p>
+            )}
+            {section.list && (
+                <ul>
+                    {section.list.map((item) => <li>{item}</li>)}
+                </ul>
+            )}
+        </Fragment>
+    ))}
+    <p class="last-updated">
+        {interpolate(privacy.lastUpdated, { date: privacy.lastUpdatedDate })}
+    </p>
+</section>
+
+<style>
+    .privacy {
+        max-width: 720px;
+        width: 100%;
+        padding: 1rem;
+        margin: 4rem auto 2rem;
+        background: var(--nord0-polar-night);
+        border-radius: 0;
+        color: var(--nord4-snow-storm);
+        font-weight: 400;
+    }
+
+    h3 {
+        font-size: 1.563em;
+        margin-bottom: 0.5rem;
+    }
+
+    @media (min-width: 720px) {
+        h3 {
+            font-size: 1.953em;
+        }
+
+        .privacy {
+            padding: 2rem;
+        }
+    }
+
+    ul {
+        margin: 0.5rem 0 1rem;
+        padding-left: 1.5rem;
+    }
+
+    li {
+        margin: 0.25rem 0;
+    }
+
+    a {
+        color: var(--nord4-snow-storm);
+    }
+
+    .last-updated {
+        color: var(--nord5-snow-storm);
+        font-size: 0.875em;
+    }
+</style>
